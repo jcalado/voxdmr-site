@@ -7,23 +7,7 @@ import {
   Radio,
   Wifi
 } from "lucide-react";
-
-const LOGO_URL = "https://lh3.googleusercontent.com/aida/ADBb0ugJLbKj5ZRS0MOFKG68Bw2kbCmsH5T3-vhwohu7pL7uvWIOlHRknjufa2aLfK36N253mn7Nvi4Cnf2gdXnaCow0na8x78qyV0gc3-XQtpo-SNZ-01IlqMeoOA5ZWpWpsP1Aj9ilyHSE9sbayEC2Mk6g63tqGGYeiULfBLLLOi3RLAIU9PJtKeP4i9CQeEg04s9fYXb-Go9GHPkKqZoDH6uGLqX4X-SXzVdR3kLD8mwtt3la4bwUYhNkg-s1p25Xo7e8mx-Y7L03Gw";
-
-const logoSizes = {
-  sm: { container: "h-8 w-8 rounded-lg", img: "h-10 w-10" },
-  md: { container: "h-10 w-10 lg:h-12 lg:w-12 rounded-xl", img: "h-12 w-12 lg:h-14 lg:w-14" },
-  lg: { container: "h-20 w-20 lg:h-24 lg:w-24 rounded-2xl", img: "h-24 w-24 lg:h-28 lg:w-28" },
-} as const;
-
-function Logo({ size = "md", className = "" }: { size?: keyof typeof logoSizes; className?: string }) {
-  const s = logoSizes[size];
-  return (
-    <div className={`${s.container} bg-surface-raised overflow-hidden flex items-center justify-center ${className}`}>
-      <img alt="VoxLink Logo" className={`${s.img} object-cover`} src={LOGO_URL} referrerPolicy="no-referrer" />
-    </div>
-  );
-}
+import { Logo } from "./Logo";
 
 export default function App() {
   return (
@@ -199,13 +183,14 @@ export default function App() {
           </div>
           
           <div className="flex flex-wrap justify-center gap-6 lg:gap-10">
-            {["About Us", "Help Center", "Privacy", "Twitter"].map((link) => (
-              <a 
-                key={link}
-                className="text-sm font-semibold text-on-surface-muted hover:text-vibrant-blue transition-colors" 
-                href="#"
-              >
-                {link}
+            {[
+              { label: "About Us", href: "#" },
+              { label: "Docs", href: "/docs" },
+              { label: "Privacy", href: "#" },
+              { label: "Twitter", href: "#" },
+            ].map((link) => (
+              <a key={link.label} className="text-sm font-semibold text-on-surface-muted hover:text-vibrant-blue transition-colors" href={link.href}>
+                {link.label}
               </a>
             ))}
           </div>
