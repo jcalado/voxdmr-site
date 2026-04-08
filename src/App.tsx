@@ -26,7 +26,7 @@ export default function App() {
             <a className="font-medium text-on-surface-muted hover:text-vibrant-blue transition-colors px-2 py-1" href="/docs">Docs</a>
           </div>
           
-          <button className="bg-vibrant-blue text-white px-6 lg:px-8 py-2.5 lg:py-3 rounded-full font-bold hover:scale-105 transition-all">
+          <button className="bg-vibrant-red hover:bg-red-500 text-white px-6 lg:px-8 py-2.5 lg:py-3 rounded-2xl font-bold hover:scale-105 transition-all">
             Get the App
           </button>
         </div>
@@ -52,7 +52,7 @@ export default function App() {
             </div>
             
             <h1 className="text-5xl lg:text-[5.5rem] font-headline font-bold text-white tracking-tight leading-[1.1] lg:leading-[1.15] mb-8">
-              Talk to the <br/> <span className="text-vibrant-blue">World.</span>
+              Talk to the <br/> <span className="text-vibrant-red">World.</span>
             </h1>
 
             <p className="text-lg lg:text-2xl text-on-surface-muted max-w-xl mb-12 leading-relaxed mx-auto lg:mx-0">
@@ -60,7 +60,7 @@ export default function App() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-              <button className="bg-vibrant-orange hover:bg-orange-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1">
+              <button className="bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1">
                 Get the App
                 <Download className="w-5 h-5" />
               </button>
@@ -158,7 +158,7 @@ export default function App() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-            <button className="w-full sm:w-auto bg-vibrant-orange hover:bg-orange-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1">
+            <button className="w-full sm:w-auto bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1">
               Get the App
               <Download className="w-5 h-5" />
             </button>
