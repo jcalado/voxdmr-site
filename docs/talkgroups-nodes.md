@@ -1,6 +1,6 @@
 # Talkgroups & Nodes
 
----
+![Nodes screen](/docs/nodes-screen.png)
 
 ## Talkgroups
 
@@ -38,7 +38,7 @@ While a station is transmitting, VoxLink displays the following information abov
 | Field | Example |
 |---|---|
 | Callsign | `CT2GNH-M` |
-| Name | `Manuel` |
-| Location | `Lisbon, Portugal` |
+| Name | `Paulo` |
+| Location | `Aveiro, Portugal` |
 
 This information is broadcast by the reflector and sourced from the transmitting station's registration details. Not all reflectors populate all fields — some may show the callsign only.

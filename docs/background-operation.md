@@ -1,66 +1,38 @@
 # Background Operation
 
-VoxLink is designed to stay connected while you use other apps or your screen is off. This page explains how that works and how to configure your device to allow it.
+How VoxLink stays connected when your screen is off or you're in another app.
 
----
+![Connection settings](/docs/settings-connection.png)
 
-## Foreground Service
+## Persistent Notification
 
-When VoxLink is connected it runs a **foreground service** — an Android component that keeps the app alive with higher priority than a standard background process. A persistent notification is shown in the status bar as long as the service is running. This is an Android requirement for foreground services and cannot be suppressed.
+While connected, VoxLink shows a notification in the status bar. This keeps the app running in the background — Android requires it and it can't be dismissed. Tap the notification to return to VoxLink.
 
-Tapping the notification returns you to VoxLink.
+## Battery Optimization
 
----
-
-## Wake and Wi-Fi Locks
-
-VoxLink holds two system locks while connected:
-
-- **Wake lock** — prevents the CPU from sleeping, ensuring packets are processed even when the screen is off. The lock has a 10-minute timeout and is renewed every 15 seconds by an internal watchdog timer.
-- **Wi-Fi lock** — keeps the Wi-Fi radio active so the connection is not dropped by Android's Wi-Fi power saving.
-
-These locks are released automatically when you disconnect.
-
-### Keep Screen On
-
-Enable **Settings > Connection > Keep Screen On** to prevent the display from turning off while connected. Useful when monitoring a talkgroup hands-free. Default: off.
-
----
-
-## Battery Optimization Exemption
-
-Android's battery optimization can suspend background apps and break the connection. To prevent this:
+Android's battery optimization can kill background apps and break your connection. To prevent this:
 
 1. Go to **Android Settings > Apps > VoxLink > Battery**.
-2. Set battery usage to **Unrestricted** (the label varies by manufacturer — look for **Unrestricted**, **No restrictions**, or **Don't optimize**).
+2. Set battery usage to **Unrestricted** (may also be called **No restrictions** or **Don't optimize**).
 
-On some devices you can reach this setting directly from VoxLink: **Settings > Background > Disable Battery Optimization**.
+On some devices you can reach this from VoxLink: **Settings > Background > Disable Battery Optimization**.
 
-> Battery optimization exemption is strongly recommended. Without it, Android may kill the foreground service after several minutes of screen-off time, especially on devices from manufacturers like Huawei, Xiaomi, Samsung, or OnePlus that apply aggressive background kill policies.
-
----
+> This is the most common fix for connections dropping when the screen is off — especially on Huawei, Xiaomi, Samsung, and OnePlus devices, which apply aggressive background limits.
 
 ## Auto-Reconnect
 
-If the connection drops (network change, server restart, timeout), VoxLink attempts to reconnect automatically with a fixed 2-second delay between attempts. The status notification updates to show **Reconnecting…** during this period.
+If the connection drops, VoxLink reconnects automatically after a 2-second delay. The notification shows **Reconnecting…** during this time.
 
-Auto-reconnect can be disabled in **Settings > Connection > Auto-Reconnect** if you prefer to reconnect manually.
+To reconnect manually instead, disable this in **Settings > Connection > Auto-Reconnect**.
 
-### Auto-Connect on Launch
+## Auto-Connect on Launch
 
-Enable **Settings > Connection > Auto-Connect** to automatically reconnect to the last server when the app starts. Default: off.
+Enable **Settings > Connection > Auto-Connect** to reconnect to your last server automatically when VoxLink starts. Off by default.
 
----
+## Keep Screen On
 
-## Heartbeats
+Enable **Settings > Connection > Keep Screen On** to prevent the display from turning off while connected. Useful for hands-free monitoring. Off by default.
 
-VoxLink and the reflector exchange heartbeat packets to detect stale connections:
+## Connection Health
 
-| Direction | Interval | Timeout |
-|---|---|---|
-| Client → Server | Every 5 s | — |
-| Server → Client | — | 15 s |
-
-If no heartbeat is received from the server within 15 seconds, VoxLink considers the connection lost and triggers auto-reconnect.
-
-TCP `SO_KEEPALIVE` is also enabled on the socket, providing an additional layer of dead-connection detection at the OS level.
+VoxLink sends a heartbeat to the server every 5 seconds. If no response arrives within 15 seconds, the connection is considered lost and auto-reconnect kicks in.

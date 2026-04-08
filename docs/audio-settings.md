@@ -1,84 +1,59 @@
 # Audio Settings
 
-Audio settings are found under **Settings > Audio**.
+Configure audio in **Settings > Audio**.
 
----
-
-## Codec
-
-VoxLink uses the **Opus** codec configured as follows:
-
-| Parameter | Value |
-|---|---|
-| Sample rate | 16 kHz mono |
-| Frame size | 20 ms |
-| Bitrate | 20 kbps |
-| Complexity | 10 (maximum) |
-| VBR | Enabled |
-| DTX | Disabled |
-
-Opus is optimised for voice at low bitrates and handles lossy mobile connections well. The configuration is fixed and does not require adjustment.
-
----
-
-## Level Metering
-
-The **PTT** screen shows two real-time level meters:
-
-- **TX meter** — your microphone level while transmitting (RMS, displayed in dBFS)
-- **RX meter** — incoming audio level while receiving
-
-Aim to keep TX peaks between −10 dB and −6 dB. Clipping above 0 dBFS causes distortion on the receiving end.
-
----
+![Audio settings](/docs/settings-screen.png)
 
 ## Mic Gain
 
-**Settings > Audio > Mic Gain** — adjustable from **0 % to 200 %**.
+**Settings > Audio > Mic Gain** — **0% to 200%**, default **100%**.
 
-The default of 100 % passes the raw microphone signal. Increase if your voice is too quiet for other stations; decrease if you are overdriving the input. A hardware-level audio limiter (−1 dB ceiling, 10:1 ratio) protects against clipping regardless of the gain setting.
-
----
+Increase if other stations report your audio is too quiet. Decrease if you're overdriving. A built-in limiter (−1 dB ceiling, 10:1 ratio) prevents clipping regardless of gain.
 
 ## RX Volume
 
-**Settings > Audio > RX Volume** — adjustable from **0 % to 200 %**.
+**Settings > Audio > RX Volume** — **0% to 200%**, default **70%**.
 
-Controls the playback level of received audio independently of the Android system volume. The default is **70 %** (0.7); 100 % is unity gain.
+Controls received audio volume independently of Android system volume.
 
----
+## Level Metering
 
-## Audio Output Route
+The PTT screen shows two real-time meters:
 
-Three output destinations are available under **Settings > Audio > Output**:
+- **TX** — your mic level while transmitting. Aim for peaks between −10 dB and −6 dB.
+- **RX** — incoming audio level while receiving.
+
+## Output Route
+
+Choose where you hear audio in **Settings > Audio > Output**:
 
 | Option | Use case |
 |---|---|
 | **Speaker** | Hands-free, loudspeaker |
-| **Earpiece** | Private listening, phone-style |
-| **Bluetooth** | Wireless headsets and earpieces |
+| **Earpiece** | Private listening |
+| **Bluetooth** | Wireless headsets |
 
----
+## Input Source
 
-## Audio Input Source
-
-Three microphone sources are available under **Settings > Audio > Input**:
+Choose your mic source in **Settings > Audio > Input**:
 
 | Option | Notes |
 |---|---|
-| **Voice Comms** | Recommended. Android-optimised source for telephony with echo cancellation and noise suppression. |
-| **Microphone** | Raw microphone input; no telephony processing. |
-| **Voice Recognition** | High-quality raw input intended for speech recognition workloads. |
+| **Voice Comms** | Recommended — includes echo cancellation and noise suppression |
+| **Microphone** | Raw input, no processing |
+| **Voice Recognition** | Raw high-quality input |
 
-> Use **Voice Comms** unless you have a specific reason not to — it applies Android's built-in noise suppression and acoustic echo cancellation, which significantly improves audio quality on noisy mobiles.
+> Stick with **Voice Comms** unless you have a reason to change it. Android's built-in noise suppression makes a big difference on mobile.
 
----
+## Codec
 
-## Audio Processing Pipeline
+VoxLink uses Opus at 16 kHz mono, 20 ms frames, 20 kbps VBR. These settings are fixed — no adjustment needed.
 
-| Stage | Detail |
-|---|---|
-| Resampler | Polyphase FIR resampler converts between device sample rate and the 16 kHz codec rate |
-| Jitter buffer | Capacity **24 frames**, pre-buffer **3 frames**; absorbs network timing variations |
-| PLC | Proactive packet loss concealment — generates concealment frames on detection of sequence gaps |
-| Limiter | −1 dB ceiling, 10:1 ratio, release time **50 ms**; applied to the TX path before encoding |
+## Under the Hood
+
+These are handled automatically and can't be adjusted:
+
+- **Resampler** — converts between your device's sample rate and the 16 kHz codec rate
+- **Jitter buffer** — 24-frame capacity with 3-frame pre-buffer, smooths out network timing
+- **Packet loss concealment** — fills in missing audio frames to reduce dropouts
+- **Limiter** — −1 dB ceiling, 10:1 ratio, 50 ms release, applied before encoding

@@ -1,45 +1,35 @@
 # PTT Modes
 
-VoxLink supports three PTT modes. Change the active mode in **Settings > PTT > Mode**.
+VoxLink has three push-to-talk modes. Switch between them in **Settings > PTT > Mode**.
 
----
+![PTT screen](/docs/ptt-screen.png)
 
 ## Latch (Default)
 
-Tap the **PTT** button once to start transmitting. Tap again to stop. This is the default mode — useful for longer overs where you don't want to keep a finger on the screen.
-
----
+Tap the **PTT** button to start transmitting, tap again to stop. Good for longer overs where holding the button isn't practical.
 
 ## Hold
 
-Press and hold the **PTT** button to transmit. Release to stop. Mirrors traditional radio behaviour — transmission ends the moment you lift your finger.
-
----
+Press and hold **PTT** to transmit, release to stop. Works like a traditional radio handset.
 
 ## VOX (Voice-Activated)
 
-Transmission starts automatically when your microphone picks up audio above the sensitivity threshold and stops after a configurable hang time of silence.
-
-Two settings control VOX behaviour:
+Transmits automatically when you speak above a set threshold. Stops after a period of silence (hang time).
 
 | Setting | Path | Default | Range |
 |---|---|---|---|
-| **VOX Threshold** | **Settings → Push to Talk → VOX Threshold** | -30 dB | -50 to -10 dB |
-| **VOX Delay** | **Settings → Push to Talk → VOX Delay** | 1000 ms | 500–3000 ms |
+| **Threshold** | **Settings > PTT > VOX Threshold** | −30 dB | −50 to −10 dB |
+| **Delay** | **Settings > PTT > VOX Delay** | 1000 ms | 500–3000 ms |
 
-**VOX Threshold** sets how loud audio must be to trigger TX — raise it (towards -10 dB) to avoid false triggers from background noise. **VOX Delay** (hang time) is how long VoxLink keeps transmitting after speech stops before dropping TX.
+**Threshold** controls how loud you need to speak to trigger TX. Raise it in noisy environments to avoid false triggers. **Delay** is how long VoxLink holds TX open after you stop speaking.
 
-> In noisy environments, raise the threshold and shorten the delay to avoid accidentally keying up. In quiet environments, lower the threshold for easier triggering.
-
----
+> In noisy environments, raise the threshold and shorten the delay. In quiet settings, lower the threshold for easier triggering.
 
 ## Timeout Timer (TOT)
 
-TOT prevents excessively long transmissions. Configure it at **Settings → Push to Talk → Timeout Timer**.
+Automatically ends your transmission after a set duration. Configure in **Settings > PTT > Timeout Timer**.
 
-- **Duration** — maximum continuous TX time. Default is **3 minutes** (180 seconds).
-- **Warning** — fires **15 seconds** before timeout by default; configurable from **5–30 seconds** via **Settings → Push to Talk → TOT Warning**. Can be toggled on/off entirely.
-- A countdown is displayed on the **PTT** screen during the final seconds.
-- When the timer expires, TX is cut and you must release and re-press **PTT** to transmit again.
+- **Duration** — default **3 minutes**. When the timer runs out, TX stops and a countdown shows during the final seconds.
+- **Warning** — vibrates **15 seconds** before timeout (configurable from **5–30 s** in **Settings > PTT > TOT Warning**, or toggle off entirely).
 
-> TOT is useful on nets that have transmit-time limits, and helps prevent accidental locked transmissions in Latch mode.
+> TOT helps prevent accidental locked transmissions in Latch mode and is useful on nets with transmit-time limits.

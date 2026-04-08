@@ -20,5 +20,24 @@
 .prose th { color: white; font-weight: 600; text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.07); }
 .prose td { padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.07); }
 .prose hr { border: none; border-top: 1px solid rgba(255, 255, 255, 0.07); margin: 2rem 0; }
-.prose img { max-width: 100%; border-radius: 0.75rem; }
+.prose img { max-width: 260px; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.07); cursor: zoom-in; transition: opacity 0.15s; }
+.prose img:hover { opacity: 0.85; }
 .prose strong { color: white; font-weight: 600; }
+
+/* Image modal */
+.doc-modal-backdrop { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); cursor: zoom-out; }
+.doc-modal-img { max-height: 90vh; max-width: 90vw; border-radius: 0.75rem; object-fit: contain; view-transition-name: doc-image; }
+
+/* View Transition animation */
+::view-transition-old(doc-image),
+::view-transition-new(doc-image) {
+  animation-duration: 0.25s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Sidebar scrollbar */
+.docs-sidebar::-webkit-scrollbar { width: 4px; }
+.docs-sidebar::-webkit-scrollbar-track { background: transparent; }
+.docs-sidebar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+.docs-sidebar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+.docs-sidebar { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.1) transparent; }

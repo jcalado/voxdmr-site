@@ -1,54 +1,29 @@
 # Server Profiles
 
-VoxLink stores all reflector connection details as named profiles so you can switch between networks quickly.
+Save multiple reflector connections and switch between them quickly.
 
----
+![Servers screen](/docs/servers-screen.png)
 
 ## Adding a Profile
 
-1. Tap the **Servers** tab.
-2. Tap **+** (add profile).
-3. Enter the following details:
+1. Tap the **Servers** tab, then **+**.
+2. Enter the hostname, port (default `5300`), talkgroup, your callsign, and auth key.
+3. Tap **Save**.
 
-| Field | Description |
-|---|---|
-| **Name** | A friendly label for this profile |
-| **Hostname** | Reflector hostname or IP address |
-| **Port** | TCP port (default: `5300`) |
-| **Talkgroup** | Talkgroup number to join on connect |
-| **Callsign** | Your callsign as broadcast to other stations |
-| **Auth Key** | HMAC-SHA1 key provided by the reflector administrator |
+The auth key is provided by your reflector admin. It's case-sensitive — if connection fails with **Auth Error**, re-check it character by character.
 
-4. Tap **Save**.
-
----
-
-## Authentication
-
-VoxLink authenticates to SvxLink Reflector Protocol V2 servers using **HMAC-SHA1**. The auth key is a shared secret between your client and the reflector server. Keep it private — do not share it publicly or commit it to version-controlled files.
-
-> If authentication fails, the status will show **Auth Error**. Re-check the auth key character by character; it is case-sensitive.
-
----
-
-## Switching Profiles
-
-To switch to a different server:
+## Switching Servers
 
 1. Tap the **Servers** tab.
-2. Tap the target profile.
-3. Tap **Connect**.
+2. Tap the profile you want to connect to.
 
-If you are already connected, VoxLink disconnects from the current server before connecting to the new one.
+VoxLink disconnects from the current server automatically before connecting to the new one.
 
----
+## Import / Export
 
-## Importing and Exporting Profiles
+Share profiles between devices or club members as JSON files.
 
-Profiles can be transferred between devices as JSON files.
+- **Export** — **Settings > Profiles > Export** saves a `.json` file to your Downloads folder.
+- **Import** — **Settings > Profiles > Import** and select a JSON file.
 
-**Export:** Tap **Settings > Profiles > Export**. VoxLink writes a `.json` file to your device's Downloads folder.
-
-**Import:** Tap **Settings > Profiles > Import** and select a JSON file. VoxLink accepts either a plain array of profiles or an object with a `servers` array (`{"servers": [...]}`). Existing profiles with matching names will be overwritten.
-
-> Use export/import to quickly deploy a pre-configured profile to club members without them having to type in credentials manually.
+> Importing overwrites existing profiles with the same name. Export your profiles first if you want to keep a backup.

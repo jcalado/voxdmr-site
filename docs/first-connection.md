@@ -2,6 +2,8 @@
 
 Set up a server profile, connect to a reflector, and make your first transmission.
 
+![Add Server form](/docs/add-server.png)
+
 ## Adding a Server Profile
 
 1. Open VoxLink and tap the **Servers** tab.
@@ -22,6 +24,8 @@ Set up a server profile, connect to a reflector, and make your first transmissio
 1. On the **Servers** tab, tap the profile you just created.
 2. The status indicator changes to **Connecting…** and then **Connected**.
 3. The PTT screen shows your talkgroup and any connected nodes.
+
+![PTT screen](/docs/ptt-screen.png)
 
 ## Making Your First Transmission
 

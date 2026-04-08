@@ -1,67 +1,56 @@
 # Troubleshooting
 
----
-
-## Can't Connect to the Server
+## Can't Connect
 
 **Symptom:** Status shows **Connecting…** indefinitely, **Auth Error**, or **Connection Refused**.
 
-1. Confirm the **hostname**, **port**, and **auth key** in your server profile are correct. The auth key is case-sensitive.
-2. Check that your device has an active internet connection — open a browser and load any page.
-3. Verify the reflector is online. Ask your admin or check the network's status page.
-4. If you are behind a corporate or guest Wi-Fi, the required TCP/UDP ports may be blocked. Try switching to mobile data.
-5. Ensure no VPN is blocking or rerouting the connection.
+1. Check the **hostname**, **port**, and **auth key** in your server profile. The auth key is case-sensitive.
+2. Make sure your device has an internet connection.
+3. Verify the reflector is online — ask your admin or check your network's status page.
+4. On corporate or guest Wi-Fi, the required ports may be blocked. Try mobile data.
+5. Disable any VPN that might be blocking the connection.
 
-> See [Server Profiles](/docs/server-profiles) for details on the auth key and connection fields.
-
----
-
-## Connection Drops When the Screen Turns Off
+## Connection Drops When Screen Is Off
 
 **Symptom:** VoxLink disconnects after the display sleeps.
 
-Android's battery optimization is almost certainly terminating the foreground service. See [Background Operation](/docs/background-operation) for instructions on exempting VoxLink from battery optimization and enabling wake/Wi-Fi locks.
+This is almost always Android's battery optimization. Exempt VoxLink from it — see [Background Operation](/docs/background-operation) for instructions.
 
-> Enable **Auto-Connect** in **Settings > Connection** to have VoxLink automatically reconnect after an unexpected drop.
+> Enable **Auto-Connect** in **Settings > Connection** so VoxLink reconnects automatically after a drop.
 
----
+## No Incoming Audio
 
-## No Incoming Audio (RX Silent)
+**Symptom:** Connected but you can't hear anything.
 
-1. Check the **RX Volume** slider in **Settings > Audio > RX Volume** — it may be set to 0 %.
-2. Check the Android media or call volume — use the hardware volume buttons while VoxLink is in the foreground.
-3. Confirm your **Audio Output** route (**Settings > Audio > Output**). If set to **Bluetooth**, ensure a Bluetooth device is connected.
-4. Confirm the talkgroup has other active stations — the **Stations** tab shows connected nodes.
+1. Check **RX Volume** in **Settings > Audio** — it may be at 0%.
+2. Check your device volume using the hardware buttons while VoxLink is open.
+3. Check **Audio Output** in **Settings > Audio > Output**. If set to **Bluetooth**, make sure a device is connected.
+4. Check the **Stations** tab — if no nodes are listed, there's nobody to hear.
 
----
+## Others Can't Hear Me
 
-## Others Can't Hear Me (TX Not Working)
+**Symptom:** You're transmitting but other stations hear nothing.
 
-1. Verify VoxLink has **Microphone** permission: **Settings > Apps > VoxLink > Permissions > Microphone**.
-2. Watch the **TX meter** on the PTT screen while keyed up. If the meter shows no movement, the microphone is not delivering signal — try changing **Settings > Audio > Input** to **Microphone** or **Voice Recognition**.
-3. Increase **Mic Gain** in **Settings > Audio > Mic Gain** if the TX meter moves but stays very low.
-4. Confirm you are connected to the correct talkgroup.
-
----
+1. Check that VoxLink has **Microphone** permission: **Android Settings > Apps > VoxLink > Permissions**.
+2. Watch the **TX** meter while transmitting. If it doesn't move, your mic isn't working — try changing **Input** in **Settings > Audio** to **Microphone** or **Voice Recognition**.
+3. If the meter moves but stays very low, increase **Mic Gain** in **Settings > Audio**.
+4. Confirm you're on the right talkgroup.
 
 ## Choppy or Robotic Audio
 
-**On receive:**
+**Hearing choppy audio from others:**
 
-1. A poor or congested internet connection causes packet loss, which produces choppy audio. Check your signal strength or switch from Wi-Fi to mobile data (or vice versa).
-2. VoxLink uses a jitter buffer (24-frame capacity) and proactive packet loss concealment (PLC) to mask occasional losses, but sustained high loss rates will still degrade quality.
-3. If other apps also perform poorly, the problem is your network, not VoxLink.
+1. Check your internet connection — packet loss is the most common cause. Try switching between Wi-Fi and mobile data.
+2. VoxLink compensates for occasional packet loss automatically, but sustained poor connectivity will still affect quality.
 
-**On transmit (reported by other stations):**
+**Others report your audio is choppy:**
 
-1. Reduce **Mic Gain** if the TX meter is regularly hitting 0 dBFS — the limiter is working hard and artefacts may be audible.
-2. Move to a quieter environment or switch **Audio Input** to **Voice Comms** to engage Android's noise suppression.
-
----
+1. If the TX meter is regularly hitting 0 dB, reduce **Mic Gain** — you're overdriving the input.
+2. Switch **Input** to **Voice Comms** in **Settings > Audio** to enable Android's noise suppression.
 
 ## App Crashes or Freezes
 
-1. Force-stop the app and reopen it: **Settings > Apps > VoxLink > Force Stop**.
-2. Check available storage — less than 500 MB free can cause instability on some devices.
-3. Reboot your device to clear any system-level audio session conflicts.
-4. If the crash is reproducible, note the steps and send a bug report to the VoxLink developer with your Android version and device model.
+1. Force-stop VoxLink: **Android Settings > Apps > VoxLink > Force Stop**, then reopen.
+2. Check available storage — below 500 MB free can cause instability.
+3. Reboot your device.
+4. If the crash is reproducible, note the steps and report it with your Android version and device model.
