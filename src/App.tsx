@@ -10,6 +10,21 @@ import {
 
 const LOGO_URL = "https://lh3.googleusercontent.com/aida/ADBb0ugJLbKj5ZRS0MOFKG68Bw2kbCmsH5T3-vhwohu7pL7uvWIOlHRknjufa2aLfK36N253mn7Nvi4Cnf2gdXnaCow0na8x78qyV0gc3-XQtpo-SNZ-01IlqMeoOA5ZWpWpsP1Aj9ilyHSE9sbayEC2Mk6g63tqGGYeiULfBLLLOi3RLAIU9PJtKeP4i9CQeEg04s9fYXb-Go9GHPkKqZoDH6uGLqX4X-SXzVdR3kLD8mwtt3la4bwUYhNkg-s1p25Xo7e8mx-Y7L03Gw";
 
+const logoSizes = {
+  sm: { container: "h-8 w-8 rounded-lg", img: "h-10 w-10" },
+  md: { container: "h-10 w-10 lg:h-12 lg:w-12 rounded-xl", img: "h-12 w-12 lg:h-14 lg:w-14" },
+  lg: { container: "h-20 w-20 lg:h-24 lg:w-24 rounded-2xl", img: "h-24 w-24 lg:h-28 lg:w-28" },
+} as const;
+
+function Logo({ size = "md", className = "" }: { size?: keyof typeof logoSizes; className?: string }) {
+  const s = logoSizes[size];
+  return (
+    <div className={`${s.container} bg-surface-raised overflow-hidden flex items-center justify-center ${className}`}>
+      <img alt="VoxLink Logo" className={`${s.img} object-cover`} src={LOGO_URL} referrerPolicy="no-referrer" />
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <div className="min-h-screen bg-community-bg text-on-surface font-sans selection:bg-vibrant-blue/20">
@@ -17,14 +32,7 @@ export default function App() {
       <nav className="w-full top-0 sticky z-50 bg-slate-950/80 backdrop-blur-xl h-24 flex items-center border-b border-border">
         <div className="flex justify-between items-center max-w-7xl mx-auto px-6 lg:px-10 w-full">
           <div className="flex items-center gap-4 lg:gap-5">
-            <div className="h-10 w-10 lg:h-12 lg:w-12 bg-surface-raised rounded-xl overflow-hidden flex items-center justify-center shadow-lg shadow-black/40">
-              <img
-                alt="VoxLink Logo"
-                className="h-11 w-11 lg:h-13 lg:w-13 object-cover"
-                src={LOGO_URL}
-                referrerPolicy="no-referrer"
-              />
-            </div>
+            <Logo size="md" className="shadow-lg shadow-black/40" />
             <span className="text-xl lg:text-2xl font-bold tracking-tight text-white font-headline">VoxLink</span>
           </div>
           
@@ -165,14 +173,7 @@ export default function App() {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto text-center"
         >
-          <div className="h-20 w-20 lg:h-24 lg:w-24 mx-auto mb-12 rounded-2xl overflow-hidden bg-surface-raised">
-            <img
-              alt="VoxLink Icon"
-              className="h-24 w-24 lg:h-28 lg:w-28 object-cover -mt-2 -ml-2"
-              src={LOGO_URL}
-              referrerPolicy="no-referrer"
-            />
-          </div>
+          <Logo size="lg" className="mx-auto mb-12" />
           <h2 className="text-4xl lg:text-7xl font-headline font-bold mb-8 text-white tracking-tight">Get on the Air</h2>
           <p className="text-on-surface-muted text-lg lg:text-xl mb-6 leading-relaxed max-w-2xl mx-auto">
             Download VoxLink and connect to reflectors worldwide. Available on Android — free, no registration required.
@@ -199,12 +200,7 @@ export default function App() {
       <footer className="bg-slate-950 py-16 border-t border-border">
         <div className="flex flex-col md:flex-row justify-between items-center px-6 lg:px-12 gap-10 max-w-7xl mx-auto">
           <div className="flex items-center gap-4">
-            <img 
-              alt="VoxLink Logo" 
-              className="h-8 w-8 object-contain" 
-              src={LOGO_URL}
-              referrerPolicy="no-referrer"
-            />
+            <Logo size="sm" />
             <span className="font-bold font-headline text-white text-2xl tracking-tight">VoxLink</span>
           </div>
           
