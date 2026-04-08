@@ -162,10 +162,10 @@ export default function App() {
               Get the App
               <Download className="w-5 h-5" />
             </button>
-            <button className="w-full sm:w-auto bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all border border-border hover:-translate-y-1">
+            <a href="/docs" className="w-full sm:w-auto bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all border border-border hover:-translate-y-1">
               Setup Guide
               <BookOpen className="w-5 h-5" />
-            </button>
+            </a>
           </div>
         </motion.div>
       </section>
