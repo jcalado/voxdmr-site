@@ -1,42 +1,40 @@
 # Installation
 
+Get VoxLink running on your Android device.
+
 ## Requirements
 
 - Android 8.0 (Oreo) or higher
-- Active internet connection (Wi-Fi or mobile data)
-- A SvxLink reflector address, talkgroup number, and auth key from your network administrator
-
-> Your reflector admin provides the hostname or IP, port, and auth key. Without these you can install the app but cannot connect.
+- Internet connection (Wi-Fi or mobile data)
+- Reflector connection details from your club or admin: hostname, port, talkgroup number, and auth key
 
 ## Install from Google Play
 
-1. Open the **Google Play Store** on your Android device.
+1. Open the **Google Play Store**.
 2. Search for **VoxLink**.
-3. Tap **Install** and wait for the download to complete.
-4. Open VoxLink from the app drawer.
+3. Tap **Install**.
 
 ## Sideload the APK
 
-If you received an APK file directly (for example, from a beta release or your club):
+If you received an APK file directly (e.g. from a beta release or your club):
 
 1. Enable **Install unknown apps** for your file manager or browser: **Settings > Apps > Special app access > Install unknown apps**.
-2. Transfer the APK to your device and open it.
-3. Tap **Install** when prompted.
+2. Open the APK file on your device and tap **Install**.
 
-To install with ADB from a PC:
+To install via ADB:
 
 ```bash
 adb install VoxLink.apk
 ```
 
-> You can disable **Install unknown apps** again after installation. Sideloaded builds do not receive automatic Play Store updates — check with your source for new versions.
+> Sideloaded builds don't receive Play Store updates — check with your source for new versions.
 
 ## Permissions
 
-**Microphone** (required) — VoxLink needs microphone access to transmit audio. On first launch Android will prompt you — tap **Allow**. Without it PTT transmission is disabled.
+**Microphone** — Required for transmitting. Android prompts you on first launch — tap **Allow**.
 
-To grant it after the fact: **Settings > Apps > VoxLink > Permissions > Microphone > Allow**.
+If you accidentally denied it: **Settings > Apps > VoxLink > Permissions > Microphone > Allow**.
 
-**Notifications** (Android 13+) — VoxLink requests **Notifications** permission so the persistent connection status notification can be displayed.
+**Notifications** (Android 13+) — Allows VoxLink to show a persistent status notification while connected.
 
-**Bluetooth** (Android 12+) — If you route audio to a Bluetooth headset or speaker, Android requires the `BLUETOOTH_CONNECT` permission. VoxLink will prompt for this when you first select a Bluetooth output device.
+**Bluetooth** (Android 12+) — Required when routing audio to a Bluetooth device. VoxLink prompts for this when you first select a Bluetooth output.
