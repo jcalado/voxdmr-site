@@ -2,7 +2,7 @@
 
 How VoxLink stays connected when your screen is off or you're in another app.
 
-![Connection settings](/docs/settings-connection.png)
+![Connection settings](/docs/settings-connection.webp)
 
 ## Persistent Notification
 

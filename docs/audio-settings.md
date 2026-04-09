@@ -2,7 +2,7 @@
 
 Configure audio in **Settings > Audio**.
 
-![Audio settings](/docs/settings-screen.png)
+![Audio settings](/docs/settings-screen.webp)
 
 ## Mic Gain
 

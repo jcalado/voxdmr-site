@@ -2,7 +2,7 @@
 
 VoxLink has three push-to-talk modes. Switch between them in **Settings > PTT > Mode**.
 
-![PTT screen](/docs/ptt-screen.png)
+![PTT screen](/docs/ptt-screen.webp)
 
 ## Latch (Default)
 

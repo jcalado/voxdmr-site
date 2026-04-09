@@ -1,6 +1,6 @@
 # Talkgroups & Nodes
 
-![Nodes screen](/docs/nodes-screen.png)
+![Nodes screen](/docs/nodes-screen.webp)
 
 ## Talkgroups
 
@@ -18,6 +18,30 @@ The talkgroup is configured per server profile (see [Server Profiles](/docs/serv
 4. VoxLink switches immediately — no reconnection required.
 
 > Confirm the new talkgroup with a short call before transmitting a long over. Some talkgroups are linked to repeaters or other networks and traffic may be forwarded widely.
+
+### Talkgroup Presets
+
+Each server profile can have a list of **presets** — saved talkgroups with custom labels. Manage them in the server edit form under **Presets**.
+
+- **Add** a preset with a talkgroup number and label (e.g., `1` → "Local", `2` → "ARES")
+- **Reorder** presets by dragging them
+- **Edit or delete** existing presets
+
+When you tap the talkgroup selector on the PTT screen, your presets appear as a quick-pick list with their labels. You can also enter a talkgroup number manually.
+
+### Monitoring
+
+VoxLink can **monitor** additional talkgroups while you stay on your primary. Audio from monitored talkgroups plays alongside your main TG — you hear everything without switching.
+
+To set up monitoring:
+
+1. Tap the **talkgroup selector** on the PTT screen.
+2. Toggle the **monitor** switch next to any talkgroup you want to listen to.
+3. Monitored talkgroups appear on the PTT screen below the main talkgroup indicator.
+
+You transmit on your primary talkgroup only. Monitoring is receive-only.
+
+> Monitoring is useful for keeping an ear on a net or emergency channel while working a different talkgroup.
 
 ---
 

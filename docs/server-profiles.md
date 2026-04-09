@@ -2,7 +2,7 @@
 
 Save multiple reflector connections and switch between them quickly.
 
-![Servers screen](/docs/servers-screen.png)
+![Servers screen](/docs/servers-screen.webp)
 
 ## Adding a Profile
 

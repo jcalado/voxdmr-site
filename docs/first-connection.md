@@ -2,7 +2,7 @@
 
 Set up a server profile, connect to a reflector, and make your first transmission.
 
-![Add Server form](/docs/add-server.png)
+![Add Server form](/docs/add-server.webp)
 
 ## Adding a Server Profile
 
@@ -25,7 +25,7 @@ Set up a server profile, connect to a reflector, and make your first transmissio
 2. The status indicator changes to **Connecting…** and then **Connected**.
 3. The PTT screen shows your talkgroup and any connected nodes.
 
-![PTT screen](/docs/ptt-screen.png)
+![PTT screen](/docs/ptt-screen.webp)
 
 ## Making Your First Transmission
 

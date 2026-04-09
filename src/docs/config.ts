@@ -23,6 +23,7 @@ export const docsConfig: DocGroup[] = [
       { slug: "audio-settings", title: "Audio Settings" },
       { slug: "server-profiles", title: "Server Profiles" },
       { slug: "talkgroups-nodes", title: "Talkgroups & Nodes" },
+      { slug: "recording", title: "Recording" },
     ],
   },
   {

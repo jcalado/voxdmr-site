@@ -114,11 +114,16 @@ export default function App() {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="w-full max-w-xs bg-surface-raised p-4 rounded-[3.5rem] soft-shadow border border-border rotate-2"
             >
-              <img
-                alt="VoxLink App Screenshot"
-                className="w-full rounded-[3rem]"
-                src="/app-screenshot.png"
-              />
+              <picture>
+                <source srcSet="/app-screenshot.webp" type="image/webp" />
+                <img
+                  alt="VoxLink App Screenshot"
+                  className="w-full rounded-[3rem]"
+                  src="/app-screenshot.png"
+                  width={1080}
+                  height={2424}
+                />
+              </picture>
             </motion.div>
           </motion.div>
         </div>
