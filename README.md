@@ -2,6 +2,10 @@
 
 Landing page and documentation site for [VoxLink](https://voxlink.app) — a modern PTT (Push-to-Talk) client for SvxLink radio reflectors.
 
+<div align="center">
+  <img src="public/app-screenshot.png" alt="VoxLink app screenshot" width="300" />
+</div>
+
 ## Tech Stack
 
 - React 19 + Vite
