@@ -30,9 +30,9 @@ export default function App() {
             <a className="nav-link font-medium text-on-surface-muted hover:text-vibrant-red transition-colors px-2 py-1" href="/docs">Docs</a>
           </div>
           
-          <button className="btn-press bg-vibrant-red hover:bg-red-500 text-white px-6 lg:px-8 py-2.5 lg:py-3 rounded-2xl font-bold hover:scale-105 transition-all">
+          <a href="https://play.google.com/store/apps/details?id=com.jcalado.voxlink" target="_blank" rel="noopener noreferrer" className="btn-press bg-vibrant-red hover:bg-red-500 text-white px-6 lg:px-8 py-2.5 lg:py-3 rounded-2xl font-bold hover:scale-105 transition-all">
             Get the App
-          </button>
+          </a>
         </div>
       </nav>
 
