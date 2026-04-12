@@ -98,7 +98,7 @@ export default function App() {
                 {t("nav.getApp")}
                 <Download className="w-5 h-5" />
               </a>
-              <a href="#" className="btn-press bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 border border-border transition-all hover:-translate-y-1">
+              <a href="https://t.me/+7eNqxZZsIrcwYzc0" target="_blank" rel="noopener noreferrer" className="btn-press bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 border border-border transition-all hover:-translate-y-1">
                 <MessageCircle className="w-5 h-5" />
                 {t("hero.joinCommunity")}
               </a>
@@ -327,7 +327,6 @@ export default function App() {
               { label: t("footer.aboutUs"), href: "#" },
               { label: t("footer.docs"), href: "/docs" },
               { label: t("footer.privacy"), href: "/privacy" },
-              { label: t("footer.twitter"), href: "#" },
             ].map((link) => (
               <a key={link.href} className="text-sm font-semibold text-on-surface-muted hover:text-vibrant-red transition-colors" href={link.href}>
                 {link.label}
