@@ -10,13 +10,12 @@ Instale o VoxLink no seu dispositivo Android.
 
 ## Instalar pela Google Play
 
-1. Abra a **Google Play Store**.
-2. Pesquise por **VoxLink**.
-3. Toque em **Instalar**.
+1. Abra o [**VoxLink na Google Play**](https://play.google.com/store/apps/details?id=com.jcalado.voxlink).
+2. Toque em **Instalar**.
 
 ## Instalar o APK manualmente
 
-Se recebeu um ficheiro APK diretamente (por exemplo, de uma versão beta ou do seu clube):
+Se recebeu um ficheiro APK diretamente (por exemplo, de uma versão beta ou da sua associação):
 
 1. Ative **Instalar apps desconhecidos** para o seu gestor de ficheiros ou browser: **Definições > Aplicações > Acesso especial > Instalar apps desconhecidos**.
 2. Abra o ficheiro APK no seu dispositivo e toque em **Instalar**.

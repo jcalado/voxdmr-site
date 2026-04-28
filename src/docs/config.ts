@@ -31,6 +31,7 @@ export const docsConfig: DocGroup[] = [
     pages: [
       { slug: "background-operation", title: "Background Operation" },
       { slug: "troubleshooting", title: "Troubleshooting" },
+      { slug: "changelog", title: "Changelog" },
     ],
   },
 ];

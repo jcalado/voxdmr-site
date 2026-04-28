@@ -18,6 +18,7 @@ const pageTitleKeys: Record<string, string> = {
   "recording": "docs.page.recording",
   "background-operation": "docs.page.backgroundOperation",
   "troubleshooting": "docs.page.troubleshooting",
+  "changelog": "docs.page.changelog",
 };
 
 export function DocsSidebar({ activeSlug, open, onClose }: { activeSlug: string; open: boolean; onClose: () => void }) {

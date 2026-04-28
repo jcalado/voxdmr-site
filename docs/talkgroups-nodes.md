@@ -21,25 +21,37 @@ The talkgroup is configured per server profile (see [Server Profiles](/docs/serv
 
 ### Talkgroup Presets
 
-Each server profile can have a list of **presets** — saved talkgroups with custom labels. Manage them in the server edit form under **Presets**.
+Each server profile can have a list of **presets** — saved talkgroups with custom labels.
+
+Open the presets screen via either:
+
+- The active server's menu on the **Servers** tab → **Talkgroups**, or
+- The server edit form → **Talkgroup Presets**.
+
+From there you can:
 
 - **Add** a preset with a talkgroup number and label (e.g., `1` → "Local", `2` → "ARES")
 - **Reorder** presets by dragging them
 - **Edit or delete** existing presets
+- **Toggle the headphones icon** on any preset to monitor that talkgroup by default whenever you connect to this server
 
 When you tap the talkgroup selector on the PTT screen, your presets appear as a quick-pick list with their labels. You can also enter a talkgroup number manually.
+
+### Stepping Through Presets
+
+When the active server has two or more presets, the PTT screen shows **‹** and **›** chevron buttons on either side of the talkgroup label. Tap them to cycle through your presets (with wrap-around) without opening the picker.
 
 ### Monitoring
 
 VoxLink can **monitor** additional talkgroups while you stay on your primary. Audio from monitored talkgroups plays alongside your main TG — you hear everything without switching.
 
-To set up monitoring:
+There are three ways to monitor a talkgroup:
 
-1. Tap the **talkgroup selector** on the PTT screen.
-2. Toggle the **monitor** switch next to any talkgroup you want to listen to.
-3. Monitored talkgroups appear on the PTT screen below the main talkgroup indicator.
+1. **Default per preset** — In the presets screen, tap the headphones icon on any preset. That talkgroup is monitored every time you connect to the server.
+2. **Toggle from the picker** — Tap the talkgroup selector on the PTT screen and toggle the headphones icon next to any preset. Changes persist as the preset's default.
+3. **Monitor an arbitrary TG** — In the picker, tap **Monitor another TG…**, type a number, and confirm. The TG is added as a monitored channel for this server (no preset needed). Toggle its headphones icon again later to stop monitoring it.
 
-You transmit on your primary talkgroup only. Monitoring is receive-only.
+Monitored talkgroups appear on the PTT screen below the main talkgroup indicator. You transmit on your primary talkgroup only — monitoring is receive-only.
 
 > Monitoring is useful for keeping an ear on a net or emergency channel while working a different talkgroup.
 

@@ -10,9 +10,8 @@ Get VoxLink running on your Android device.
 
 ## Install from Google Play
 
-1. Open the **Google Play Store**.
-2. Search for **VoxLink**.
-3. Tap **Install**.
+1. Open the [**VoxLink listing on Google Play**](https://play.google.com/store/apps/details?id=com.jcalado.voxlink).
+2. Tap **Install**.
 
 ## Sideload the APK
 

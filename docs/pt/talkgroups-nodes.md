@@ -21,25 +21,37 @@ O talkgroup é configurado por perfil de servidor (ver [Perfis de Servidor](/doc
 
 ### Presets de Talkgroup
 
-Cada perfil de servidor pode ter uma lista de **presets** — talkgroups guardados com etiquetas personalizadas. Gerencie-os no formulário de edição do servidor em **Presets**.
+Cada perfil de servidor pode ter uma lista de **presets** — talkgroups guardados com etiquetas personalizadas.
 
-- **Adicione** um preset com um número de talkgroup e etiqueta (ex.: `1` → "Local", `2` → "ARES")
-- **Reordene** presets arrastando-os
-- **Edite ou elimine** presets existentes
+Aceda ao ecrã de presets por uma de duas vias:
+
+- Pelo menu do servidor ativo no separador **Servidores** → **Talkgroups**, ou
+- Pelo formulário de edição do servidor → **Presets de Talkgroup**.
+
+A partir desse ecrã pode:
+
+- **Adicionar** um preset com um número de talkgroup e etiqueta (ex.: `1` → "Local", `2` → "ARES")
+- **Reordenar** presets arrastando-os
+- **Editar ou eliminar** presets existentes
+- **Ativar o ícone de auscultadores** num preset para monitorizar esse talkgroup por omissão sempre que se ligar a este servidor
 
 Quando toca no seletor de talkgroup no ecrã PTT, os seus presets aparecem como uma lista de seleção rápida com as suas etiquetas. Pode também introduzir um número de talkgroup manualmente.
+
+### Navegar Pelos Presets
+
+Quando o servidor ativo tem dois ou mais presets, o ecrã PTT mostra botões **‹** e **›** dos dois lados da etiqueta de talkgroup. Toque-os para percorrer os presets (com retorno ao início) sem abrir o seletor.
 
 ### Monitorização
 
 O VoxLink pode **monitorizar** talkgroups adicionais enquanto permanece no seu principal. O áudio dos talkgroups monitorizados reproduz juntamente com o seu TG principal — ouve tudo sem mudar.
 
-Para configurar a monitorização:
+Há três formas de monitorizar um talkgroup:
 
-1. Toque no **seletor de talkgroup** no ecrã PTT.
-2. Ative o interruptor de **monitorização** junto a qualquer talkgroup que queira ouvir.
-3. Os talkgroups monitorizados aparecem no ecrã PTT abaixo do indicador do talkgroup principal.
+1. **Por omissão num preset** — No ecrã de presets, toque no ícone de auscultadores de qualquer preset. Esse talkgroup é monitorizado sempre que se liga ao servidor.
+2. **A partir do seletor** — Toque no seletor de talkgroup no ecrã PTT e ative o ícone de auscultadores junto a qualquer preset. As alterações persistem como o valor por omissão do preset.
+3. **Monitorizar um TG arbitrário** — No seletor, toque em **Monitorizar outro TG…**, escreva um número e confirme. O TG é adicionado como canal monitorizado para este servidor (sem necessidade de preset). Ative novamente o ícone de auscultadores depois para deixar de monitorizar.
 
-Transmite no seu talkgroup principal apenas. A monitorização é apenas de receção.
+Os talkgroups monitorizados aparecem no ecrã PTT abaixo do indicador do talkgroup principal. Transmite apenas no seu talkgroup principal — a monitorização é apenas de receção.
 
 > A monitorização é útil para manter um ouvido numa rede ou canal de emergência enquanto trabalha num talkgroup diferente.
 

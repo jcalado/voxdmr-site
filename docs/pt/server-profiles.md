@@ -12,6 +12,20 @@ Guarde múltiplas ligações a refletores e alterne entre elas rapidamente.
 
 A chave de autenticação é fornecida pelo administrador do seu refletor. É sensível a maiúsculas/minúsculas — se a ligação falhar com **Erro de Autenticação**, verifique-a caractere por caractere.
 
+Após guardar, o VoxLink propõe configurar [presets de talkgroup](/docs/talkgroups-nodes#presets-de-talkgroup) para o novo servidor logo de seguida. Ignore se preferir adicioná-los mais tarde — pode sempre voltar ao mesmo ecrã pelo menu do servidor ativo.
+
+## Configuração Rápida por Código QR ou Link
+
+Operadores de refletores podem publicar um link `voxlink://` (frequentemente como código QR) que pré-preenche o formulário de novo servidor. Ao ler ou tocar no link, o VoxLink abre o ecrã **Adicionar servidor** com o host, porta, nome, indicativo, password e talkgroup pré-preenchidos — confirme e toque em **Guardar**.
+
+O formato do link é:
+
+```
+voxlink://{host}:{port}/?name={nome}&user={indicativo}&pass={password}&tg={tg}
+```
+
+Todos os parâmetros de query são opcionais. Os que ficarem por preencher usam os valores predefinidos do formulário.
+
 ## Mudar de Servidor
 
 1. Toque no separador **Servidores**.
