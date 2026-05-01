@@ -50,10 +50,6 @@ Tanto o medidor **TX** (microfone, topo) como o **RX** (receção, baixo) na jan
 
 Aponta para **verde com algum amarelo** em fala normal. Amarelo constante com toques no vermelho nas sílabas mais fortes é o ponto ideal para o codificador AMBE+2. Vermelho constante ou qualquer clipping significa que estás demasiado alto.
 
-## Frequências de amostragem e codec
-
-Não configuras nada disto, mas para que conste: o VoxDMR captura a 48 kHz, faz downsample para 8 kHz para o vocoder AMBE+2, codifica em frames de voz de 49 bits a 50 Hz, e empacota no protocolo Rewind. O caminho inverso em RX é o mesmo em espelho.
-
 ## Próximos passos
 
 - [PTT Modes](./ptt-modes). Push-to-talk vs toggle, mudar a tecla PTT.

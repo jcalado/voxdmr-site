@@ -50,10 +50,6 @@ Both the **TX** (microphone, top) and **RX** (receive, bottom) meters on the mai
 
 Aim for **green-with-some-yellow** during normal speech. Solid yellow with brushes into red on louder syllables is the sweet spot for the AMBE+2 encoder. Constant red or any clipping means you're too hot.
 
-## Sample rates and codec
-
-You don't configure these, but for completeness: VoxDMR captures at 48 kHz, downsamples to 8 kHz for the AMBE+2 vocoder, encodes to 49-bit voice frames at 50 Hz, and packetises into the Rewind protocol. The reverse path on RX is the same in mirror.
-
 ## Next steps
 
 - [PTT Modes](./ptt-modes). Push-to-talk vs toggle, rebinding the PTT key.
