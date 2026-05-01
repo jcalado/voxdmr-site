@@ -2,7 +2,7 @@
 
 Notas de versão do VoxDMR. Cada página de release no GitHub tem a lista completa de commits e os binários assinados; isto é o resumo humano.
 
-## v0.6.0 (primeira versão pública)
+## v0.7.0 (primeira versão pública)
 
 _Lançada em abril de 2026. Linux x86_64 + Windows x86_64._
 
@@ -25,4 +25,4 @@ Limitações conhecidas:
 - O binário de Windows ainda não está assinado digitalmente. O SmartScreen pede confirmação no primeiro arranque. Clica em **Mais informações** → **Executar mesmo assim**.
 - Os downloads HTTPS (firmware, diretório de masters) não respeitam as definições de proxy do sistema. Usa o caminho de ficheiros manuais ou corre a partir de uma rede sem proxy.
 
-Vê a [página de release](https://github.com/jcalado/dmr-input/releases/tag/v0.6.0) para binários e SHA-256, e o [guia de instalação](./installation) para começar.
+Vê a [página de release](https://github.com/jcalado/dmr-input/releases/tag/v0.7.0) para binários e SHA-256, e o [guia de instalação](./installation) para começar.
