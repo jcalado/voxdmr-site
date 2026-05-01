@@ -25,4 +25,4 @@ Limitações conhecidas:
 - O binário de Windows ainda não está assinado digitalmente. O SmartScreen pede confirmação no primeiro arranque. Clica em **Mais informações** → **Executar mesmo assim**.
 - Os downloads HTTPS (firmware, diretório de masters) não respeitam as definições de proxy do sistema. Usa o caminho de ficheiros manuais ou corre a partir de uma rede sem proxy.
 
-Vê a [página de release](https://github.com/jcalado/dmr-input/releases/tag/v0.7.0) para binários e SHA-256, e o [guia de instalação](./installation) para começar.
+Vê a [página de release](https://github.com/jcalado/voxdmr-site/releases/tag/v0.7.0) para binários e SHA-256, e o [guia de instalação](./installation) para começar.

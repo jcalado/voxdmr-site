@@ -25,4 +25,4 @@ Known limitations:
 - The Windows binary isn't code-signed yet. SmartScreen will prompt on first launch. Click **More info** → **Run anyway**.
 - HTTPS downloads (firmware fetch, master directory) don't honour system proxy settings. Use the manual-files path or run from an unproxied network.
 
-See the [release page](https://github.com/jcalado/dmr-input/releases/tag/v0.7.0) for binaries and SHA-256 sums, and the [installation guide](./installation) to get going.
+See the [release page](https://github.com/jcalado/voxdmr-site/releases/tag/v0.7.0) for binaries and SHA-256 sums, and the [installation guide](./installation) to get going.

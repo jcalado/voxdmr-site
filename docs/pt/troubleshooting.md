@@ -121,4 +121,4 @@ O VoxDMR é construído sobre iced + wgpu. Em combinações raras de drivers GPU
 ## Ainda preso?
 
 - Lê o ficheiro de log completo (`~/.local/state/voxdmr/logs/` em Linux, `%LOCALAPPDATA%\voxdmr\logs\` em Windows).
-- Abre uma issue no [GitHub](https://github.com/jcalado/dmr-input/issues) com o log e uma descrição do que estavas a tentar fazer.
+- Abre uma issue no [GitHub](https://github.com/jcalado/voxdmr-site/issues) com o log e uma descrição do que estavas a tentar fazer.

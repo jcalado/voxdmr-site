@@ -121,4 +121,4 @@ VoxDMR is built on iced + wgpu. On rare GPU-driver combinations the renderer doe
 ## Still stuck?
 
 - Read the full log file (`~/.local/state/voxdmr/logs/` on Linux, `%LOCALAPPDATA%\voxdmr\logs\` on Windows).
-- Open an issue on [GitHub](https://github.com/jcalado/dmr-input/issues) with the log and a description of what you were trying to do.
+- Open an issue on [GitHub](https://github.com/jcalado/voxdmr-site/issues) with the log and a description of what you were trying to do.
