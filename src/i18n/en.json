@@ -28,8 +28,8 @@
   "features.talkgroups.description": "Browse and switch between thousands of BrandMeister talkgroups. Favorites, search, and live activity indicators.",
   "features.rewind.title": "Rewind Protocol",
   "features.rewind.description": "Connects via the open Rewind protocol used by hotspot firmware like Pi-Star. Just need a DMR ID and a hotspot password. No proprietary client software.",
-  "features.openSource.title": "Open Source, Free",
-  "features.openSource.description": "GPL-3.0 licensed. No account, no telemetry, no subscription. Build it yourself from source or grab a release binary from GitHub.",
+  "features.free.title": "Free to Use",
+  "features.free.description": "No account, no telemetry, no subscription. Download a release binary and start transmitting.",
   "features.crossPlatform.title": "Cross-Platform",
   "features.crossPlatform.description": "Native Linux and Windows binaries. Same UI, same audio engine, same experience on both platforms.",
 

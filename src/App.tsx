@@ -259,8 +259,8 @@ export default function App() {
               className="feature-card lg:col-span-3 p-10 lg:p-14 rounded-3xl bg-surface-raised/40 border border-border hover:bg-surface-raised/60"
             >
               <Layers className="feature-icon w-10 h-10 text-vibrant-blue mb-8" />
-              <h3 className="font-headline font-bold text-3xl lg:text-4xl mb-5 text-white">{t("features.openSource.title")}</h3>
-              <p className="text-on-surface-muted text-lg leading-relaxed max-w-lg">{t("features.openSource.description")}</p>
+              <h3 className="font-headline font-bold text-3xl lg:text-4xl mb-5 text-white">{t("features.free.title")}</h3>
+              <p className="text-on-surface-muted text-lg leading-relaxed max-w-lg">{t("features.free.description")}</p>
             </motion.div>
 
             {/* Cross-platform */}
