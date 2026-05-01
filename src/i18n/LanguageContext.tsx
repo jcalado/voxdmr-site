@@ -15,7 +15,7 @@ interface LanguageContextValue {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 function detectLanguage(): Lang {
-  const stored = localStorage.getItem("voxlink-lang");
+  const stored = localStorage.getItem("voxdmr-lang");
   if (stored === "en" || stored === "pt") return stored;
   if (navigator.language.startsWith("pt")) return "pt";
   return "en";
@@ -26,7 +26,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLang = useCallback((l: Lang) => {
     setLangState(l);
-    localStorage.setItem("voxlink-lang", l);
+    localStorage.setItem("voxdmr-lang", l);
   }, []);
 
   const t = useCallback((key: string): string => {
