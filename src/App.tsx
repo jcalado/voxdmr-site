@@ -164,8 +164,6 @@ export default function App() {
                       alt={item.alt}
                       className="w-full rounded-2xl"
                       src={`${item.src}.png`}
-                      width={1280}
-                      height={800}
                       loading="lazy"
                     />
                   </picture>
