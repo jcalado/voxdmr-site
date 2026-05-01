@@ -13,10 +13,7 @@ const pageTitleKeys: Record<string, string> = {
   "first-connection": "docs.page.firstConnection",
   "ptt-modes": "docs.page.pttModes",
   "audio-settings": "docs.page.audioSettings",
-  "server-profiles": "docs.page.serverProfiles",
   "talkgroups-nodes": "docs.page.talkgroupsNodes",
-  "recording": "docs.page.recording",
-  "background-operation": "docs.page.backgroundOperation",
   "troubleshooting": "docs.page.troubleshooting",
   "changelog": "docs.page.changelog",
 };

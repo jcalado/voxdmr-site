@@ -91,10 +91,7 @@
   "docs.page.firstConnection": "First Connection",
   "docs.page.pttModes": "PTT Modes",
   "docs.page.audioSettings": "Audio Settings",
-  "docs.page.serverProfiles": "Server Profiles",
   "docs.page.talkgroupsNodes": "Talkgroups & Nodes",
-  "docs.page.recording": "Recording",
-  "docs.page.backgroundOperation": "Background Operation",
   "docs.page.troubleshooting": "Troubleshooting",
   "docs.page.changelog": "Changelog"
 }

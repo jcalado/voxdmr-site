@@ -21,15 +21,12 @@ export const docsConfig: DocGroup[] = [
     pages: [
       { slug: "ptt-modes", title: "PTT Modes" },
       { slug: "audio-settings", title: "Audio Settings" },
-      { slug: "server-profiles", title: "Server Profiles" },
       { slug: "talkgroups-nodes", title: "Talkgroups & Nodes" },
-      { slug: "recording", title: "Recording" },
     ],
   },
   {
     label: "Reference",
     pages: [
-      { slug: "background-operation", title: "Background Operation" },
       { slug: "troubleshooting", title: "Troubleshooting" },
       { slug: "changelog", title: "Changelog" },
     ],
