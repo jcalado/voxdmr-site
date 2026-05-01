@@ -114,15 +114,18 @@ export default function App() {
             <motion.div
               animate={{ opacity: [0.3, 0.6, 0.3] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-0 m-auto w-72 h-72 bg-vibrant-blue/20 rounded-full blur-3xl"
+              className="absolute inset-0 m-auto w-3/4 h-3/4 bg-vibrant-blue/20 rounded-full blur-3xl"
             />
-            <motion.div
-              animate={{ scale: [1, 1.04, 1] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative z-10"
-            >
-              <Logo size="lg" className="shadow-2xl shadow-vibrant-blue/30 ring-1 ring-white/10" />
-            </motion.div>
+            <div className="relative z-10 bg-surface-raised p-2 rounded-3xl soft-shadow border border-border ring-1 ring-white/10">
+              <picture>
+                <source srcSet="/main-app.webp" type="image/webp" />
+                <img
+                  src="/main-app.png"
+                  alt="VoxDMR main window: connected to BrandMeister, talkgroup picker with favorites and live activity dots"
+                  className="w-full rounded-2xl"
+                />
+              </picture>
+            </div>
           </motion.div>
         </div>
       </header>
