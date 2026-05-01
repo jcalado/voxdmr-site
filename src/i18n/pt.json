@@ -1,7 +1,16 @@
 {
+  "nav.screenshots": "Capturas",
   "nav.features": "Funcionalidades",
   "nav.docs": "Documentação",
   "nav.getApp": "Transferir",
+
+  "screenshots.heading": "Vê em ação",
+  "screenshots.subheading": "Da configuração inicial à transmissão ao vivo — eis o aspeto do VoxDMR.",
+  "screenshots.setup": "Configuração inicial",
+  "screenshots.main": "Ligado e pronto",
+  "screenshots.rx": "A receber áudio",
+  "screenshots.firmware": "Estado do firmware",
+  "screenshots.connection": "Definições de ligação",
 
   "hero.badge": "Gratuito e Código Aberto",
   "hero.title1": "DMR a partir do",

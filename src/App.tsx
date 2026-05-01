@@ -29,6 +29,7 @@ export default function App() {
           </div>
 
           <div className="hidden lg:flex gap-12 items-center">
+            <a className="nav-link font-medium text-on-surface-muted hover:text-vibrant-red transition-colors px-2 py-1" href="#screenshots">{t("nav.screenshots")}</a>
             <a className="nav-link font-medium text-on-surface-muted hover:text-vibrant-red transition-colors px-2 py-1" href="#features">{t("nav.features")}</a>
             <a className="nav-link font-medium text-on-surface-muted hover:text-vibrant-red transition-colors px-2 py-1" href="/docs">{t("nav.docs")}</a>
           </div>
@@ -125,6 +126,56 @@ export default function App() {
           </motion.div>
         </div>
       </header>
+
+      {/* Screenshots Gallery */}
+      <section id="screenshots" className="py-16 lg:py-24 px-6 lg:px-8 scroll-mt-24">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6 }}
+            className="mb-12 lg:mb-16 max-w-2xl"
+          >
+            <h2 className="text-4xl lg:text-5xl font-headline font-bold text-white mb-4 tracking-tight">{t("screenshots.heading")}</h2>
+            <p className="text-on-surface-muted text-lg leading-relaxed">{t("screenshots.subheading")}</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+            {[
+              { src: "/screenshots/setup-card", alt: "VoxDMR first-launch setup card with firmware download button", label: t("screenshots.setup") },
+              { src: "/screenshots/main-idle", alt: "VoxDMR main UI connected and ready to transmit", label: t("screenshots.main") },
+              { src: "/screenshots/main-rx", alt: "VoxDMR receiving audio from a BrandMeister talkgroup", label: t("screenshots.rx") },
+              { src: "/screenshots/settings-firmware", alt: "VoxDMR settings firmware tab showing valid firmware checksum", label: t("screenshots.firmware") },
+              { src: "/screenshots/settings-connection", alt: "VoxDMR settings connection tab with BrandMeister master picker", label: t("screenshots.connection") },
+            ].map((item, i) => (
+              <motion.div
+                key={item.src}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: (i % 2) * 0.1 }}
+                className="flex flex-col gap-4"
+              >
+                <div className="bg-surface-raised p-3 rounded-3xl soft-shadow border border-border">
+                  <picture>
+                    <source srcSet={`${item.src}.webp`} type="image/webp" />
+                    <img
+                      alt={item.alt}
+                      className="w-full rounded-2xl"
+                      src={`${item.src}.png`}
+                      width={1280}
+                      height={800}
+                      loading="lazy"
+                    />
+                  </picture>
+                </div>
+                <span className="text-xs font-bold uppercase tracking-widest text-on-surface-muted px-2">{item.label}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
       <section id="features" className="py-24 lg:py-32 px-6 lg:px-8 bg-surface border-y border-border scroll-mt-24">

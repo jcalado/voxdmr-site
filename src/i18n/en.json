@@ -1,7 +1,16 @@
 {
+  "nav.screenshots": "Screenshots",
   "nav.features": "Features",
   "nav.docs": "Docs",
   "nav.getApp": "Download",
+
+  "screenshots.heading": "See it in action",
+  "screenshots.subheading": "From first-launch setup to live transmission — here's what VoxDMR looks like.",
+  "screenshots.setup": "First-launch setup",
+  "screenshots.main": "Connected & ready",
+  "screenshots.rx": "Receiving audio",
+  "screenshots.firmware": "Firmware status",
+  "screenshots.connection": "Connection settings",
 
   "hero.badge": "Free & Open Source",
   "hero.title1": "DMR from your",
