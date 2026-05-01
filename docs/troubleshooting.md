@@ -1,6 +1,6 @@
 # Troubleshooting
 
-A short index of the things most likely to break and how to fix them. The bottom-bar log line in VoxDMR is the first place to look. Most failures print there. The full activity log is in the [logs directory](./installation) (`~/.local/state/dmr-presenter/logs/` on Linux, `%LOCALAPPDATA%\dmr-presenter\logs\` on Windows).
+A short index of the things most likely to break and how to fix them. The bottom-bar log line in VoxDMR is the first place to look. Most failures print there. The full activity log is in the [logs directory](./installation) (`~/.local/state/voxdmr/logs/` on Linux, `%LOCALAPPDATA%\voxdmr\logs\` on Windows).
 
 ## Connection
 
@@ -120,5 +120,5 @@ VoxDMR is built on iced + wgpu. On rare GPU-driver combinations the renderer doe
 
 ## Still stuck?
 
-- Read the full log file (`~/.local/state/dmr-presenter/logs/` on Linux, `%LOCALAPPDATA%\dmr-presenter\logs\` on Windows).
+- Read the full log file (`~/.local/state/voxdmr/logs/` on Linux, `%LOCALAPPDATA%\voxdmr\logs\` on Windows).
 - Open an issue on [GitHub](https://github.com/jcalado/dmr-input/issues) with the log and a description of what you were trying to do.

@@ -51,7 +51,7 @@
   "privacy.dataStored.title": "Data Stored on Your Device",
   "privacy.dataStored.intro": "The app stores the following data locally on your device only:",
   "privacy.dataStored.serverProfiles": "Configuration",
-  "privacy.dataStored.serverProfilesDesc": "DMR ID, hotspot password, server address, talkgroup settings, and PTT key binding. Stored in ~/.config/dmr-presenter/",
+  "privacy.dataStored.serverProfilesDesc": "DMR ID, hotspot password, server address, talkgroup settings, and PTT key binding. Stored in ~/.config/voxdmr/",
   "privacy.dataStored.appPreferences": "App preferences",
   "privacy.dataStored.appPreferencesDesc": "audio device selection, PTT mode, UI preferences",
   "privacy.dataStored.outro": "This data never leaves your device except when connecting directly to BrandMeister servers.",

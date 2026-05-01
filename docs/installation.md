@@ -62,13 +62,11 @@ VoxDMR follows OS conventions for config, data, and logs:
 
 | Type | Linux | Windows | macOS¹ |
 |---|---|---|---|
-| Firmware | `~/.local/share/dmr-presenter/firmware/` | `%APPDATA%\dmr-presenter\firmware\` | `~/Library/Application Support/dmr-presenter/firmware/` |
-| Config | `~/.config/dmr-presenter/` | `%APPDATA%\dmr-presenter\` | `~/Library/Application Support/dmr-presenter/` |
-| Logs | `~/.local/state/dmr-presenter/logs/` | `%LOCALAPPDATA%\dmr-presenter\logs\` | `~/Library/Logs/dmr-presenter/` |
+| Firmware | `~/.local/share/voxdmr/firmware/` | `%APPDATA%\voxdmr\firmware\` | `~/Library/Application Support/voxdmr/firmware/` |
+| Config | `~/.config/voxdmr/` | `%APPDATA%\voxdmr\` | `~/Library/Application Support/voxdmr/` |
+| Logs | `~/.local/state/voxdmr/logs/` | `%LOCALAPPDATA%\voxdmr\logs\` | `~/Library/Logs/voxdmr/` |
 
 ¹ macOS isn't currently a release target. Paths are listed for future reference and for users building from source.
-
-The directory name is `dmr-presenter` rather than `voxdmr` for backwards compatibility with earlier versions. The on-disk layout is stable.
 
 To override the firmware location (e.g. for packagers or sandboxed installs), set `VOXDMR_FIRMWARE_DIR` before launching:
 

@@ -13,7 +13,7 @@
   "screenshots.connection": "Definições de ligação",
 
   "hero.badge": "Gratuito e Código Aberto",
-  "hero.title1": "DMR a partir do",
+  "hero.title1": "DMR no",
   "hero.title2": "Computador.",
   "hero.subtitle": "Transmita áudio para talkgroups BrandMeister DMR a partir de Linux ou Windows. Prima a barra de espaço para transmitir. Sem rádio DMR necessário.",
   "hero.joinCommunity": "Ver no GitHub",
@@ -51,7 +51,7 @@
   "privacy.dataStored.title": "Dados Armazenados no Seu Dispositivo",
   "privacy.dataStored.intro": "A aplicação armazena os seguintes dados localmente apenas no seu dispositivo:",
   "privacy.dataStored.serverProfiles": "Configuração",
-  "privacy.dataStored.serverProfilesDesc": "ID DMR, palavra-passe do hotspot, endereço do servidor, definições de talkgroup e tecla PTT. Armazenados em ~/.config/dmr-presenter/",
+  "privacy.dataStored.serverProfilesDesc": "ID DMR, palavra-passe do hotspot, endereço do servidor, definições de talkgroup e tecla PTT. Armazenados em ~/.config/voxdmr/",
   "privacy.dataStored.appPreferences": "Preferências da aplicação",
   "privacy.dataStored.appPreferencesDesc": "seleção de dispositivo de áudio, modo PTT, preferências de interface",
   "privacy.dataStored.outro": "Estes dados nunca saem do seu dispositivo exceto ao ligar diretamente a servidores BrandMeister.",

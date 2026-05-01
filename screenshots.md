@@ -16,7 +16,7 @@ Capture these 5 screenshots and drop them into `public/screenshots/` as both `.p
 ### 1. `setup-card` — First-launch setup
 The marquee shot. Explains the legal-posture story visually.
 
-- App state: no firmware provisioned (delete `~/.local/share/dmr-presenter/firmware/` to force this).
+- App state: no firmware provisioned (delete `~/.local/share/voxdmr/firmware/` to force this).
 - Visible: the setup card with "VoxDMR needs MD-380 firmware to encode and decode audio", the two source URLs (`md380.org/...` and `raw.githubusercontent.com/...`), and the **Download (≈2 MB)** button highlighted/focused.
 - Optional alt: progress mid-download (`Downloading MD-380 firmware… 1.2 / 2.3 MB`) — second variant if you want a "before/after" pair.
 
@@ -37,7 +37,7 @@ The dynamic moment.
 Proves the runtime-loading is real.
 
 - Open Settings → Firmware tab.
-- Visible: "Loaded from: ~/.local/share/dmr-presenter/firmware/" with both files showing ✓ valid, plus the **[Verify]** and **[Reinstall…]** buttons.
+- Visible: "Loaded from: ~/.local/share/voxdmr/firmware/" with both files showing ✓ valid, plus the **[Verify]** and **[Reinstall…]** buttons.
 
 ### 5. `settings-connection` — Connection settings
 Shows the app is configurable.
