@@ -13,7 +13,7 @@ export default function PrivacyPage() {
         <div className="flex justify-between items-center max-w-7xl mx-auto px-6 lg:px-10 w-full">
           <Link to="/" className="flex items-center gap-4 lg:gap-5">
             <Logo size="md" className="shadow-lg shadow-black/40" />
-            <span className="text-xl lg:text-2xl font-bold tracking-tight text-white font-headline">VoxLink</span>
+            <span className="text-xl lg:text-2xl font-bold tracking-tight text-white font-headline">VoxDMR</span>
           </Link>
           <LanguageSwitcher />
         </div>
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-2xl font-headline font-bold text-white mb-4">{t("privacy.contact.title")}</h2>
-            <p>{t("privacy.contact.text")} <a href="mailto:voxlink@jcalado.com" className="text-vibrant-blue hover:underline">voxlink@jcalado.com</a></p>
+            <p>{t("privacy.contact.text")} <a href="mailto:voxdmr@jcalado.com" className="text-vibrant-blue hover:underline">voxdmr@jcalado.com</a></p>
           </section>
         </div>
       </main>

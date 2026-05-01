@@ -17,7 +17,7 @@ export const docsConfig: DocGroup[] = [
     ],
   },
   {
-    label: "Using VoxLink",
+    label: "Using VoxDMR",
     pages: [
       { slug: "ptt-modes", title: "PTT Modes" },
       { slug: "audio-settings", title: "Audio Settings" },

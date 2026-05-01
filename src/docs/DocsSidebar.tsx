@@ -4,7 +4,7 @@ import { useLanguage } from "../i18n/LanguageContext";
 
 const groupLabelKeys: Record<string, string> = {
   "Getting Started": "docs.group.gettingStarted",
-  "Using VoxLink": "docs.group.usingVoxlink",
+  "Using VoxDMR": "docs.group.usingVoxlink",
   "Reference": "docs.group.reference",
 };
 

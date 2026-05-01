@@ -1,5 +1,5 @@
 {
-  "name": "VoxLink",
-  "description": "The friendliest way to explore global radio reflectors. Turn your device into a playful portal for voices around the world.",
+  "name": "VoxDMR",
+  "description": "Desktop audio for BrandMeister DMR. Open source, no DMR radio required.",
   "requestFramePermissions": []
 }

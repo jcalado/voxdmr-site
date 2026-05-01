@@ -10,7 +10,7 @@ export function Logo({ size = "md", className = "" }: { size?: keyof typeof logo
   const s = logoSizes[size];
   return (
     <div className={`${s.container} bg-surface-raised overflow-hidden flex items-center justify-center ${className}`}>
-      <img alt="VoxLink Logo" className={`${s.img} object-cover`} src={LOGO_URL} />
+      <img alt="VoxDMR Logo" className={`${s.img} object-cover`} src={LOGO_URL} />
     </div>
   );
 }

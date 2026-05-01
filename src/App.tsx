@@ -7,9 +7,9 @@ import {
   BookOpen,
   Radio,
   Wifi,
-  MessageCircle,
+  Github,
   Layers,
-  Disc
+  Cpu
 } from "lucide-react";
 import { Logo } from "./Logo";
 import { useLanguage } from "./i18n/LanguageContext";
@@ -25,18 +25,17 @@ export default function App() {
         <div className="flex justify-between items-center max-w-7xl mx-auto px-6 lg:px-10 w-full">
           <div className="flex items-center gap-4 lg:gap-5">
             <Logo size="md" className="shadow-lg shadow-black/40" />
-            <span className="text-xl lg:text-2xl font-bold tracking-tight text-white font-headline">VoxLink</span>
+            <span className="text-xl lg:text-2xl font-bold tracking-tight text-white font-headline">VoxDMR</span>
           </div>
 
           <div className="hidden lg:flex gap-12 items-center">
-            <a className="nav-link font-medium text-on-surface-muted hover:text-vibrant-red transition-colors px-2 py-1" href="#screenshots">{t("nav.screenshots")}</a>
             <a className="nav-link font-medium text-on-surface-muted hover:text-vibrant-red transition-colors px-2 py-1" href="#features">{t("nav.features")}</a>
             <a className="nav-link font-medium text-on-surface-muted hover:text-vibrant-red transition-colors px-2 py-1" href="/docs">{t("nav.docs")}</a>
           </div>
 
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
-            <a href="https://play.google.com/store/apps/details?id=com.jcalado.voxlink" target="_blank" rel="noopener noreferrer" className="btn-press bg-vibrant-red hover:bg-red-500 text-white px-6 lg:px-8 py-2.5 lg:py-3 rounded-2xl font-bold hover:scale-105 transition-all">
+            <a href="https://github.com/jcalado/dmr-input/releases/latest" target="_blank" rel="noopener noreferrer" className="btn-press bg-vibrant-red hover:bg-red-500 text-white px-6 lg:px-8 py-2.5 lg:py-3 rounded-2xl font-bold hover:scale-105 transition-all">
               {t("nav.getApp")}
             </a>
           </div>
@@ -94,12 +93,12 @@ export default function App() {
               transition={{ duration: 0.5, delay: 0.45 }}
               className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start"
             >
-              <a href="https://play.google.com/store/apps/details?id=com.jcalado.voxlink" target="_blank" rel="noopener noreferrer" className="btn-press bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1">
+              <a href="https://github.com/jcalado/dmr-input/releases/latest" target="_blank" rel="noopener noreferrer" className="btn-press bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1">
                 {t("nav.getApp")}
                 <Download className="w-5 h-5" />
               </a>
-              <a href="https://t.me/+7eNqxZZsIrcwYzc0" target="_blank" rel="noopener noreferrer" className="btn-press bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 border border-border transition-all hover:-translate-y-1">
-                <MessageCircle className="w-5 h-5" />
+              <a href="https://github.com/jcalado/dmr-input" target="_blank" rel="noopener noreferrer" className="btn-press bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 border border-border transition-all hover:-translate-y-1">
+                <Github className="w-5 h-5" />
                 {t("hero.joinCommunity")}
               </a>
             </motion.div>
@@ -109,70 +108,23 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative flex justify-center"
+            className="relative flex justify-center items-center"
           >
             <motion.div
-              animate={{ opacity: [0.4, 0.7, 0.4] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-0 m-auto w-64 h-80 bg-vibrant-blue/20 rounded-full blur-3xl"
+              animate={{ opacity: [0.3, 0.6, 0.3] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-0 m-auto w-72 h-72 bg-vibrant-blue/20 rounded-full blur-3xl"
             />
             <motion.div
-              animate={{ y: [0, -20, 0] }}
+              animate={{ scale: [1, 1.04, 1] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="w-full max-w-xs bg-surface-raised p-4 rounded-[3.5rem] soft-shadow border border-border rotate-2"
+              className="relative z-10"
             >
-              <picture>
-                <source srcSet="/app-screenshot.webp" type="image/webp" />
-                <img
-                  alt="VoxLink App Screenshot"
-                  className="w-full rounded-[3rem]"
-                  src="/app-screenshot.png"
-                  width={1080}
-                  height={2424}
-                />
-              </picture>
+              <Logo size="lg" className="shadow-2xl shadow-vibrant-blue/30 ring-1 ring-white/10" />
             </motion.div>
           </motion.div>
         </div>
       </header>
-
-      {/* Screenshots Gallery */}
-      <section id="screenshots" className="py-16 lg:py-24 px-6 lg:px-8 scroll-mt-24">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex gap-6 lg:gap-8 overflow-x-auto snap-x snap-mandatory pb-4 lg:pb-0 lg:grid lg:grid-cols-4 lg:overflow-visible scrollbar-hide">
-            {[
-              { src: "/app-screenshot", alt: "VoxLink PTT Screen", label: t("screenshots.ptt") },
-              { src: "/docs/servers-screen", alt: "VoxLink Servers Screen", label: t("screenshots.servers") },
-              { src: "/docs/nodes-screen", alt: "VoxLink Nodes Screen", label: t("screenshots.nodes") },
-              { src: "/docs/settings-screen", alt: "VoxLink Settings Screen", label: t("screenshots.settings") },
-            ].map((item, i) => (
-              <motion.div
-                key={item.src}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="flex flex-col items-center gap-4 snap-center shrink-0 w-56 lg:w-auto"
-              >
-                <div className="bg-surface-raised p-3 rounded-[2.5rem] soft-shadow border border-border">
-                  <picture>
-                    <source srcSet={`${item.src}.webp`} type="image/webp" />
-                    <img
-                      alt={item.alt}
-                      className="w-full rounded-[2rem]"
-                      src={`${item.src}.png`}
-                      width={1080}
-                      height={2424}
-                      loading="lazy"
-                    />
-                  </picture>
-                </div>
-                <span className="text-xs font-bold uppercase tracking-widest text-on-surface-muted">{item.label}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Features Section */}
       <section id="features" className="py-24 lg:py-32 px-6 lg:px-8 bg-surface border-y border-border scroll-mt-24">
@@ -189,7 +141,7 @@ export default function App() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
-            {/* PTT Modes — hero feature */}
+            {/* PTT — hero feature */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -204,7 +156,7 @@ export default function App() {
               <p className="text-on-surface-muted text-lg leading-relaxed max-w-lg">{t("features.ptt.description")}</p>
             </motion.div>
 
-            {/* Opus Audio */}
+            {/* AMBE+2 Vocoder */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -215,11 +167,11 @@ export default function App() {
               className="feature-card lg:col-span-2 p-10 rounded-3xl bg-surface-raised/40 border border-border hover:bg-surface-raised/60"
             >
               <Activity className="feature-icon w-8 h-8 text-vibrant-blue mb-6" />
-              <h3 className="font-headline font-bold text-2xl mb-3 text-white">{t("features.opus.title")}</h3>
-              <p className="text-on-surface-muted leading-relaxed">{t("features.opus.description")}</p>
+              <h3 className="font-headline font-bold text-2xl mb-3 text-white">{t("features.ambe.title")}</h3>
+              <p className="text-on-surface-muted leading-relaxed">{t("features.ambe.description")}</p>
             </motion.div>
 
-            {/* Multi-Server */}
+            {/* BrandMeister Talkgroups */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -230,11 +182,11 @@ export default function App() {
               className="feature-card lg:col-span-2 p-10 rounded-3xl bg-surface-raised/40 border border-border hover:bg-surface-raised/60"
             >
               <Radio className="feature-icon w-8 h-8 text-accent-tertiary mb-6" />
-              <h3 className="font-headline font-bold text-2xl mb-3 text-white">{t("features.multiServer.title")}</h3>
-              <p className="text-on-surface-muted leading-relaxed">{t("features.multiServer.description")}</p>
+              <h3 className="font-headline font-bold text-2xl mb-3 text-white">{t("features.talkgroups.title")}</h3>
+              <p className="text-on-surface-muted leading-relaxed">{t("features.talkgroups.description")}</p>
             </motion.div>
 
-            {/* Always On */}
+            {/* Rewind Protocol — hero feature */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -245,11 +197,11 @@ export default function App() {
               className="feature-card lg:col-span-3 p-10 lg:p-14 rounded-3xl bg-surface-raised/40 border border-border hover:bg-surface-raised/60"
             >
               <Wifi className="feature-icon w-10 h-10 text-vibrant-orange mb-8" />
-              <h3 className="font-headline font-bold text-3xl lg:text-4xl mb-5 text-white">{t("features.alwaysOn.title")}</h3>
-              <p className="text-on-surface-muted text-lg leading-relaxed max-w-lg">{t("features.alwaysOn.description")}</p>
+              <h3 className="font-headline font-bold text-3xl lg:text-4xl mb-5 text-white">{t("features.rewind.title")}</h3>
+              <p className="text-on-surface-muted text-lg leading-relaxed max-w-lg">{t("features.rewind.description")}</p>
             </motion.div>
 
-            {/* TG Monitoring */}
+            {/* Open Source — hero feature */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -260,11 +212,11 @@ export default function App() {
               className="feature-card lg:col-span-3 p-10 lg:p-14 rounded-3xl bg-surface-raised/40 border border-border hover:bg-surface-raised/60"
             >
               <Layers className="feature-icon w-10 h-10 text-vibrant-blue mb-8" />
-              <h3 className="font-headline font-bold text-3xl lg:text-4xl mb-5 text-white">{t("features.talkgroup.title")}</h3>
-              <p className="text-on-surface-muted text-lg leading-relaxed max-w-lg">{t("features.talkgroup.description")}</p>
+              <h3 className="font-headline font-bold text-3xl lg:text-4xl mb-5 text-white">{t("features.openSource.title")}</h3>
+              <p className="text-on-surface-muted text-lg leading-relaxed max-w-lg">{t("features.openSource.description")}</p>
             </motion.div>
 
-            {/* Recording */}
+            {/* Cross-platform */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -274,9 +226,9 @@ export default function App() {
               style={{ "--card-accent": "rgba(251, 146, 60, 0.25)" } as CSSProperties}
               className="feature-card lg:col-span-2 p-10 rounded-3xl bg-surface-raised/40 border border-border hover:bg-surface-raised/60"
             >
-              <Disc className="feature-icon w-8 h-8 text-vibrant-orange mb-6" />
-              <h3 className="font-headline font-bold text-2xl mb-3 text-white">{t("features.recording.title")}</h3>
-              <p className="text-on-surface-muted leading-relaxed">{t("features.recording.description")}</p>
+              <Cpu className="feature-icon w-8 h-8 text-vibrant-orange mb-6" />
+              <h3 className="font-headline font-bold text-2xl mb-3 text-white">{t("features.crossPlatform.title")}</h3>
+              <p className="text-on-surface-muted leading-relaxed">{t("features.crossPlatform.description")}</p>
             </motion.div>
           </div>
         </div>
@@ -302,7 +254,7 @@ export default function App() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-            <a href="https://play.google.com/store/apps/details?id=com.jcalado.voxlink" target="_blank" rel="noopener noreferrer" className="btn-press w-full sm:w-auto bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1">
+            <a href="https://github.com/jcalado/dmr-input/releases/latest" target="_blank" rel="noopener noreferrer" className="btn-press w-full sm:w-auto bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1">
               {t("nav.getApp")}
               <Download className="w-5 h-5" />
             </a>
@@ -319,7 +271,7 @@ export default function App() {
         <div className="flex flex-col md:flex-row justify-between items-center px-6 lg:px-12 gap-10 max-w-7xl mx-auto">
           <div className="flex items-center gap-4">
             <Logo size="sm" />
-            <span className="font-bold font-headline text-white text-2xl tracking-tight">VoxLink</span>
+            <span className="font-bold font-headline text-white text-2xl tracking-tight">VoxDMR</span>
           </div>
 
           <div className="flex flex-wrap justify-center gap-6 lg:gap-10">

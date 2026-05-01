@@ -1,10 +1,6 @@
-# VoxLink Site
+# VoxDMR Site
 
-Landing page and documentation site for [VoxLink](https://voxlink.app) — a modern PTT (Push-to-Talk) client for SvxLink radio reflectors.
-
-<div align="center">
-  <img src="public/app-screenshot.png" alt="VoxLink app screenshot" width="300" />
-</div>
+Landing page and documentation site for [VoxDMR](https://voxdmr.app) — a desktop app for streaming audio to BrandMeister DMR talkgroups via the Rewind protocol. Runs on Linux and Windows.
 
 ## Tech Stack
 
@@ -28,10 +24,14 @@ The dev server starts at `http://localhost:3000`.
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start dev server |
-| `npm run build` | Production build |
+| `npm run dev` | Start dev server on port 3000 |
+| `npm run build` | Production build to `dist/` |
 | `npm run lint` | Type-check (`tsc --noEmit`) |
 | `npm run clean` | Remove `dist/` |
+
+## Deployment
+
+Deploy the `dist/` folder. The `public/404.html` handles SPA routing on static hosts.
 
 ## License
 

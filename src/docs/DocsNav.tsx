@@ -15,7 +15,7 @@ export function DocsNav({ sidebarOpen, onToggleSidebar }: { sidebarOpen: boolean
         </button>
         <Link to="/" className="flex items-center gap-3">
           <Logo size="sm" />
-          <span className="font-headline font-bold text-white text-sm">VoxLink</span>
+          <span className="font-headline font-bold text-white text-sm">VoxDMR</span>
         </Link>
         <span className="text-on-surface-muted text-sm">{t("docs.slash")}</span>
       </div>
