@@ -7,7 +7,6 @@ import {
   BookOpen,
   Radio,
   Wifi,
-  Github,
   Layers,
   Cpu
 } from "lucide-react";
@@ -97,10 +96,6 @@ export default function App() {
               <a href="https://github.com/jcalado/dmr-input/releases/latest" target="_blank" rel="noopener noreferrer" className="btn-press bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1">
                 {t("nav.getApp")}
                 <Download className="w-5 h-5" />
-              </a>
-              <a href="https://github.com/jcalado/dmr-input" target="_blank" rel="noopener noreferrer" className="btn-press bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 border border-border transition-all hover:-translate-y-1">
-                <Github className="w-5 h-5" />
-                {t("hero.joinCommunity")}
               </a>
             </motion.div>
           </div>
