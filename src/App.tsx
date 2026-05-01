@@ -141,7 +141,7 @@ export default function App() {
             <p className="text-on-surface-muted text-lg leading-relaxed">{t("screenshots.subheading")}</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+          <div className="columns-1 lg:columns-2 gap-6 lg:gap-8">
             {[
               { src: "/screenshots/setup-card", alt: "VoxDMR first-launch setup card with firmware download button", label: t("screenshots.setup") },
               { src: "/screenshots/main-idle", alt: "VoxDMR main UI connected and ready to transmit", label: t("screenshots.main") },
@@ -155,7 +155,7 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: (i % 2) * 0.1 }}
-                className="flex flex-col gap-4"
+                className="break-inside-avoid flex flex-col gap-4 mb-6 lg:mb-8"
               >
                 <div className="bg-surface-raised p-3 rounded-3xl soft-shadow border border-border">
                   <picture>
