@@ -248,7 +248,7 @@ export default function App() {
               <p className="text-on-surface-muted text-lg leading-relaxed max-w-lg">{t("features.rewind.description")}</p>
             </motion.div>
 
-            {/* Open Source. Hero feature */}
+            {/* Free to Use. Hero feature */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}

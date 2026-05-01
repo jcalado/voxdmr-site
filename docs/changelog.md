@@ -21,7 +21,7 @@ What ships:
 
 Known limitations:
 
-- macOS isn't a release target yet. Source builds work but aren't tested in CI.
+- macOS isn't a release target yet.
 - The Windows binary isn't code-signed yet. SmartScreen will prompt on first launch. Click **More info** → **Run anyway**.
 - HTTPS downloads (firmware fetch, master directory) don't honour system proxy settings. Use the manual-files path or run from an unproxied network.
 

@@ -21,7 +21,7 @@ O que inclui:
 
 Limitações conhecidas:
 
-- macOS ainda não é um alvo de release. Builds a partir do código-fonte funcionam mas não são testadas em CI.
+- macOS ainda não é um alvo de release.
 - O binário de Windows ainda não está assinado digitalmente. O SmartScreen pede confirmação no primeiro arranque. Clica em **Mais informações** → **Executar mesmo assim**.
 - Os downloads HTTPS (firmware, diretório de masters) não respeitam as definições de proxy do sistema. Usa o caminho de ficheiros manuais ou corre a partir de uma rede sem proxy.
 

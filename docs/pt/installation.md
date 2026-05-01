@@ -66,7 +66,7 @@ O VoxDMR segue as convenções do sistema operativo para configuração, dados e
 | Configuração | `~/.config/voxdmr/` | `%APPDATA%\voxdmr\` | `~/Library/Application Support/voxdmr/` |
 | Logs | `~/.local/state/voxdmr/logs/` | `%LOCALAPPDATA%\voxdmr\logs\` | `~/Library/Logs/voxdmr/` |
 
-¹ macOS não é atualmente um alvo de release. Os caminhos estão listados para referência futura e para quem compila a partir do código-fonte.
+¹ macOS não é atualmente um alvo de release. Os caminhos estão listados para referência futura.
 
 Para definir uma localização alternativa do firmware (útil para empacotadores ou instalações em sandbox), define `VOXDMR_FIRMWARE_DIR` antes de iniciar:
 
@@ -83,10 +83,6 @@ O VoxDMR não atualiza automaticamente. Para atualizar:
 1. Transfere o novo binário da [página de releases](https://github.com/jcalado/dmr-input/releases/latest).
 2. Substitui o binário antigo.
 3. Inicia. A tua configuração, talkgroups favoritos e firmware são preservados entre atualizações.
-
-## Compilar a partir do código-fonte
-
-Se quiseres compilar a partir do código-fonte (por exemplo, para uma arquitetura diferente ou para verificar o binário), consulta o [README do projeto](https://github.com/jcalado/dmr-input#building) no GitHub. As compilações a partir do código requerem a toolchain do Rust e um ambiente de compilação C++ para o JIT do vocoder. Tipicamente 5 a 10 minutos na primeira vez, ~30 segundos em compilações incrementais.
 
 ## Desinstalar
 

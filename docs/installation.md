@@ -66,7 +66,7 @@ VoxDMR follows OS conventions for config, data, and logs:
 | Config | `~/.config/voxdmr/` | `%APPDATA%\voxdmr\` | `~/Library/Application Support/voxdmr/` |
 | Logs | `~/.local/state/voxdmr/logs/` | `%LOCALAPPDATA%\voxdmr\logs\` | `~/Library/Logs/voxdmr/` |
 
-¹ macOS isn't currently a release target. Paths are listed for future reference and for users building from source.
+¹ macOS isn't currently a release target. Paths are listed for future reference.
 
 To override the firmware location (e.g. for packagers or sandboxed installs), set `VOXDMR_FIRMWARE_DIR` before launching:
 
@@ -83,10 +83,6 @@ VoxDMR doesn't auto-update. To upgrade:
 1. Download the new binary from the [releases page](https://github.com/jcalado/dmr-input/releases/latest).
 2. Replace the old binary.
 3. Launch. Your config, talkgroup favorites, and firmware are preserved across updates.
-
-## Building from source
-
-If you want to build from source (e.g. for a different architecture, or to verify the binary), see the [project README](https://github.com/jcalado/dmr-input#building) on GitHub. Source builds need a Rust toolchain plus a C++ build environment for the bundled vocoder JIT. Usually a 5–10 minute first build, ~30 seconds for incremental rebuilds after.
 
 ## Uninstall
 
