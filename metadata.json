@@ -1,0 +1,5 @@
+{
+  "name": "VoxDMR",
+  "description": "Desktop audio for BrandMeister DMR. Open source, no DMR radio required.",
+  "requestFramePermissions": []
+}
