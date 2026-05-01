@@ -53,5 +53,5 @@ Aponta para **verde com algum amarelo** em fala normal. Amarelo constante com to
 ## Próximos passos
 
 - [PTT Modes](./ptt-modes). Push-to-talk vs toggle, mudar a tecla PTT.
-- [Talkgroups & Nodes](./talkgroups-nodes). Favoritos e o indicador de atividade.
+- [Talkgroups](./talkgroups). Favoritos e o indicador de atividade.
 - [Troubleshooting](./troubleshooting). Problemas de áudio comuns e soluções.

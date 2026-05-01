@@ -21,7 +21,7 @@ export const docsConfig: DocGroup[] = [
     pages: [
       { slug: "ptt-modes", title: "PTT Modes" },
       { slug: "audio-settings", title: "Audio Settings" },
-      { slug: "talkgroups-nodes", title: "Talkgroups & Nodes" },
+      { slug: "talkgroups", title: "Talkgroups" },
     ],
   },
   {

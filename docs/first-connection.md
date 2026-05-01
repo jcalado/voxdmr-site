@@ -96,4 +96,4 @@ Open Settings → Connection again and tick **Auto-connect**. From then on, VoxD
 
 - [PTT Modes](./ptt-modes). Change the PTT key, switch between push-to-talk and toggle.
 - [Audio Settings](./audio-settings). Pick mic and output devices, adjust gain.
-- [Talkgroups & Nodes](./talkgroups-nodes). Managing favorites and the talkgroup database.
+- [Talkgroups](./talkgroups). Managing favorites and the talkgroup database.

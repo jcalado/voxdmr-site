@@ -96,4 +96,4 @@ Volta a Settings → Connection e ativa **Auto-connect**. A partir daí, o VoxDM
 
 - [PTT Modes](./ptt-modes). Mudar a tecla PTT, alternar entre push-to-talk e toggle.
 - [Audio Settings](./audio-settings). Escolher dispositivos de microfone e saída, ajustar ganho.
-- [Talkgroups & Nodes](./talkgroups-nodes). Gerir favoritos e a base de dados de talkgroups.
+- [Talkgroups](./talkgroups). Gerir favoritos e a base de dados de talkgroups.

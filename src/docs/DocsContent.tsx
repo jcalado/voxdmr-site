@@ -9,7 +9,7 @@ const pageTitleKeys: Record<string, string> = {
   "first-connection": "docs.page.firstConnection",
   "ptt-modes": "docs.page.pttModes",
   "audio-settings": "docs.page.audioSettings",
-  "talkgroups-nodes": "docs.page.talkgroupsNodes",
+  "talkgroups": "docs.page.talkgroups",
   "troubleshooting": "docs.page.troubleshooting",
 };
 

@@ -53,5 +53,5 @@ Aim for **green-with-some-yellow** during normal speech. Solid yellow with brush
 ## Next steps
 
 - [PTT Modes](./ptt-modes). Push-to-talk vs toggle, rebinding the PTT key.
-- [Talkgroups & Nodes](./talkgroups-nodes). Favorites and the activity indicator.
+- [Talkgroups](./talkgroups). Favorites and the activity indicator.
 - [Troubleshooting](./troubleshooting). Common audio issues and fixes.
