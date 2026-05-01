@@ -15,8 +15,8 @@ VoxDMR ships as a single self-contained binary. No installer, no package manager
 
 ```bash
 # Download
-curl -LO https://github.com/jcalado/dmr-input/releases/latest/download/VoxDMR-linux-x86_64
-curl -LO https://github.com/jcalado/dmr-input/releases/latest/download/SHA256SUMS
+curl -LO https://github.com/jcalado/voxdmr-site/releases/latest/download/VoxDMR-linux-x86_64
+curl -LO https://github.com/jcalado/voxdmr-site/releases/latest/download/SHA256SUMS
 
 # Verify
 sha256sum -c SHA256SUMS --ignore-missing
@@ -28,7 +28,7 @@ chmod +x VoxDMR-linux-x86_64
 
 ### Windows (x86_64)
 
-1. Open the [latest release page](https://github.com/jcalado/dmr-input/releases/latest).
+1. Open the [latest release page](https://github.com/jcalado/voxdmr-site/releases/latest).
 2. Download `VoxDMR-windows-x86_64.exe`.
 3. Optional but recommended: also download `SHA256SUMS` and verify in PowerShell:
    ```powershell
@@ -80,7 +80,7 @@ The app also looks for `<exe-dir>/firmware/`. Drop the firmware files next to th
 
 VoxDMR doesn't auto-update. To upgrade:
 
-1. Download the new binary from the [releases page](https://github.com/jcalado/dmr-input/releases/latest).
+1. Download the new binary from the [releases page](https://github.com/jcalado/voxdmr-site/releases/latest).
 2. Replace the old binary.
 3. Launch. Your config, talkgroup favorites, and firmware are preserved across updates.
 

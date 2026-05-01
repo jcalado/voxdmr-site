@@ -15,8 +15,8 @@ O VoxDMR é distribuído como um único binário autocontido. Sem instalador, se
 
 ```bash
 # Transferir
-curl -LO https://github.com/jcalado/dmr-input/releases/latest/download/VoxDMR-linux-x86_64
-curl -LO https://github.com/jcalado/dmr-input/releases/latest/download/SHA256SUMS
+curl -LO https://github.com/jcalado/voxdmr-site/releases/latest/download/VoxDMR-linux-x86_64
+curl -LO https://github.com/jcalado/voxdmr-site/releases/latest/download/SHA256SUMS
 
 # Verificar
 sha256sum -c SHA256SUMS --ignore-missing
@@ -28,7 +28,7 @@ chmod +x VoxDMR-linux-x86_64
 
 ### Windows (x86_64)
 
-1. Abre a [página da versão mais recente](https://github.com/jcalado/dmr-input/releases/latest).
+1. Abre a [página da versão mais recente](https://github.com/jcalado/voxdmr-site/releases/latest).
 2. Transfere `VoxDMR-windows-x86_64.exe`.
 3. Opcional mas recomendado: transfere também `SHA256SUMS` e verifica no PowerShell:
    ```powershell
@@ -80,7 +80,7 @@ A app também procura em `<dir-do-executável>/firmware/`. Coloca os ficheiros d
 
 O VoxDMR não atualiza automaticamente. Para atualizar:
 
-1. Transfere o novo binário da [página de releases](https://github.com/jcalado/dmr-input/releases/latest).
+1. Transfere o novo binário da [página de releases](https://github.com/jcalado/voxdmr-site/releases/latest).
 2. Substitui o binário antigo.
 3. Inicia. A tua configuração, talkgroups favoritos e firmware são preservados entre atualizações.
 
