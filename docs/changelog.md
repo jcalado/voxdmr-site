@@ -2,6 +2,24 @@
 
 Release notes for VoxDMR. Each release page on GitHub has the full commit list and the signed binaries; this is the human summary.
 
+## v0.8.0
+
+_Released May 2026._
+
+Adds a **Time-Out Timer (TOT)** so a stuck PTT or a long-winded transmission can't hold a talkgroup indefinitely — standard radio behavior, finally available client-side.
+
+- **Four modes:** Off, Warn only, Warn then cutoff (default), Hard cutoff. Configurable in Settings → Interface.
+- **Visual + audible warning.** The TX timer under the PTT button counts down (gray → amber → red); a short beep plays through your local audio output device at the warning threshold and again on cutoff. Sidetone never goes to the network.
+- **Sensible defaults.** 180 s duration, 15 s warning lead, both warning surfaces on. Duration capped at 190 s — anything higher would be silently dropped by BrandMeister's own forwarding cutoff.
+- **Auto-release on cutoff.** Reaching the duration triggers a clean PTT release for you; press fresh to keep talking.
+
+Adjacent UX polish:
+
+- The top status card now flips to **Transmitting → TG …** in red while you're keyed up, instead of staying on **Idle**.
+- The settings window opens 150 px taller and the right-hand panel scrolls when content overflows, so growing tabs (Interface in particular) stay usable on smaller screens.
+
+`config.toml` gains a new `[tot]` section; older configs without it pick up the documented defaults. No env vars, paths, or protocol semantics changed.
+
 ## v0.7.0 (first public release)
 
 _Released April 2026. Linux x86_64 + Windows x86_64._
