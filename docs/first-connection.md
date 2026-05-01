@@ -2,13 +2,13 @@
 
 Get on a BrandMeister talkgroup and make your first transmission.
 
-This page assumes you've already finished [Installation](./installation) — VoxDMR is running, the setup card is gone, and the main UI is visible.
+This page assumes you've already finished [Installation](./installation), VoxDMR is running, the setup card is gone, and the main UI is visible.
 
 ## What you need
 
-- **DMR ID** (numeric, 7 digits) — issued by [radioid.net](https://radioid.net).
-- **Hotspot security password** — from your [BrandMeister SelfCare](https://brandmeister.network/) profile, under _Hotspot security password_. **This is not your BrandMeister account password.** It's a separate string you set yourself in SelfCare and is shared by all your hotspots and clients.
-- **A BrandMeister master server** — usually the regional one closest to you (e.g. `master.brandmeister.network` or a country-specific master like `master2.brandmeister.network`).
+- **DMR ID** (numeric, 7 digits). Issued by [radioid.net](https://radioid.net).
+- **Hotspot security password**: from your [BrandMeister SelfCare](https://brandmeister.network/) profile, under _Hotspot security password_. **This is not your BrandMeister account password.** It's a separate string you set yourself in SelfCare and is shared by all your hotspots and clients.
+- **A BrandMeister master server**: usually the regional one closest to you (e.g. `master.brandmeister.network` or a country-specific master like `2682.master.brandmeister.network`).
 
 ## Configure the connection
 
@@ -20,34 +20,39 @@ Open **Settings** (the gear icon) and switch to the **Connection** tab.
 | **Port** | Defaults to `54006`. Don't change unless your master uses a different one. |
 | **DMR ID** | Your 7-digit ID from radioid.net. |
 | **Password** | Your hotspot security password. |
-| **Default talkgroup** | The talkgroup VoxDMR joins at startup. Use **9990** (Parrot) for your first connection — it echoes your audio back so you can confirm everything works. |
 | **Auto-connect** | Off for now. Turn on once everything works. |
 
-Close Settings — your changes are saved automatically.
+Close Settings. Your changes are saved automatically.
+
+## Pick your starting talkgroup
+
+VoxDMR doesn't have a "default talkgroup" field on the settings page. Instead, whatever talkgroup you have selected when the app saves config becomes the one it joins on the next launch.
+
+For your first connection, type `9990` into the talkgroup picker on the main window and click the **Parrot** result. Parrot echoes your audio back so you can confirm the round trip works.
 
 ## Connect
 
-Back on the main window, click **Connect**. The status indicator in the title bar (and bottom bar) walks through these states:
+Click **Connect** on the main window. The status indicator in the title bar (and bottom bar) walks through these states:
 
-1. **Disconnected** — nothing happening yet.
-2. **Connecting…** — TCP/UDP handshake with the master.
-3. **Authenticating…** — VoxDMR is presenting your DMR ID + password.
-4. **Connected** — auth accepted; subscribing to your default talkgroup.
-5. **Ready** — talkgroup subscribed; you can transmit and receive.
+1. **Disconnected**: nothing happening yet.
+2. **Connecting…**: TCP/UDP handshake with the master.
+3. **Authenticating…**: VoxDMR is presenting your DMR ID + password.
+4. **Connected**: auth accepted; subscribing to the selected talkgroup.
+5. **Ready**: talkgroup subscribed; you can transmit and receive.
 
-If you stop at **Authenticating…** and drop back to Disconnected, the password is wrong — see [Troubleshooting](./troubleshooting).
+If you stop at **Authenticating…** and drop back to Disconnected, the password is wrong. See [Troubleshooting](./troubleshooting).
 
 ## Make your first transmission
 
 With **9990 (Parrot)** as your active talkgroup:
 
 1. Hold **Spacebar** (the default PTT key).
-2. The bottom bar shows `>>> PTT DOWN — Transmitting` and a TX timer.
-3. Speak a short test phrase — "Testing, this is _your callsign_, parrot test".
+2. The bottom bar shows `>>> PTT DOWN, Transmitting` and a TX timer.
+3. Speak a short test phrase, "Testing, this is _your callsign_, parrot test".
 4. Release Spacebar.
 5. After about a second, Parrot replays your audio back to you. You should hear yourself in your output device.
 
-If you hear yourself, you're on the air. If not, see [Troubleshooting](./troubleshooting) — the most common causes are mic permissions, wrong audio device, or zero TX gain.
+If you hear yourself, you're on the air. If not, see [Troubleshooting](./troubleshooting). The most common causes are mic permissions, wrong audio device, or zero TX gain.
 
 > The PTT key is configurable in **Settings → Interface**. If Spacebar conflicts with another window or you'd prefer a function key, change it there.
 
@@ -70,7 +75,7 @@ The **talkgroup picker** on the main window lets you change which talkgroup you'
 - **Star** a talkgroup to add it to your favorites.
 - **Click** a talkgroup to switch.
 
-Switching talkgroups happens instantly — VoxDMR sends a subscription update to the master and starts receiving the new talkgroup's traffic.
+Switching talkgroups happens instantly, VoxDMR sends a subscription update to the master and starts receiving the new talkgroup's traffic.
 
 Some popular talkgroups to try once Parrot works:
 
@@ -89,6 +94,6 @@ Open Settings → Connection again and tick **Auto-connect**. From then on, VoxD
 
 ## Next steps
 
-- [PTT Modes](./ptt-modes) — change the PTT key, switch between hold and latch.
-- [Audio Settings](./audio-settings) — pick mic and output devices, adjust gain.
-- [Talkgroups & Nodes](./talkgroups-nodes) — managing favorites and the talkgroup database.
+- [PTT Modes](./ptt-modes). Change the PTT key, switch between push-to-talk and toggle.
+- [Audio Settings](./audio-settings). Pick mic and output devices, adjust gain.
+- [Talkgroups & Nodes](./talkgroups-nodes). Managing favorites and the talkgroup database.

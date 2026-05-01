@@ -192,7 +192,7 @@ export default function App() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
-            {/* PTT — hero feature */}
+            {/* PTT. Hero feature */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -237,7 +237,7 @@ export default function App() {
               <p className="text-on-surface-muted leading-relaxed">{t("features.talkgroups.description")}</p>
             </motion.div>
 
-            {/* Rewind Protocol — hero feature */}
+            {/* Rewind Protocol. Hero feature */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -252,7 +252,7 @@ export default function App() {
               <p className="text-on-surface-muted text-lg leading-relaxed max-w-lg">{t("features.rewind.description")}</p>
             </motion.div>
 
-            {/* Open Source — hero feature */}
+            {/* Open Source. Hero feature */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
