@@ -2,6 +2,20 @@
 
 Notas de versão do VoxDMR. Cada página de release no GitHub tem a lista completa de commits e os binários assinados; isto é o resumo humano.
 
+## v0.9.0
+
+_Lançada em maio de 2026._
+
+Adiciona **auto-atualização integrada**. O VoxDMR passa a verificar novas versões no arranque e a pedido, e pode instalá-las sem sair da app — sem ida ao browser, sem installer para procurar.
+
+- **Aviso no arranque.** Quando há um build mais recente, o VoxDMR abre um modal com a versão, um link *What's new* e três escolhas: **Atualizar agora**, **Saltar esta versão** (silenciada para sempre) ou **Lembrar mais tarde** (24 h de cooldown).
+- **Verificação manual.** Definições → Sobre tem um botão **Check for updates**. O resultado — *A verificar…*, *Estás na última versão*, *Atualização disponível* ou erro — aparece em texto pequeno por baixo do botão, para não teres de desviar o olhar.
+- **Instalação atómica e verificada.** O binário é descarregado com barra de progresso e botão de cancelar, verificado por SHA-256 contra o ficheiro `SHA256SUMS` da release, e trocado atomicamente — seguro em Windows, mesmo com o `.exe` em execução. Um checksum errado aborta e nunca sobrepõe o build atual.
+- **Estado pós-instalação claro.** Quando a instalação termina, ficas com um clique de **Reiniciar agora**, ou podes continuar a trabalhar e apanhar o build novo no próximo arranque. Se fechaste o modal a meio do fluxo, a linha de estado do rodapé confirma a instalação a verde para o resultado não passar despercebido.
+- **Rodapé-como-toast.** Mensagens transitórias do auto-update partilham o slot de estado à direita no rodapé durante ~5 segundos, em vez de empurrarem o resto da UI para baixo.
+
+Apenas canal estável — pre-releases ficam de fora. A verificação fala com um repositório público fixo (`jcalado/voxdmr-site`); zero telemetria, zero analítica, zero registo. O `config.toml` ganha uma secção `[updates]` que guarda versões saltadas e o timestamp do *Remind me later*; configurações antigas sem ela assumem os defaults documentados.
+
 ## v0.8.0
 
 _Lançada em maio de 2026._

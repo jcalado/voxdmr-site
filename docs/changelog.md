@@ -2,6 +2,20 @@
 
 Release notes for VoxDMR. Each release page on GitHub has the full commit list and the signed binaries; this is the human summary.
 
+## v0.9.0
+
+_Released May 2026._
+
+Adds **in-app auto-update**. VoxDMR now checks for new releases on launch and on demand, and can install them without leaving the app — no separate download trip, no installer to find.
+
+- **Prompt on launch.** When a newer build is published, VoxDMR opens a modal with the version, a *What's new* link, and three choices: **Update now**, **Skip this version** (silenced forever), or **Remind me later** (24-hour cooldown).
+- **Manual check.** Settings → About has a **Check for updates** button. The result — *Checking…*, *You're on the latest*, *Update available*, or an error — appears inline below the button so you don't have to glance away to read it.
+- **Verified, atomic install.** The binary is downloaded with progress + cancel, SHA-256 verified against the release's `SHA256SUMS` file, and atomically swapped into place — Windows-safe, even with the `.exe` running. A mismatched checksum aborts and never overwrites the existing build.
+- **Clear post-install state.** When the install finishes you get a one-click **Restart now**, or you can keep working and pick up the new build on next launch. If you dismissed the modal mid-flow, the footer status line confirms the install in green so the work isn't silent.
+- **Footer-as-toast.** Transient update messages share the right-hand status slot in the footer for ~5 seconds instead of pushing the rest of the UI down.
+
+Stable channel only — pre-releases are excluded. The check hits a fixed public repo (`jcalado/voxdmr-site`); no telemetry, no analytics, no registration. `config.toml` gains an `[updates]` section that records skipped versions and the *Remind me later* timestamp; older configs without it pick up the documented defaults.
+
 ## v0.8.0
 
 _Released May 2026._
