@@ -98,6 +98,10 @@ export default function App() {
                 {t("nav.getApp")}
                 <Download className="w-5 h-5" />
               </a>
+              <a href="https://t.me/+6-ncS_eluTUxNmU0" target="_blank" rel="noopener noreferrer" className="btn-press bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all border border-border hover:-translate-y-1">
+                {t("cta.joinCommunity")}
+                <MessageCircle className="w-5 h-5" />
+              </a>
             </motion.div>
           </div>
 
@@ -309,10 +313,6 @@ export default function App() {
             <a href="/docs" className="btn-press w-full sm:w-auto bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all border border-border hover:-translate-y-1">
               {t("cta.setupGuide")}
               <BookOpen className="w-5 h-5" />
-            </a>
-            <a href="https://t.me/+6-ncS_eluTUxNmU0" target="_blank" rel="noopener noreferrer" className="btn-press w-full sm:w-auto bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all border border-border hover:-translate-y-1">
-              {t("cta.joinCommunity")}
-              <MessageCircle className="w-5 h-5" />
             </a>
           </div>
         </motion.div>
