@@ -3,7 +3,6 @@ import { motion } from "motion/react";
 import {
   Mic,
   Activity,
-  Download,
   BookOpen,
   Radio,
   Wifi,
@@ -11,6 +10,12 @@ import {
   Cpu,
   MessageCircle,
   Coffee,
+  Smartphone,
+  Monitor,
+  Headphones,
+  Plane,
+  LifeBuoy,
+  ChevronDown,
 } from "lucide-react";
 import { Logo } from "./Logo";
 import { useLanguage } from "./i18n/LanguageContext";
@@ -37,7 +42,7 @@ export default function App() {
 
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
-            <a href="https://github.com/jcalado/voxdmr-site/releases/latest" target="_blank" rel="noopener noreferrer" className="btn-press bg-vibrant-red hover:bg-red-500 text-white px-6 lg:px-8 py-2.5 lg:py-3 rounded-2xl font-bold hover:scale-105 transition-all">
+            <a href="#download" className="btn-press bg-vibrant-red hover:bg-red-500 text-white px-6 lg:px-8 py-2.5 lg:py-3 rounded-2xl font-bold hover:scale-105 transition-all">
               {t("nav.getApp")}
             </a>
           </div>
@@ -93,15 +98,33 @@ export default function App() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.45 }}
-              className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center lg:justify-start"
             >
-              <a href="https://github.com/jcalado/voxdmr-site/releases/latest" target="_blank" rel="noopener noreferrer" className="btn-press bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1">
-                {t("nav.getApp")}
-                <Download className="w-5 h-5" />
-              </a>
-              <a href="https://t.me/+6-ncS_eluTUxNmU0" target="_blank" rel="noopener noreferrer" className="btn-press bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all border border-border hover:-translate-y-1">
+              <div className="flex flex-col gap-2.5 items-center sm:items-start">
+                <span className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-on-surface-muted">{t("cta.onPhone")}</span>
+                <a href="https://play.google.com/store/apps/details?id=com.jcalado.voxdmr" target="_blank" rel="noopener noreferrer" className="btn-press bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1 whitespace-nowrap">
+                  {t("cta.getAndroid")}
+                  <Smartphone className="w-5 h-5" />
+                </a>
+              </div>
+              <div className="flex flex-col gap-2.5 items-center sm:items-start">
+                <span className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-on-surface-muted">{t("cta.onDesktop")}</span>
+                <a href="https://github.com/jcalado/voxdmr-site/releases/latest" target="_blank" rel="noopener noreferrer" className="btn-press bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all border border-border hover:border-vibrant-red/50 hover:-translate-y-1 whitespace-nowrap">
+                  {t("cta.getDesktop")}
+                  <Monitor className="w-5 h-5" />
+                </a>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="mt-6 flex justify-center lg:justify-start"
+            >
+              <a href="https://t.me/+6-ncS_eluTUxNmU0" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-on-surface-muted hover:text-white font-semibold text-sm transition-colors">
+                <MessageCircle className="w-4 h-4" />
                 {t("cta.joinCommunity")}
-                <MessageCircle className="w-5 h-5" />
               </a>
             </motion.div>
           </div>
@@ -122,7 +145,7 @@ export default function App() {
                 <source srcSet="/main-app.webp" type="image/webp" />
                 <img
                   src="/main-app.png"
-                  alt="VoxDMR main window: connected to BrandMeister, talkgroup picker with favorites and live activity dots"
+                  alt="VoxDMR main window: connected to a DMR network, talkgroup picker with favorites and live activity dots"
                   className="w-full rounded-2xl"
                 />
               </picture>
@@ -130,6 +153,46 @@ export default function App() {
           </motion.div>
         </div>
       </header>
+
+      {/* Use Cases */}
+      <section className="py-20 lg:py-28 px-6 lg:px-8 bg-community-bg border-t border-border">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6 }}
+            className="mb-14 lg:mb-20 max-w-2xl"
+          >
+            <h2 className="text-4xl lg:text-5xl font-headline font-bold text-white mb-4 tracking-tight">{t("useCases.heading")}</h2>
+            <p className="text-on-surface-muted text-lg leading-relaxed">{t("useCases.subheading")}</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-y-12 md:gap-y-0">
+            {[
+              { icon: Headphones, title: t("useCases.case1.title"), description: t("useCases.case1.description") },
+              { icon: Plane, title: t("useCases.case2.title"), description: t("useCases.case2.description") },
+              { icon: LifeBuoy, title: t("useCases.case3.title"), description: t("useCases.case3.description") },
+            ].map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className={`flex flex-col gap-5 md:px-8 lg:px-10 ${i > 0 ? "md:border-l md:border-border" : ""}`}
+                >
+                  <Icon className="w-8 h-8 text-vibrant-blue" strokeWidth={1.5} />
+                  <h3 className="font-headline font-bold text-xl lg:text-2xl text-white tracking-tight leading-tight">{item.title}</h3>
+                  <p className="text-on-surface-muted leading-relaxed">{item.description}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* Screenshots Gallery */}
       <section id="screenshots" className="py-16 lg:py-24 px-6 lg:px-8 scroll-mt-24">
@@ -149,9 +212,9 @@ export default function App() {
             {[
               { src: "/screenshots/setup-card", alt: "VoxDMR first-launch setup card with firmware download button", label: t("screenshots.setup") },
               { src: "/screenshots/main-idle", alt: "VoxDMR main UI connected and ready to transmit", label: t("screenshots.main") },
-              { src: "/screenshots/main-rx", alt: "VoxDMR receiving audio from a BrandMeister talkgroup", label: t("screenshots.rx") },
+              { src: "/screenshots/main-rx", alt: "VoxDMR receiving audio from a DMR talkgroup", label: t("screenshots.rx") },
               { src: "/screenshots/settings-firmware", alt: "VoxDMR settings firmware tab showing valid firmware checksum", label: t("screenshots.firmware") },
-              { src: "/screenshots/settings-connection", alt: "VoxDMR settings connection tab with BrandMeister master picker", label: t("screenshots.connection") },
+              { src: "/screenshots/settings-connection", alt: "VoxDMR settings connection tab with DMR master picker", label: t("screenshots.connection") },
             ].map((item, i) => (
               <motion.div
                 key={item.src}
@@ -224,7 +287,7 @@ export default function App() {
               <p className="text-on-surface-muted leading-relaxed">{t("features.ambe.description")}</p>
             </motion.div>
 
-            {/* BrandMeister Talkgroups */}
+            {/* DMR Talkgroups */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -287,8 +350,45 @@ export default function App() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="py-20 lg:py-28 px-6 lg:px-8 bg-community-bg">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6 }}
+            className="mb-12"
+          >
+            <h2 className="text-4xl lg:text-5xl font-headline font-bold text-white mb-4 tracking-tight">{t("faq.heading")}</h2>
+            <p className="text-on-surface-muted text-lg leading-relaxed">{t("faq.subheading")}</p>
+          </motion.div>
+
+          <div className="border-y border-border">
+            {[1, 2, 3, 4, 5].map((n, i) => (
+              <motion.div
+                key={n}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className={i > 0 ? "border-t border-border" : ""}
+              >
+                <details className="faq-item">
+                  <summary className="flex items-center justify-between gap-6 py-6 cursor-pointer list-none">
+                    <span className="font-headline font-semibold text-lg lg:text-xl text-white tracking-tight">{t(`faq.q${n}.question`)}</span>
+                    <ChevronDown className="faq-chevron w-5 h-5 text-on-surface-muted shrink-0" />
+                  </summary>
+                  <p className="text-on-surface-muted leading-relaxed pb-6 pr-8 max-w-2xl">{t(`faq.q${n}.answer`)}</p>
+                </details>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="py-24 lg:py-32 px-6 lg:px-8 bg-community-bg">
+      <section id="download" className="py-24 lg:py-32 px-6 lg:px-8 bg-community-bg scroll-mt-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -306,14 +406,26 @@ export default function App() {
             {t("cta.description")}
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-            <a href="https://github.com/jcalado/voxdmr-site/releases/latest" target="_blank" rel="noopener noreferrer" className="btn-press w-full sm:w-auto bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1">
-              {t("nav.getApp")}
-              <Download className="w-5 h-5" />
-            </a>
-            <a href="/docs" className="btn-press w-full sm:w-auto bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all border border-border hover:-translate-y-1">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-end justify-center gap-6 sm:gap-8">
+            <div className="flex flex-col gap-2.5 items-center">
+              <span className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-on-surface-muted">{t("cta.onPhone")}</span>
+              <a href="https://play.google.com/store/apps/details?id=com.jcalado.voxdmr" target="_blank" rel="noopener noreferrer" className="btn-press w-full sm:w-auto bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1 whitespace-nowrap">
+                {t("cta.getAndroid")}
+                <Smartphone className="w-5 h-5" />
+              </a>
+            </div>
+            <div className="flex flex-col gap-2.5 items-center">
+              <span className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-on-surface-muted">{t("cta.onDesktop")}</span>
+              <a href="https://github.com/jcalado/voxdmr-site/releases/latest" target="_blank" rel="noopener noreferrer" className="btn-press w-full sm:w-auto bg-vibrant-red/90 hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1 whitespace-nowrap">
+                {t("cta.getDesktop")}
+                <Monitor className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+          <div className="mt-6 flex justify-center">
+            <a href="/docs" className="inline-flex items-center gap-2 text-vibrant-blue hover:text-sky-300 font-semibold transition-colors">
+              <BookOpen className="w-4 h-4" />
               {t("cta.setupGuide")}
-              <BookOpen className="w-5 h-5" />
             </a>
           </div>
         </motion.div>
@@ -358,11 +470,16 @@ export default function App() {
 
           <div className="flex flex-wrap justify-center gap-6 lg:gap-10">
             {[
-              { label: t("footer.aboutUs"), href: "#" },
               { label: t("footer.docs"), href: "/docs" },
               { label: t("footer.privacy"), href: "/privacy" },
+              { label: t("footer.github"), href: "https://github.com/jcalado/dmr-input", external: true },
             ].map((link) => (
-              <a key={link.href} className="text-sm font-semibold text-on-surface-muted hover:text-vibrant-red transition-colors" href={link.href}>
+              <a
+                key={link.href}
+                className="text-sm font-semibold text-on-surface-muted hover:text-vibrant-red transition-colors"
+                href={link.href}
+                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
                 {link.label}
               </a>
             ))}
