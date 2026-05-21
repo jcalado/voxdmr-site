@@ -1,5 +1,5 @@
-import type { CSSProperties } from "react";
-import { motion } from "motion/react";
+import { useEffect, useState, type CSSProperties } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import {
   Mic,
   Activity,
@@ -16,13 +16,82 @@ import {
   Plane,
   LifeBuoy,
   ChevronDown,
+  X,
 } from "lucide-react";
 import { Logo } from "./Logo";
 import { useLanguage } from "./i18n/LanguageContext";
 import { LanguageSwitcher } from "./i18n/LanguageSwitcher";
+import { usePlatform } from "./docs/PlatformContext";
+import { PlatformSwitcher } from "./docs/PlatformSwitcher";
 
 export default function App() {
   const { t } = useLanguage();
+  const { platform } = usePlatform();
+
+  const heroShot = platform === "mobile"
+    ? { src: "/screenshots/android-main-rx", alt: t("hero.imageAlt.mobile") }
+    : { src: "/screenshots/desktop-main-rx", alt: t("hero.imageAlt.desktop") };
+
+  const galleryShots = platform === "mobile"
+    ? [
+        { src: "/screenshots/android-main", alt: t("screenshots.alt.main.mobile"), label: t("screenshots.main") },
+        { src: "/screenshots/android-main-rx", alt: t("screenshots.alt.rx.mobile"), label: t("screenshots.rx") },
+        { src: "/screenshots/android-talkgroups", alt: t("screenshots.alt.talkgroups.mobile"), label: t("screenshots.talkgroups") },
+        { src: "/screenshots/android-settings-connection", alt: t("screenshots.alt.connection.mobile"), label: t("screenshots.connection") },
+        { src: "/screenshots/android-settings-firmware", alt: t("screenshots.alt.firmware.mobile"), label: t("screenshots.firmware") },
+      ]
+    : [
+        { src: "/screenshots/desktop-main", alt: t("screenshots.alt.main.desktop"), label: t("screenshots.main") },
+        { src: "/screenshots/desktop-main-rx", alt: t("screenshots.alt.rx.desktop"), label: t("screenshots.rx") },
+        { src: "/screenshots/desktop-talkgroups", alt: t("screenshots.alt.talkgroups.desktop"), label: t("screenshots.talkgroups") },
+        { src: "/screenshots/desktop-settings-connection", alt: t("screenshots.alt.connection.desktop"), label: t("screenshots.connection") },
+        { src: "/screenshots/desktop-settings-firmware", alt: t("screenshots.alt.firmware.desktop"), label: t("screenshots.firmware") },
+      ];
+
+  const galleryColumns = platform === "mobile"
+    ? "columns-2 sm:columns-3 lg:columns-3"
+    : "columns-1 lg:columns-2";
+
+  const [zoomed, setZoomed] = useState<{ src: string; alt: string; label: string } | null>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (!zoomed) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setZoomed(null); };
+    document.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [zoomed]);
+
+  useEffect(() => {
+    if (zoomed) setZoomed(null);
+    // Close the lightbox if the user toggles platform while it's open —
+    // the thumbnail it would FLIP back into no longer exists.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [platform]);
+
+  const zoomLayoutTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { type: "tween" as const, duration: 0.42, ease: [0.16, 1, 0.3, 1] as const };
+
+  const [openFaqs, setOpenFaqs] = useState<Set<number>>(new Set());
+  const toggleFaq = (n: number) =>
+    setOpenFaqs((prev) => {
+      const next = new Set(prev);
+      next.has(n) ? next.delete(n) : next.add(n);
+      return next;
+    });
+
+  const faqOpenTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { type: "tween" as const, duration: 0.34, ease: [0.16, 1, 0.3, 1] as const };
+  const faqCloseTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { type: "tween" as const, duration: 0.24, ease: [0.16, 1, 0.3, 1] as const };
 
   return (
     <div className="min-h-screen bg-community-bg text-on-surface font-sans selection:bg-vibrant-blue/20">
@@ -140,12 +209,12 @@ export default function App() {
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               className="absolute inset-0 m-auto w-3/4 h-3/4 bg-vibrant-blue/20 rounded-full blur-3xl"
             />
-            <div className="relative z-10 bg-surface-raised p-2 rounded-3xl soft-shadow border border-border ring-1 ring-white/10">
+            <div className={`relative z-10 bg-surface-raised p-2 rounded-3xl soft-shadow border border-border ring-1 ring-white/10 ${platform === "mobile" ? "max-w-[18rem]" : ""}`}>
               <picture>
-                <source srcSet="/main-app.webp" type="image/webp" />
+                <source srcSet={`${heroShot.src}.webp`} type="image/webp" />
                 <img
-                  src="/main-app.png"
-                  alt="VoxDMR main window: connected to a DMR network, talkgroup picker with favorites and live activity dots"
+                  src={`${heroShot.src}.png`}
+                  alt={heroShot.alt}
                   className="w-full rounded-2xl"
                 />
               </picture>
@@ -156,7 +225,7 @@ export default function App() {
 
       {/* Use Cases */}
       <section className="py-20 lg:py-28 px-6 lg:px-8 bg-community-bg border-t border-border">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -184,7 +253,7 @@ export default function App() {
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   className={`flex flex-col gap-5 md:px-8 lg:px-10 ${i > 0 ? "md:border-l md:border-border" : ""}`}
                 >
-                  <Icon className="w-8 h-8 text-vibrant-blue" strokeWidth={1.5} />
+                  <Icon className="w-8 h-8 text-vibrant-red" strokeWidth={1.5} />
                   <h3 className="font-headline font-bold text-xl lg:text-2xl text-white tracking-tight leading-tight">{item.title}</h3>
                   <p className="text-on-surface-muted leading-relaxed">{item.description}</p>
                 </motion.div>
@@ -196,48 +265,56 @@ export default function App() {
 
       {/* Screenshots Gallery */}
       <section id="screenshots" className="py-16 lg:py-24 px-6 lg:px-8 scroll-mt-24">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.6 }}
-            className="mb-12 lg:mb-16 max-w-2xl"
+            className="mb-12 lg:mb-16 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
           >
-            <h2 className="text-4xl lg:text-5xl font-headline font-bold text-white mb-4 tracking-tight">{t("screenshots.heading")}</h2>
-            <p className="text-on-surface-muted text-lg leading-relaxed">{t("screenshots.subheading")}</p>
+            <div className="max-w-2xl">
+              <h2 className="text-4xl lg:text-5xl font-headline font-bold text-white mb-4 tracking-tight">{t("screenshots.heading")}</h2>
+              <p className="text-on-surface-muted text-lg leading-relaxed">{t("screenshots.subheading")}</p>
+            </div>
+            <PlatformSwitcher />
           </motion.div>
 
-          <div className="columns-1 lg:columns-2 gap-6 lg:gap-8">
-            {[
-              { src: "/screenshots/setup-card", alt: "VoxDMR first-launch setup card with firmware download button", label: t("screenshots.setup") },
-              { src: "/screenshots/main-idle", alt: "VoxDMR main UI connected and ready to transmit", label: t("screenshots.main") },
-              { src: "/screenshots/main-rx", alt: "VoxDMR receiving audio from a DMR talkgroup", label: t("screenshots.rx") },
-              { src: "/screenshots/settings-firmware", alt: "VoxDMR settings firmware tab showing valid firmware checksum", label: t("screenshots.firmware") },
-              { src: "/screenshots/settings-connection", alt: "VoxDMR settings connection tab with DMR master picker", label: t("screenshots.connection") },
-            ].map((item, i) => (
-              <motion.div
-                key={item.src}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: (i % 2) * 0.1 }}
-                className="break-inside-avoid flex flex-col gap-4 mb-6 lg:mb-8"
-              >
-                <div className="bg-surface-raised p-3 rounded-3xl soft-shadow border border-border">
-                  <picture>
-                    <source srcSet={`${item.src}.webp`} type="image/webp" />
-                    <img
-                      alt={item.alt}
-                      className="w-full rounded-2xl"
-                      src={`${item.src}.png`}
-                      loading="lazy"
-                    />
-                  </picture>
-                </div>
-                <span className="text-xs font-bold uppercase tracking-widest text-on-surface-muted px-2">{item.label}</span>
-              </motion.div>
-            ))}
+          <div key={platform} className={`${galleryColumns} gap-6 lg:gap-8`}>
+            {galleryShots.map((item, i) => {
+              const isZoomed = zoomed?.src === item.src;
+              return (
+                <motion.div
+                  key={item.src}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: (i % 2) * 0.1 }}
+                  className="break-inside-avoid flex flex-col gap-4 mb-6 lg:mb-8"
+                >
+                  <motion.button
+                    type="button"
+                    layoutId={`zoom-${item.src}`}
+                    onClick={() => setZoomed(item)}
+                    animate={{ opacity: isZoomed ? 0 : 1 }}
+                    transition={zoomLayoutTransition}
+                    aria-label={`${t("screenshots.zoomOpen")} ${item.label}`}
+                    className="group block bg-surface-raised p-3 rounded-3xl soft-shadow border border-border cursor-zoom-in text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-red focus-visible:ring-offset-2 focus-visible:ring-offset-community-bg"
+                  >
+                    <picture>
+                      <source srcSet={`${item.src}.webp`} type="image/webp" />
+                      <img
+                        alt={item.alt}
+                        className="w-full rounded-2xl transition-transform duration-300 ease-out group-hover:scale-[1.02]"
+                        src={`${item.src}.png`}
+                        loading="lazy"
+                      />
+                    </picture>
+                  </motion.button>
+                  <span className="text-xs font-bold uppercase tracking-widest text-on-surface-muted px-2">{item.label}</span>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -352,7 +429,7 @@ export default function App() {
 
       {/* FAQ */}
       <section className="py-20 lg:py-28 px-6 lg:px-8 bg-community-bg">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -365,24 +442,71 @@ export default function App() {
           </motion.div>
 
           <div className="border-y border-border">
-            {[1, 2, 3, 4, 5].map((n, i) => (
-              <motion.div
-                key={n}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
-                className={i > 0 ? "border-t border-border" : ""}
-              >
-                <details className="faq-item">
-                  <summary className="flex items-center justify-between gap-6 py-6 cursor-pointer list-none">
-                    <span className="font-headline font-semibold text-lg lg:text-xl text-white tracking-tight">{t(`faq.q${n}.question`)}</span>
-                    <ChevronDown className="faq-chevron w-5 h-5 text-on-surface-muted shrink-0" />
-                  </summary>
-                  <p className="text-on-surface-muted leading-relaxed pb-6 pr-8 max-w-2xl">{t(`faq.q${n}.answer`)}</p>
-                </details>
-              </motion.div>
-            ))}
+            {[1, 2, 3, 4, 5].map((n, i) => {
+              const isOpen = openFaqs.has(n);
+              return (
+                <motion.div
+                  key={n}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  className={i > 0 ? "border-t border-border" : ""}
+                >
+                  <h3>
+                    <button
+                      type="button"
+                      onClick={() => toggleFaq(n)}
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-answer-${n}`}
+                      id={`faq-question-${n}`}
+                      className="group w-full flex items-center justify-between gap-6 py-6 cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-red focus-visible:rounded-md"
+                    >
+                      <span className={`font-headline font-semibold text-lg lg:text-xl tracking-tight transition-colors group-hover:text-vibrant-red ${isOpen ? "text-vibrant-red" : "text-white"}`}>
+                        {t(`faq.q${n}.question`)}
+                      </span>
+                      <motion.span
+                        animate={{ rotate: isOpen ? 180 : 0 }}
+                        transition={faqOpenTransition}
+                        className={`shrink-0 inline-flex items-center justify-center transition-colors group-hover:text-vibrant-red ${isOpen ? "text-vibrant-red" : "text-on-surface-muted"}`}
+                      >
+                        <ChevronDown className="w-5 h-5" />
+                      </motion.span>
+                    </button>
+                  </h3>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        key="answer"
+                        id={`faq-answer-${n}`}
+                        role="region"
+                        aria-labelledby={`faq-question-${n}`}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{
+                          height: "auto",
+                          opacity: 1,
+                          transition: {
+                            height: faqOpenTransition,
+                            opacity: { ...faqOpenTransition, delay: prefersReducedMotion ? 0 : 0.08 },
+                          },
+                        }}
+                        exit={{
+                          height: 0,
+                          opacity: 0,
+                          transition: {
+                            height: faqCloseTransition,
+                            opacity: { ...faqCloseTransition, duration: prefersReducedMotion ? 0 : 0.16 },
+                          },
+                        }}
+                        className="overflow-hidden"
+                      >
+                        <p className="text-on-surface-muted leading-relaxed pb-6 pr-8 max-w-2xl">{t(`faq.q${n}.answer`)}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -490,6 +614,51 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      <AnimatePresence>
+        {zoomed && (
+          <motion.div
+            key="zoom-overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-label={zoomed.alt}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.22, ease: [0.16, 1, 0.3, 1] }}
+            onClick={() => setZoomed(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 lg:p-10 bg-community-bg/85 backdrop-blur-md cursor-zoom-out"
+          >
+            <motion.div
+              layoutId={`zoom-${zoomed.src}`}
+              onClick={(e) => e.stopPropagation()}
+              transition={zoomLayoutTransition}
+              className="bg-surface-raised p-3 rounded-3xl soft-shadow border border-border cursor-default max-w-[min(72rem,100%)] max-h-full"
+            >
+              <picture>
+                <source srcSet={`${zoomed.src}.webp`} type="image/webp" />
+                <img
+                  src={`${zoomed.src}.png`}
+                  alt={zoomed.alt}
+                  className="rounded-2xl max-h-[calc(100vh-6rem)] w-auto max-w-full"
+                />
+              </picture>
+            </motion.div>
+            <motion.button
+              type="button"
+              onClick={() => setZoomed(null)}
+              aria-label={t("screenshots.zoomClose")}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.22, delay: prefersReducedMotion ? 0 : 0.15 }}
+              className="absolute top-4 right-4 lg:top-6 lg:right-6 inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface-raised border border-border text-white hover:bg-vibrant-red hover:border-vibrant-red transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-red focus-visible:ring-offset-2 focus-visible:ring-offset-community-bg"
+            >
+              <X className="w-5 h-5" />
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

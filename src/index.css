@@ -92,19 +92,6 @@ html {
   transition: transform 0.08s ease !important;
 }
 
-/* FAQ accordion */
-.faq-item > summary::-webkit-details-marker { display: none; }
-.faq-item > summary::marker { content: ""; }
-.faq-chevron {
-  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.faq-item[open] .faq-chevron {
-  transform: rotate(180deg);
-}
-.faq-item > summary:hover .faq-chevron {
-  color: var(--color-vibrant-red);
-}
-
 /* Reduced motion: respect user preference */
 @media (prefers-reduced-motion: reduce) {
   *,
