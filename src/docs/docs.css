@@ -61,9 +61,33 @@
 .prose blockquote { background: #1E293B; border-radius: 0.75rem; border: none; padding: 1rem 1.25rem; margin: 0 0 1.5rem 0; }
 .prose blockquote::before { content: "Tip"; display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.8125rem; font-weight: 700; color: #FB923C; margin-bottom: 0.5rem; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='%23FB923C'%3E%3Cpath d='M11 24H21V26H11z'/%3E%3Cpath d='M13 28H19V30H13z'/%3E%3Cpath d='M16,2A10,10,0,0,0,6,12a9.19,9.19,0,0,0,3.46,7.62c1,.93,1.54,1.46,1.54,2.38h2c0-1.84-1.11-2.87-2.19-3.86A7.2,7.2,0,0,1,8,12a8,8,0,0,1,16,0,7.2,7.2,0,0,1-2.82,6.14c-1.07,1-2.18,2-2.18,3.86h2c0-.92.53-1.45,1.54-2.39A9.18,9.18,0,0,0,26,12,10,10,0,0,0,16,2Z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-size: 0.875rem 0.875rem; background-position: left center; padding-left: 1.25rem; line-height: 1; }
 .prose blockquote p { margin: 0; }
-.prose table { width: 100%; border-collapse: collapse; margin: 0 0 1.5rem 0; font-size: 0.875rem; }
-.prose th { color: white; font-weight: 600; text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.07); }
-.prose td { padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.07); }
+.prose table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0 0 1.5rem 0;
+  font-size: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  overflow: hidden; /* clip cell backgrounds to the rounded frame */
+}
+.prose thead th {
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.625rem 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.prose td {
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: top;
+}
+.prose tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.025); }
+.prose tbody tr:hover { background: rgba(56, 189, 248, 0.07); }
+.prose tbody tr:last-child td { border-bottom: none; }
+.prose tbody td:first-child { color: #E2E8F0; font-weight: 500; }
 .prose hr { border: none; border-top: 1px solid rgba(255, 255, 255, 0.07); margin: 2rem 0; }
 .prose img { max-width: 260px; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.07); cursor: zoom-in; transition: opacity 0.15s; }
 .prose img:hover { opacity: 0.85; }
