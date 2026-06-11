@@ -10,6 +10,7 @@ const DocsLayout = lazy(() =>
   import("./docs/DocsLayout.tsx").then((m) => ({ default: m.DocsLayout }))
 );
 const PrivacyPage = lazy(() => import("./PrivacyPage.tsx"));
+const RadiosPage = lazy(() => import("./RadiosPage.tsx"));
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")!).render(
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/privacy" element={<Suspense><PrivacyPage /></Suspense>} />
+            <Route path="/radios" element={<Suspense><RadiosPage /></Suspense>} />
             <Route path="/docs" element={<Navigate to="/docs/installation" replace />} />
             <Route
               path="/docs/:slug"

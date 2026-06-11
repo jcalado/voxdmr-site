@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
-import { Logo } from "./Logo";
 import { useLanguage } from "./i18n/LanguageContext";
-import { LanguageSwitcher } from "./i18n/LanguageSwitcher";
+import { SiteNav } from "./SiteNav";
 
 export default function PrivacyPage() {
   const { t } = useLanguage();
@@ -9,15 +7,7 @@ export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-community-bg text-on-surface font-sans">
       {/* Navigation */}
-      <nav className="w-full top-0 sticky z-50 bg-slate-950/80 backdrop-blur-xl h-24 flex items-center border-b border-border">
-        <div className="flex justify-between items-center max-w-7xl mx-auto px-6 lg:px-10 w-full">
-          <Link to="/" className="flex items-center gap-4 lg:gap-5">
-            <Logo size="md" className="shadow-lg shadow-black/40" />
-            <span className="text-xl lg:text-2xl font-bold tracking-tight text-white font-headline">VoxDMR</span>
-          </Link>
-          <LanguageSwitcher />
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* Content */}
       <main className="max-w-3xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
