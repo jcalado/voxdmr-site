@@ -196,5 +196,6 @@
   "radios.metaTitle": "Tested PoC radios for VoxDMR",
   "radios.metaDescription": "PoC radios confirmed working with the VoxDMR Android app, with PTT, knob, and audio support details plus a compatibility score for each.",
   "radios.notes.hytera-p50": "The rotary knob can be assigned to top-group switching. PTT works out of the box and audio quality is very good.",
+  "radios.notes.mkmxptt-1b-wli0-oqsk": "Full hardware support: PTT, rotary knob, and programmable side keys all work, with good audio. Tested on Android 9.",
   "radios.notes.ksun-zl65": "On my list to test."
 }
