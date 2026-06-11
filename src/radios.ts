@@ -45,6 +45,7 @@ export const radios: Radio[] = [
     name: "MKMXPTT 1B-WLI0-OQSK",
     model: "1B-WLI0-OQSK",
     maker: "MKMXPTT",
+    image: "/radios/mkmxptt-1b-wli0-oqsk.jpg",
     ptt: true,
     knob: true,
     sideKeys: true,
