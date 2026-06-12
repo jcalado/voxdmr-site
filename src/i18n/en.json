@@ -201,5 +201,5 @@
   "radios.notes.hytera-p50": "The rotary knob can be assigned to top-group switching. PTT works out of the box and audio quality is very good.",
   "radios.notes.mkmxptt-1b-wli0-oqsk": "Full hardware support: PTT, rotary knob, and programmable side keys all work, with good audio. Tested on Android 9.",
   "radios.notes.inrico-t320": "PTT works and audio quality is good. Rotary knob and side-key support haven't been verified yet.",
-  "radios.notes.ksun-zl65": "On my list to test."
+  "radios.notes.ksun-zl65": "Full hardware support: PTT, rotary knob, and programmable side keys all work. Audio quality is OK. Tested on Android 9."
 }
