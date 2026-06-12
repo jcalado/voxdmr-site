@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { Check, X, ExternalLink, ArrowUpNarrowWide, ArrowDownWideNarrow, Download, Smartphone, Cpu, Info, Plus } from "lucide-react";
+import { Check, X, ExternalLink, ArrowUpNarrowWide, ArrowDownWideNarrow, Download, Smartphone, Cpu, Info, Plus, Gift, AlertCircle } from "lucide-react";
 import { FaceDissatisfied } from "@carbon/icons-react";
 import { useLanguage } from "./i18n/LanguageContext";
 import { SiteNav } from "./SiteNav";
@@ -36,6 +36,19 @@ const SUBMIT_RADIO_URL =
       "**Android version:** ",
       "**VoxDMR version tested:** ",
       "**Notes:** ",
+    ].join("\n"),
+  );
+
+// Prefilled email for offering to donate a radio for testing.
+const DONATE_RADIO_URL =
+  "mailto:voxdmr@jcalado.com?subject=" +
+  encodeURIComponent("VoxDMR radio donation: <make and model>") +
+  "&body=" +
+  encodeURIComponent(
+    [
+      "Radio (make and model): ",
+      "Where you're shipping from: ",
+      "Anything else I should know: ",
     ].join("\n"),
   );
 
@@ -381,6 +394,51 @@ export default function RadiosPage() {
             >
               <Download className="w-4 h-4 transition-transform group-hover/cta:translate-y-0.5 motion-reduce:transform-none" aria-hidden="true" />
               {t("radios.apk.cta")}
+            </a>
+          </div>
+        </div>
+
+        {/* Donate-a-radio banner */}
+        <div className="relative overflow-hidden mb-12 rounded-3xl border border-vibrant-orange/20 bg-surface-raised/40 p-6 sm:p-8">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-20 -right-12 w-64 h-64 rounded-full bg-vibrant-orange/10 blur-3xl"
+          />
+          <div className="relative flex flex-col sm:flex-row sm:items-center gap-6">
+            <div className="shrink-0 flex items-center justify-center w-14 h-14 rounded-2xl bg-vibrant-orange/15 text-vibrant-orange">
+              <Gift className="w-7 h-7" aria-hidden="true" />
+            </div>
+
+            <div className="flex-1 min-w-0">
+              <h2 className="text-lg sm:text-xl font-headline font-bold text-white tracking-tight">
+                {t("radios.donate.title")}
+              </h2>
+              <p className="mt-1.5 text-sm text-on-surface-muted leading-relaxed">{t("radios.donate.note")}</p>
+              <p className="mt-2 text-sm text-on-surface-muted leading-relaxed">
+                {t("radios.donate.kofiNote")}{" "}
+                <a
+                  href="https://ko-fi.com/jcalado"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-semibold text-vibrant-orange hover:text-orange-300 transition-colors"
+                >
+                  Ko-fi
+                  <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                </a>
+                . {t("radios.donate.kofiUnit")}
+              </p>
+              <p className="mt-3 flex items-start gap-1.5 text-xs text-on-surface-muted/70 leading-relaxed">
+                <AlertCircle className="w-3.5 h-3.5 mt-0.5 shrink-0" aria-hidden="true" />
+                <span>{t("radios.donate.disclaimer")}</span>
+              </p>
+            </div>
+
+            <a
+              href={DONATE_RADIO_URL}
+              className="btn-press shrink-0 inline-flex items-center justify-center gap-2 bg-vibrant-orange hover:bg-orange-400 text-community-bg px-6 py-3 rounded-2xl font-bold hover:scale-105 transition-all whitespace-nowrap shadow-lg shadow-vibrant-orange/20"
+            >
+              <Gift className="w-4 h-4" aria-hidden="true" />
+              {t("radios.donate.cta")}
             </a>
           </div>
         </div>
