@@ -65,7 +65,9 @@ export function PlatformSwitcher({ lang }: { lang: Lang }) {
             )}
             <span className="relative z-10 flex items-center gap-1.5">
               <Icon className="w-3.5 h-3.5" />
-              {t(labelKey)}
+              {/* On mobile, only the active platform shows its text label;
+                  the inactive one collapses to icon-only. Always full on sm+. */}
+              <span className={isActive ? undefined : "hidden sm:inline"}>{t(labelKey)}</span>
             </span>
           </button>
         );

@@ -52,7 +52,7 @@ const home = localizePath("/", lang);
         <Logo size="sm" />
         <span class="font-headline font-bold text-white text-sm">VoxDMR</span>
       </a>
-      <span class="text-on-surface-muted text-sm">{t("docs.slash")}</span>
+      <span class="hidden sm:inline text-on-surface-muted text-sm">{t("docs.slash")}</span>
     </div>
     <div class="flex items-center gap-3">
       <PlatformSwitcher lang={lang} client:idle />
