@@ -27,7 +27,6 @@
   "hero.imageAlt.desktop": "VoxDMR desktop window mid-receive: DMR talkgroup active, talker alias and audio meter visible",
   "hero.imageAlt.mobile": "VoxDMR Android app mid-receive: DMR talkgroup active, talker alias and audio meter visible",
 
-  "hero.badge": "Free · No hotspot · No account",
   "hero.title1": "Get on DMR",
   "hero.title2": "without the radio.",
   "hero.subtitle": "Free app for Android, Windows and Linux. Connect to DMR talkgroups on BrandMeister, TGIF and other networks straight from your phone or PC. Real AMBE+2 audio. No hotspot, no proprietary client.",
@@ -80,6 +79,10 @@
   "cta.description": "Free to download. No account needed. Install VoxDMR on your phone or PC, enter your DMR ID, and you're on the air.",
   "cta.setupGuide": "Setup Guide",
   "cta.joinCommunity": "Join the Community",
+  "cta.android": "Android",
+  "cta.desktop": "Desktop",
+  "cta.community": "Community",
+  "cta.donate": "Donate",
 
   "support.cta": "Support on Ko-fi",
   "support.note": "Built in my free time, for the fun of it. Ko-fi is just there if you want to say thanks.",

@@ -8,7 +8,6 @@ import {
   Wifi,
   Layers,
   Cpu,
-  MessageCircle,
   Coffee,
   Smartphone,
   Monitor,
@@ -19,6 +18,7 @@ import {
   X,
 } from "lucide-react";
 import { Logo } from "./Logo";
+import { CtaBar } from "./CtaBar";
 import { useLanguage } from "./i18n/LanguageContext";
 import { SiteNav } from "./SiteNav";
 import { usePlatform } from "./docs/PlatformContext";
@@ -115,21 +115,11 @@ export default function App() {
 
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="z-10 text-center lg:text-left">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 bg-surface-raised/60 rounded-full mb-8 border border-border"
-            >
-              <span className="flex h-2.5 w-2.5 rounded-full bg-status-online animate-pulse"></span>
-              <span className="text-xs font-bold uppercase tracking-widest text-on-surface-muted">{t("hero.badge")}</span>
-            </motion.div>
-
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-5xl lg:text-[5.5rem] font-headline font-bold text-white tracking-tight leading-[1.1] lg:leading-[1.15] mb-8"
+              className="text-4xl lg:text-[4.5rem] font-headline font-bold text-white tracking-tight leading-[1.1] lg:leading-[1.15] mb-8"
             >
               {t("hero.title1")} <br/> <span className="text-vibrant-red">{t("hero.title2")}</span>
             </motion.h1>
@@ -142,40 +132,6 @@ export default function App() {
             >
               {t("hero.subtitle")}
             </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.45 }}
-              className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center lg:justify-start"
-            >
-              <div className="flex flex-col gap-2.5 items-center sm:items-start">
-                <span className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-on-surface-muted">{t("cta.onPhone")}</span>
-                <a href="https://play.google.com/store/apps/details?id=com.jcalado.voxdmr" target="_blank" rel="noopener noreferrer" className="btn-press bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1 whitespace-nowrap">
-                  {t("cta.getAndroid")}
-                  <Smartphone className="w-5 h-5" />
-                </a>
-              </div>
-              <div className="flex flex-col gap-2.5 items-center sm:items-start">
-                <span className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-on-surface-muted">{t("cta.onDesktop")}</span>
-                <a href="https://github.com/jcalado/voxdmr-site/releases/latest" target="_blank" rel="noopener noreferrer" className="btn-press bg-surface-raised hover:bg-surface-raised/80 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all border border-border hover:border-vibrant-red/50 hover:-translate-y-1 whitespace-nowrap">
-                  {t("cta.getDesktop")}
-                  <Monitor className="w-5 h-5" />
-                </a>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="mt-6 flex justify-center lg:justify-start"
-            >
-              <a href="https://t.me/+6-ncS_eluTUxNmU0" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-on-surface-muted hover:text-white font-semibold text-sm transition-colors">
-                <MessageCircle className="w-4 h-4" />
-                {t("cta.joinCommunity")}
-              </a>
-            </motion.div>
           </div>
 
           <motion.div
@@ -201,6 +157,15 @@ export default function App() {
             </div>
           </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="max-w-7xl mx-auto mt-8 lg:mt-10 flex justify-center lg:justify-start"
+        >
+          <CtaBar />
+        </motion.div>
       </header>
 
       {/* Use Cases */}

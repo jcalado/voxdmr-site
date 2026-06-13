@@ -27,7 +27,6 @@
   "hero.imageAlt.desktop": "Janela VoxDMR no PC a meio da receção: talkgroup DMR ativa, talker alias e medidor de áudio visíveis",
   "hero.imageAlt.mobile": "App VoxDMR no Android a meio da receção: talkgroup DMR ativa, talker alias e medidor de áudio visíveis",
 
-  "hero.badge": "Grátis · Sem hotspot · Sem conta",
   "hero.title1": "Entra no DMR",
   "hero.title2": "sem o rádio.",
   "hero.subtitle": "App gratuita para Android, Windows e Linux. Liga-te a talkgroups DMR na BrandMeister, TGIF e noutras redes a partir do telemóvel ou do PC. Áudio AMBE+2 real. Sem hotspot, sem cliente proprietário.",
@@ -80,6 +79,10 @@
   "cta.description": "Gratuito para descarregar. Sem necessidade de conta. Instala o VoxDMR no telemóvel ou no PC, introduz o teu ID DMR e estás no ar.",
   "cta.setupGuide": "Guia de Configuração",
   "cta.joinCommunity": "Junta-te à Comunidade",
+  "cta.android": "Android",
+  "cta.desktop": "Desktop",
+  "cta.community": "Comunidade",
+  "cta.donate": "Doar",
 
   "support.cta": "Apoiar no Ko-fi",
   "support.note": "Feito nos meus tempos livres, por gosto. O Ko-fi fica aí se quiseres deixar um agradecimento.",
