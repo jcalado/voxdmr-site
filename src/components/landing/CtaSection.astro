@@ -1,0 +1,65 @@
+---
+import Logo from "@/src/components/Logo.astro";
+import Smartphone from "@/src/components/icons/Smartphone.astro";
+import Monitor from "@/src/components/icons/Monitor.astro";
+import BookOpen from "@/src/components/icons/BookOpen.astro";
+import Coffee from "@/src/components/icons/Coffee.astro";
+import { getT, type Lang } from "@/src/i18n/t";
+import { localizePath } from "@/src/i18n/routing";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getT(lang);
+
+const docsHref = localizePath("/docs", lang);
+---
+<section id="download" class="pt-12 lg:pt-16 pb-20 lg:pb-28 px-6 lg:px-8 bg-community-bg scroll-mt-24">
+  <div class="scroll-reveal max-w-3xl mx-auto text-center">
+    <div class="glow-pulse">
+      <Logo size="md" className="mx-auto mb-10" />
+    </div>
+    <h2 class="text-5xl lg:text-7xl font-headline font-bold mb-6 text-white tracking-tight">{t("cta.heading")}</h2>
+    <p class="text-on-surface-muted text-lg lg:text-xl mb-10 leading-relaxed max-w-2xl mx-auto">
+      {t("cta.description")}
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-end justify-center gap-6 sm:gap-8">
+      <div class="flex flex-col gap-2.5 items-center">
+        <span class="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-on-surface-muted">{t("cta.onPhone")}</span>
+        <a href="https://play.google.com/store/apps/details?id=com.jcalado.voxdmr" target="_blank" rel="noopener noreferrer" class="btn-press w-full sm:w-auto bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1 whitespace-nowrap">
+          {t("cta.getAndroid")}
+          <Smartphone class="w-5 h-5" />
+        </a>
+      </div>
+      <div class="flex flex-col gap-2.5 items-center">
+        <span class="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-on-surface-muted">{t("cta.onDesktop")}</span>
+        <a href="https://github.com/jcalado/voxdmr-site/releases/latest" target="_blank" rel="noopener noreferrer" class="btn-press w-full sm:w-auto bg-vibrant-red/90 hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1 whitespace-nowrap">
+          {t("cta.getDesktop")}
+          <Monitor class="w-5 h-5" />
+        </a>
+      </div>
+    </div>
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-sm">
+      <a href={docsHref} class="inline-flex items-center gap-2 text-vibrant-blue hover:text-sky-300 font-semibold transition-colors">
+        <BookOpen class="w-4 h-4" />
+        {t("cta.setupGuide")}
+      </a>
+      <span aria-hidden class="hidden sm:inline text-on-surface-muted/40">·</span>
+      <a
+        href="https://ko-fi.com/jcalado"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-vibrant-orange hover:text-orange-300 font-semibold transition-colors"
+      >
+        <Coffee class="w-4 h-4" />
+        {t("support.cta")}
+      </a>
+    </div>
+    <p class="mt-4 text-xs text-on-surface-muted/70">
+      {t("support.note")}
+    </p>
+  </div>
+</section>

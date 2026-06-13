@@ -1,0 +1,30 @@
+---
+import Layout from '@/src/layouts/Layout.astro';
+import SiteNav from '@/src/components/SiteNav.astro';
+import RadiosBanner from '@/src/components/radios/RadiosBanner.astro';
+import RadiosContribute from '@/src/components/radios/RadiosContribute.astro';
+import RadiosGrid from '@/src/islands/RadiosGrid.tsx';
+import { t } from '@/src/i18n/t';
+
+const lang = 'pt';
+const pathname = Astro.url.pathname;
+const title = t('radios.metaTitle', lang);
+const description = t('radios.metaDescription', lang);
+---
+
+<Layout lang={lang} title={title} description={description} pathname={pathname}>
+  <div class="min-h-screen bg-community-bg text-on-surface font-sans">
+    <SiteNav lang={lang} pathname={pathname} />
+
+    <main class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      <h1 class="text-4xl lg:text-5xl font-headline font-bold text-white mb-4 tracking-tight">{t('radios.title', lang)}</h1>
+      <p class="text-on-surface-muted mb-8 max-w-2xl leading-relaxed">{t('radios.intro', lang)}</p>
+
+      <RadiosBanner lang={lang} />
+
+      <RadiosGrid lang={lang} client:visible />
+
+      <RadiosContribute lang={lang} />
+    </main>
+  </div>
+</Layout>

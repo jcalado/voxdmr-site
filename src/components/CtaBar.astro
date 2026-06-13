@@ -1,0 +1,45 @@
+---
+import Smartphone from "@/src/components/icons/Smartphone.astro";
+import Monitor from "@/src/components/icons/Monitor.astro";
+import MessageCircle from "@/src/components/icons/MessageCircle.astro";
+import Coffee from "@/src/components/icons/Coffee.astro";
+import { getT, type Lang } from "@/src/i18n/t";
+
+const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.jcalado.voxdmr";
+const RELEASES_URL = "https://github.com/jcalado/voxdmr-site/releases/latest";
+const TELEGRAM_URL = "https://t.me/+6-ncS_eluTUxNmU0";
+const KOFI_URL = "https://ko-fi.com/jcalado";
+
+const SEGMENT =
+  "btn-press inline-flex items-center justify-center gap-2.5 rounded-full text-base px-6 py-4 transition-colors whitespace-nowrap " +
+  "focus:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-red focus-visible:ring-offset-2 focus-visible:ring-offset-community-bg";
+
+interface Props {
+  lang: Lang;
+  /** Extra classes for the outer track (e.g. layout/width overrides at the call site). */
+  className?: string;
+}
+
+const { lang, className = "" } = Astro.props;
+const t = getT(lang);
+---
+<div
+  class={`grid w-full grid-cols-2 gap-1.5 rounded-3xl border border-border bg-surface-raised/40 p-1.5 sm:inline-flex sm:w-auto sm:flex-wrap sm:items-center sm:gap-1.5 sm:rounded-full ${className}`}
+>
+  <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer" class={`${SEGMENT} bg-vibrant-red hover:bg-red-500 text-white font-bold`}>
+    <Smartphone class="w-5 h-5" />
+    {t("cta.android")}
+  </a>
+  <a href={RELEASES_URL} target="_blank" rel="noopener noreferrer" class={`${SEGMENT} bg-white/10 hover:bg-white/[0.15] text-white font-bold`}>
+    <Monitor class="w-5 h-5" />
+    {t("cta.desktop")}
+  </a>
+  <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" class={`${SEGMENT} bg-white/5 hover:bg-white/10 text-on-surface font-semibold`}>
+    <MessageCircle class="w-5 h-5" />
+    {t("cta.community")}
+  </a>
+  <a href={KOFI_URL} target="_blank" rel="noopener noreferrer" class={`${SEGMENT} bg-vibrant-orange/15 hover:bg-vibrant-orange/25 text-vibrant-orange font-semibold`}>
+    <Coffee class="w-5 h-5" />
+    {t("cta.donate")}
+  </a>
+</div>

@@ -1,0 +1,176 @@
+---
+import Logo from "@/src/components/Logo.astro";
+import LanguageSwitcher from "@/src/components/LanguageSwitcher.astro";
+import { PlatformSwitcher } from "@/src/components/docs/PlatformSwitcher";
+import Menu from "@/src/components/icons/Menu.astro";
+import X from "@/src/components/icons/X.astro";
+import { getT, type Lang } from "@/src/i18n/t";
+import { localizePath } from "@/src/i18n/routing";
+import type { SidebarGroup, AdjacentPage } from "@/src/lib/docs-i18n";
+
+interface Props {
+  lang: Lang;
+  pathname: string;
+  slug: string;
+  groups: SidebarGroup[];
+  prev?: AdjacentPage;
+  next?: AdjacentPage;
+}
+
+const { lang, pathname, slug, groups, prev, next } = Astro.props;
+const t = getT(lang);
+const home = localizePath("/", lang);
+---
+
+{/* Apply the persisted platform filter before paint to avoid a flash. */}
+<script is:inline>
+  (function () {
+    try {
+      var p = localStorage.getItem("voxdmr-docs-platform");
+      if (p !== "desktop" && p !== "mobile") p = "desktop";
+      document.documentElement.dataset.platformFilter = p;
+    } catch (e) {
+      document.documentElement.dataset.platformFilter = "desktop";
+    }
+  })();
+</script>
+
+<div class="min-h-screen bg-community-bg text-on-surface font-sans" data-docs-root>
+  <nav class="h-14 bg-surface border-b border-border flex items-center justify-between px-4 lg:px-6 sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        class="lg:hidden text-on-surface-muted hover:text-white transition-colors p-1"
+        data-sidebar-toggle
+        aria-label="Toggle sidebar"
+        aria-expanded="false"
+      >
+        <Menu class="w-5 h-5" data-icon-menu />
+        <X class="w-5 h-5 hidden" data-icon-close />
+      </button>
+      <a href={home} class="flex items-center gap-3">
+        <Logo size="sm" />
+        <span class="font-headline font-bold text-white text-sm">VoxDMR</span>
+      </a>
+      <span class="text-on-surface-muted text-sm">{t("docs.slash")}</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <PlatformSwitcher lang={lang} client:idle />
+      <LanguageSwitcher lang={lang} pathname={pathname} />
+      <a
+        href={home}
+        class="hidden sm:inline text-on-surface-muted text-sm hover:text-white transition-colors font-medium"
+      >
+        {t("docs.backToSite")}
+      </a>
+    </div>
+  </nav>
+
+  <div class="flex">
+    <div class="docs-sidebar-backdrop" data-sidebar-backdrop aria-hidden="true"></div>
+    <aside class="docs-sidebar-aside" data-sidebar>
+      <div class="docs-sidebar w-60 h-full bg-surface-raised/30 backdrop-blur-xl border-r border-border p-4 overflow-y-auto">
+        {groups.map((group) => (
+          <div class="mb-6">
+            <div class="text-xs font-bold uppercase tracking-widest text-vibrant-orange mb-2 px-2">
+              {group.label}
+            </div>
+            {group.pages.map((page) => (
+              <a
+                href={localizePath(`/docs/${page.slug}`, lang)}
+                class={`block text-sm rounded-lg px-3 py-2 mb-0.5 transition-colors ${
+                  page.slug === slug
+                    ? "bg-vibrant-red text-white font-semibold"
+                    : "text-on-surface-muted hover:bg-surface-raised/40"
+                }`}
+              >
+                {page.title}
+              </a>
+            ))}
+          </div>
+        ))}
+      </div>
+    </aside>
+
+    <main class="flex-1 p-6 lg:py-10 lg:px-12 overflow-y-auto bg-community-bg">
+      <div class="max-w-[680px]">
+        <div class="prose" data-docs-content>
+          <slot />
+        </div>
+        {(prev || next) && (
+          <div class="flex justify-between items-start mt-12 pt-6 border-t border-border">
+            {prev ? (
+              <a href={localizePath(`/docs/${prev.slug}`, lang)} class="group">
+                <div class="text-[10px] uppercase tracking-widest text-on-surface-muted mb-1">
+                  {t("docs.previous")}
+                </div>
+                <div class="text-vibrant-red font-semibold text-sm group-hover:underline">
+                  ← {prev.title}
+                </div>
+              </a>
+            ) : (
+              <div />
+            )}
+            {next ? (
+              <a href={localizePath(`/docs/${next.slug}`, lang)} class="group text-right">
+                <div class="text-[10px] uppercase tracking-widest text-on-surface-muted mb-1">
+                  {t("docs.next")}
+                </div>
+                <div class="text-vibrant-red font-semibold text-sm group-hover:underline">
+                  {next.title} →
+                </div>
+              </a>
+            ) : (
+              <div />
+            )}
+          </div>
+        )}
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+  // Mobile sidebar drawer (CSS handles the slide; this only toggles state).
+  const root = document.querySelector("[data-docs-root]");
+  const toggle = document.querySelector("[data-sidebar-toggle]");
+  const backdrop = document.querySelector("[data-sidebar-backdrop]");
+  const menuIcon = document.querySelector("[data-icon-menu]");
+  const closeIcon = document.querySelector("[data-icon-close]");
+  function setSidebar(open: boolean) {
+    root?.classList.toggle("docs-sidebar-open", open);
+    toggle?.setAttribute("aria-expanded", String(open));
+    menuIcon?.classList.toggle("hidden", open);
+    closeIcon?.classList.toggle("hidden", !open);
+  }
+  toggle?.addEventListener("click", () =>
+    setSidebar(!root?.classList.contains("docs-sidebar-open")),
+  );
+  backdrop?.addEventListener("click", () => setSidebar(false));
+
+  // Image lightbox: zoom any .prose img on click (progressive enhancement).
+  const content = document.querySelector("[data-docs-content]");
+  let modal: HTMLDivElement | null = null;
+  function closeModal() {
+    modal?.remove();
+    modal = null;
+    document.body.style.overflow = "";
+  }
+  content?.addEventListener("click", (e) => {
+    const img = e.target;
+    if (!(img instanceof HTMLImageElement)) return;
+    modal = document.createElement("div");
+    modal.className = "doc-modal-backdrop";
+    const big = document.createElement("img");
+    big.src = img.src;
+    big.alt = img.alt;
+    big.className = "doc-modal-img";
+    modal.appendChild(big);
+    modal.addEventListener("click", closeModal);
+    document.body.appendChild(modal);
+    document.body.style.overflow = "hidden";
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+</script>

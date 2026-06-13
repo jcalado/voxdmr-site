@@ -1,0 +1,48 @@
+---
+import CtaBar from "@/src/components/CtaBar.astro";
+import HeroShot from "@/src/islands/HeroShot.tsx";
+import { getT, type Lang } from "@/src/i18n/t";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getT(lang);
+---
+<header class="relative overflow-hidden py-16 lg:py-32 px-6 lg:px-8">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-40">
+    <div class="blob-a absolute top-0 right-10 w-96 h-96 bg-sky-900 rounded-full blur-3xl"></div>
+    <div class="blob-b absolute bottom-0 left-10 w-[500px] h-[500px] bg-slate-900 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+    <div class="z-10 text-center lg:text-left">
+      <h1
+        class="scroll-reveal text-4xl lg:text-[4.5rem] font-headline font-bold text-white tracking-tight leading-[1.1] lg:leading-[1.15] mb-8"
+        style="transition-delay: 150ms"
+      >
+        {t("hero.title1")} <br /> <span class="text-vibrant-red">{t("hero.title2")}</span>
+      </h1>
+
+      <p
+        class="scroll-reveal text-lg lg:text-2xl text-on-surface-muted max-w-xl mb-12 leading-relaxed mx-auto lg:mx-0"
+        style="transition-delay: 300ms"
+      >
+        {t("hero.subtitle")}
+      </p>
+    </div>
+
+    <div class="relative flex justify-center items-center">
+      <div class="hero-glow absolute inset-0 m-auto w-3/4 h-3/4 bg-vibrant-blue/20 rounded-full blur-3xl"></div>
+      <HeroShot lang={lang} client:load />
+    </div>
+  </div>
+
+  <div
+    class="scroll-reveal max-w-7xl mx-auto mt-8 lg:mt-10 flex justify-center lg:justify-start"
+    style="transition-delay: 500ms"
+  >
+    <CtaBar lang={lang} />
+  </div>
+</header>

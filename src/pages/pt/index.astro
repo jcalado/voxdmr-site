@@ -1,0 +1,15 @@
+---
+import Layout from '@/src/layouts/Layout.astro';
+import LandingBody from '@/src/components/LandingBody.astro';
+import { t } from '@/src/i18n/t';
+
+const lang = 'pt' as const;
+const pathname = Astro.url.pathname;
+
+const title = `VoxDMR — ${t('hero.title1', lang)} ${t('hero.title2', lang)}`;
+const description = t('hero.subtitle', lang);
+---
+
+<Layout lang={lang} title={title} description={description} pathname={pathname}>
+  <LandingBody lang={lang} />
+</Layout>

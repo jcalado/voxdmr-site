@@ -1,0 +1,20 @@
+---
+/**
+ * Drop `<ScrollReveal />` once near the end of a page's body to activate the
+ * shared scroll-reveal entrance animation for every `.scroll-reveal` element
+ * on that page. This is the only client JS an otherwise-static page needs.
+ *
+ * Usage in a static .astro section:
+ *   <div class="scroll-reveal">…</div>
+ *   <div class="scroll-reveal" style="transition-delay: 100ms">…</div>  // stagger
+ */
+---
+<script>
+  import { initScrollReveal } from "@/src/lib/scroll-reveal";
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initScrollReveal, { once: true });
+  } else {
+    initScrollReveal();
+  }
+</script>

@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "@/src/layouts/Layout.astro";
+import DocsLayout from "@/src/layouts/DocsLayout.astro";
+import { pageTitle, localizedSidebarGroups, localizedAdjacent } from "@/src/lib/docs-i18n";
+import { getPageBySlug } from "@/src/lib/docs-config";
+import { t, type Lang } from "@/src/i18n/t";
+import "@/src/docs/docs.css";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("docs", (e) => e.id.startsWith("en/"));
+  return entries.map((entry) => {
+    const slug = entry.id.replace(/^en\//, "");
+    return { params: { slug }, props: { entry, slug } };
+  });
+}
+
+const { entry, slug } = Astro.props;
+const lang: Lang = "en";
+const pathname = Astro.url.pathname;
+
+// Astro's native markdown pipeline renders the body; the remark/rehype plugins
+// (remark-directive + remark-platform, rehype-slug + autolink) handle the
+// :::desktop/:::mobile platform directives, changelog badges, and heading anchors.
+const { Content } = await render(entry);
+
+const cfgPage = getPageBySlug(slug);
+const title = entry.data.title ?? pageTitle(slug, cfgPage?.title ?? slug, lang);
+const description =
+  entry.data.description ?? `${title} — VoxDMR documentation. ${t("hero.subtitle", lang)}`;
+
+const groups = localizedSidebarGroups(lang);
+const { prev, next } = localizedAdjacent(slug, lang);
+---
+
+<Layout lang={lang} title={`${title} — VoxDMR Docs`} description={description} pathname={pathname}>
+  <DocsLayout lang={lang} pathname={pathname} slug={slug} groups={groups} prev={prev} next={next}>
+    <Content />
+  </DocsLayout>
+</Layout>

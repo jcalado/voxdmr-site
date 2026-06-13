@@ -1,0 +1,116 @@
+---
+import Smartphone from "@/src/components/icons/Smartphone.astro";
+import Cpu from "@/src/components/icons/Cpu.astro";
+import Gift from "@/src/components/icons/Gift.astro";
+import Download from "@/src/components/icons/Download.astro";
+import ExternalLink from "@/src/components/icons/ExternalLink.astro";
+import AlertCircle from "@/src/components/icons/AlertCircle.astro";
+import { getT, type Lang } from "@/src/i18n/t";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getT(lang);
+
+// Prefilled email for offering to donate a radio for testing.
+const DONATE_RADIO_URL =
+  "mailto:voxdmr@jcalado.com?subject=" +
+  encodeURIComponent("VoxDMR radio donation: <make and model>") +
+  "&body=" +
+  encodeURIComponent(
+    [
+      "Radio (make and model): ",
+      "Where you're shipping from: ",
+      "Anything else I should know: ",
+    ].join("\n"),
+  );
+---
+{/* Get-started banner: sideload the APK + donate a radio */}
+<div class="relative overflow-hidden mb-12 rounded-3xl border border-border bg-surface-raised/40">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-24 -left-16 w-64 h-64 rounded-full bg-vibrant-red/10 blur-3xl"
+  />
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -bottom-24 -right-16 w-64 h-64 rounded-full bg-vibrant-orange/10 blur-3xl"
+  />
+  <div class="relative grid grid-cols-1 sm:grid-cols-2 divide-y divide-border sm:divide-y-0 sm:divide-x">
+    {/* Download / sideload */}
+    <div class="flex flex-col gap-4 p-6 sm:p-8">
+      <div class="flex items-start gap-4">
+        <div class="shrink-0 flex items-center justify-center w-12 h-12 rounded-2xl bg-vibrant-red/15 text-vibrant-red">
+          <Smartphone class="w-6 h-6" />
+        </div>
+        <div class="min-w-0">
+          <h2 class="text-lg sm:text-xl font-headline font-bold text-white tracking-tight">
+            {t("radios.apk.title")}
+          </h2>
+          <p class="mt-1.5 text-sm text-on-surface-muted leading-relaxed">{t("radios.apk.note")}</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3 rounded-2xl border border-vibrant-orange/30 bg-vibrant-orange/10 p-4">
+        <div class="shrink-0 flex items-center justify-center w-8 h-8 rounded-xl bg-vibrant-orange/20 text-vibrant-orange">
+          <Cpu class="w-4 h-4" />
+        </div>
+        <div class="min-w-0">
+          <p class="text-xs font-bold uppercase tracking-wider text-vibrant-orange">{t("radios.apk.tipLabel")}</p>
+          <p class="mt-1 text-sm text-on-surface leading-relaxed">
+            <strong class="font-semibold text-white">{t("radios.apk.tipLead")}</strong>{" "}
+            {t("radios.apk.tip")}
+          </p>
+        </div>
+      </div>
+      <a
+        href="https://github.com/jcalado/voxdmr-site/releases"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-press group/cta mt-auto inline-flex items-center justify-center gap-2 bg-vibrant-red hover:bg-red-500 text-white px-6 py-3 rounded-2xl font-bold hover:scale-105 transition-all whitespace-nowrap shadow-lg shadow-vibrant-red/20"
+      >
+        <Download class="w-4 h-4 transition-transform group-hover/cta:translate-y-0.5 motion-reduce:transform-none" />
+        {t("radios.apk.cta")}
+      </a>
+    </div>
+
+    {/* Donate a radio */}
+    <div class="flex flex-col gap-4 p-6 sm:p-8">
+      <div class="flex items-start gap-4">
+        <div class="shrink-0 flex items-center justify-center w-12 h-12 rounded-2xl bg-vibrant-orange/15 text-vibrant-orange">
+          <Gift class="w-6 h-6" />
+        </div>
+        <div class="min-w-0">
+          <h2 class="text-lg sm:text-xl font-headline font-bold text-white tracking-tight">
+            {t("radios.donate.title")}
+          </h2>
+          <p class="mt-1.5 text-sm text-on-surface-muted leading-relaxed">{t("radios.donate.note")}</p>
+          <p class="mt-2 text-sm text-on-surface-muted leading-relaxed">
+            {t("radios.donate.kofiNote")}{" "}
+            <a
+              href="https://ko-fi.com/jcalado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 font-semibold text-vibrant-orange hover:text-orange-300 transition-colors"
+            >
+              Ko-fi
+              <ExternalLink class="w-3 h-3" />
+            </a>
+            . {t("radios.donate.kofiUnit")}
+          </p>
+        </div>
+      </div>
+      <p class="flex items-start gap-1.5 text-xs text-on-surface-muted/70 leading-relaxed">
+        <AlertCircle class="w-3.5 h-3.5 mt-0.5 shrink-0" />
+        <span>{t("radios.donate.disclaimer")}</span>
+      </p>
+      <a
+        href={DONATE_RADIO_URL}
+        class="btn-press mt-auto inline-flex items-center justify-center gap-2 bg-vibrant-orange hover:bg-orange-400 text-community-bg px-6 py-3 rounded-2xl font-bold hover:scale-105 transition-all whitespace-nowrap shadow-lg shadow-vibrant-orange/20"
+      >
+        <Gift class="w-4 h-4" />
+        {t("radios.donate.cta")}
+      </a>
+    </div>
+  </div>
+</div>

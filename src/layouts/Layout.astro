@@ -1,0 +1,74 @@
+---
+// Self-hosted fonts (replaces the render-blocking Google Fonts @import).
+import '@fontsource-variable/plus-jakarta-sans';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
+import '@fontsource/space-mono/400.css';
+import '@fontsource/space-mono/700.css';
+import '@/src/index.css';
+import type { Lang } from '@/src/i18n/t';
+import { altLocalePath } from '@/src/i18n/routing';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description?: string;
+  pathname: string;
+  ogImage?: string;
+}
+
+const {
+  lang,
+  title,
+  description = 'VoxDMR streams audio to DMR talkgroups (BrandMeister and other networks) from your phone or PC. Free, on Android, Linux, and Windows.',
+  pathname,
+  ogImage = '/social.jpg',
+} = Astro.props;
+
+const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://voxdmr.jcalado.com';
+const canonical = site + pathname;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : site + ogImage;
+
+// hreflang alternates: this page in each locale, plus x-default → English.
+const altPath = altLocalePath(pathname);
+const enHref = lang === 'en' ? pathname : altPath;
+const ptHref = lang === 'pt' ? pathname : altPath;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={site + enHref} />
+    <link rel="alternate" hreflang="pt" href={site + ptHref} />
+    <link rel="alternate" hreflang="x-default" href={site + enHref} />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1731" />
+    <meta property="og:image:height" content="909" />
+    <meta property="og:image:alt" content={title} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

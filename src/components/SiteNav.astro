@@ -1,0 +1,44 @@
+---
+import Logo from "@/src/components/Logo.astro";
+import LanguageSwitcher from "@/src/components/LanguageSwitcher.astro";
+import { getT, type Lang } from "@/src/i18n/t";
+import { localizePath } from "@/src/i18n/routing";
+
+const linkClass =
+  "nav-link font-medium text-on-surface-muted hover:text-vibrant-red transition-colors px-2 py-1";
+
+interface Props {
+  lang: Lang;
+  pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+const t = getT(lang);
+const home = localizePath("/", lang);
+const homePrefix = home === "/" ? "" : home;
+---
+<nav class="w-full top-0 sticky z-50 bg-slate-950/80 backdrop-blur-xl h-24 flex items-center border-b border-border">
+  <div class="flex justify-between items-center max-w-7xl mx-auto px-6 lg:px-10 w-full">
+    <a href={home} class="flex items-center gap-4 lg:gap-5">
+      <Logo size="md" className="shadow-lg shadow-black/40" />
+      <span class="text-xl lg:text-2xl font-bold tracking-tight text-white font-headline">VoxDMR</span>
+    </a>
+
+    <div class="hidden lg:flex gap-12 items-center">
+      <a class={linkClass} href={`${homePrefix}/#screenshots`}>{t("nav.screenshots")}</a>
+      <a class={linkClass} href={`${homePrefix}/#features`}>{t("nav.features")}</a>
+      <a class={linkClass} href={localizePath("/docs", lang)}>{t("nav.docs")}</a>
+      <a class={linkClass} href={localizePath("/radios", lang)}>{t("nav.radios")}</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <LanguageSwitcher lang={lang} pathname={pathname} />
+      <a
+        href={`${homePrefix}/#download`}
+        class="btn-press bg-vibrant-red hover:bg-red-500 text-white px-6 lg:px-8 py-2.5 lg:py-3 rounded-2xl font-bold hover:scale-105 transition-all"
+      >
+        {t("nav.getApp")}
+      </a>
+    </div>
+  </div>
+</nav>

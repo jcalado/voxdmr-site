@@ -1,0 +1,53 @@
+---
+import SiteNav from "@/src/components/SiteNav.astro";
+import Footer from "@/src/components/Footer.astro";
+import ScrollReveal from "@/src/components/ScrollReveal.astro";
+import HeroSection from "@/src/components/landing/HeroSection.astro";
+import UseCases from "@/src/components/landing/UseCases.astro";
+import Features from "@/src/components/landing/Features.astro";
+import CtaSection from "@/src/components/landing/CtaSection.astro";
+import ScreenshotGallery from "@/src/islands/ScreenshotGallery.tsx";
+import FaqAccordion from "@/src/islands/FaqAccordion.tsx";
+import { getT, type Lang } from "@/src/i18n/t";
+import { localizePath } from "@/src/i18n/routing";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getT(lang);
+---
+<div class="min-h-screen bg-community-bg text-on-surface font-sans selection:bg-vibrant-blue/20">
+  <SiteNav lang={lang} pathname={localizePath("/", lang)} />
+
+  <HeroSection lang={lang} />
+
+  <UseCases lang={lang} />
+
+  {/* Screenshots Gallery */}
+  <section id="screenshots" class="py-16 lg:py-24 px-6 lg:px-8 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <ScreenshotGallery lang={lang} client:visible />
+    </div>
+  </section>
+
+  <Features lang={lang} />
+
+  {/* FAQ */}
+  <section class="pt-20 lg:pt-28 pb-12 lg:pb-16 px-6 lg:px-8 bg-community-bg">
+    <div class="max-w-7xl mx-auto">
+      <div class="scroll-reveal mb-12">
+        <h2 class="text-4xl lg:text-5xl font-headline font-bold text-white mb-4 tracking-tight">{t("faq.heading")}</h2>
+        <p class="text-on-surface-muted text-lg leading-relaxed">{t("faq.subheading")}</p>
+      </div>
+      <FaqAccordion lang={lang} client:visible />
+    </div>
+  </section>
+
+  <CtaSection lang={lang} />
+
+  <Footer lang={lang} />
+
+  <ScrollReveal />
+</div>

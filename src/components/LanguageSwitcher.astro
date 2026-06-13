@@ -1,0 +1,21 @@
+---
+import Globe from "@/src/components/icons/Globe.astro";
+import type { Lang } from "@/src/i18n/t";
+import { altLocalePath } from "@/src/i18n/routing";
+
+interface Props {
+  lang: Lang;
+  pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+const href = altLocalePath(pathname);
+---
+<a
+  href={href}
+  class="flex items-center gap-1.5 text-on-surface-muted hover:text-vibrant-red transition-colors px-2 py-1 rounded-lg"
+  aria-label={lang === "en" ? "Mudar para Português" : "Switch to English"}
+>
+  <Globe class="w-4 h-4" />
+  <span class="text-xs font-bold uppercase tracking-wide">{lang === "en" ? "EN" : "PT"}</span>
+</a>

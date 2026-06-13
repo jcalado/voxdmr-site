@@ -1,0 +1,40 @@
+---
+import Headphones from "@/src/components/icons/Headphones.astro";
+import Plane from "@/src/components/icons/Plane.astro";
+import LifeBuoy from "@/src/components/icons/LifeBuoy.astro";
+import { getT, type Lang } from "@/src/i18n/t";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getT(lang);
+
+const cases = [
+  { Icon: Headphones, title: t("useCases.case1.title"), description: t("useCases.case1.description") },
+  { Icon: Plane, title: t("useCases.case2.title"), description: t("useCases.case2.description") },
+  { Icon: LifeBuoy, title: t("useCases.case3.title"), description: t("useCases.case3.description") },
+];
+---
+<section class="py-20 lg:py-28 px-6 lg:px-8 bg-community-bg border-t border-border">
+  <div class="max-w-7xl mx-auto">
+    <div class="scroll-reveal mb-14 lg:mb-20 max-w-2xl">
+      <h2 class="text-4xl lg:text-5xl font-headline font-bold text-white mb-4 tracking-tight">{t("useCases.heading")}</h2>
+      <p class="text-on-surface-muted text-lg leading-relaxed">{t("useCases.subheading")}</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-y-12 md:gap-y-0">
+      {cases.map(({ Icon, title, description }, i) => (
+        <div
+          class={`scroll-reveal flex flex-col gap-5 md:px-8 lg:px-10 ${i > 0 ? "md:border-l md:border-border" : ""}`}
+          style={`transition-delay: ${i * 100}ms`}
+        >
+          <Icon class="w-8 h-8 text-vibrant-red" strokeWidth={1.5} />
+          <h3 class="font-headline font-bold text-xl lg:text-2xl text-white tracking-tight leading-tight">{title}</h3>
+          <p class="text-on-surface-muted leading-relaxed">{description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

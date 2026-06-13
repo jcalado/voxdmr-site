@@ -1,0 +1,78 @@
+---
+import Mic from "@/src/components/icons/Mic.astro";
+import Activity from "@/src/components/icons/Activity.astro";
+import Radio from "@/src/components/icons/Radio.astro";
+import Wifi from "@/src/components/icons/Wifi.astro";
+import Layers from "@/src/components/icons/Layers.astro";
+import Cpu from "@/src/components/icons/Cpu.astro";
+import { getT, type Lang } from "@/src/i18n/t";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getT(lang);
+
+// hover lift: whileHover y:-6 -> `hover:-translate-y-1.5` (1.5 = 0.375rem = 6px)
+const heroCardBase =
+  "feature-card scroll-reveal lg:col-span-3 p-10 lg:p-14 rounded-3xl bg-surface-raised/40 border border-border hover:bg-surface-raised/60 transition-transform hover:-translate-y-1.5";
+const wideCardBase =
+  "feature-card scroll-reveal lg:col-span-2 p-10 rounded-3xl bg-surface-raised/40 border border-border hover:bg-surface-raised/60 transition-transform hover:-translate-y-1.5";
+
+const accentOrange = "--card-accent: rgba(251, 146, 60, 0.25)";
+const accentBlue = "--card-accent: rgba(56, 189, 248, 0.25)";
+const accentIndigo = "--card-accent: rgba(129, 140, 248, 0.25)";
+---
+<section id="features" class="py-24 lg:py-32 px-6 lg:px-8 bg-surface border-y border-border scroll-mt-24">
+  <div class="max-w-7xl mx-auto">
+    <div class="scroll-reveal mb-16 lg:mb-24 max-w-2xl">
+      <h2 class="text-4xl lg:text-6xl font-headline font-bold text-white mb-6 tracking-tight">{t("features.heading")}</h2>
+      <p class="text-on-surface-muted text-lg lg:text-xl leading-relaxed">{t("features.subheading")}</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
+      {/* PTT. Hero feature */}
+      <div class={heroCardBase} style={accentOrange}>
+        <Mic class="feature-icon w-10 h-10 text-vibrant-orange mb-8" />
+        <h3 class="font-headline font-bold text-3xl lg:text-4xl mb-5 text-white">{t("features.ptt.title")}</h3>
+        <p class="text-on-surface-muted text-lg leading-relaxed max-w-lg">{t("features.ptt.description")}</p>
+      </div>
+
+      {/* AMBE+2 Vocoder */}
+      <div class={wideCardBase} style={`${accentBlue}; transition-delay: 100ms`}>
+        <Activity class="feature-icon w-8 h-8 text-vibrant-blue mb-6" />
+        <h3 class="font-headline font-bold text-2xl mb-3 text-white">{t("features.ambe.title")}</h3>
+        <p class="text-on-surface-muted leading-relaxed">{t("features.ambe.description")}</p>
+      </div>
+
+      {/* DMR Talkgroups */}
+      <div class={wideCardBase} style={`${accentIndigo}; transition-delay: 200ms`}>
+        <Radio class="feature-icon w-8 h-8 text-accent-tertiary mb-6" />
+        <h3 class="font-headline font-bold text-2xl mb-3 text-white">{t("features.talkgroups.title")}</h3>
+        <p class="text-on-surface-muted leading-relaxed">{t("features.talkgroups.description")}</p>
+      </div>
+
+      {/* Rewind Protocol. Hero feature */}
+      <div class={heroCardBase} style={`${accentOrange}; transition-delay: 300ms`}>
+        <Wifi class="feature-icon w-10 h-10 text-vibrant-orange mb-8" />
+        <h3 class="font-headline font-bold text-3xl lg:text-4xl mb-5 text-white">{t("features.rewind.title")}</h3>
+        <p class="text-on-surface-muted text-lg leading-relaxed max-w-lg">{t("features.rewind.description")}</p>
+      </div>
+
+      {/* Free to Use. Hero feature */}
+      <div class={heroCardBase} style={`${accentBlue}; transition-delay: 400ms`}>
+        <Layers class="feature-icon w-10 h-10 text-vibrant-blue mb-8" />
+        <h3 class="font-headline font-bold text-3xl lg:text-4xl mb-5 text-white">{t("features.free.title")}</h3>
+        <p class="text-on-surface-muted text-lg leading-relaxed max-w-lg">{t("features.free.description")}</p>
+      </div>
+
+      {/* Cross-platform */}
+      <div class={wideCardBase} style={`${accentOrange}; transition-delay: 500ms`}>
+        <Cpu class="feature-icon w-8 h-8 text-vibrant-orange mb-6" />
+        <h3 class="font-headline font-bold text-2xl mb-3 text-white">{t("features.crossPlatform.title")}</h3>
+        <p class="text-on-surface-muted leading-relaxed">{t("features.crossPlatform.description")}</p>
+      </div>
+    </div>
+  </div>
+</section>

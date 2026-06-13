@@ -1,0 +1,54 @@
+---
+import Logo from "@/src/components/Logo.astro";
+import { getT, type Lang } from "@/src/i18n/t";
+import { localizePath } from "@/src/i18n/routing";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getT(lang);
+
+const docsHref = localizePath("/docs", lang);
+const radiosHref = localizePath("/radios", lang);
+const privacyHref = localizePath("/privacy", lang);
+
+const links = [
+  { label: t("footer.docs"), href: docsHref },
+  { label: t("footer.radios"), href: radiosHref },
+  { label: t("footer.privacy"), href: privacyHref },
+  { label: t("footer.github"), href: "https://github.com/jcalado/voxdmr-site/releases", external: true },
+];
+
+const [copyBefore, copyAfter] = t("footer.copyright").split("{callsign}");
+---
+<footer class="bg-slate-950 py-16 border-t border-border">
+  <div class="flex flex-col md:flex-row justify-between items-center px-6 lg:px-12 gap-10 max-w-7xl mx-auto">
+    <div class="flex items-center gap-4">
+      <Logo size="sm" />
+      <span class="font-bold font-headline text-white text-2xl tracking-tight">VoxDMR</span>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-6 lg:gap-10">
+      {links.map((link) => (
+        <a
+          class="text-sm font-semibold text-on-surface-muted hover:text-vibrant-red transition-colors"
+          href={link.href}
+          {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="text-on-surface-muted text-sm font-medium text-center md:text-right">
+      {copyBefore}<a
+        href="https://www.qrz.com/db/CS7BLE"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-white font-semibold hover:text-vibrant-red transition-colors"
+      >CS7BLE</a>{copyAfter}
+    </div>
+  </div>
+</footer>

@@ -110,3 +110,32 @@
 .docs-sidebar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
 .docs-sidebar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
 .docs-sidebar { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.1) transparent; }
+
+/* Sidebar layout: static sticky column on desktop; slide-in drawer on mobile.
+   The drawer is pure CSS — a tiny script in DocsLayout.astro toggles the
+   `.docs-sidebar-open` class on the docs root; no React/hydration involved. */
+.docs-sidebar-aside { flex-shrink: 0; }
+.docs-sidebar-backdrop { display: none; }
+
+@media (min-width: 1024px) {
+  .docs-sidebar-aside { position: sticky; top: 3.5rem; height: calc(100vh - 3.5rem); }
+}
+
+@media (max-width: 1023px) {
+  .docs-sidebar-aside {
+    position: fixed; top: 3.5rem; left: 0; bottom: 0; z-index: 40;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .docs-sidebar-open .docs-sidebar-aside { transform: translateX(0); }
+  .docs-sidebar-backdrop {
+    display: block; position: fixed; inset: 3.5rem 0 0 0; z-index: 30;
+    background: rgba(0, 0, 0, 0.6); opacity: 0; pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .docs-sidebar-open .docs-sidebar-backdrop { opacity: 1; pointer-events: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .docs-sidebar-aside, .docs-sidebar-backdrop { transition: none; }
+}

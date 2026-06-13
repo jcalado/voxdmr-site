@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap');
+/* Fonts are self-hosted via @fontsource (imported in src/layouts/Layout.astro). */
 @import "tailwindcss";
 
 html {
@@ -26,7 +26,7 @@ html {
 }
 
 @theme {
-  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-headline: "Poppins", sans-serif;
   --font-mono: "Space Mono", ui-monospace, monospace;
 
@@ -92,6 +92,49 @@ html {
   transition: transform 0.08s ease !important;
 }
 
+/* Shared scroll-reveal: CSS replacement for Framer Motion `whileInView`
+   entrance fades. A static .astro section adds `scroll-reveal`; the inline
+   IntersectionObserver from <ScrollReveal /> adds `.revealed` once it enters
+   the viewport. Per-item stagger via inline `style="transition-delay: …"`. */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Decorative animations migrated out of Framer Motion (hero blobs, hero glow,
+   CTA logo pulse). Values match the original motion props 1:1. */
+@keyframes blob-float-a {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(30px, -20px) scale(1.1); }
+  66%  { transform: translate(-20px, 10px) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes blob-float-b {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(-25px, 15px) scale(0.95); }
+  66%  { transform: translate(15px, -25px) scale(1.08); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes glow-pulse-opacity {
+  0%   { opacity: 0.3; }
+  50%  { opacity: 0.6; }
+  100% { opacity: 0.3; }
+}
+@keyframes glow-pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+.blob-a { animation: blob-float-a 20s ease-in-out infinite; }
+.blob-b { animation: blob-float-b 25s ease-in-out infinite; }
+.hero-glow { animation: glow-pulse-opacity 5s ease-in-out infinite; }
+.glow-pulse { animation: glow-pulse 5s ease-in-out infinite; }
+
 /* Reduced motion: respect user preference */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -101,5 +144,15 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Reduced motion: also fully reveal scroll-reveal elements (the global block
+   above only neutralizes durations; ensure no opacity:0 sticks). */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

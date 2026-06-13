@@ -1,0 +1,98 @@
+---
+import Layout from '@/src/layouts/Layout.astro';
+import SiteNav from '@/src/components/SiteNav.astro';
+import { localeFromUrl } from '@/src/i18n/routing';
+import { t } from '@/src/i18n/t';
+
+const pathname = Astro.url.pathname;
+const lang = localeFromUrl(pathname);
+
+const title = `${t('privacy.title', lang)} — VoxDMR`;
+const description = t('privacy.overview.text', lang);
+---
+
+<Layout lang={lang} title={title} description={description} pathname={pathname}>
+  <div class="min-h-screen bg-community-bg text-on-surface font-sans">
+    <SiteNav lang={lang} pathname={pathname} />
+
+    <main class="max-w-3xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      <h1 class="text-4xl lg:text-5xl font-headline font-bold text-white mb-2 tracking-tight">
+        {t('privacy.title', lang)}
+      </h1>
+      <p class="text-on-surface-muted mb-12 text-sm">{t('privacy.lastUpdated', lang)}</p>
+
+      <div class="space-y-10 text-on-surface-muted leading-relaxed">
+        <section>
+          <h2 class="text-2xl font-headline font-bold text-white mb-4">{t('privacy.overview.title', lang)}</h2>
+          <p>{t('privacy.overview.text', lang)}</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-headline font-bold text-white mb-4">{t('privacy.dataCollection.title', lang)}</h2>
+          <p>{t('privacy.dataCollection.text', lang)}</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-headline font-bold text-white mb-4">{t('privacy.dataStored.title', lang)}</h2>
+          <p class="mb-4">{t('privacy.dataStored.intro', lang)}</p>
+          <ul class="list-disc list-inside space-y-2 pl-2">
+            <li>
+              <strong class="text-white">{t('privacy.dataStored.serverProfiles', lang)}</strong>: {t('privacy.dataStored.serverProfilesDesc', lang)}
+            </li>
+            <li>
+              <strong class="text-white">{t('privacy.dataStored.appPreferences', lang)}</strong>: {t('privacy.dataStored.appPreferencesDesc', lang)}
+            </li>
+          </ul>
+          <p class="mt-4">{t('privacy.dataStored.outro', lang)}</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-headline font-bold text-white mb-4">{t('privacy.microphone.title', lang)}</h2>
+          <p>{t('privacy.microphone.text', lang)}</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-headline font-bold text-white mb-4">{t('privacy.network.title', lang)}</h2>
+          <p class="mb-4">{t('privacy.network.intro', lang)}</p>
+          <ul class="list-disc list-inside space-y-2 pl-2">
+            <li>
+              <strong class="text-white">{t('privacy.network.tcp', lang)}</strong>: {t('privacy.network.tcpDesc', lang)}
+            </li>
+            <li>
+              <strong class="text-white">{t('privacy.network.udp', lang)}</strong>: {t('privacy.network.udpDesc', lang)}
+            </li>
+          </ul>
+          <p class="mt-4">{t('privacy.network.outro', lang)}</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-headline font-bold text-white mb-4">{t('privacy.thirdParty.title', lang)}</h2>
+          <p>{t('privacy.thirdParty.text', lang)}</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-headline font-bold text-white mb-4">{t('privacy.reflectorServers.title', lang)}</h2>
+          <p>{t('privacy.reflectorServers.text', lang)}</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-headline font-bold text-white mb-4">{t('privacy.children.title', lang)}</h2>
+          <p>{t('privacy.children.text', lang)}</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-headline font-bold text-white mb-4">{t('privacy.changes.title', lang)}</h2>
+          <p>{t('privacy.changes.text', lang)}</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-headline font-bold text-white mb-4">{t('privacy.contact.title', lang)}</h2>
+          <p>
+            {t('privacy.contact.text', lang)}{' '}
+            <a href="mailto:voxdmr@jcalado.com" class="text-vibrant-blue hover:underline">voxdmr@jcalado.com</a>
+          </p>
+        </section>
+      </div>
+    </main>
+  </div>
+</Layout>

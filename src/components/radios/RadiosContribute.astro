@@ -1,0 +1,45 @@
+---
+import Plus from "@/src/components/icons/Plus.astro";
+import { getT, type Lang } from "@/src/i18n/t";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getT(lang);
+
+// Prefilled "submit a tested radio" issue on the project repo.
+const SUBMIT_RADIO_URL =
+  "https://github.com/jcalado/voxdmr-site/issues/new?title=" +
+  encodeURIComponent("Tested radio: <make and model>") +
+  "&body=" +
+  encodeURIComponent(
+    [
+      "**Radio:** ",
+      "**PTT key works:** yes / no",
+      "**Rotary knob works:** yes / no",
+      "**Programmable side keys work:** yes / no",
+      "**Audio quality:** good / ok / poor",
+      "**Android version:** ",
+      "**VoxDMR version tested:** ",
+      "**Notes:** ",
+    ].join("\n"),
+  );
+---
+{/* Contribute */}
+<div class="mt-14 flex flex-col sm:flex-row sm:items-center gap-4 rounded-3xl border border-border bg-surface-raised/30 p-6 sm:p-8">
+  <div class="flex-1">
+    <h2 class="text-lg font-headline font-bold text-white tracking-tight">{t("radios.contribute.title")}</h2>
+    <p class="mt-1.5 text-sm text-on-surface-muted leading-relaxed">{t("radios.contribute.text")}</p>
+  </div>
+  <a
+    href={SUBMIT_RADIO_URL}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn-press shrink-0 inline-flex items-center justify-center gap-2 rounded-2xl border border-vibrant-red/40 bg-vibrant-red/10 text-white px-6 py-3 font-bold hover:bg-vibrant-red/20 hover:scale-105 transition-all whitespace-nowrap"
+  >
+    <Plus class="w-4 h-4" />
+    {t("radios.contribute.cta")}
+  </a>
+</div>
