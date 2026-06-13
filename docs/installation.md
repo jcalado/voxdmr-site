@@ -24,6 +24,19 @@ The first launch:
 - **Microphone permission** is requested the first time you press PTT.
 - **Battery optimization**: on some devices (Xiaomi, Samsung, OnePlus, Huawei) Android may aggressively kill the app in the background. Open **Settings → Background** in the app to grant *Ignore battery optimizations* and, where exposed, *Autostart*.
 
+### PoC radios and 32-bit devices
+
+Many PoC (push-to-talk over cellular) radios don't ship with the Google Play Store, and most run an older **32-bit** build of Android that the Play release can't install. For these, VoxDMR also publishes a standalone APK on GitHub Releases.
+
+If you're installing on a PoC radio (or any 32-bit Android device), sideload the non-Play-Store build:
+
+1. On the radio, open the [latest release page](https://github.com/jcalado/voxdmr-site/releases/latest).
+2. Download the **32-bit (`armeabi-v7a`) APK**. Most PoC radios are 32-bit, so if you're unsure, pick this one — the 64-bit (`arm64-v8a`) build will not install on a 32-bit device.
+3. When Android prompts, allow installs from your browser or file manager (**Settings → Apps → Special access → Install unknown apps**).
+4. Open the downloaded APK and tap **Install**, then launch the app.
+
+First launch (firmware, microphone, battery optimization) works exactly as it does for the Play Store install above.
+
 ### Where Android stores things
 
 App data lives in the standard Android app-private directory. Uninstalling the app removes config, firmware, and logs.
