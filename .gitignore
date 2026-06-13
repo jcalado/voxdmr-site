@@ -8,4 +8,5 @@ dist/
 .DS_Store
 Thumbs.db
 .superpowers
-docs/superpowers
+docs/superpowers/
+.astro/
