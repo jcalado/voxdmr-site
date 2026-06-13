@@ -45,8 +45,8 @@ const home = localizePath("/", lang);
         aria-label="Toggle sidebar"
         aria-expanded="false"
       >
-        <Menu class="w-5 h-5" data-icon-menu />
-        <X class="w-5 h-5 hidden" data-icon-close />
+        <span data-icon-menu><Menu class="w-5 h-5" /></span>
+        <span data-icon-close class="hidden"><X class="w-5 h-5" /></span>
       </button>
       <a href={home} class="flex items-center gap-3">
         <Logo size="sm" />

@@ -49,6 +49,22 @@ html {
   }
 }
 
+/* Mobile nav dropdown (SiteNav). Pure CSS; a tiny script flips data-open. */
+.site-mobile-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-0.5rem);
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+}
+.site-mobile-menu[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-mobile-menu { transition: none; }
+}
+
 /* Nav link animated underline */
 .nav-link {
   position: relative;

@@ -1,6 +1,8 @@
 ---
 import Logo from "@/src/components/Logo.astro";
 import LanguageSwitcher from "@/src/components/LanguageSwitcher.astro";
+import Menu from "@/src/components/icons/Menu.astro";
+import X from "@/src/components/icons/X.astro";
 import { getT, type Lang } from "@/src/i18n/t";
 import { localizePath } from "@/src/i18n/routing";
 
@@ -16,6 +18,13 @@ const { lang, pathname } = Astro.props;
 const t = getT(lang);
 const home = localizePath("/", lang);
 const homePrefix = home === "/" ? "" : home;
+
+const navLinks = [
+  { href: `${homePrefix}/#screenshots`, label: t("nav.screenshots") },
+  { href: `${homePrefix}/#features`, label: t("nav.features") },
+  { href: localizePath("/docs", lang), label: t("nav.docs") },
+  { href: localizePath("/radios", lang), label: t("nav.radios") },
+];
 ---
 <nav class="w-full top-0 sticky z-50 bg-slate-950/80 backdrop-blur-xl h-24 flex items-center border-b border-border">
   <div class="flex justify-between items-center max-w-7xl mx-auto px-6 lg:px-10 w-full">
@@ -25,20 +34,81 @@ const homePrefix = home === "/" ? "" : home;
     </a>
 
     <div class="hidden lg:flex gap-12 items-center">
-      <a class={linkClass} href={`${homePrefix}/#screenshots`}>{t("nav.screenshots")}</a>
-      <a class={linkClass} href={`${homePrefix}/#features`}>{t("nav.features")}</a>
-      <a class={linkClass} href={localizePath("/docs", lang)}>{t("nav.docs")}</a>
-      <a class={linkClass} href={localizePath("/radios", lang)}>{t("nav.radios")}</a>
+      {navLinks.map((l) => <a class={linkClass} href={l.href}>{l.label}</a>)}
     </div>
 
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-3 lg:gap-4">
       <LanguageSwitcher lang={lang} pathname={pathname} />
       <a
         href={`${homePrefix}/#download`}
-        class="btn-press bg-vibrant-red hover:bg-red-500 text-white px-6 lg:px-8 py-2.5 lg:py-3 rounded-2xl font-bold hover:scale-105 transition-all"
+        class="btn-press hidden lg:inline-flex bg-vibrant-red hover:bg-red-500 text-white px-6 lg:px-8 py-2.5 lg:py-3 rounded-2xl font-bold hover:scale-105 transition-all"
+      >
+        {t("nav.getApp")}
+      </a>
+      <button
+        type="button"
+        class="lg:hidden text-on-surface-muted hover:text-white transition-colors p-1.5 -mr-1.5"
+        data-nav-toggle
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="site-mobile-menu"
+      >
+        <span data-nav-icon-menu><Menu class="w-6 h-6" /></span>
+        <span data-nav-icon-close class="hidden"><X class="w-6 h-6" /></span>
+      </button>
+    </div>
+  </div>
+
+  {/* Mobile dropdown menu */}
+  <div
+    id="site-mobile-menu"
+    class="site-mobile-menu lg:hidden absolute top-full left-0 right-0 bg-slate-950/95 backdrop-blur-xl border-b border-border"
+    data-nav-menu
+    data-open="false"
+  >
+    <div class="flex flex-col max-w-7xl mx-auto px-6 py-3">
+      {navLinks.map((l) => (
+        <a
+          href={l.href}
+          data-nav-link
+          class="text-on-surface-muted hover:text-white font-medium text-lg py-3 border-b border-border/60 last:border-0 transition-colors"
+        >
+          {l.label}
+        </a>
+      ))}
+      <a
+        href={`${homePrefix}/#download`}
+        data-nav-link
+        class="btn-press mt-4 bg-vibrant-red hover:bg-red-500 text-white text-center px-6 py-3 rounded-2xl font-bold transition-colors"
       >
         {t("nav.getApp")}
       </a>
     </div>
   </div>
 </nav>
+
+<script>
+  const toggle = document.querySelector("[data-nav-toggle]");
+  const menu = document.querySelector("[data-nav-menu]");
+  const menuIcon = document.querySelector("[data-nav-icon-menu]");
+  const closeIcon = document.querySelector("[data-nav-icon-close]");
+
+  function setOpen(open: boolean) {
+    menu?.setAttribute("data-open", String(open));
+    toggle?.setAttribute("aria-expanded", String(open));
+    menuIcon?.classList.toggle("hidden", open);
+    closeIcon?.classList.toggle("hidden", !open);
+  }
+
+  toggle?.addEventListener("click", () =>
+    setOpen(menu?.getAttribute("data-open") !== "true"),
+  );
+  // Close on link tap (covers same-page anchors that don't reload).
+  document
+    .querySelectorAll("[data-nav-link]")
+    .forEach((a) => a.addEventListener("click", () => setOpen(false)));
+  // Close on Escape.
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
+  });
+</script>
