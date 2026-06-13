@@ -5,6 +5,7 @@ O VoxDMR corre em Android, Linux e Windows. Escolhe a tua plataforma abaixo.
 ## Requisitos
 
 - **DMR ID**: obtém um em [radioid.net](https://radioid.net) se ainda não tiveres. Gratuito, requer licença válida de radioamador.
+- **Versão do Android** (apenas Android): Android 7.0 (Nougat) ou mais recente — API nível 24+.
 - **Uma password de rede**:
   - Para a **BrandMeister**: a tua hotspot security password em [BrandMeister SelfCare](https://brandmeister.network/), no campo _Hotspot security password_. **Não é a password da tua conta BrandMeister** — é uma string separada que defines tu próprio no SelfCare.
   - Para a **FreeDMR**: a password pública documentada (`passw0rd` no hotspot oficial do Reino Unido).
