@@ -8,12 +8,19 @@ Release notes for VoxDMR. Each release page on GitHub has the full commit list a
 
 _Released June 2026. Desktop (now incl. macOS) + Android._
 
-Two headline changes: VoxDMR now rides out connection drops on its own, and macOS gets its first official build.
+The biggest release yet: VoxDMR now rides out connection drops on its own, macOS gets its first official build, the audio engine levels itself, transmitting respects an active call, your profiles are portable, and keypad/PoC radios get full D-pad navigation.
 
 - **Auto-reconnect.** When the link drops unexpectedly — a timeout, a server-side error, or a network change (Wi-Fi ↔ cellular) — VoxDMR reconnects on its own with exponential backoff (~2 s growing to a ~60 s cap, jittered, unlimited retries) and re-subscribes to your last talkgroup, so you land back where you were. It stops only on a deliberate disconnect or an authentication failure. On by default; toggle it in **Settings → Connection** on desktop or **Settings** on Android. Shared by both frontends. See [Auto-reconnect](./auto-reconnect).
 - **macOS desktop build.** macOS is now a release target — a native Apple Silicon (arm64) `.app` shipped in a `.dmg`, with an in-app microphone-permission prompt on first launch and smooth CoreAudio receive playback. This clears the "macOS isn't a release target yet" limitation noted back in v0.7.0. Intel Macs aren't built yet.
+- **Self-levelling audio.** An always-on auto-leveler now sits on both the transmit and receive paths — an AGC with an adaptive noise gate and a soft limiter — so a hot microphone no longer over-drives the vocoder and quiet stations come up to a consistent level. The TX/RX level sliders nudge the target up or down (±dB) rather than acting as a raw gain. Prefer to set levels yourself? Each direction has an **AGC toggle** that switches to a plain manual gain. See [Audio settings](./audio-settings).
+- **Half-duplex busy lockout.** Pressing PTT while a call is coming in no longer cuts off the inbound audio. Transmit is held until the channel clears, with a *"Receiving — wait to transmit"* cue — standard half-duplex etiquette, on both desktop and Android.
+- **Profile backup & restore.** Export your server profiles to a file and import them back, with per-conflict resolution and an optional include-passwords toggle. The format is shared between desktop and Android, so profiles move freely between them. See [Server profiles](./server-profiles).
+- **Per-profile favourites.** Talkgroup favourites are now scoped to the active profile (your existing global favourites are migrated automatically), so each network keeps its own list.
+- **Built for keypad & PoC radios (Android).** Full D-pad navigation with a visible focus ring on every control, a scroll/select mode for long lists, a rotary TG-cycle knob debounce (one detent = one favourite), an optional "Hide status bar" setting, and a searchable drill-down settings layout — so VoxDMR is fully usable without a touchscreen.
+- **Refreshed UI.** A redesigned connection screen merges your identity into a single hero card with quick-swap profiles and friendly server labels; the talkgroup picker moves private-call onto a per-row menu; and the QSO log pins to the newest call with a wider source column.
+- **Identity reported to networks.** VoxDMR now reports a platform- and architecture-aware version string to DMR masters (e.g. `VoxDMR 0.12.0 (android32)` or `(linux)`), with the project URL pointing at voxdmr.com.
 
-`config.toml` (desktop) and the Android settings gain an `auto_reconnect` flag, defaulting to on; older configs without it pick up that default. No other config, paths, or protocol semantics changed.
+`config.toml` (desktop) and the Android settings gain `auto_reconnect`, `rx_agc`, and `tx_agc` flags, all defaulting to on; older configs without them pick up those defaults. No other config, paths, or protocol semantics changed.
 
 ## v0.10.0
 
