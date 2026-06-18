@@ -25,7 +25,7 @@ const anchorIcon = {
 
 export default defineConfig({
   output: 'static',
-  site: 'https://voxdmr.jcalado.com',
+  site: 'https://voxdmr.com',
   base: '/',
   image: { service: passthroughImageService() },
   i18n: {

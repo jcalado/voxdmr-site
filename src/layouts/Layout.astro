@@ -26,7 +26,7 @@ const {
   ogImage = '/social.jpg',
 } = Astro.props;
 
-const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://voxdmr.jcalado.com';
+const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://voxdmr.com';
 const canonical = site + pathname;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : site + ogImage;
 
