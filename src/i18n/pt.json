@@ -216,5 +216,12 @@
   "radios.notes.inrico-s100": "O PTT e as teclas laterais programáveis funcionam, com boa qualidade de áudio. Testado em Android 8.1. Este modelo não tem botão rotativo.",
   "radios.notes.ksun-zl65": "Suporte de hardware completo: o PTT, o botão rotativo e as teclas laterais programáveis funcionam. A qualidade de áudio é razoável. Testado em Android 9.",
   "radios.notes.hytera-pnc380": "O PTT funciona e a qualidade de áudio é boa. Este modelo não tem botão rotativo. O suporte para teclas laterais ainda não foi verificado.",
-  "radios.notes.anysecu-t59": "O PTT funciona e a qualidade de áudio é boa. O suporte para botão rotativo e teclas laterais ainda não foi verificado."
+  "radios.notes.anysecu-t59": "O PTT funciona e a qualidade de áudio é boa. O suporte para botão rotativo e teclas laterais ainda não foi verificado.",
+  "radios.notes.blackview-xplore-1": "Tudo funciona: o PTT e as teclas laterais programáveis funcionam, com boa qualidade de áudio. Este telefone resistente não tem botão rotativo.",
+  "radios.notes.anysecu-w6-pro": "Suporte de hardware completo: o PTT, o botão rotativo e as teclas laterais programáveis funcionam, com boa qualidade de áudio. Testado em Android 10.",
+  "radios.notes.anysecu-w6-plus": "O PTT e as teclas laterais programáveis funcionam, com boa qualidade de áudio. O botão rotativo não funciona. Testado em Android 10.",
+  "radios.notes.inrico-tm7": "O PTT funciona e o áudio de receção é bom, mas a transmissão pode ficar entrecortada. O suporte para botão rotativo e teclas laterais ainda não foi verificado. Testado em Android 11.",
+  "radios.notes.inrico-tm9": "O PTT funciona e o áudio de receção é bom, mas o áudio de transmissão fica muito entrecortado e difícil de perceber. O suporte para botão rotativo e teclas laterais ainda não foi verificado. Testado em Android 7.1.1.",
+  "radios.notes.inrico-t310": "O PTT e as teclas laterais programáveis funcionam, mas o botão rotativo não, e a transmissão pode ficar entrecortada. A qualidade de áudio é fraca. Testado em Android 9.",
+  "radios.notes.uniwa-f400": "A tecla PTT funciona apenas como alternância — premir uma vez para começar e outra para parar, em vez de manter premida. As teclas laterais programáveis funcionam e o áudio é bom; o botão rotativo não funciona. Testado em Android 15."
 }

@@ -16,7 +16,7 @@ VoxDMR is a landing and documentation site for VoxDMR — a cross-platform app t
 
 ## Architecture
 
-Static site built with Astro. Content is server-rendered to HTML at build time; only the genuinely interactive pieces hydrate as React islands. Deployed to GitHub Pages at the custom domain (`public/CNAME` → voxdmr.jcalado.com).
+Static site built with Astro. Content is server-rendered to HTML at build time; only the genuinely interactive pieces hydrate as React islands. Deployed to GitHub Pages at the custom domain (`public/CNAME` → voxdmr.com).
 
 **Routing & i18n.** File-based routing under `src/pages/`. i18n is **route-based**: English at the root (`/`, `/radios`, `/docs/<slug>`) and Portuguese under `/pt/…`, configured via Astro's `i18n` in `astro.config.mjs` (`defaultLocale: 'en'`, `prefixDefaultLocale: false`). Each page resolves its `lang` from the route and passes it as a prop; the language switcher is a link to the counterpart-locale URL (no client-side language toggle).
 

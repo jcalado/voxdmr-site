@@ -216,5 +216,12 @@
   "radios.notes.inrico-s100": "PTT and programmable side keys both work, with good audio. Tested on Android 8.1. This model has no rotary knob.",
   "radios.notes.ksun-zl65": "Full hardware support: PTT, rotary knob, and programmable side keys all work. Audio quality is OK. Tested on Android 9.",
   "radios.notes.hytera-pnc380": "PTT works and audio quality is good. This model has no rotary knob. Side-key support hasn't been verified yet.",
-  "radios.notes.anysecu-t59": "PTT works and audio quality is good. Rotary knob and side-key support haven't been verified yet."
+  "radios.notes.anysecu-t59": "PTT works and audio quality is good. Rotary knob and side-key support haven't been verified yet.",
+  "radios.notes.blackview-xplore-1": "Everything works: PTT and programmable side keys both function, with good audio. This rugged phone has no rotary knob.",
+  "radios.notes.anysecu-w6-pro": "Full hardware support: PTT, rotary knob, and programmable side keys all work, with good audio. Tested on Android 10.",
+  "radios.notes.anysecu-w6-plus": "PTT and programmable side keys work, with good audio. The rotary knob does not work. Tested on Android 10.",
+  "radios.notes.inrico-tm7": "PTT works and RX audio is good, but TX can be choppy. Rotary knob and side-key support haven't been verified yet. Tested on Android 11.",
+  "radios.notes.inrico-tm9": "PTT works and RX audio is good, but TX audio breaks up badly and is hard to understand. Rotary knob and side-key support haven't been verified yet. Tested on Android 7.1.1.",
+  "radios.notes.inrico-t310": "PTT and programmable side keys work, but the rotary knob does not and TX can be choppy. Audio quality is poor. Tested on Android 9.",
+  "radios.notes.uniwa-f400": "The PTT key works only as a toggle — press once to start and again to stop, rather than press-and-hold. Programmable side keys work and audio is good; the rotary knob does not work. Tested on Android 15."
 }
