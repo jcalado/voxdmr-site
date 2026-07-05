@@ -290,6 +290,22 @@ export const radios: Radio[] = [
     testDate: "2026-07-05",
     status: "partial",
   },
+  {
+    id: "anysecu-w8",
+    name: "Anysecu W8",
+    model: "W8",
+    maker: "Anysecu",
+    makerUrl: "https://www.szanysecu.com",
+    image: "/radios/anysecu-w8.webp",
+    ptt: "yes",
+    knob: "no",
+    sideKeys: "no",
+    audio: "good",
+    androidVersion: "8.1.0",
+    testedAppVersion: "0.12.0",
+    testDate: "2026-07-05",
+    status: "partial",
+  },
 ];
 
 /** Each scorable feature's maximum weight; the audio weight is earned partially by quality. */
