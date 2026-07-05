@@ -306,6 +306,22 @@ export const radios: Radio[] = [
     testDate: "2026-07-05",
     status: "partial",
   },
+  {
+    id: "sonim-xp8800",
+    name: "Sonim XP8800",
+    model: "XP8800",
+    maker: "Sonim",
+    makerUrl: "https://www.sonimtech.com",
+    image: "/radios/sonim-xp8800.webp",
+    ptt: "yes",
+    knob: "na",
+    sideKeys: "yes",
+    audio: "good",
+    androidVersion: "10",
+    testedAppVersion: "0.12.0",
+    testDate: "2026-07-05",
+    status: "partial",
+  },
 ];
 
 /** Each scorable feature's maximum weight; the audio weight is earned partially by quality. */
