@@ -209,7 +209,7 @@
   "radios.contribute.cta": "Submit a radio",
   "radios.metaTitle": "Tested PoC radios for VoxDMR",
   "radios.metaDescription": "PoC radios confirmed working with the VoxDMR Android app, with PTT, knob, and audio support details plus a compatibility score for each.",
-  "radios.notes.hytera-p50": "The rotary knob can be assigned to top-group switching. PTT works out of the box and audio quality is very good.",
+  "radios.notes.hytera-p50": "Full hardware support: PTT works out of the box, the rotary knob can be assigned to talk-group switching, and the programmable side keys work. Audio quality is very good.",
   "radios.notes.mkmxptt-1b-wli0-oqsk": "Full hardware support: PTT, rotary knob, and programmable side keys all work, with good audio. Tested on Android 9.",
   "radios.notes.inrico-t320": "PTT works and audio quality is good. Rotary knob and side-key support haven't been verified yet.",
   "radios.notes.inrico-s200": "PTT and programmable side keys both work, with good audio. This model has no rotary knob.",
@@ -223,5 +223,6 @@
   "radios.notes.inrico-tm7": "PTT works and RX audio is good, but TX can be choppy. Rotary knob and side-key support haven't been verified yet. Tested on Android 11.",
   "radios.notes.inrico-tm9": "PTT works and RX audio is good, but TX audio breaks up badly and is hard to understand. Rotary knob and side-key support haven't been verified yet. Tested on Android 7.1.1.",
   "radios.notes.inrico-t310": "PTT and programmable side keys work, but the rotary knob does not and TX can be choppy. Audio quality is poor. Tested on Android 9.",
-  "radios.notes.uniwa-f400": "The PTT key works only as a toggle — press once to start and again to stop, rather than press-and-hold. Programmable side keys work and audio is good; the rotary knob does not work. Tested on Android 15."
+  "radios.notes.uniwa-f400": "The PTT key works only as a toggle — press once to start and again to stop, rather than press-and-hold. Programmable side keys work and audio is good; the rotary knob does not work. Tested on Android 15.",
+  "radios.notes.hytera-p60": "Programmable side keys work and audio is good — better than Hytera's own HyTalk app. Neither the PTT key nor the rotary knob works yet. Tested on Android 12."
 }
