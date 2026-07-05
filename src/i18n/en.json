@@ -225,5 +225,6 @@
   "radios.notes.inrico-t310": "PTT and programmable side keys work, but the rotary knob does not and TX can be choppy. Audio quality is poor. Tested on Android 9.",
   "radios.notes.uniwa-f400": "The PTT key works only as a toggle — press once to start and again to stop, rather than press-and-hold. Programmable side keys work and audio is good; the rotary knob does not work. Tested on Android 15.",
   "radios.notes.hytera-p60": "Programmable side keys work and audio is good — better than Hytera's own HyTalk app. Neither the PTT key nor the rotary knob works yet. Tested on Android 12.",
-  "radios.notes.anysecu-w8": "PTT works and audio quality is good. The rotary knob and programmable side keys do not work. Initial setup through the touchpad is a real pain, but the USB-C port accepts an external keyboard via an adapter if you need one. Tested on Android 8.1.0."
+  "radios.notes.anysecu-w8": "PTT works and audio quality is good. The rotary knob and programmable side keys do not work. Initial setup through the touchpad is a real pain, but the USB-C port accepts an external keyboard via an adapter if you need one. Tested on Android 8.1.0.",
+  "radios.notes.sonim-xp8800": "PTT and programmable side keys work, with good audio. This rugged phone has no rotary knob. Tested on Android 10."
 }
