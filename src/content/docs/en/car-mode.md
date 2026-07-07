@@ -27,6 +27,8 @@ On larger (non-compact) screens a **favourites rail** lets you switch talkgroups
 
 ![Car mode on a larger phone (portrait): the Receiving state with a big callsign (KG4LYA, Francisco) and a favourites rail along the bottom — talkgroup buttons 91 (selected), 92, 268, and 2681](/screenshots/android-car-mode-rail.webp)
 
+![The same car-mode screen with scan armed: a green "Scan ▸ 91" badge above the callsign shows scan is locked onto talkgroup 91, with the favourites rail (91, 92, 93, 268) along the bottom](/screenshots/android-car-mode-scan.webp)
+
 ## Entering and leaving car mode
 
 There are several ways in, all opt-in:

@@ -27,6 +27,8 @@ Em ecrãs maiores (não compactos), uma **barra de favoritos** permite trocar de
 
 ![Modo carro num telemóvel maior (vertical): o estado Receiving com um indicativo grande (KG4LYA, Francisco) e uma barra de favoritos ao fundo — botões de talkgroup 91 (selecionado), 92, 268 e 2681](/screenshots/android-car-mode-rail.webp)
 
+![O mesmo ecrã de modo carro com a procura ativa: um selo verde "Scan ▸ 91" por cima do indicativo indica que a procura está fixada no talkgroup 91, com a barra de favoritos (91, 92, 93, 268) ao fundo](/screenshots/android-car-mode-scan.webp)
+
 ## Entrar e sair do modo carro
 
 Há várias formas de entrar, todas opcionais:
