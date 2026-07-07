@@ -23,7 +23,9 @@ A disposição mantém cada elemento num espaço fixo, por isso o indicativo gra
 
 ![Modo carro a transmitir num rádio PoC Hytera P50: uma pílula vermelha "ON AIR" com um cronómetro de TX (0:07) num ecrã vermelho, com o número de talkgroup 98 esbatido por baixo](/screenshots/android-car-mode-tx.webp)
 
-Em ecrãs maiores (não compactos), uma **barra de favoritos** lateral permite trocar de talkgroup com um toque (ou com o D-pad); em telemóveis compactos os favoritos ficam na gaveta de navegação. Se a [procura](./talkgroups) estiver ativa, um selo de procura com código de cores mostra o seu estado — toque nele para sair da procura. Veja [Talkgroups](./talkgroups) para saber como a procura funciona.
+Em ecrãs maiores (não compactos), uma **barra de favoritos** permite trocar de talkgroup com um toque (ou com o D-pad) — ao lado em modo horizontal, ao fundo em modo vertical. Em ecrãs compactos (rádios de teclado/PoC) não há barra; troca de talkgroup com as setas ◄ ► em vez disso. Se a [procura](./talkgroups) estiver ativa, um selo de procura com código de cores mostra o seu estado — toque nele para sair da procura. Veja [Talkgroups](./talkgroups) para saber como a procura funciona.
+
+![Modo carro num telemóvel maior (vertical): o estado Receiving com um indicativo grande (KG4LYA, Francisco) e uma barra de favoritos ao fundo — botões de talkgroup 91 (selecionado), 92, 268 e 2681](/screenshots/android-car-mode-rail.webp)
 
 ## Entrar e sair do modo carro
 

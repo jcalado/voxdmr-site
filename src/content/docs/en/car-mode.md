@@ -23,7 +23,9 @@ The layout keeps every element in a fixed slot, so the big callsign never jumps 
 
 ![Car mode transmitting on a Hytera P50 PoC radio: a red "ON AIR" pill with a running TX timer (0:07) on a red screen, the talkgroup number 98 dimmed below](/screenshots/android-car-mode-tx.webp)
 
-On larger (non-compact) screens a **favourites rail** down the side lets you switch talkgroups with a tap (or the D-pad); on compact phones the favourites live in the nav drawer. If [scan](./talkgroups) is armed, a colour-coded scan badge shows its state — tap it to exit scan. See [Talkgroups](./talkgroups) for how scan works.
+On larger (non-compact) screens a **favourites rail** lets you switch talkgroups with a tap (or the D-pad) — down the side in landscape, along the bottom in portrait. On compact screens (keypad/PoC radios) there's no rail; you cycle talkgroups with the ◄ ► arrows instead. If [scan](./talkgroups) is armed, a colour-coded scan badge shows its state — tap it to exit scan. See [Talkgroups](./talkgroups) for how scan works.
+
+![Car mode on a larger phone (portrait): the Receiving state with a big callsign (KG4LYA, Francisco) and a favourites rail along the bottom — talkgroup buttons 91 (selected), 92, 268, and 2681](/screenshots/android-car-mode-rail.webp)
 
 ## Entering and leaving car mode
 
