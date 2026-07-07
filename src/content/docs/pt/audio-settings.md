@@ -67,6 +67,18 @@ Acertar o TX gain é a tarefa de áudio mais comum para utilizadores novos. As f
 
 Se o indicador **CLIP** à direita do medidor TX ficar vermelho fixo, os teus picos estão a saturar o codificador e as outras estações vão ouvir distorção. Baixa o TX gain até o CLIP deixar de disparar, depois clica em CLIP para limpar.
 
+:::important
+
+**Confirma sempre como realmente soas no ar.** Os medidores acima mostram o que estás a entregar ao codificador — mas o verdadeiro teste é ouvires-te na rede. Usa uma **hoseline**, um leitor web que transmite o áudio ao vivo de um talkgroup:
+
+1. Abre **[hose.brandmeister.pt](https://hose.brandmeister.pt)** e seleciona o **TG 98**.
+2. Carrega no PTT no VoxDMR e fala normalmente durante um teste curto (mantém-te abaixo do tempo-limite de **180 segundos**).
+3. Observa o **medidor VU** na página da hoseline. Deve manter-se no **verde** todo o tempo, com apenas ligeiros picos esporádicos para o **amarelo**.
+
+Se passar mais do que o pico ocasional breve no amarelo, o teu áudio está demasiado alto. **Reduz o TX gain** e repete o teste até ficares satisfeito com o resultado.
+
+:::
+
 ## Monitor mic level off-air
 
 Desligado por omissão. Quando ligado, o medidor TX está sempre ativo, mostrando o nível do microfone mesmo quando não estás a transmitir. Útil para afinar o TX gain sem teres de transmitir num talkgroup real.

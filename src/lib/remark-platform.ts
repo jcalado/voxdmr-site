@@ -40,6 +40,11 @@ export function remarkPlatform() {
           node.data = node.data || {};
           node.data.hName = "div";
           node.data.hProperties = { "data-platform": platform };
+        } else if (name === "important" || name === "note" || name === "warning") {
+          // Styled callout boxes (see .callout / .callout--* in docs.css).
+          node.data = node.data || {};
+          node.data.hName = "div";
+          node.data.hProperties = { class: `callout callout--${name}` };
         }
         return;
       }

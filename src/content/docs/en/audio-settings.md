@@ -67,6 +67,18 @@ Setting TX gain right is the most common new-user audio task. The tools to dial 
 
 If the **CLIP** indicator on the right side of the TX meter latches red, your peaks are saturating the encoder and other stations will hear distortion. Drop TX gain until clip stops triggering, then click CLIP to reset the latch.
 
+:::important
+
+**Always check how you actually sound on the air.** The meters above show what you're feeding the encoder — but the real test is hearing yourself on the network. Use a **hoseline**, a web player that streams a talkgroup's live audio:
+
+1. Open **[hose.brandmeister.pt](https://hose.brandmeister.pt)** and select **TG 98**.
+2. Key up in VoxDMR and talk normally for a short test (keep it under the **180-second** time-out).
+3. Watch the **VU meter** on the hoseline page. It should stay in the **green** the whole time, with only slight, sporadic peaks into the **yellow**.
+
+If it spends more than the occasional brief peak in the yellow, your audio is too hot. **Reduce TX gain** and retest until you're happy with the result.
+
+:::
+
 ## Monitor mic level off-air
 
 Off by default. When on, the TX meter is always live, showing your mic level even when you're not transmitting. Useful for setting TX gain without keying up onto a real talkgroup.
