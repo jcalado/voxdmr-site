@@ -14,14 +14,14 @@ When auto-reconnect is enabled, VoxDMR watches the link and steps in whenever it
 When that happens, VoxDMR:
 
 1. Retries with **exponential backoff** — starting at ~2 seconds and growing to a cap of ~60 seconds between attempts, with a little random jitter so retries don't all land at once. It keeps trying indefinitely.
-2. **Re-authenticates** with the active profile and **re-subscribes to your last talkgroup**, so you land back exactly where you were.
+2. **Re-authenticates** with the active profile and **re-subscribes to your last talkgroup**, so you land back exactly where you were. Hardware next/prev-talkgroup and rotary-knob controls stay live throughout, so they keep working the moment the link is back.
 3. Shows the progress in the status indicator while it works — *Reconnecting… (attempt N)* on Android, *Connecting* on desktop.
 
 ## When it stops trying
 
 Auto-reconnect only gives up in two cases:
 
-- **You disconnect on purpose** — tapping/clicking **Disconnect** ends the session for good; it won't reconnect behind your back.
+- **You disconnect on purpose** — tapping/clicking **Disconnect** ends the session for good; it won't reconnect behind your back. Hitting **Cancel** mid-reconnect stops the retries cleanly and clears the *Reconnecting…* banner.
 - **Authentication fails** — if the server rejects your credentials (wrong password or hash format), VoxDMR stops instead of hammering the server with a password it already knows is bad. Fix the credentials and connect again. See [Troubleshooting](./troubleshooting).
 
 Everything else — flaky Wi-Fi, NAT timeouts, a server hiccup, a tunnel through a dead zone — is treated as recoverable and retried.

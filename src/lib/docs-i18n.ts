@@ -25,6 +25,7 @@ const pageTitleKeys: Record<string, string> = {
   installation: "docs.page.installation",
   "first-connection": "docs.page.firstConnection",
   "ptt-modes": "docs.page.pttModes",
+  "car-mode": "docs.page.carMode",
   "audio-settings": "docs.page.audioSettings",
   "server-profiles": "docs.page.serverProfiles",
   "auto-reconnect": "docs.page.autoReconnect",

@@ -23,6 +23,7 @@ export const docsConfig: DocGroup[] = [
       { slug: "auto-reconnect", title: "Auto-reconnect" },
       { slug: "talkgroups", title: "Talkgroups" },
       { slug: "ptt-modes", title: "PTT Modes" },
+      { slug: "car-mode", title: "Car Mode" },
       { slug: "audio-settings", title: "Audio Settings" },
     ],
   },

@@ -2,6 +2,79 @@
 
 Notas de versão do VoxDMR. Cada página de release no GitHub tem a lista completa de commits e os binários assinados; isto é o resumo humano.
 
+## v0.13.0
+
+::platforms[desktop mobile]
+
+_Lançada em julho de 2026. Desktop + Android._
+
+Um grande seguimento da v0.12.0: o VoxDMR passa a vigiar um conjunto inteiro de talkgroups
+ao mesmo tempo, resolve indicativos offline, conduz a partir de um ecrã de condução
+de leitura rápida, e ganhou um registo de atividade a sério — além de uma vaga de suporte
+a hardware de rádios PoC e definições de desktop que finalmente igualam as do Android.
+
+- **Scan de talkgroups.** Marca qualquer um dos teus favoritos para scan, arma-o, e o
+  VoxDMR vigia-os todos ao mesmo tempo — trava no primeiro talkgroup que fica ativo,
+  reproduz-no, aguarda um instante para apanhar uma resposta e depois retoma
+  (o primeiro a chegar ganha). O teu próprio DMR ID é sempre vigiado e tem prioridade.
+  Carregar no PTT durante a janela de espera fixa esse talkgroup; também podes parar o scan
+  a meio de uma chamada para ficar naquela que estás a ouvir. O tempo de espera é um slider
+  (**0–30 s, por omissão 4 s**). Vê [Talkgroups](./talkgroups).
+- **Recebe sempre as chamadas privadas.** O VoxDMR passa a subscrever permanentemente o teu
+  próprio DMR ID em paralelo com o talkgroup selecionado, por isso uma chamada privada
+  dirigida a ti já não é descartada enquanto ouves um grupo. Automático, sem definição.
+- **Base de dados de DMR IDs offline.** Uma cópia opcional e descarregável da base de dados
+  de utilizadores da radioid.net, para que os DMR IDs sejam resolvidos em indicativos de
+  imediato e offline. Opt-in — descarrega, atualiza ou apaga em **Definições → DMR IDs** no
+  desktop ou no ecrã **Base de dados de DMR IDs** no Android. As pesquisas recorrem à API da
+  radioid.net quando um ID não está local.
+- **Modo condução (Android).** Um modo de condução em ecrã inteiro, grande e de leitura
+  rápida: indicativo de RX em grande, estados de cor inativo → RX → TX, tocar para PTT, e
+  entrada automática ao carregar, num dispositivo Bluetooth escolhido, no arranque da app ou
+  através de uma tecla de hardware associada. Em **Definições → Modo condução**.
+- **Tons de permissão de fala no PTT.** Uma definição opcional (**desligada por omissão**)
+  que toca um beep ascendente quando carregas no PTT e um beep descendente quando largas —
+  sintetizados localmente, nunca enviados para o ar. Desktop: **Definições → Áudio →
+  Transmit**; Android: **Definições → Push-to-talk**. No Android, o aviso do time-out (TOT)
+  também passa a apitar.
+- **Homebrew, reformulado.** O protocolo **Others** cresceu: a antiga lista de três
+  servidores é substituída pelo diretório comunitário `DMR_Hosts.txt` do Pi-Star (~1200
+  entradas agrupadas e pesquisáveis, com preenchimento de palavra-passe e uma nota
+  *Account required*), o formato de hash de login passa a **Auto** por omissão, e os perfis
+  ganham talkgroups estáticos, um ESSID/peer ID, um timeslot por omissão e uma identidade de
+  dashboard editável. Passas mesmo a *ouvir* os teus talkgroups estáticos ao estilo de scanner,
+  e o TX/RX entre masters funciona. Vê [Perfis de servidor](./server-profiles).
+- **Registo de atividade.** O desktop e o Android convergem num único registo de eventos
+  (ligação, scan, TX/RX, perfil, backup, firmware, eventos da base de dados de DMR IDs) com um
+  interruptor **Verbose** (desligado por omissão) e copiar/partilhar para relatórios de bugs.
+  O desktop ganha um cartão **Event Log** no ecrã (Definições → Connection); o registo de QSOs
+  ganha um seletor de colunas Hora / Indicativo / Nome / Talkgroup nas duas plataformas.
+- **Mais rádios PoC e com teclado (Android).** PTT de hardware no ecrã bloqueado e em segundo
+  plano (através de um serviço de acessibilidade, para o Hytera P50 e semelhantes), ciclo de
+  talkgroups pelo botão rotativo (Meig P50/P60), associação por scanCode para botões GPIO de
+  keycode 0 (Motorola LEX L11e), uma opção de microfone via auricular Bluetooth, uma tecla de
+  alternar menu, acordar-ao-carregar e arranque-no-boot para o modo Always-on. Vê [Rádios](../radios).
+- **Paridade no desktop.** As definições de push-to-talk passam para um separador **PTT**
+  dedicado (com teclas associáveis de talkgroup seguinte/anterior e de alternar scan), e o
+  desktop ganha o slider de tempo de espera do scan, os interruptores de medidor de nível/dB e
+  o seletor de colunas do registo de QSOs, para igualar o Android.
+- **Níveis de áudio manuais por omissão.** O auto-nivelador de RX/TX introduzido na v0.12.0
+  passa a estar **desligado** por omissão numa instalação nova, e o interruptor de AGC de TX
+  foi removido por completo — o slider de TX é agora sempre um ganho manual de microfone
+  (2 dB/passo, 7 = 0 dB, ±12 dB), com o limitador suave ainda aplicado. O AGC de RX continua
+  disponível como opt-in. Vê [Definições de áudio](./audio-settings).
+- **Fiabilidade.** A reconexão automática restaura sempre o teu último talkgroup (o botão
+  rotativo de hardware já não fica morto depois de uma reconexão), e os DMR IDs de BrandMeister
+  (Rewind) estão limitados a 7 dígitos no editor de perfis.
+
+O `config.toml` (desktop) e as definições do Android ganham o scan (`scan_talkgroups`,
+`scan_hang_secs` — por omissão 4, `scan_toggle_key`/`next_tg_key`/`prev_tg_key`),
+`ptt_tones_enabled` (desligado), `log_verbose` (desligado), os interruptores `qso_col_*`, os
+campos de Homebrew, e — no Android — as chaves `car_mode_*`. `rx_agc` e `tx_agc` passam a estar
+**desligadas** por omissão (vê a nota sob a v0.12.0). A base de dados de DMR IDs offline é um
+ficheiro descarregado, não uma chave de configuração. As crates de desktop são
+`voxdmr 0.13.0` / `voxdmr-core 0.2.0`.
+
 ## v0.12.0
 
 ::platforms[desktop mobile]
@@ -12,7 +85,7 @@ A maior versão até agora: o VoxDMR aguenta as quedas de ligação sozinho, o m
 
 - **Reconexão automática.** Quando a ligação cai de forma inesperada — um timeout, um erro do lado do servidor ou uma mudança de rede (Wi-Fi ↔ dados móveis) — o VoxDMR volta a ligar-se sozinho com backoff exponencial (~2 s a crescer até um teto de ~60 s, com jitter, tentativas ilimitadas) e re-subscreve o teu último talkgroup, para regressares onde estavas. Só pára numa desconexão deliberada ou numa falha de autenticação. Ligada por defeito; alterna em **Definições → Connection** no desktop ou **Definições** no Android. Partilhada pelos dois frontends. Vê [Reconexão automática](./auto-reconnect).
 - **Build de desktop para macOS.** O macOS é agora um alvo de release — uma `.app` nativa para Apple Silicon (arm64) distribuída num `.dmg`, com um pedido de permissão de microfone na app no primeiro arranque e reprodução de receção CoreAudio sem cortes. Isto resolve a limitação "o macOS ainda não é um alvo de release" anotada na v0.7.0. Macs Intel ainda não têm build.
-- **Áudio que se nivela sozinho.** Um auto-nivelador sempre ativo passa a atuar nos caminhos de transmissão e receção — um AGC com gate de ruído adaptativo e limitador suave — para que um microfone demasiado alto deixe de saturar o vocoder e as estações fracas subam para um nível consistente. Os sliders de nível de TX/RX ajustam o alvo para cima ou para baixo (±dB) em vez de funcionarem como ganho bruto. Preferes definir os níveis tu mesmo? Cada direção tem um **interruptor de AGC** que passa a um ganho manual simples. Vê [Definições de áudio](./audio-settings).
+- **Áudio que se nivela sozinho.** Um auto-nivelador sempre ativo passa a atuar nos caminhos de transmissão e receção — um AGC com gate de ruído adaptativo e limitador suave — para que um microfone demasiado alto deixe de saturar o vocoder e as estações fracas subam para um nível consistente. Os sliders de nível de TX/RX ajustam o alvo para cima ou para baixo (±dB) em vez de funcionarem como ganho bruto. Preferes definir os níveis tu mesmo? Cada direção tem um **interruptor de AGC** que passa a um ganho manual simples _(alterado na v0.13.0 — o nivelador passa a estar desligado por omissão e o interruptor de TX foi removido; vê a entrada da v0.13.0 acima)_. Vê [Definições de áudio](./audio-settings).
 - **Bloqueio de canal ocupado (half-duplex).** Carregar no PTT enquanto entra uma chamada já não corta o áudio recebido. A transmissão fica retida até o canal ficar livre, com o aviso *"A receber — aguarde para transmitir"* — a etiqueta normal de half-duplex, tanto no desktop como no Android.
 - **Cópia de segurança e restauro de perfis.** Exporta os teus perfis de servidor para um ficheiro e volta a importá-los, com resolução conflito a conflito e uma opção para incluir (ou não) as palavras-passe. O formato é partilhado entre desktop e Android, por isso os perfis movem-se livremente entre os dois. Vê [Perfis de servidor](./server-profiles).
 - **Favoritos por perfil.** Os favoritos de talkgroup passam a estar associados ao perfil ativo (os teus favoritos globais são migrados automaticamente), por isso cada rede mantém a sua própria lista.
@@ -20,7 +93,7 @@ A maior versão até agora: o VoxDMR aguenta as quedas de ligação sozinho, o m
 - **Interface renovada.** Um ecrã de ligação redesenhado funde a tua identidade num único cartão principal com troca rápida de perfis e nomes de servidor amigáveis; o seletor de talkgroups move a chamada privada para um menu por linha; e o registo de QSOs fixa-se na chamada mais recente com uma coluna de origem mais larga.
 - **Identidade reportada às redes.** O VoxDMR passa a reportar aos masters DMR uma string de versão consciente da plataforma e arquitetura (ex.: `VoxDMR 0.12.0 (android32)` ou `(linux)`), com o URL do projeto a apontar para voxdmr.com.
 
-O `config.toml` (desktop) e as definições do Android ganham as flags `auto_reconnect`, `rx_agc` e `tx_agc`, todas ligadas por defeito; configurações antigas sem elas assumem esses valores. Nada mais mudou na configuração, caminhos ou semântica de protocolo.
+O `config.toml` (desktop) e as definições do Android ganham as flags `auto_reconnect`, `rx_agc` e `tx_agc`. `auto_reconnect` fica ligada por defeito; `rx_agc` e `tx_agc` saíram ligadas por defeito na v0.12.0 mas **agora ficam desligadas por defeito a partir da v0.13.0** (e `tx_agc` já não tem qualquer efeito). Configurações antigas sem elas assumem esses valores. Nada mais mudou na configuração, caminhos ou semântica de protocolo.
 
 ## v0.10.0
 

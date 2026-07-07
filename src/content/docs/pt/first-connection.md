@@ -7,13 +7,13 @@ Esta página assume que já terminaste a [Instalação](./installation), o VoxDM
 O VoxDMR fala **dois protocolos**, e a configuração depende da rede a que te queres ligar:
 
 - A **BrandMeister** usa o protocolo **Rewind**. O diretório de masters é puxado em tempo real; basta escolheres um master.
-- A **TGIF, FreeDMR, ADN.systems e outras redes baseadas em MMDVM** usam o protocolo **Homebrew** (MMDVM_HBP). Não há um diretório central, por isso o VoxDMR traz uma pequena lista curada (TGIF Network, FreeDMR United Kingdom, ADN Portugal) e ainda uma opção *Servidor personalizado* para tudo o que não está listado.
+- A **TGIF, FreeDMR, ADN.systems e outras redes baseadas em MMDVM** usam o protocolo **Homebrew** (MMDVM_HBP). Não há um diretório central, por isso o VoxDMR traz um diretório pesquisável de servidores da comunidade (a partir da lista de hosts do Pi-Star) e ainda uma opção *Servidor personalizado* para tudo o que não está listado.
 
 Não escolhes um ou outro de uma vez por todas — o VoxDMR suporta **vários perfis**, cada um com o seu protocolo, servidor e credenciais. Adiciona os que quiseres; muda entre eles com um toque.
 
 ## O que precisas
 
-- **DMR ID** (numérico, 7 dígitos). Emitido pelo [radioid.net](https://radioid.net).
+- **DMR ID** (numérico). Emitido pelo [radioid.net](https://radioid.net). Os perfis BrandMeister (Rewind) limitam o ID a **7 dígitos**; os perfis **Others** (Homebrew) aceitam qualquer comprimento.
 - **Uma password** da rede a que te vais ligar (vê [Instalação → Requisitos](./installation#requisitos) para saber o que cada rede espera).
 - **Indicativo** (opcional, mas as redes Homebrew costumam querer um para identificação).
 
@@ -40,8 +40,8 @@ Em **Server**, escolhe um protocolo — **BrandMeister** ou **Others**:
 
 **Others** (Homebrew):
 
-- O **picker de servidor** abre com as entradas curadas: ADN Portugal (2681), FreeDMR United Kingdom, TGIF Network. Escolhe uma e o host, porto e formato de hash são preenchidos automaticamente.
-- **Custom server…** abre campos de host/porto e ainda um seletor de **hash format** (Raw vs Hex ASCII). A maioria das redes Homebrew usa **Raw**; muda para Hex ASCII só se a autenticação continuar a falhar.
+- O **picker de servidor** abre como um diretório pesquisável de servidores da comunidade. Pesquisa a tua rede, escolhe-a e o host, porto e definições de login são preenchidos automaticamente. Vê [Perfis de Servidor](./server-profiles) para a explicação completa do diretório.
+- **Custom server…** abre campos de host/porto. O **hash format** de login fica sob a divulgação **Advanced** e assume por defeito **Auto (recommended)** — deteta o formato certo sozinho, por isso raramente precisas de lhe mexer.
 
 Clica em **Save**. O novo perfil aparece na lista. Clica no rádio respetivo para o tornares ativo.
 
@@ -98,9 +98,7 @@ Em **Server**, toca no controlo segmentado para escolher **BrandMeister** ou **O
 
 **BrandMeister**: toca na linha do servidor para abrir a bottom sheet **BrandMeister servers**. Pesquisa por país ou hostname; toca num master para o selecionar. O porto é `54006` e não precisas de mexer.
 
-**Others**: toca na linha do servidor para abrir a bottom sheet **Servers** com TGIF, FreeDMR, ADN Portugal. Toca numa para selecionar — host, porto e formato de hash são preenchidos. Podes editar tudo manualmente depois.
-
-O seletor **Hash Format** (só na Homebrew) oferece **Raw (default)** ou **Hex-ASCII**.
+**Others**: toca na linha do servidor para abrir a bottom sheet **Servers** — um diretório pesquisável de servidores da comunidade. Pesquisa a tua rede e toca nela; host, porto e definições de login são preenchidos. Podes editar tudo manualmente depois. O **hash format** fica sob **Advanced options** e assume por defeito **Auto (recommended)**.
 
 Toca em **Save**. O novo perfil aparece na lista. Toca no rádio respetivo para o tornares ativo.
 
@@ -140,9 +138,13 @@ Enquanto estás ligado, qualquer tráfego no talkgroup ativo toca automaticament
 
 Quando a transmissão termina, o cartão volta a *Idle*.
 
+> O VoxDMR monitoriza sempre o teu próprio DMR ID em paralelo com o talkgroup selecionado, por isso uma chamada privada dirigida a ti chega mesmo enquanto ouves um grupo. Não há nada a ativar.
+
 ## Mudar de talkgroup
 
 O picker de talkgroup (painel esquerdo no desktop, bottom sheet no Android) permite-te mudar de talkgroup. Escreve uma pesquisa, toca/clica num resultado e a subscrição atualiza-se imediatamente. Vê [Talkgroups](./talkgroups) para a explicação completa do picker, incluindo favoritos, indicador de atividade e aliases por perfil.
+
+Queres vigiar vários talkgroups ao mesmo tempo em vez de apenas um? Vê [scan](./talkgroups#scanning-talkgroups).
 
 Alguns talkgroups populares para experimentar depois do Parrot:
 

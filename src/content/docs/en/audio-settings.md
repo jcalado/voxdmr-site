@@ -7,9 +7,10 @@ VoxDMR's audio settings live in **Settings → Audio** on desktop, and in the **
 | | Desktop | Android |
 |---|---|---|
 | Input/output device picker | Yes — pick exact OS endpoints | No — uses the Android system route (speaker / earpiece / headset / BT) |
-| RX gain range | 1× – 32× (default 4×) | 1× – 10× (default 4×) |
-| TX gain range | 0.1× – 4.0× (default 0.5×) | 0.1× – 4.0× (default 0.5×) |
-| RX AGC (Auto level) | Yes | Yes |
+| RX gain range | −12 to +12 dB slider (7 = 0 dB unity, 2 dB/step) | Same |
+| TX gain range | −12 to +12 dB slider (7 = 0 dB unity, 2 dB/step) | Same |
+| RX AGC (auto level) | Yes — opt-in, off by default | Yes — opt-in, off by default |
+| TX AGC | Removed (manual gain only) | Removed (manual gain only) |
 | Monitor mic level off-air | Yes | No — meters always live while screen is on |
 
 :::desktop
@@ -44,13 +45,19 @@ There's no in-app device picker on Android. If you want to force playback throug
 
 ## RX gain
 
-Linear multiplier applied to incoming decoded audio before it hits the output device. Range **1× to 32×** (default **4×**).
+Manual gain applied to incoming decoded audio before it hits the output device. The slider runs from **−12 dB to +12 dB** in 2 dB steps, with the centre setting (**7**) at **0 dB** (unity gain). It is not a linear multiplier.
 
 If the other station sounds quiet, raise it. If they distort, drop it. RX gain is purely local. It doesn't affect what the network sends you, just how loud you hear it.
 
+### RX AGC (auto level)
+
+**Off by default.** RX AGC is an opt-in automatic leveler that rides the incoming audio toward a consistent loudness instead of applying a fixed gain. Turn it on if stations arrive at wildly different levels and you'd rather not chase the slider yourself; leave it off for a plain, predictable manual gain.
+
 ## TX gain
 
-Linear multiplier applied to your microphone signal before it goes into the AMBE+2 encoder. Range **0.1× to 4.0×** in 0.1 steps (default **0.5×**).
+Manual gain applied to your microphone signal before it goes into the AMBE+2 encoder. Same slider as RX: **−12 dB to +12 dB** in 2 dB steps, with the centre setting (**7**) at **0 dB** (unity gain).
+
+> **There is no TX auto-level.** Earlier builds had a TX AGC toggle; it has been removed on both platforms. TX is always a manual gain now.
 
 Setting TX gain right is the most common new-user audio task. The tools to dial it in:
 
