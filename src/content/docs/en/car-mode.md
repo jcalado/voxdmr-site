@@ -17,6 +17,12 @@ Car mode replaces the normal PTT screen with a single big readout:
 
 The layout keeps every element in a fixed slot, so the big callsign never jumps around as the state changes.
 
+![Car mode idle on a Hytera P50 PoC radio: a dimmed grey callsign (ON3JDK) with a "Jean · 10s ago" last-heard label above the bare talkgroup number 91 with cycle arrows](/screenshots/android-car-mode-idle.webp)
+
+![Car mode receiving on a Hytera P50 PoC radio: a "Receiving" chip above a bright lit callsign (YG3AUH, Irfan) and the bare talkgroup number 91](/screenshots/android-car-mode-rx.webp)
+
+![Car mode transmitting on a Hytera P50 PoC radio: a red "ON AIR" pill with a running TX timer (0:07) on a red screen, the talkgroup number 98 dimmed below](/screenshots/android-car-mode-tx.webp)
+
 On larger (non-compact) screens a **favourites rail** down the side lets you switch talkgroups with a tap (or the D-pad); on compact phones the favourites live in the nav drawer. If [scan](./talkgroups) is armed, a colour-coded scan badge shows its state — tap it to exit scan. See [Talkgroups](./talkgroups) for how scan works.
 
 ## Entering and leaving car mode

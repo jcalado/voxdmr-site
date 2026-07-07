@@ -17,6 +17,12 @@ O modo carro substitui o ecrã PTT normal por um único mostrador grande:
 
 A disposição mantém cada elemento num espaço fixo, por isso o indicativo grande nunca salta quando o estado muda.
 
+![Modo carro inativo num rádio PoC Hytera P50: um indicativo cinzento esbatido (ON3JDK) com a etiqueta "Jean · 10s ago" do último ouvido, por cima do número de talkgroup 91 com setas de mudança](/screenshots/android-car-mode-idle.webp)
+
+![Modo carro a receber num rádio PoC Hytera P50: um selo "Receiving" por cima de um indicativo aceso (YG3AUH, Irfan) e o número de talkgroup 91](/screenshots/android-car-mode-rx.webp)
+
+![Modo carro a transmitir num rádio PoC Hytera P50: uma pílula vermelha "ON AIR" com um cronómetro de TX (0:07) num ecrã vermelho, com o número de talkgroup 98 esbatido por baixo](/screenshots/android-car-mode-tx.webp)
+
 Em ecrãs maiores (não compactos), uma **barra de favoritos** lateral permite trocar de talkgroup com um toque (ou com o D-pad); em telemóveis compactos os favoritos ficam na gaveta de navegação. Se a [procura](./talkgroups) estiver ativa, um selo de procura com código de cores mostra o seu estado — toque nele para sair da procura. Veja [Talkgroups](./talkgroups) para saber como a procura funciona.
 
 ## Entrar e sair do modo carro
