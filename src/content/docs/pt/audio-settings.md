@@ -7,9 +7,10 @@ As definições de áudio do VoxDMR estão em **Definições → Audio** no desk
 | | Desktop | Android |
 |---|---|---|
 | Seletor de dispositivo entrada/saída | Sim — escolhes endpoints exatos do SO | Não — usa o encaminhamento de áudio do Android (altifalante / auricular / headset / BT) |
-| Intervalo RX gain | 1× – 32× (predefinição 4×) | 1× – 10× (predefinição 4×) |
-| Intervalo TX gain | 0,1× – 4,0× (predefinição 0,5×) | 0,1× – 4,0× (predefinição 0,5×) |
-| RX AGC (Auto level) | Sim | Sim |
+| Intervalo RX gain | Deslizador −12 a +12 dB (7 = 0 dB unitário, 2 dB/passo) | Igual |
+| Intervalo TX gain | Deslizador −12 a +12 dB (7 = 0 dB unitário, 2 dB/passo) | Igual |
+| RX AGC (auto level) | Sim — opcional, desligado por omissão | Sim — opcional, desligado por omissão |
+| TX AGC | Removido (só ganho manual) | Removido (só ganho manual) |
 | Monitor mic level off-air | Sim | Não — medidores sempre ativos enquanto o ecrã está ligado |
 
 :::desktop
@@ -44,13 +45,19 @@ Não há um seletor de dispositivo dentro da app no Android. Se quiseres forçar
 
 ## RX gain
 
-Multiplicador linear aplicado ao áudio recebido descodificado antes de chegar ao dispositivo de saída. Intervalo **1× a 32×** (predefinição **4×**).
+Ganho manual aplicado ao áudio recebido descodificado antes de chegar ao dispositivo de saída. O deslizador vai de **−12 dB a +12 dB** em passos de 2 dB, com a posição central (**7**) em **0 dB** (ganho unitário). Não é um multiplicador linear.
 
 Se a outra estação soa baixa, sobe. Se distorce, baixa. O RX gain é puramente local: não afeta o que a rede te envia, só o quão alto o ouves.
 
+### RX AGC (auto level)
+
+**Desligado por omissão.** O RX AGC é um auto-nivelador opcional que ajusta o áudio recebido para uma sonoridade consistente em vez de aplicar um ganho fixo. Liga-o se as estações chegam a níveis muito diferentes e preferes não andar a mexer no deslizador; deixa-o desligado para um ganho manual simples e previsível.
+
 ## TX gain
 
-Multiplicador linear aplicado ao sinal do microfone antes de entrar no codificador AMBE+2. Intervalo **0,1× a 4,0×** em passos de 0,1 (predefinição **0,5×**).
+Ganho manual aplicado ao sinal do microfone antes de entrar no codificador AMBE+2. O mesmo deslizador do RX: **−12 dB a +12 dB** em passos de 2 dB, com a posição central (**7**) em **0 dB** (ganho unitário).
+
+> **Não existe auto-nivelador de TX.** Versões anteriores tinham um interruptor de TX AGC; foi removido em ambas as plataformas. O TX é agora sempre um ganho manual.
 
 Acertar o TX gain é a tarefa de áudio mais comum para utilizadores novos. As ferramentas para o afinar:
 
@@ -59,6 +66,18 @@ Acertar o TX gain é a tarefa de áudio mais comum para utilizadores novos. As f
 3. Ajusta o TX gain até os picos caírem na zona **amarela** com toques ocasionais no vermelho mas sem fazer clip.
 
 Se o indicador **CLIP** à direita do medidor TX ficar vermelho fixo, os teus picos estão a saturar o codificador e as outras estações vão ouvir distorção. Baixa o TX gain até o CLIP deixar de disparar, depois clica em CLIP para limpar.
+
+:::important
+
+**Confirma sempre como realmente soas no ar.** Os medidores acima mostram o que estás a entregar ao codificador — mas o verdadeiro teste é ouvires-te na rede. Usa uma **hoseline**, um leitor web que transmite o áudio ao vivo de um talkgroup:
+
+1. Abre **[hose.brandmeister.pt](https://hose.brandmeister.pt)** e seleciona o **TG 98**.
+2. Carrega no PTT no VoxDMR e fala normalmente durante um teste curto (mantém-te abaixo do tempo-limite de **180 segundos**).
+3. Observa o **medidor VU** na página da hoseline. Deve manter-se no **verde** todo o tempo, com apenas ligeiros picos esporádicos para o **amarelo**.
+
+Se passar mais do que o pico ocasional breve no amarelo, o teu áudio está demasiado alto. **Reduz o TX gain** e repete o teste até ficares satisfeito com o resultado.
+
+:::
 
 ## Monitor mic level off-air
 

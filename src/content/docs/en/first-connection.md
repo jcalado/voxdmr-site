@@ -7,13 +7,13 @@ This page assumes you've already finished [Installation](./installation), VoxDMR
 VoxDMR speaks **two protocols**, and the connection setup depends on which network you want to join:
 
 - **BrandMeister** uses the **Rewind** protocol. Master directory is fetched live; you just pick a master.
-- **TGIF, FreeDMR, ADN.systems, and similar MMDVM-based networks** use the **Homebrew** (MMDVM_HBP) protocol. There's no central master directory, so VoxDMR ships a small curated list (TGIF Network, FreeDMR United Kingdom, ADN Portugal) plus a *Custom server* option for anything not listed.
+- **TGIF, FreeDMR, ADN.systems, and similar MMDVM-based networks** use the **Homebrew** (MMDVM_HBP) protocol. There's no central master directory, so VoxDMR ships a searchable directory of community servers (from the Pi-Star host list) plus a *Custom server* option for anything not listed.
 
 You don't pick one or the other once and for all — VoxDMR supports **multiple profiles**, each with its own protocol, server, and credentials. Add as many as you like; switch with a tap.
 
 ## What you need
 
-- **DMR ID** (numeric, 7 digits). Issued by [radioid.net](https://radioid.net).
+- **DMR ID** (numeric). Issued by [radioid.net](https://radioid.net). BrandMeister (Rewind) profiles cap the ID at **7 digits**; **Others** (Homebrew) profiles accept any length.
 - **A password** for the network you're joining (see [Installation → Requirements](./installation#requirements) for what each network expects).
 - **Callsign** (optional, but Homebrew networks usually want one for identification).
 
@@ -40,8 +40,8 @@ Under **Server**, pick a protocol — **BrandMeister** or **Others**:
 
 **Others** (Homebrew):
 
-- The **server picker** drops down with the curated entries: ADN Portugal (2681), FreeDMR United Kingdom, TGIF Network. Pick one to fill in the host + port + hash format automatically.
-- **Custom server…** opens host/port fields plus a **hash format** toggle (Raw vs Hex ASCII). Most Homebrew networks use **Raw**; flip to Hex ASCII only if auth keeps failing.
+- The **server picker** drops down as a searchable directory of community servers. Search for your network, pick it, and the host, port, and login settings fill in automatically. See [Server Profiles](./server-profiles) for the full directory walk-through.
+- **Custom server…** opens host/port fields. The login **hash format** lives under the **Advanced** disclosure and defaults to **Auto (recommended)** — it figures out the right format on its own, so you rarely need to touch it.
 
 Click **Save**. The new profile appears in the list. Click its radio button to make it active.
 
@@ -98,7 +98,7 @@ Under **Server**, tap the segmented control to pick **BrandMeister** or **Others
 
 **BrandMeister**: tap the server row to open the **BrandMeister servers** bottom sheet. Search by country or hostname, tap a master to select it. Port is `54006` and you don't need to change it.
 
-**Others**: tap the server row to open the **Servers** bottom sheet listing TGIF, FreeDMR, ADN Portugal. Tap one to select it — host, port, and hash format are filled in. You can override host/port/hash format manually after.
+**Others**: tap the server row to open the **Servers** bottom sheet — a searchable directory of community servers. Search for your network and tap it; host, port, and login settings fill in. You can override them manually after. The **hash format** lives under **Advanced options** and defaults to **Auto (recommended)**.
 
 Tap **Save**. The new profile appears in the list. Tap its radio to make it active.
 
@@ -138,9 +138,13 @@ While you're connected, any traffic on your active talkgroup plays through your 
 
 When the transmission ends, the card flips back to *Idle*.
 
+> VoxDMR always monitors your own DMR ID alongside the selected talkgroup, so a private call addressed to you comes through even while you're listening to a group. Nothing to enable.
+
 ## Switching talkgroups
 
 The talkgroup picker (left panel on desktop, bottom sheet on Android) lets you change which talkgroup you're listening to. Type a search, tap/click a result, and the subscription updates immediately. See [Talkgroups](./talkgroups) for the full picker walk-through, including favorites, the activity indicator, and per-profile aliases.
+
+Want to watch several talkgroups at once instead of just one? See [scanning](./talkgroups#scanning-talkgroups).
 
 Some popular talkgroups to try once Parrot works:
 

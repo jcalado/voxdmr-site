@@ -14,14 +14,14 @@ Com a reconexão automática ligada, o VoxDMR vigia a ligação e intervém semp
 Quando isso acontece, o VoxDMR:
 
 1. Tenta de novo com **backoff exponencial** — começa em ~2 segundos e cresce até um teto de ~60 segundos entre tentativas, com um pouco de jitter aleatório para as tentativas não caírem todas ao mesmo tempo. Continua a tentar indefinidamente.
-2. **Volta a autenticar** com o perfil ativo e **re-subscreve o último talkgroup**, para regressares exatamente onde estavas.
+2. **Volta a autenticar** com o perfil ativo e **re-subscreve o último talkgroup**, para regressares exatamente onde estavas. Os controlos de hardware de talkgroup seguinte/anterior e o botão rotativo mantêm-se ativos durante todo o processo, por isso continuam a funcionar assim que a ligação regressa.
 3. Mostra o progresso no indicador de estado enquanto trabalha — *Reconnecting… (attempt N)* no Android, *Connecting* no desktop.
 
 ## Quando deixa de tentar
 
 A reconexão automática só desiste em dois casos:
 
-- **Desligas de propósito** — tocar/clicar em **Disconnect** termina a sessão de vez; não volta a ligar-se nas tuas costas.
+- **Desligas de propósito** — tocar/clicar em **Disconnect** termina a sessão de vez; não volta a ligar-se nas tuas costas. Tocar em **Cancel** a meio de uma reconexão pára as tentativas de forma limpa e remove o aviso *Reconnecting…*.
 - **A autenticação falha** — se o servidor rejeita as credenciais (palavra-passe ou formato de hash errados), o VoxDMR pára em vez de martelar o servidor com uma palavra-passe que já sabe estar errada. Corrige as credenciais e liga de novo. Vê [Resolução de problemas](./troubleshooting).
 
 Tudo o resto — Wi-Fi instável, timeouts de NAT, um soluço do servidor, um túnel por uma zona morta — é tratado como recuperável e repetido.
