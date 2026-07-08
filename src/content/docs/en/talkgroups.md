@@ -175,6 +175,8 @@ Open the talkgroup picker and use a favourite row's **overflow menu → Add to s
 
 ![The same picker with the 92 Europe overflow menu open on a Hytera P50 PoC radio: an "Add to scan" item with a radar icon highlighted at the top, above Rename, Reorder, and Remove](/screenshots/android-scan-add.webp)
 
+::youtube[yphqum0VsXs]{title="VoxDMR — How to enable scan on PoC radios"}
+
 :::
 
 ### Replying and parking

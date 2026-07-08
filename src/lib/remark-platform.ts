@@ -25,6 +25,10 @@ function langFromPath(path: string | undefined): "en" | "pt" {
  *     → <p class="ver-badges"><span class="ver-badge ver-badge--desktop">…</span> …</p>
  *       Labels are localized from the file's locale (en/pt).
  *
+ *   ::youtube[VIDEO_ID]{title="…"}        leaf directive (embedded video)
+ *     → <div class="video-embed"><iframe src="…youtube-nocookie.com/embed/ID" …></iframe></div>
+ *       Responsive 16:9 embed styled by .video-embed in docs.css.
+ *
  * Replaces the brittle "name a heading exactly Desktop/Android" convention with
  * explicit, authored directives, and keeps everything in Astro's renderer.
  */
@@ -46,6 +50,35 @@ export function remarkPlatform() {
           node.data.hName = "div";
           node.data.hProperties = { class: `callout callout--${name}` };
         }
+        return;
+      }
+
+      if (node.type === "leafDirective" && node.name === "youtube") {
+        // ::youtube[VIDEO_ID]{title="…"} → responsive privacy-friendly embed.
+        const id = (node.children ?? [])
+          .map((c: any) => c.value ?? "")
+          .join("")
+          .trim();
+        const title = String(node.attributes?.title ?? "").trim();
+        node.type = "html";
+        if (/^[\w-]{6,20}$/.test(id)) {
+          const titleAttr = title
+            ? ` title="${title.replace(/"/g, "&quot;")}"`
+            : "";
+          node.value =
+            `<div class="video-embed">` +
+            `<iframe src="https://www.youtube-nocookie.com/embed/${id}"${titleAttr} ` +
+            `loading="lazy" frameborder="0" ` +
+            `allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ` +
+            `referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>` +
+            `</div>`;
+        } else {
+          node.value = "";
+        }
+        delete node.children;
+        delete node.name;
+        delete node.attributes;
+        delete node.data;
         return;
       }
 

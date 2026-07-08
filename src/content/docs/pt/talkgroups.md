@@ -175,6 +175,8 @@ Abre o picker de talkgroup e usa o **menu de opções → Add to scan / Remove f
 
 ![O mesmo picker com o menu de opções da linha 92 Europe aberto num rádio PoC Hytera P50: um item "Add to scan" com um ícone de radar destacado no topo, acima de Rename, Reorder e Remove](/screenshots/android-scan-add.webp)
 
+::youtube[yphqum0VsXs]{title="VoxDMR — Como ativar o scan em rádios PoC"}
+
 :::
 
 ### Responder e estacionar
