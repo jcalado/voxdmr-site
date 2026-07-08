@@ -210,7 +210,7 @@
   "radios.contribute.cta": "Enviar um rádio",
   "radios.metaTitle": "Rádios PoC testados com o VoxDMR",
   "radios.metaDescription": "Rádios PoC confirmados a funcionar com a aplicação Android do VoxDMR, com detalhes de PTT, botão rotativo e áudio, e uma pontuação de compatibilidade para cada um.",
-  "radios.notes.hytera-p50": "O botão rotativo pode ser atribuído à mudança de top group. O PTT funciona de imediato e a qualidade de áudio é muito boa. O PTT em segundo plano e no ecrã de bloqueio já funciona através do serviço de acessibilidade do VoxDMR.",
+  "radios.notes.hytera-p50": "Suporte total de hardware: o PTT funciona de imediato, o botão rotativo pode ser atribuído à mudança de talk group e as teclas laterais programáveis funcionam. A qualidade de áudio é muito boa. O PTT em segundo plano e no ecrã de bloqueio já funciona através do serviço de acessibilidade do VoxDMR.",
   "radios.notes.mkmxptt-1b-wli0-oqsk": "Suporte de hardware completo: o PTT, o botão rotativo e as teclas laterais programáveis funcionam, com boa qualidade de áudio. Testado em Android 9.",
   "radios.notes.inrico-t320": "O PTT funciona e a qualidade de áudio é boa. O suporte para botão rotativo e teclas laterais ainda não foi verificado.",
   "radios.notes.inrico-s200": "O PTT e as teclas laterais programáveis funcionam, com boa qualidade de áudio. Este modelo não tem botão rotativo.",
@@ -224,5 +224,8 @@
   "radios.notes.inrico-tm7": "O PTT funciona e o áudio de receção é bom, mas a transmissão pode ficar entrecortada. O suporte para botão rotativo e teclas laterais ainda não foi verificado. Testado em Android 11.",
   "radios.notes.inrico-tm9": "O PTT funciona e o áudio de receção é bom, mas o áudio de transmissão fica muito entrecortado e difícil de perceber. O suporte para botão rotativo e teclas laterais ainda não foi verificado. Testado em Android 7.1.1.",
   "radios.notes.inrico-t310": "O PTT e as teclas laterais programáveis funcionam, mas o botão rotativo não, e a transmissão pode ficar entrecortada. A qualidade de áudio é fraca. Testado em Android 9.",
-  "radios.notes.uniwa-f400": "A tecla PTT funciona apenas como alternância — premir uma vez para começar e outra para parar, em vez de manter premida. As teclas laterais programáveis funcionam e o áudio é bom; o botão rotativo não funciona. Testado em Android 15."
+  "radios.notes.uniwa-f400": "A tecla PTT funciona apenas como alternância — premir uma vez para começar e outra para parar, em vez de manter premida. As teclas laterais programáveis funcionam e o áudio é bom; o botão rotativo não funciona. Testado em Android 15.",
+  "radios.notes.hytera-p60": "As teclas laterais programáveis funcionam e o áudio é bom — melhor do que a própria aplicação HyTalk da Hytera. Nem a tecla PTT nem o botão rotativo funcionam ainda. Testado em Android 12.",
+  "radios.notes.anysecu-w8": "O PTT funciona e a qualidade de áudio é boa. O botão rotativo e as teclas laterais programáveis não funcionam. A configuração inicial através do touchpad é uma dor de cabeça, mas a porta USB-C aceita um teclado externo com um adaptador, se precisares. Testado em Android 8.1.0.",
+  "radios.notes.sonim-xp8800": "O PTT e as teclas laterais programáveis funcionam, com bom áudio. Este telefone robusto não tem botão rotativo. Testado em Android 10."
 }

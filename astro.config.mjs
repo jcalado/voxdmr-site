@@ -1,4 +1,5 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
@@ -33,25 +34,31 @@ export default defineConfig({
     locales: ['en', 'pt'],
     routing: { prefixDefaultLocale: false },
   },
+  // Astro 7 defaults to the Sätteri processor and no longer bundles
+  // @astrojs/markdown-remark; opt back into the unified() pipeline so the
+  // platform directives (remark-directive + remark-platform) and heading
+  // anchors keep working.
   markdown: {
-    remarkPlugins: [remarkDirective, remarkPlatform],
-    rehypePlugins: [
-      rehypeSlug,
-      [
-        rehypeAutolinkHeadings,
-        {
-          behavior: 'prepend',
-          // h2..h6 only; the page title (h1) stays clean.
-          test: ['h2', 'h3', 'h4', 'h5', 'h6'],
-          properties: {
-            className: ['heading-anchor'],
-            'aria-label': 'Permalink to this section',
-            tabindex: -1,
+    processor: unified({
+      remarkPlugins: [remarkDirective, remarkPlatform],
+      rehypePlugins: [
+        rehypeSlug,
+        [
+          rehypeAutolinkHeadings,
+          {
+            behavior: 'prepend',
+            // h2..h6 only; the page title (h1) stays clean.
+            test: ['h2', 'h3', 'h4', 'h5', 'h6'],
+            properties: {
+              className: ['heading-anchor'],
+              'aria-label': 'Permalink to this section',
+              tabindex: -1,
+            },
+            content: anchorIcon,
           },
-          content: anchorIcon,
-        },
+        ],
       ],
-    ],
+    }),
   },
   integrations: [react(), sitemap()],
   vite: {
