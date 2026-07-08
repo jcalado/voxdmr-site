@@ -171,6 +171,10 @@ Cada linha de favorito tem um pequeno **toggle de radar** na sua tira de ações
 
 Abre o picker de talkgroup e usa o **menu de opções → Add to scan / Remove from scan** de uma linha de favorito; os favoritos marcados mostram um **badge de radar**. Arma e desarma o scan a partir do **controlo de scan no cartão de chamada PTT** (no nav drawer em ecrãs PoC compactos). No modo carro um badge com cores mostra o estado — `Scanning…`, `Scan ▸ <tg>`, ou `Hold ▸ <tg>` durante a janela de espera; toca-lhe para sair do scan.
 
+![Picker de talkgroup num rádio PoC Hytera P50: a lista de favoritos (91 World-wide, 92 Europe, 268 Portugal, 2681 North, …) com o botão de três pontos da linha 92 Europe focado, e badges de radar nos favoritos já marcados](/screenshots/android-scan-overflow.webp)
+
+![O mesmo picker com o menu de opções da linha 92 Europe aberto num rádio PoC Hytera P50: um item "Add to scan" com um ícone de radar destacado no topo, acima de Rename, Reorder e Remove](/screenshots/android-scan-add.webp)
+
 :::
 
 ### Responder e estacionar

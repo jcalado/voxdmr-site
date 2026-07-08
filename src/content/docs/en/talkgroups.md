@@ -171,6 +171,10 @@ Each favourite row carries a small **radar toggle** in its hover action strip, a
 
 Open the talkgroup picker and use a favourite row's **overflow menu → Add to scan / Remove from scan**; flagged favourites show a **radar badge**. Arm and disarm scan from the **scan control on the PTT call card** (in the nav drawer on compact PoC screens). In car mode a colour-coded badge shows the state — `Scanning…`, `Scan ▸ <tg>`, or `Hold ▸ <tg>` during the hang window; tap it to exit scan.
 
+![Talkgroup picker on a Hytera P50 PoC radio: the favourites list (91 World-wide, 92 Europe, 268 Portugal, 2681 North, …) with the overflow three-dot button on the 92 Europe row focused, and radar badges on the already-flagged favourites](/screenshots/android-scan-overflow.webp)
+
+![The same picker with the 92 Europe overflow menu open on a Hytera P50 PoC radio: an "Add to scan" item with a radar icon highlighted at the top, above Rename, Reorder, and Remove](/screenshots/android-scan-add.webp)
+
 :::
 
 ### Replying and parking
