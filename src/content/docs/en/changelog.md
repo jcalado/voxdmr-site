@@ -2,6 +2,20 @@
 
 Release notes for VoxDMR. Each release page on GitHub has the full commit list and the signed binaries; this is the human summary.
 
+## v0.13.1
+
+::platforms[desktop mobile]
+
+_Released July 2026. Desktop + Android._
+
+A bugfix release for Homebrew ("Others") networks.
+
+- **Homebrew audio routing.** Fixed audio routing on Homebrew ("Others") networks, so
+  transmissions now bridge correctly between masters on the network — ADN, TGIF, FreeDMR, and
+  similar. Affects both desktop and Android. See [Server profiles](./server-profiles).
+
+No config, paths, or protocol semantics changed.
+
 ## v0.13.0
 
 ::platforms[desktop mobile]
