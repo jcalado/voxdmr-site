@@ -2,6 +2,27 @@
 
 Release notes for VoxDMR. Each release page on GitHub has the full commit list and the signed binaries; this is the human summary.
 
+## v0.13.2
+
+::platforms[desktop mobile]
+
+_Released July 2026. Desktop + Android._
+
+A small bugfix and polish release across both platforms.
+
+- **Scan notification tracks the active talkgroup (Android).** While scanning, the
+  playback notification now updates to show the talkgroup you're actually hearing instead
+  of the armed set. See [Talkgroups](./talkgroups).
+- **Accessibility disclosure (Android).** The About screen now surfaces the accessibility
+  disclosure.
+- **Windows DMR ID database update fixed (desktop).** Updating the offline DMR ID database
+  no longer fails on Windows with "os error 5" (access denied). See
+  [Talkgroups](./talkgroups).
+- **About blurb broadened (desktop).** The About text now describes VoxDMR beyond
+  BrandMeister, reflecting support for other DMR networks.
+
+No config, paths, or protocol semantics changed.
+
 ## v0.13.1
 
 ::platforms[desktop mobile]

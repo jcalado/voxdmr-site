@@ -2,6 +2,27 @@
 
 Notas de versão do VoxDMR. Cada página de release no GitHub tem a lista completa de commits e os binários assinados; isto é o resumo humano.
 
+## v0.13.2
+
+::platforms[desktop mobile]
+
+_Lançada em julho de 2026. Desktop + Android._
+
+Uma pequena versão de correções e afinações em ambas as plataformas.
+
+- **A notificação de scan segue o talkgroup ativo (Android).** Durante o scan, a notificação
+  de reprodução passa a mostrar o talkgroup que estás mesmo a ouvir, em vez do conjunto
+  armado. Vê [Talkgroups](./talkgroups).
+- **Divulgação de acessibilidade (Android).** O ecrã Sobre passa a apresentar a divulgação
+  de acessibilidade.
+- **Corrigida a atualização da base de dados de DMR IDs no Windows (desktop).** Atualizar a
+  base de dados de DMR IDs offline já não falha no Windows com "os error 5" (acesso negado).
+  Vê [Talkgroups](./talkgroups).
+- **Texto do Sobre alargado (desktop).** O texto do ecrã Sobre passa a descrever o VoxDMR
+  para além da BrandMeister, refletindo o suporte a outras redes DMR.
+
+Não houve alterações a configuração, caminhos ou semântica de protocolo.
+
 ## v0.13.1
 
 ::platforms[desktop mobile]
