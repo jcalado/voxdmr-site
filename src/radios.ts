@@ -338,6 +338,22 @@ export const radios: Radio[] = [
     testDate: "2026-07-11",
     status: "partial",
   },
+  {
+    id: "talkpod-n58plus",
+    name: "Talkpod N58plus",
+    model: "N58plus",
+    maker: "Talkpod",
+    makerUrl: "https://talkpod.com/products/talkpod%C2%AE-n58plus-2-4-inch-touch-display-smart-lte-handheld",
+    image: "/radios/talkpod-n58plus.webp",
+    ptt: "yes",
+    knob: "yes",
+    sideKeys: "yes",
+    audio: "good",
+    androidVersion: "9",
+    testedAppVersion: "0.12.0",
+    testDate: "2026-07-11",
+    status: "full",
+  },
 ];
 
 /** Each scorable feature's maximum weight; the audio weight is earned partially by quality. */

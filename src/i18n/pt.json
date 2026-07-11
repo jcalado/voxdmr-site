@@ -257,5 +257,6 @@
   "radios.notes.hytera-p60": "Suporte total de hardware: o PTT, o botão rotativo e as teclas laterais programáveis funcionam todos. O áudio é bom — melhor do que a própria aplicação HyTalk da Hytera. Testado em Android 12.",
   "radios.notes.anysecu-w8": "O PTT funciona e a qualidade de áudio é boa. O botão rotativo e as teclas laterais programáveis não funcionam. A configuração inicial através do touchpad é uma dor de cabeça, mas a porta USB-C aceita um teclado externo com um adaptador, se precisares. Testado em Android 8.1.0.",
   "radios.notes.sonim-xp8800": "O PTT e as teclas laterais programáveis funcionam, com bom áudio. Este telefone robusto não tem botão rotativo. Testado em Android 10.",
-  "radios.notes.anysecu-4g-w2plus": "O PTT e as teclas laterais programáveis funcionam, com bom áudio. O suporte para o botão rotativo ainda não foi verificado. Testado em Android 7."
+  "radios.notes.anysecu-4g-w2plus": "O PTT e as teclas laterais programáveis funcionam, com bom áudio. O suporte para o botão rotativo ainda não foi verificado. Testado em Android 7.",
+  "radios.notes.talkpod-n58plus": "Suporte total de hardware: o PTT, o botão rotativo e as teclas laterais programáveis funcionam todos, com bom áudio. Testado em Android 9."
 }
