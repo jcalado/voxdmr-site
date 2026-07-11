@@ -322,6 +322,22 @@ export const radios: Radio[] = [
     testDate: "2026-07-05",
     status: "partial",
   },
+  {
+    id: "anysecu-4g-w2plus",
+    name: "Anysecu 4G-W2plus",
+    model: "4G-W2plus",
+    maker: "Anysecu",
+    makerUrl: "https://www.szanysecu.com",
+    image: "/radios/anysecu-4g-w2plus.webp",
+    ptt: "yes",
+    knob: "unknown",
+    sideKeys: "yes",
+    audio: "good",
+    androidVersion: "7",
+    testedAppVersion: "0.13.2",
+    testDate: "2026-07-11",
+    status: "partial",
+  },
 ];
 
 /** Each scorable feature's maximum weight; the audio weight is earned partially by quality. */
