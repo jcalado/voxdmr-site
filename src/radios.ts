@@ -376,7 +376,7 @@ export const radios: Radio[] = [
     makerUrl: "https://www.motorolasolutions.com",
     image: "/radios/motorola-ion.png",
     ptt: "yes",
-    knob: "na",
+    knob: "yes",
     sideKeys: "yes",
     audio: "good",
     androidVersion: null,
