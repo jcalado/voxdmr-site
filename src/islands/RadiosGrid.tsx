@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { Check, X, ExternalLink, ArrowUpNarrowWide, ArrowDownWideNarrow, Info } from "lucide-react";
+import { Check, X, ExternalLink, ArrowUpNarrowWide, ArrowDownWideNarrow, Info, Lightbulb, Download } from "lucide-react";
 import { FaceDissatisfied } from "@carbon/icons-react";
 import { getT, type Lang } from "@/src/i18n/t";
 import { radios, performanceScore, scoreParts, type Radio, type RadioStatus, type AudioQuality, type Support } from "@/src/radios";
@@ -285,6 +285,32 @@ function RadioCard({
             </DetailRow>
           </dl>
           <p className="mt-4 text-sm text-on-surface-muted leading-relaxed">{t(`radios.notes.${radio.id}`)}</p>
+          {radio.hasTip && (
+            <div className="mt-3 flex gap-2.5 rounded-2xl border border-vibrant-blue/25 bg-vibrant-blue/10 px-3.5 py-3">
+              <Lightbulb className="w-4 h-4 shrink-0 mt-0.5 text-vibrant-blue" aria-hidden="true" />
+              <p className="text-sm text-on-surface leading-relaxed">{t(`radios.tips.${radio.id}`)}</p>
+            </div>
+          )}
+          {radio.links && radio.links.length > 0 && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {radio.links.map((link) => (
+                <a
+                  key={link.labelKey}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border border-border bg-surface-raised/60 text-on-surface hover:border-vibrant-red/40 hover:text-white transition-colors"
+                >
+                  {link.kind === "apk" ? (
+                    <Download className="w-3.5 h-3.5 shrink-0 text-vibrant-blue" aria-hidden="true" />
+                  ) : (
+                    <ExternalLink className="w-3.5 h-3.5 shrink-0 text-vibrant-blue" aria-hidden="true" />
+                  )}
+                  {t(link.labelKey)}
+                </a>
+              ))}
+            </div>
+          )}
           {score !== null && <ScoreMeter radio={radio} score={score} t={t} />}
         </>
       )}
