@@ -259,7 +259,7 @@
   "radios.notes.anysecu-4g-w2plus": "PTT and programmable side keys work, with good audio. Rotary knob support hasn't been verified yet. Tested on Android 7.",
   "radios.notes.talkpod-n58plus": "Full hardware support: PTT, rotary knob, and programmable side keys all work, with good audio. Tested on Android 9.",
   "radios.notes.motorola-ion": "Full hardware support once set up: the PTT key, programmable side keys, and audio all work well. This is a touchscreen POC handset, so it has no rotary knob. Its hardware PTT button ships locked to Motorola's own PTT client, so a one-time enabler APK is required (see tip).",
-  "radios.tips.motorola-ion": "The ION's PTT button is bound to Motorola's built-in PTT service out of the box, so third-party apps can't see it being pressed. Install the PTT Enabler APK once to free the key, then VoxDMR can receive PTT presses. You only need to do this a single time.",
+  "radios.tips.motorola-ion": "The ION's PTT button is bound to Motorola's built-in PTT service out of the box, so third-party apps never see it being pressed. The PTT Enabler bridges it, but installing the APK is only half of it: Android won't let you grant log access from the UI, so run adb shell pm grant com.jcalado.voxptt android.permission.READ_LOGS once as well. Then open the app (it shows up as Vox PTT), pick VoxDMR as the target, and tap Start bridge — it restarts on boot from then on.",
   "radios.links.motorola-ion.ptt-apk": "PTT Enabler APK",
   "radios.notes.motorola-lex-l11": "Everything works out of the box, with no enabler APK needed: the PTT key and programmable side keys both work, with good audio. This is a touchscreen POC handset, so it has no rotary knob."
 }

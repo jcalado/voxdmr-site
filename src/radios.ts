@@ -387,7 +387,10 @@ export const radios: Radio[] = [
     links: [
       {
         labelKey: "radios.links.motorola-ion.ptt-apk",
-        url: "https://github.com/jcalado/voxdmr-site/releases/latest/download/motorola-ion-ptt-enabler.apk",
+        // Pinned to the standalone enabler release, not `latest`: the enabler
+        // versions independently of the app, and a `latest/download` URL would
+        // 404 the moment a VoxDMR release ships without this asset attached.
+        url: "https://github.com/jcalado/voxdmr-site/releases/download/ion-ptt-enabler-v0.1.0/motorola-ion-ptt-enabler.apk",
         kind: "apk",
       },
     ],

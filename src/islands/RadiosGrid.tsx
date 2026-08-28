@@ -288,7 +288,7 @@ function RadioCard({
           {radio.hasTip && (
             <div className="mt-3 flex gap-2.5 rounded-2xl border border-vibrant-blue/25 bg-vibrant-blue/10 px-3.5 py-3">
               <Lightbulb className="w-4 h-4 shrink-0 mt-0.5 text-vibrant-blue" aria-hidden="true" />
-              <p className="text-sm text-on-surface leading-relaxed">{t(`radios.tips.${radio.id}`)}</p>
+              <p className="text-sm text-on-surface leading-relaxed break-words">{t(`radios.tips.${radio.id}`)}</p>
             </div>
           )}
           {radio.links && radio.links.length > 0 && (
