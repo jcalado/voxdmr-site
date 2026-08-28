@@ -264,5 +264,9 @@
   "radios.notes.anysecu-w8": "O PTT funciona e a qualidade de áudio é boa. O botão rotativo e as teclas laterais programáveis não funcionam. A configuração inicial através do touchpad é uma dor de cabeça, mas a porta USB-C aceita um teclado externo com um adaptador, se precisares. Testado em Android 8.1.0.",
   "radios.notes.sonim-xp8800": "O PTT e as teclas laterais programáveis funcionam, com bom áudio. Este telefone robusto não tem botão rotativo. Testado em Android 10.",
   "radios.notes.anysecu-4g-w2plus": "O PTT e as teclas laterais programáveis funcionam, com bom áudio. O suporte para o botão rotativo ainda não foi verificado. Testado em Android 7.",
-  "radios.notes.talkpod-n58plus": "Suporte total de hardware: o PTT, o botão rotativo e as teclas laterais programáveis funcionam todos, com bom áudio. Testado em Android 9."
+  "radios.notes.talkpod-n58plus": "Suporte total de hardware: o PTT, o botão rotativo e as teclas laterais programáveis funcionam todos, com bom áudio. Testado em Android 9.",
+  "radios.notes.motorola-ion": "Suporte total de hardware depois de configurado: a tecla PTT, as teclas laterais programáveis e o áudio funcionam bem. É um POC com ecrã tátil, por isso não tem botão rotativo. A tecla PTT vem bloqueada ao cliente PTT da própria Motorola, por isso é necessário um APK de ativação único (ver dica).",
+  "radios.tips.motorola-ion": "A tecla PTT do ION está associada de origem ao serviço PTT integrado da Motorola, por isso as apps de terceiros não a conseguem detetar. Instale uma vez o APK PTT Enabler para libertar a tecla e o VoxDMR passa a receber os toques no PTT. Só precisa de o fazer uma vez.",
+  "radios.links.motorola-ion.ptt-apk": "APK PTT Enabler",
+  "radios.notes.motorola-lex-l11": "Funciona tudo de origem, sem necessidade de APK de ativação: a tecla PTT e as teclas laterais programáveis funcionam, com bom áudio. É um POC com ecrã tátil, por isso não tem botão rotativo."
 }

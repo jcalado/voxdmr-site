@@ -10,6 +10,16 @@ export type AudioQuality = "good" | "ok" | "poor";
  */
 export type Support = "yes" | "no" | "na" | "unknown";
 
+/** A downloadable asset or external resource attached to a radio (e.g. a PTT-enabler APK). */
+export interface RadioLink {
+  /** i18n key for the visible label, e.g. "radios.links.motorola-ion.ptt-apk". */
+  labelKey: string;
+  /** Destination URL — a direct file (APK) or an external page. */
+  url: string;
+  /** Chooses the icon: "apk" shows a download glyph, "link" (default) an external-link glyph. */
+  kind?: "apk" | "link";
+}
+
 export interface Radio {
   /** kebab-case; used as the React key and the `radios.notes.<id>` i18n key. */
   id: string;
@@ -33,6 +43,10 @@ export interface Radio {
   /** ISO date (YYYY-MM-DD) the radio was last verified. Optional. */
   testDate?: string;
   status: RadioStatus;
+  /** Extra guidance shown as a highlighted callout, sourced from `radios.tips.<id>`. Optional. */
+  hasTip?: boolean;
+  /** Downloadable assets or external resources, rendered as link pills. Optional. */
+  links?: RadioLink[];
 }
 
 export const radios: Radio[] = [
@@ -352,6 +366,46 @@ export const radios: Radio[] = [
     androidVersion: "9",
     testedAppVersion: "0.12.0",
     testDate: "2026-07-11",
+    status: "full",
+  },
+  {
+    id: "motorola-ion",
+    name: "Motorola ION",
+    model: "ION",
+    maker: "Motorola",
+    makerUrl: "https://www.motorolasolutions.com",
+    image: "/radios/motorola-ion.png",
+    ptt: "yes",
+    knob: "na",
+    sideKeys: "yes",
+    audio: "good",
+    androidVersion: null,
+    testedAppVersion: "0.13.2",
+    testDate: "2026-07-21",
+    status: "full",
+    hasTip: true,
+    links: [
+      {
+        labelKey: "radios.links.motorola-ion.ptt-apk",
+        url: "https://github.com/jcalado/voxdmr-site/releases/latest/download/motorola-ion-ptt-enabler.apk",
+        kind: "apk",
+      },
+    ],
+  },
+  {
+    id: "motorola-lex-l11",
+    name: "Motorola LEX L11",
+    model: "LEX L11",
+    maker: "Motorola",
+    makerUrl: "https://www.motorolasolutions.com",
+    image: "/radios/motorola-lex-l11.jpg",
+    ptt: "yes",
+    knob: "na",
+    sideKeys: "yes",
+    audio: "good",
+    androidVersion: null,
+    testedAppVersion: "0.13.2",
+    testDate: "2026-07-21",
     status: "full",
   },
 ];
