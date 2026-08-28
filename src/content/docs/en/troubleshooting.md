@@ -149,8 +149,10 @@ Set it in **Settings → Scan → Hang time**.
 
 The vocoder firmware isn't installed yet, or the install location isn't where VoxDMR is looking. The setup card lets you fix this two ways:
 
-- **Download (≈2 MB)**: the easy path; works on any machine with internet access to `md380.org` and `raw.githubusercontent.com`.
-- **Choose existing files**: for offline machines or restrictive networks. Point VoxDMR at `D002.032.bin` and `d02032-core.img` on disk.
+- **Download**: the easy path; works on any machine with internet access to `md380.org`.
+- **Choose existing files**: for offline machines or restrictive networks. Point VoxDMR at `D002.032.bin` on disk.
+
+Since v0.14.0 only `D002.032.bin` is required — the old second file, `d02032-core.img`, is compiled in and no longer downloaded. An existing copy is still used if you have one.
 
 If you have the files in a non-default location, set `VOXDMR_FIRMWARE_DIR` to point at the directory before launching:
 
@@ -164,7 +166,7 @@ A firmware file got corrupted (partial download, disk error, accidentally edited
 
 ### Auto-download fails behind a corporate proxy
 
-`ureq` (the HTTPS client VoxDMR uses) doesn't read system proxy settings. Either use the **Choose existing files** path with manually-downloaded files, or run VoxDMR from a network that allows direct outbound HTTPS to the two source hosts.
+`ureq` (the HTTPS client VoxDMR uses) doesn't read system proxy settings. Either use the **Choose existing files** path with a manually-downloaded `D002.032.bin`, or run VoxDMR from a network that allows direct outbound HTTPS to `md380.org`.
 
 ## Activity dots stay gray
 

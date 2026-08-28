@@ -88,13 +88,11 @@ Na primeira execução do VoxDMR Desktop aparece um cartão de configuração ú
 
 Tens duas opções:
 
-**Auto-download** (recomendado). Clica em **Transferir (≈2 MB)**. O VoxDMR vai buscar:
-- `D002.032.bin` (994 KB) a [md380.org](https://md380.org/firmware/orig/TYT-Tytera-MD-380-FW-v232.zip), desempacotado do formato OEM.
-- `d02032-core.img` (128 KB) ao [projeto md380_vocoder_dynarmic no GitHub](https://github.com/nostar/md380_vocoder_dynarmic).
+**Auto-download** (recomendado). Clica em **Transferir**. O VoxDMR vai buscar um único ficheiro — o `D002.032.bin` (994 KB) — a [md380.org](https://md380.org/firmware/orig/TYT-Tytera-MD-380-FW-v232.zip), desempacotado do formato OEM. É verificado por SHA-256 antes de ser escrito no disco, e o processo demora alguns segundos numa ligação normal.
 
-Ambos são verificados por SHA-256 antes de serem escritos no disco. O processo demora alguns segundos numa ligação normal.
+**Escolher ficheiros existentes**: se a tua máquina não conseguir aceder ao URL (proxy corporativo, offline, firewall restritivo), clica em **Escolher ficheiros existentes…** e seleciona o `D002.032.bin` no disco. É copiado para o diretório de dados e verificado por SHA-256 da mesma forma.
 
-**Escolher ficheiros existentes**: se a tua máquina não conseguir aceder aos URLs (proxy corporativo, offline, firewall restritivo), clica em **Escolher ficheiros existentes…** e seleciona `D002.032.bin` e `d02032-core.img` no disco. São copiados para o diretório de dados e verificados por SHA-256 da mesma forma.
+> **Vens da v0.13.x ou anterior?** A configuração inicial ia buscar um segundo ficheiro, o `d02032-core.img` (um dump de 128 KB da SRAM de um rádio em funcionamento). A partir da v0.14.0 a parte essencial dessa imagem está compilada dentro do VoxDMR, por isso **já não é transferida nem necessária**. Uma cópia que já esteja em disco continua a ser preferida e verificada por SHA, portanto nada quebra numa atualização — simplesmente deixa de ser preciso numa instalação nova. (O seletor **Escolher ficheiros existentes…** filtra por `.bin`, por isso só apresenta o `D002.032.bin`.) Vê o [registo de alterações](./changelog).
 
 Depois da configuração concluída, o UI principal aparece e o firmware é carregado em todos os arranques seguintes.
 

@@ -88,13 +88,11 @@ The first time VoxDMR Desktop starts, it shows a one-shot setup card because the
 
 You have two choices:
 
-**Auto-download** (recommended). Click **Download (≈2 MB)**. VoxDMR fetches:
-- `D002.032.bin` (994 KB) from [md380.org](https://md380.org/firmware/orig/TYT-Tytera-MD-380-FW-v232.zip), unwrapped from the OEM update format.
-- `d02032-core.img` (128 KB) from the [upstream md380_vocoder_dynarmic project on GitHub](https://github.com/nostar/md380_vocoder_dynarmic).
+**Auto-download** (recommended). Click **Download**. VoxDMR fetches a single file — `D002.032.bin` (994 KB) — from [md380.org](https://md380.org/firmware/orig/TYT-Tytera-MD-380-FW-v232.zip), unwrapped from the OEM update format. It's SHA-256 verified before being written to disk, and the whole thing takes a few seconds on a normal connection.
 
-Both downloads are SHA-256 verified before being written to disk. The whole thing takes a few seconds on a normal connection.
+**Choose existing files**: if your machine can't reach the download URL (corporate proxy, offline, restricted firewall), click **Choose existing files…** and pick `D002.032.bin` from somewhere on disk. It's copied into the data directory and SHA-verified the same way.
 
-**Choose existing files**: if your machine can't reach the download URLs (corporate proxy, offline, restricted firewall), click **Choose existing files…** and pick `D002.032.bin` and `d02032-core.img` from somewhere on disk. They're copied into the data directory and SHA-verified the same way.
+> **Upgrading from v0.13.x or earlier?** Setup used to fetch a second file, `d02032-core.img` (a 128 KB dump of a running radio's SRAM). As of v0.14.0 the load-bearing part of that image is compiled into VoxDMR, so it's **no longer downloaded or required**. An existing copy on disk is still preferred and SHA-verified, so nothing breaks on an upgrade — you just don't need it on a fresh install. (The **Choose existing files…** picker filters on `.bin`, so it only offers `D002.032.bin` anyway.) See the [changelog](./changelog).
 
 Once setup completes, the main UI mounts and the firmware is loaded for every subsequent launch.
 

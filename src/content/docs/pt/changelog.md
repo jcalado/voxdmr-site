@@ -2,6 +2,51 @@
 
 Notas de versão do VoxDMR. Cada página de release no GitHub tem a lista completa de commits e os binários assinados; isto é o resumo humano.
 
+## v0.14.0
+
+::platforms[desktop mobile]
+
+_Lançada em julho de 2026. Desktop + Android._
+
+Áudio recebido mais alto, um registo de QSOs com localizações e ligações ao QRZ, cópias de
+segurança que incluem as tuas definições, e um vocoder muito mais rápido.
+
+- **Áudio recebido mais alto.** O nivelamento automático aponta mais alto, para o áudio
+  recebido soar como um rádio e não como um sussurro, e uma nova opção
+  **Reforço de RX (+6 dB)** acrescenta mais para ambientes ruidosos.
+  ⚠️ **Vens da 0.13.x no desktop?** Liga a caixa do AGC de RX uma vez — a tua configuração
+  gravada tem-na desligada. Vê [Definições de áudio](./audio-settings).
+- **Guardar tudo.** As cópias de segurança passam a incluir todas as definições da
+  aplicação, não só os perfis. Desktop: **Guardar tudo…**; Android: **Definições → Cópia de
+  segurança e restauro**. Vê [Perfis de servidor](./server-profiles).
+- **O registo de QSOs cresceu.** Os indicativos passam a ligar para o **QRZ.com**, e a
+  cidade, o distrito/estado, o país e as bandeiras estão disponíveis como colunas. No
+  desktop as colunas redimensionam-se e as linhas abrem uma vista de detalhe.
+- **Acessórios de PTT Bluetooth (Android).** Acessórios de PTT externos como o Inrico B01
+  passam a funcionar, com carregar-para-falar a sério, e o microfone Bluetooth ganha o seu
+  próprio cursor de nível. Vê [Modos de PTT](./ptt-modes).
+- **Um vocoder muito mais rápido.** A codificação de transmissão é várias vezes mais rápida,
+  resolvendo o áudio de TX entrecortado nos telemóveis mais lentos. A qualidade do áudio não
+  muda.
+- **Põe-no com o aspeto que quiseres.** Um novo ecrã Interface em ambas as plataformas:
+  cores para o cartão de chamada, o distintivo de talkgroup e o botão de PTT, mais controlo
+  do tamanho do texto.
+- **Ligações `voxdmr://` (desktop).** Clicar numa ligação `voxdmr://tg/91` abre o VoxDMR
+  diretamente nesse talkgroup.
+- **Um ficheiro de firmware em vez de dois.** A configuração inicial é uma transferência
+  mais pequena. As instalações existentes não são afetadas. Vê [Instalação](./installation).
+- **A lista de servidores Homebrew atualiza-se sozinha.** Um botão **Atualizar** vai buscar
+  o diretório de servidores da comunidade sem esperar por uma atualização da aplicação. Vê
+  [Perfis de servidor](./server-profiles).
+- **Definições mais claras (Android).** Etiquetas em linguagem simples, com os detalhes
+  atrás de um **(i)** tocável. As definições do Modo condução estão agrupadas, e um atalho
+  para a otimização de bateria passa a estar em Ecrã e energia.
+- **Correções.** A latência de receção já não vai subindo quanto mais tempo ouves, e o
+  medidor de RX acompanha o que estás mesmo a ouvir. O scan é limpo corretamente ao
+  desligar e mantém-se acessível durante uma chamada. Nos rádios PoC, o botão rotativo dos
+  LEX salta um favorito por retenção e o balancim de canal do Motorola ION funciona. Vê
+  [Rádios](../radios).
+
 ## v0.13.2
 
 ::platforms[desktop mobile]
