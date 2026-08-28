@@ -4,6 +4,12 @@
   "nav.docs": "Documentação",
   "nav.getApp": "Transferir",
 
+  "download.label": "Transferir",
+  "download.playStore": "Play Store",
+  "download.windows": "Windows",
+  "download.linuxAppImage": "Linux · AppImage",
+  "download.apk32": "APK Android · 32-bit (PoC)",
+
   "screenshots.heading": "Vê em ação",
   "screenshots.subheading": "Do idle ao RX ativo. A mesma app no PC e no telemóvel — alterna para trocar.",
   "screenshots.zoomOpen": "Ampliar",

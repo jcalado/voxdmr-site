@@ -10,3 +10,4 @@ Thumbs.db
 .superpowers
 docs/superpowers/
 .astro/
+.playwright-mcp/
