@@ -1,6 +1,7 @@
 ---
 import Logo from "@/src/components/Logo.astro";
 import LanguageSwitcher from "@/src/components/LanguageSwitcher.astro";
+import DownloadMenu from "@/src/islands/DownloadMenu.tsx";
 import Menu from "@/src/components/icons/Menu.astro";
 import X from "@/src/components/icons/X.astro";
 import { getT, type Lang } from "@/src/i18n/t";
@@ -39,12 +40,13 @@ const navLinks = [
 
     <div class="flex items-center gap-3 lg:gap-4">
       <LanguageSwitcher lang={lang} pathname={pathname} />
-      <a
-        href={`${homePrefix}/#download`}
-        class="btn-press hidden lg:inline-flex bg-vibrant-red hover:bg-red-500 text-white px-6 lg:px-8 py-2.5 lg:py-3 rounded-2xl font-bold hover:scale-105 transition-all"
-      >
-        {t("nav.getApp")}
-      </a>
+      <DownloadMenu
+        lang={lang}
+        align="right"
+        className="hidden lg:block"
+        triggerClassName="btn-press inline-flex items-center gap-2 bg-vibrant-red hover:bg-red-500 text-white px-5 lg:px-6 py-2.5 lg:py-3 rounded-2xl font-bold hover:scale-105 transition-all"
+        client:load
+      />
       <button
         type="button"
         class="lg:hidden text-on-surface-muted hover:text-white transition-colors p-1.5 -mr-1.5"

@@ -4,6 +4,12 @@
   "nav.docs": "Docs",
   "nav.getApp": "Download",
 
+  "download.label": "Download",
+  "download.playStore": "Play Store",
+  "download.windows": "Windows",
+  "download.linuxAppImage": "Linux · AppImage",
+  "download.apk32": "Android APK · 32-bit (PoC)",
+
   "screenshots.heading": "See it in action",
   "screenshots.subheading": "From idle to active RX. Same app on the desktop and on a phone — toggle to switch.",
   "screenshots.zoomOpen": "Zoom in on",
