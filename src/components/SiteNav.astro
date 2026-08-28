@@ -6,6 +6,7 @@ import Menu from "@/src/components/icons/Menu.astro";
 import X from "@/src/components/icons/X.astro";
 import { getT, type Lang } from "@/src/i18n/t";
 import { localizePath } from "@/src/i18n/routing";
+import { downloads } from "@/src/downloads";
 
 const linkClass =
   "nav-link font-medium text-on-surface-muted hover:text-vibrant-red transition-colors px-2 py-1";
@@ -26,6 +27,10 @@ const navLinks = [
   { href: localizePath("/docs", lang), label: t("nav.docs") },
   { href: localizePath("/radios", lang), label: t("nav.radios") },
 ];
+
+// The phone menu leads with the Play Store and demotes the rest.
+const primary = downloads.find((d) => d.key === "playStore")!;
+const secondary = downloads.filter((d) => d.key !== "playStore");
 ---
 <nav class="w-full top-0 sticky z-50 bg-slate-950/80 backdrop-blur-xl h-24 flex items-center border-b border-border">
   <div class="flex justify-between items-center max-w-7xl mx-auto px-6 lg:px-10 w-full">
@@ -78,13 +83,40 @@ const navLinks = [
           {l.label}
         </a>
       ))}
-      <a
-        href={`${homePrefix}/#download`}
-        data-nav-link
-        class="btn-press mt-4 bg-vibrant-red hover:bg-red-500 text-white text-center px-6 py-3 rounded-2xl font-bold transition-colors"
-      >
-        {t("nav.getApp")}
-      </a>
+      {/*
+        The slide-out lists the download targets inline rather than nesting the
+        DownloadMenu dropdown inside it: one tap instead of two, and no overlay
+        stacked on an overlay. The Play Store leads as the primary button since
+        this menu only ever renders on a phone; the rest sit beneath as
+        secondary links. Each carries data-nav-link so the existing tap handler
+        closes the menu.
+      */}
+      <div class="mt-4 flex flex-col items-center gap-3">
+        <span class="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-on-surface-muted">
+          {t("download.label")}
+        </span>
+        <a
+          href={primary.href}
+          data-nav-link
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-press w-full bg-vibrant-red hover:bg-red-500 text-white text-center px-6 py-3 rounded-2xl font-bold transition-colors"
+        >
+          {t(primary.labelKey)}
+        </a>
+        <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 pb-1">
+          {secondary.map((d) => (
+            <a
+              href={d.href}
+              data-nav-link
+              {...(d.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              class="text-sm font-medium text-on-surface-muted hover:text-white transition-colors"
+            >
+              {t(d.labelKey)}
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </nav>

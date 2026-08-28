@@ -2,7 +2,6 @@
   "nav.screenshots": "Screenshots",
   "nav.features": "Features",
   "nav.docs": "Docs",
-  "nav.getApp": "Download",
 
   "download.label": "Download",
   "download.playStore": "Play Store",
@@ -39,10 +38,6 @@
   "hero.joinCommunity": "View on GitHub",
   "nav.getAndroid": "Google Play",
   "nav.getDesktop": "Desktop",
-  "cta.getAndroid": "Get on Google Play",
-  "cta.getDesktop": "Download for Desktop",
-  "cta.onPhone": "On your phone",
-  "cta.onDesktop": "On your computer",
 
   "features.heading": "Built for DMR",
   "features.subheading": "Everything you need to get on the air, on any DMR network you can reach.",
@@ -85,8 +80,6 @@
   "cta.description": "Free to download. No account needed. Install VoxDMR on your phone or PC, enter your DMR ID, and you're on the air.",
   "cta.setupGuide": "Setup Guide",
   "cta.joinCommunity": "Join the Community",
-  "cta.android": "Android",
-  "cta.desktop": "Desktop",
   "cta.community": "Community",
   "cta.donate": "Donate",
 

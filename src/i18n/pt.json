@@ -2,7 +2,6 @@
   "nav.screenshots": "Capturas",
   "nav.features": "Funcionalidades",
   "nav.docs": "Documentação",
-  "nav.getApp": "Transferir",
 
   "download.label": "Transferir",
   "download.playStore": "Play Store",
@@ -39,10 +38,6 @@
   "hero.joinCommunity": "Ver no GitHub",
   "nav.getAndroid": "Google Play",
   "nav.getDesktop": "PC",
-  "cta.getAndroid": "Obter no Google Play",
-  "cta.getDesktop": "Transferir para PC",
-  "cta.onPhone": "No teu telemóvel",
-  "cta.onDesktop": "No teu computador",
 
   "features.heading": "Feito para DMR",
   "features.subheading": "Tudo o que precisas para entrar no ar, em qualquer rede DMR ao teu alcance.",
@@ -85,8 +80,6 @@
   "cta.description": "Gratuito para descarregar. Sem necessidade de conta. Instala o VoxDMR no telemóvel ou no PC, introduz o teu ID DMR e estás no ar.",
   "cta.setupGuide": "Guia de Configuração",
   "cta.joinCommunity": "Junta-te à Comunidade",
-  "cta.android": "Android",
-  "cta.desktop": "Desktop",
   "cta.community": "Comunidade",
   "cta.donate": "Doar",
 
