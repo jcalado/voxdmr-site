@@ -2,6 +2,47 @@
 
 Release notes for VoxDMR. Each release page on GitHub has the full commit list and the signed binaries; this is the human summary.
 
+## v0.14.0
+
+::platforms[desktop mobile]
+
+_Released July 2026. Desktop + Android._
+
+Louder receive audio, a QSO log with locations and QRZ links, backups that include your
+settings, and a much faster vocoder.
+
+- **Louder receive audio.** Auto-levelling aims higher, so received audio sounds like a
+  radio instead of a whisper, and a new **RX boost (+6 dB)** adds more for noisy
+  environments. ⚠️ **Upgrading desktop from 0.13.x?** Tick the RX AGC checkbox once — your
+  saved config has it switched off. See [Audio settings](./audio-settings).
+- **Back up everything.** Backups now include all your app settings, not just profiles.
+  Desktop: **Back up all…**; Android: **Settings → Backup & restore**. See
+  [Server profiles](./server-profiles).
+- **The QSO log grew up.** Callsigns link out to **QRZ.com**, and city, state, country and
+  country flags are available as columns. Desktop columns are resizable and rows open a
+  detail view.
+- **Bluetooth PTT accessories (Android).** External PTT accessories such as the Inrico B01
+  now work, with proper hold-to-talk, and the Bluetooth mic gets its own level slider. See
+  [PTT modes](./ptt-modes).
+- **A much faster vocoder.** Transmit encoding is several times faster, clearing up the
+  choppy TX audio on slower phones. Audio quality is unchanged.
+- **Make it look how you want.** A new Interface screen on both platforms: colours for the
+  call card, talkgroup badge and PTT button, plus text-size controls.
+- **`voxdmr://` links (desktop).** Clicking a `voxdmr://tg/91` link opens VoxDMR straight
+  onto that talkgroup.
+- **One firmware file instead of two.** First-launch setup is a smaller download. Existing
+  installs are unaffected. See [Installation](./installation).
+- **The Homebrew server list updates itself.** A **Refresh** button pulls the current
+  community server directory without waiting for an app update. See
+  [Server profiles](./server-profiles).
+- **Clearer settings (Android).** Plain-language labels, with the details behind a tappable
+  **(i)**. Car mode settings are grouped, and a battery-optimization shortcut sits under
+  Display & power.
+- **Fixes.** Receive latency no longer creeps upward the longer you listen, and the RX meter
+  tracks what you're actually hearing. Scan clears properly on disconnect and stays
+  reachable during a call. On PoC radios, the LEX knob steps one favourite per detent and
+  the Motorola ION's channel rocker works. See [Radios](../radios).
+
 ## v0.13.2
 
 ::platforms[desktop mobile]
