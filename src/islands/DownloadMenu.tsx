@@ -3,49 +3,14 @@ import { createPortal } from "react-dom";
 import type { LucideIcon } from "lucide-react";
 import { ChevronDown, Cpu, Download, Monitor, Smartphone, Terminal } from "lucide-react";
 import { getT, type Lang } from "@/src/i18n/t";
+import { downloads, type Download as DownloadTarget } from "@/src/downloads";
 
-type DownloadItem = {
-  key: string;
-  labelKey: string;
-  href: string;
-  Icon: LucideIcon;
-  /** Open in a new tab (store / releases pages). Direct asset links download in place. */
-  external?: boolean;
+const ICONS: Record<DownloadTarget["key"], LucideIcon> = {
+  playStore: Smartphone,
+  windows: Monitor,
+  linuxAppImage: Terminal,
+  apk32: Cpu,
 };
-
-// Download targets. The stable-named desktop assets resolve through GitHub's
-// `/releases/latest/download/<asset>` redirect, so these URLs never need a
-// version bump. The APKs have version-stamped filenames, so the 32-bit build
-// links to the releases page rather than a direct asset.
-const RELEASES = "https://github.com/jcalado/voxdmr-site/releases";
-const DOWNLOADS: DownloadItem[] = [
-  {
-    key: "playStore",
-    labelKey: "download.playStore",
-    href: "https://play.google.com/store/apps/details?id=com.jcalado.voxdmr",
-    Icon: Smartphone,
-    external: true,
-  },
-  {
-    key: "windows",
-    labelKey: "download.windows",
-    href: `${RELEASES}/latest/download/VoxDMR-windows-x86_64.exe`,
-    Icon: Monitor,
-  },
-  {
-    key: "linuxAppImage",
-    labelKey: "download.linuxAppImage",
-    href: `${RELEASES}/latest/download/VoxDMR-linux-x86_64.AppImage`,
-    Icon: Terminal,
-  },
-  {
-    key: "apk32",
-    labelKey: "download.apk32",
-    href: `${RELEASES}/latest`,
-    Icon: Cpu,
-    external: true,
-  },
-];
 
 type DownloadMenuProps = {
   lang: Lang;
@@ -135,19 +100,22 @@ export default function DownloadMenu({
             style={{ top: coords.top, left: coords.left, width: MENU_WIDTH }}
             className="fixed z-[60] origin-top rounded-2xl border border-border bg-slate-900/95 p-2 shadow-2xl shadow-black/50 backdrop-blur-xl"
           >
-            {DOWNLOADS.map(({ key, labelKey, href, Icon, external }) => (
-              <a
-                key={key}
-                href={href}
-                role="menuitem"
-                onClick={() => setOpen(false)}
-                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-on-surface transition-colors hover:bg-white/10 hover:text-white"
-              >
-                <Icon className="w-4 h-4 shrink-0 text-vibrant-blue" />
-                {t(labelKey)}
-              </a>
-            ))}
+            {downloads.map(({ key, labelKey, href, external }) => {
+              const Icon = ICONS[key];
+              return (
+                <a
+                  key={key}
+                  href={href}
+                  role="menuitem"
+                  onClick={() => setOpen(false)}
+                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-on-surface transition-colors hover:bg-white/10 hover:text-white"
+                >
+                  <Icon className="w-4 h-4 shrink-0 text-vibrant-blue" />
+                  {t(labelKey)}
+                </a>
+              );
+            })}
           </div>,
           document.body,
         )}
