@@ -2,6 +2,65 @@
 
 Notas de versão do VoxDMR. Cada página de release no GitHub tem a lista completa de commits e os binários assinados; isto é o resumo humano.
 
+## v0.15.0
+
+::platforms[desktop mobile]
+
+_Lançada em setembro de 2026. Desktop + Android._
+
+Transmissão com as mãos livres, redução de ruído neural no microfone, tema claro, um
+assistente de primeira utilização e um modo de condução que transforma um rádio PoC num
+painel de instrumentos.
+
+- **VOX — transmitir ao falar.** Ativa-o e a tua voz liga o rádio; o botão de falar tem
+  sempre prioridade e o temporizador de corte é sempre aplicado. Está deliberadamente fora
+  do caminho: no Android, *Definições → Premir para falar → Avançado: VOX* só abre com um
+  toque longo de cinco segundos na primeira vez (nos rádios sem ecrã tátil, manter o OK do
+  D-pad também serve); no desktop, cinco cliques no mesmo cabeçalho.
+  ⚠️ **Não uses o VOX para ligar outro rádio ou um repetidor à BrandMeister** — as ligações
+  não vigiadas violam os termos da BrandMeister e são motivo para banir o teu ID DMR.
+  Vê [Modos de PTT](./ptt-modes).
+- **Redução de ruído neural na transmissão.** Uma pequena rede neural limpa o microfone
+  antes de o codec DMR o ver, com um cursor de intensidade. O codec envia um *modelo* da tua
+  voz e não o som em si, por isso o ruído de fundo corrompe-o nos artefactos que as pessoas
+  atribuem ao DMR — limpar a entrada ajuda muito mais do que limpar a saída. Cerca de +3 a
+  +4 dB em carro, zumbido, vozes de fundo e chiado. **Desligada por predefinição, e vale a
+  pena deixá-la desligada num sítio silencioso.** Vê [Definições de áudio](./audio-settings).
+- **Tema claro.** Escuro, claro ou seguir o sistema, nas duas plataformas. O escuro continua
+  a ser a predefinição e está exatamente como estava; a escolha sobrevive a um reinício e
+  entra na cópia de segurança das definições.
+- **Assistente de primeira utilização.** Um primeiro arranque guiado nas duas plataformas —
+  rede, conta, teste de microfone, vocoder — em vez de um ecrã de definições vazio. Os nomes
+  dos talkgroups passam a ser por rede, por isso um talkgroup da FreeDMR já não mostra um
+  nome da BrandMeister.
+- **Bips para chamadas recebidas, e tons de PTT separados.** Um bip agudo curto quando
+  alguém começa a transmitir no teu talkgroup e um grave quando pára, para ouvires o canal
+  ficar ocupado sem olhar para o ecrã. A definição única de "tons de PTT" passa a ser duas —
+  início e fim — para poderes ficar só com o bip de fim. Vê
+  [Definições de áudio](./audio-settings).
+- **O modo de condução parece um rádio (rádios PoC).** Nos rádios de painel pequeno como o
+  Hytera P50, o modo de condução passa a desenhar uma face de instrumentos: uma barra de
+  legendas, uma placa de estado, um medidor de nível segmentado com retenção de pico, uma
+  barra de tempo limite enquanto transmites e teclas de canal de arestas vivas. Nos
+  telemóveis e tablets nada muda. Vê [Modo de condução](./car-mode).
+- **Cartão de chamada no ecrã principal (rádios PoC Hytera).** Nos rádios com o lançador
+  Onego, o ecrã principal mostra o talkgroup, quem está a falar e um cronómetro da chamada, e
+  o VoxDMR aparece no seletor de cartões do lançador. Vê [Rádios](../radios).
+- **LED de estado (rádios Hytera).** O LED de notificação do rádio segue a sessão: verde
+  numa chamada a entrar, vermelho enquanto transmites, um piscar laranja lento com a procura
+  armada, e ainda indicações opcionais de queda e de ligação ativa. Cinco interruptores
+  independentes em Ecrã e energia.
+- **Captação de microfone mais limpa (Android).** O VoxDMR pede ao Android o microfone menos
+  processado que conseguir e desliga o supressor de ruído, o AGC e o cancelador de eco do
+  fabricante na sessão de captação — antes disso, em muitos telemóveis, esses corriam por
+  cima do nivelamento do próprio VoxDMR.
+- **Correções.** O microfone do auricular Bluetooth volta a funcionar (não enviava nada), e
+  nos rádios Hytera as teclas de volume mexem no volume que estás mesmo a ouvir. O tom de PTT
+  já não entra no início da tua transmissão. No desktop, fechar a última janela já não deixa
+  o processo a correr. As listas de definições no Android libertam a barra de navegação, os
+  botões de informação já não prendem o foco do D-pad nos rádios compactos, e a aplicação
+  passa a visar o Android 16. Vê [Resolução de problemas](./troubleshooting).
+
 ## v0.14.0
 
 ::platforms[desktop mobile]

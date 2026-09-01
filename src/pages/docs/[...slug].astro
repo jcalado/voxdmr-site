@@ -5,6 +5,8 @@ import DocsLayout from "@/src/layouts/DocsLayout.astro";
 import { pageTitle, localizedSidebarGroups, localizedAdjacent } from "@/src/lib/docs-i18n";
 import { getPageBySlug } from "@/src/lib/docs-config";
 import { t, type Lang } from "@/src/i18n/t";
+import { parseChangelog } from "@/src/lib/changelog";
+import { ChangelogReleases } from "@/src/islands/ChangelogReleases";
 import "@/src/docs/docs.css";
 
 export async function getStaticPaths() {
@@ -31,10 +33,32 @@ const description =
 
 const groups = localizedSidebarGroups(lang);
 const { prev, next } = localizedAdjacent(slug, lang);
+
+// The changelog is the one doc that is a list of releases rather than a piece
+// of prose, so it renders as a version rail plus collapsible cards. The split
+// happens here, at build time, from the same rendered HTML the other pages use
+// — so the release bodies are in the static page and only the folding is
+// client-side. Any page whose HTML the loader didn't cache falls through to the
+// plain <Content /> path.
+const changelogHtml = slug === "changelog" ? entry.rendered?.html : undefined;
+const changelog = changelogHtml ? parseChangelog(changelogHtml) : undefined;
 ---
 
 <Layout lang={lang} title={`${title} — VoxDMR Docs`} description={description} pathname={pathname}>
   <DocsLayout lang={lang} pathname={pathname} slug={slug} groups={groups} prev={prev} next={next}>
-    <Content />
+    {changelog ? (
+      <>
+        <Fragment set:html={changelog.introHtml} />
+        <ChangelogReleases
+          client:load
+          releases={changelog.releases}
+          latestLabel={t("changelog.latest", lang)}
+          changesLabel={t("changelog.changes", lang)}
+          changeLabel={t("changelog.change", lang)}
+        />
+      </>
+    ) : (
+      <Content />
+    )}
   </DocsLayout>
 </Layout>
