@@ -17,6 +17,7 @@ export interface AdjacentPage {
 const groupLabelKeys: Record<string, string> = {
   "Getting Started": "docs.group.gettingStarted",
   "Using VoxDMR": "docs.group.usingVoxlink",
+  "PoC Radios": "docs.group.pocRadios",
   Reference: "docs.group.reference",
 };
 
@@ -30,6 +31,8 @@ const pageTitleKeys: Record<string, string> = {
   "server-profiles": "docs.page.serverProfiles",
   "auto-reconnect": "docs.page.autoReconnect",
   talkgroups: "docs.page.talkgroups",
+  "poc-radios": "docs.page.pocRadios",
+  "hytera-p50": "docs.page.hyteraP50",
   troubleshooting: "docs.page.troubleshooting",
   changelog: "docs.page.changelog",
 };

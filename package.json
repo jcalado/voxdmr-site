@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev --port 3000 --host",
-    "build": "astro build",
+    "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "clean": "rm -rf dist",
     "lint": "astro check && tsc --noEmit"
@@ -34,6 +34,7 @@
     "@types/node": "^22.14.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "pagefind": "^1.5.2",
     "tailwindcss": "^4.1.14",
     "typescript": "~5.8.2"
   },

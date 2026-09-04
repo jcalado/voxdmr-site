@@ -2,6 +2,61 @@
 
 Release notes for VoxDMR. Each release page on GitHub has the full commit list and the signed binaries; this is the human summary.
 
+## v0.15.0
+
+::platforms[desktop mobile]
+
+_Released September 2026. Desktop + Android._
+
+Hands-free transmit, neural noise reduction on the microphone, a light theme, a first-run
+setup wizard, and a car mode that turns a PoC radio into an instrument panel.
+
+- **VOX — transmit by speaking.** Arm it and your voice keys the radio; the talk button
+  always overrides it, and a time-out timer is always enforced. It is deliberately out of
+  the way: on Android, *Settings → Push-to-talk → Advanced: VOX* opens to a five-second
+  press and hold the first time (a held D-pad OK works on radios with no touchscreen); on
+  desktop, five clicks on the same header. ⚠️ **Do not use VOX to bridge another radio or a
+  repeater onto BrandMeister** — unattended bridging is against their terms and is grounds
+  for having your DMR ID banned. See [PTT modes](./ptt-modes).
+- **Neural noise reduction on transmit.** A small neural network cleans your microphone
+  before the DMR codec sees it, with a strength slider. The codec sends a *model* of your
+  voice rather than the sound itself, so background noise corrupts it into the burbly
+  artefacts people blame on DMR — cleaning the input helps far more than cleaning the
+  output would. Roughly +3 to +4 dB in car, hum, babble and hiss. **Off by default, and
+  worth leaving off somewhere quiet.** See [Audio settings](./audio-settings).
+- **Light theme.** Dark, Light, or follow the system, on both platforms. Dark stays the
+  default and looks exactly as it did; the choice survives a restart and is included in a
+  settings backup.
+- **First-run setup wizard.** A guided first launch on both platforms — network, account,
+  microphone check, vocoder — instead of an empty settings screen. Talkgroup names are now
+  per-network, so a FreeDMR talkgroup no longer shows a BrandMeister name.
+- **Bips for received calls, and separate PTT tones.** A short high bip when someone starts
+  transmitting on your talkgroup and a low one when they stop, so you can hear the channel
+  go busy without watching the screen. The single "PTT tones" setting is now two — start and
+  stop — so you can keep just the roger beep. See [Audio settings](./audio-settings).
+- **Car mode looks like a radio (PoC radios).** On small-panel radios such as the Hytera
+  P50, car mode now draws an instrument face: a legend rail, a state plate, a segmented
+  level meter with peak hold, a time-out bar while you transmit, and hard-edged channel
+  keys. Phones and tablets are unchanged. See [Car mode](./car-mode).
+- **Home-screen call card (Hytera PoC radios).** On radios running the Onego launcher, the
+  home screen shows the talkgroup, who is talking and a running call timer, and VoxDMR
+  appears in the launcher's card picker. See [Radios](../radios).
+- **Status LED (Hytera radios).** The radio's notification LED follows the session: green
+  for an incoming call, red while you transmit, a slow orange blink while scan is armed,
+  plus optional connection-drop and connected indications. Five independent switches under
+  Display & power.
+- **Cleaner microphone capture (Android).** VoxDMR now asks Android for the least-processed
+  microphone it can get and switches the vendor noise suppressor, AGC and echo canceller off
+  on the capture session — previously those ran on top of VoxDMR's own levelling on many
+  handsets.
+- **Fixes.** The Bluetooth headset mic works again (it was sending nothing at all), and on
+  Hytera radios the volume keys move the volume you are actually listening to. The PTT tone
+  no longer leaks into the start of your transmission. On desktop, closing the last window
+  no longer leaves the process running. Android settings lists clear the navigation bar, the
+  info buttons no longer trap D-pad focus on compact radios, and the app targets Android 16.
+  A talker alias sent as 16-bit text no longer turns into Chinese characters partway
+  through a call. See [Troubleshooting](./troubleshooting).
+
 ## v0.14.0
 
 ::platforms[desktop mobile]

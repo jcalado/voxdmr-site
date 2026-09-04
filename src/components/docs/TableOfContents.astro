@@ -1,0 +1,111 @@
+---
+import type { MarkdownHeading } from "astro";
+import { getT, type Lang } from "@/src/i18n/t";
+
+interface Props {
+  lang: Lang;
+  headings: MarkdownHeading[];
+}
+
+const { lang, headings } = Astro.props;
+const t = getT(lang);
+
+// h2/h3 only: h1 is the page title (already the heading of the page) and h4+ is
+// too fine-grained to be a useful jump target.
+const entries = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{
+  entries.length > 1 && (
+    <aside class="docs-toc-aside" data-pagefind-ignore>
+      <nav class="docs-toc" aria-labelledby="docs-toc-title">
+        <div id="docs-toc-title" class="text-xs font-bold uppercase tracking-widest text-vibrant-orange mb-3">
+          {t("docs.onThisPage")}
+        </div>
+        <ul>
+          {entries.map((h) => (
+            <li data-toc-item data-toc-slug={h.slug} data-toc-depth={h.depth}>
+              <a href={`#${h.slug}`}>{h.text}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+  )
+}
+
+<script>
+  const toc = document.querySelector<HTMLElement>(".docs-toc");
+
+  if (toc) {
+    const items = Array.from(toc.querySelectorAll<HTMLLIElement>("[data-toc-item]"));
+
+    /** The heading element each entry points at, in document order. */
+    const targets = items
+      .map((item) => ({
+        item,
+        heading: document.getElementById(item.dataset.tocSlug ?? ""),
+      }))
+      .filter((entry): entry is { item: HTMLLIElement; heading: HTMLElement } => !!entry.heading);
+
+    /**
+     * A heading inside a `:::desktop` / `:::mobile` block is display:none when
+     * the other platform is selected, so its TOC entry has to disappear with
+     * it. `offsetParent` is null exactly when an ancestor is hidden, which is
+     * the same condition the CSS rule in docs.css applies.
+     */
+    function syncVisibility() {
+      for (const { item, heading } of targets) {
+        item.hidden = heading.offsetParent === null;
+      }
+    }
+
+    /**
+     * Highlight the section the reader is in: the last visible heading that has
+     * scrolled past the sticky nav, falling back to the first one while still
+     * above the initial heading.
+     */
+    function syncActive() {
+      const visible = targets.filter(({ item }) => !item.hidden);
+      if (!visible.length) return;
+
+      // 5rem clears the 3.5rem sticky nav plus a little breathing room, matching
+      // the `scroll-margin-top` the headings themselves use.
+      const threshold = 80;
+      let current = visible[0];
+      for (const entry of visible) {
+        if (entry.heading.getBoundingClientRect().top <= threshold) current = entry;
+        else break;
+      }
+
+      // At the very bottom the last section may never cross the threshold, so
+      // pin it there — otherwise the final heading is unreachable.
+      const atBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 2;
+      if (atBottom) current = visible[visible.length - 1];
+
+      for (const { item } of targets) item.classList.toggle("is-active", item === current.item);
+    }
+
+    let queued = false;
+    function schedule() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        syncVisibility();
+        syncActive();
+      });
+    }
+
+    schedule();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+
+    // The platform toggle rewrites `data-platform-filter` on <html>, which
+    // shows/hides whole sections — recompute when it flips.
+    new MutationObserver(schedule).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-platform-filter"],
+    });
+  }
+</script>

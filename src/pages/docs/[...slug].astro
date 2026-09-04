@@ -22,7 +22,7 @@ const pathname = Astro.url.pathname;
 // Astro's native markdown pipeline renders the body; the remark/rehype plugins
 // (remark-directive + remark-platform, rehype-slug + autolink) handle the
 // :::desktop/:::mobile platform directives, changelog badges, and heading anchors.
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 
 const cfgPage = getPageBySlug(slug);
 const title = entry.data.title ?? pageTitle(slug, cfgPage?.title ?? slug, lang);
@@ -34,7 +34,7 @@ const { prev, next } = localizedAdjacent(slug, lang);
 ---
 
 <Layout lang={lang} title={`${title} — VoxDMR Docs`} description={description} pathname={pathname}>
-  <DocsLayout lang={lang} pathname={pathname} slug={slug} groups={groups} prev={prev} next={next}>
+  <DocsLayout lang={lang} pathname={pathname} slug={slug} groups={groups} prev={prev} next={next} headings={headings}>
     <Content />
   </DocsLayout>
 </Layout>

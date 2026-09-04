@@ -9,7 +9,7 @@ VoxDMR is a landing and documentation site for VoxDMR — a cross-platform app t
 ## Commands
 
 - `npm run dev` — Start the Astro dev server on port 3000
-- `npm run build` — Static production build to `dist/`
+- `npm run build` — Static production build to `dist/`, then `pagefind --site dist` to emit the search index into `dist/pagefind/`
 - `npm run preview` — Serve the built `dist/` locally
 - `npm run lint` — `astro check` + `tsc --noEmit` (no ESLint)
 - `npm run clean` — Remove `dist/`
@@ -23,7 +23,7 @@ Static site built with Astro. Content is server-rendered to HTML at build time; 
 - `astro.config.mjs` — Astro config: static output, i18n, the markdown pipeline (remark/rehype plugins), `@astrojs/react` + `@astrojs/sitemap`, Tailwind via `@tailwindcss/vite`, and the `@` → project-root alias.
 - `src/layouts/Layout.astro` — shared `<html>`/`<head>` (meta, OG, favicon), imports global `src/index.css`.
 - `src/pages/` — one `.astro` per route, with a `pt/` mirror per locale. `index` (landing), `privacy`, `radios`, `docs/[...slug]` (+ `docs/index` redirect to installation).
-- `src/components/` — static `.astro` building blocks (zero JS): `SiteNav.astro`, `CtaBar.astro`, `Footer.astro`, `Logo.astro`, `LanguageSwitcher.astro`, `ScrollReveal.astro`, inline-SVG `icons/`, the landing sections (`landing/HeroSection|Features|UseCases|CtaSection.astro`, `LandingBody.astro`), and the radios banners (`radios/`). `components/docs/` holds the docs React pieces (`DocsShell`, `DocsContent`, `PlatformSwitcher`, `PlatformContext`). Note `Logo`/`LanguageSwitcher` exist as both `.astro` (used by `.astro` pages) and `.tsx` (imported by the docs React island tree).
+- `src/components/` — static `.astro` building blocks (zero JS): `SiteNav.astro`, `CtaBar.astro`, `Footer.astro`, `Logo.astro`, `LanguageSwitcher.astro`, `ScrollReveal.astro`, inline-SVG `icons/`, the landing sections (`landing/HeroSection|Features|UseCases|CtaSection.astro`, `LandingBody.astro`), and the radios banners (`radios/`). `components/docs/` holds the docs chrome: `PlatformSwitcher` (React island), plus the zero-JS-island `DocsSearch.astro` (Pagefind modal) and `TableOfContents.astro` ("On this page" rail) — both plain `.astro` with a bundled `<script>`. Note `Logo`/`LanguageSwitcher` exist as both `.astro` (used by `.astro` pages) and `.tsx` (imported by the docs React island tree).
 - `src/islands/` — the only hydrated React: `RadiosGrid` (filter/sort), `ScreenshotGallery` (+ lightbox), `FaqAccordion`, `HeroShot`, and `platformStore.ts` (module-level store syncing the landing's platform toggle across its two islands).
 - `src/i18n/` — `en.json`, `pt.json` (flat key→string), `t.ts` (`t(key, lang)` / `getT(lang)`, usable in `.astro` and islands), `routing.ts` (`localeFromUrl`, `altLocalePath`, `localizePath`).
 - `src/content/docs/` + `src/content.config.ts` — docs content collection; Markdown at `src/content/docs/{en,pt}/<slug>.md`, rendered via Astro's native pipeline (`render(entry)` → `<Content />`).
@@ -91,6 +91,7 @@ Uses Tailwind CSS v4 with the `@tailwindcss/vite` plugin (not PostCSS). Custom t
 - `motion/react` — Animation library (Framer Motion). Import as `motion` from `"motion/react"`. Used inside islands.
 - `lucide-react` — Icon library (islands). Static `.astro` components use inline SVG in `src/components/icons/` instead.
 - `remark-directive` — Adds container (`:::name`) and leaf (`::name[…]`) directive syntax to Astro's markdown pipeline; consumed by `src/lib/remark-platform.ts`. Paired with `rehype-slug` + `rehype-autolink-headings` for heading anchors.
+- `pagefind` — dev-only CLI. Indexes `dist/` after `astro build`; the emitted `dist/pagefind/` bundle is what `DocsSearch.astro` lazily imports at runtime. Multilingual indexing is automatic from `<html lang>`, so `en` and `pt` get separate indexes and a page only ever searches its own locale. `data-pagefind-body` on the docs content div is what scopes the index to docs pages only — adding that attribute anywhere excludes every page that lacks it. **Search is inert under `astro dev`** (the bundle only exists after a build); the modal says so rather than failing silently.
 - `marked` — vestigial: still in `package.json` but no longer imported (the old client-side markdown pipeline was removed). Safe to drop.
 
 ## Design Context

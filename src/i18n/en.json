@@ -153,6 +153,12 @@
   "bmpw.trouble.selfcare": "SelfCare",
   "footer.bmpw": "BrandMeister Password",
 
+  "docs.onThisPage": "On this page",
+  "docs.search.label": "Search",
+  "docs.search.placeholder": "Search the docs…",
+  "docs.search.results": "Search results",
+  "docs.search.empty": "No results. Try a different word.",
+  "docs.search.unavailable": "Search is only available in the built site — run `npm run build`.",
   "docs.previous": "Previous",
   "docs.next": "Next",
   "docs.pageNotFound": "Page not found",
@@ -166,6 +172,7 @@
 
   "docs.group.gettingStarted": "Getting Started",
   "docs.group.usingVoxlink": "Using VoxDMR",
+  "docs.group.pocRadios": "PoC Radios",
   "docs.group.reference": "Reference",
 
   "docs.page.installation": "Installation",
@@ -176,6 +183,8 @@
   "docs.page.serverProfiles": "Server Profiles",
   "docs.page.autoReconnect": "Auto-reconnect",
   "docs.page.talkgroups": "Talkgroups",
+  "docs.page.pocRadios": "PoC Radios",
+  "docs.page.hyteraP50": "Hytera P50",
   "docs.page.troubleshooting": "Troubleshooting",
   "docs.page.changelog": "Changelog",
   "nav.radios": "PoC radios",

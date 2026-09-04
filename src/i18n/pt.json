@@ -153,6 +153,12 @@
   "bmpw.trouble.selfcare": "SelfCare",
   "footer.bmpw": "Palavra-passe BrandMeister",
 
+  "docs.onThisPage": "Nesta página",
+  "docs.search.label": "Pesquisar",
+  "docs.search.placeholder": "Pesquisar na documentação…",
+  "docs.search.results": "Resultados da pesquisa",
+  "docs.search.empty": "Sem resultados. Tente outra palavra.",
+  "docs.search.unavailable": "A pesquisa só está disponível no site compilado — execute `npm run build`.",
   "docs.previous": "Anterior",
   "docs.next": "Seguinte",
   "docs.pageNotFound": "Página não encontrada",
@@ -166,6 +172,7 @@
 
   "docs.group.gettingStarted": "Primeiros Passos",
   "docs.group.usingVoxlink": "Usar o VoxDMR",
+  "docs.group.pocRadios": "Rádios PoC",
   "docs.group.reference": "Referência",
 
   "docs.page.installation": "Instalação",
@@ -176,6 +183,8 @@
   "docs.page.serverProfiles": "Perfis de Servidor",
   "docs.page.autoReconnect": "Reconexão automática",
   "docs.page.talkgroups": "Talkgroups",
+  "docs.page.pocRadios": "Rádios PoC",
+  "docs.page.hyteraP50": "Hytera P50",
   "docs.page.troubleshooting": "Resolução de Problemas",
   "docs.page.changelog": "Registo de Alterações",
   "nav.radios": "Rádios PoC",
