@@ -54,7 +54,8 @@ setup wizard, and a car mode that turns a PoC radio into an instrument panel.
   no longer leaks into the start of your transmission. On desktop, closing the last window
   no longer leaves the process running. Android settings lists clear the navigation bar, the
   info buttons no longer trap D-pad focus on compact radios, and the app targets Android 16.
-  See [Troubleshooting](./troubleshooting).
+  A talker alias sent as 16-bit text no longer turns into Chinese characters partway
+  through a call. See [Troubleshooting](./troubleshooting).
 
 ## v0.14.0
 

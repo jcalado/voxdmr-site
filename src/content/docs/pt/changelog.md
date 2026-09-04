@@ -59,7 +59,9 @@ painel de instrumentos.
   já não entra no início da tua transmissão. No desktop, fechar a última janela já não deixa
   o processo a correr. As listas de definições no Android libertam a barra de navegação, os
   botões de informação já não prendem o foco do D-pad nos rádios compactos, e a aplicação
-  passa a visar o Android 16. Vê [Resolução de problemas](./troubleshooting).
+  passa a visar o Android 16. Um alias de locutor enviado em texto de 16 bits já não se
+  transforma em caracteres chineses a meio da chamada.
+  Vê [Resolução de problemas](./troubleshooting).
 
 ## v0.14.0
 
