@@ -1,0 +1,284 @@
+---
+import Search from "@/src/components/icons/Search.astro";
+import { getT, type Lang } from "@/src/i18n/t";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getT(lang);
+
+// Strings the client script needs. Passed as a data attribute rather than
+// `define:vars` so the script stays a bundled module (the same approach the
+// sidebar drawer script uses for its DOM hooks).
+const strings = JSON.stringify({
+  empty: t("docs.search.empty"),
+  unavailable: t("docs.search.unavailable"),
+  results: t("docs.search.results"),
+});
+---
+
+{/* Trigger. Mirrors the platform toggle's pill styling; collapses to the bare
+    icon below `sm`, where there is no room for the label and shortcut hint. */}
+<button
+  type="button"
+  data-search-open
+  class="inline-flex items-center gap-2 rounded-full bg-surface-raised/60 border border-border pl-2.5 pr-2 py-1 text-xs font-semibold text-on-surface-muted hover:text-white hover:border-white/15 transition-colors"
+  aria-label={t("docs.search.label")}
+>
+  <Search class="w-3.5 h-3.5" />
+  <span class="hidden sm:inline">{t("docs.search.label")}</span>
+  <kbd class="hidden sm:inline docs-search-kbd">⌘K</kbd>
+</button>
+
+<dialog data-search-dialog class="docs-search-dialog" aria-label={t("docs.search.label")} data-strings={strings}>
+  <div class="docs-search-panel">
+    <div class="docs-search-inputrow">
+      <Search class="w-4 h-4 shrink-0 text-on-surface-muted" />
+      <input
+        data-search-input
+        type="search"
+        autocomplete="off"
+        spellcheck="false"
+        enterkeyhint="search"
+        placeholder={t("docs.search.placeholder")}
+        aria-label={t("docs.search.label")}
+        aria-controls="docs-search-results"
+      />
+      <kbd class="docs-search-kbd">Esc</kbd>
+    </div>
+    <div id="docs-search-results" class="docs-search-results" data-search-results role="listbox" aria-label={t("docs.search.results")}></div>
+    <p data-search-status class="docs-search-status" role="status" aria-live="polite"></p>
+  </div>
+</dialog>
+
+<script>
+  type SubResult = { title: string; url: string; excerpt: string };
+  type ResultData = {
+    url: string;
+    meta?: { title?: string };
+    excerpt: string;
+    sub_results?: SubResult[];
+  };
+  type Pagefind = {
+    search: (q: string) => Promise<{ results: { data: () => Promise<ResultData> }[] }>;
+  };
+
+  /**
+   * Bound to already-narrowed elements: TypeScript's narrowing from an
+   * `if (a && b)` guard does not reach nested function declarations, so the
+   * whole search UI takes its elements as parameters instead.
+   */
+  function initSearch(
+    dialog: HTMLDialogElement,
+    trigger: HTMLButtonElement,
+    input: HTMLInputElement,
+    list: HTMLDivElement,
+    status: HTMLParagraphElement,
+  ) {
+    const strings = JSON.parse(dialog.dataset.strings || "{}") as Record<string, string>;
+
+    let pagefind: Pagefind | null = null;
+    let unavailable = false;
+    let debounce: ReturnType<typeof setTimeout> | undefined;
+    // Monotonic token so a slow request can never overwrite a newer one's results.
+    let seq = 0;
+    let active = -1;
+
+    /**
+     * The Pagefind bundle is emitted by the `pagefind` CLI *after* `astro build`,
+     * so it exists in `dist/` but never during `astro dev`. Load it lazily on
+     * first open and degrade to a notice if it isn't there. The path goes
+     * through a variable + `@vite-ignore` so Vite leaves the import alone
+     * instead of trying to resolve it at build time.
+     */
+    async function loadPagefind(): Promise<Pagefind | null> {
+      if (pagefind || unavailable) return pagefind;
+      try {
+        const path = "/pagefind/pagefind.js";
+        pagefind = (await import(/* @vite-ignore */ path)) as Pagefind;
+      } catch {
+        unavailable = true;
+      }
+      return pagefind;
+    }
+
+    /** `dist/docs/x/index.html` → `/docs/x/`; leaves already-clean URLs alone. */
+    function cleanUrl(url: string): string {
+      return url.replace(/index\.html$/, "").replace(/\.html(?=#|$)/, "/");
+    }
+
+    function setStatus(message: string) {
+      status.textContent = message;
+      status.hidden = !message;
+    }
+
+    function items(): HTMLAnchorElement[] {
+      return Array.from(list.querySelectorAll<HTMLAnchorElement>(".docs-search-hit"));
+    }
+
+    function setActive(next: number) {
+      const all = items();
+      if (!all.length) {
+        active = -1;
+        return;
+      }
+      // Wrap around in both directions.
+      active = (next + all.length) % all.length;
+      all.forEach((el, i) => {
+        const on = i === active;
+        el.classList.toggle("is-active", on);
+        el.setAttribute("aria-selected", String(on));
+        if (on) el.scrollIntoView({ block: "nearest" });
+      });
+    }
+
+    function render(pages: ResultData[]) {
+      list.innerHTML = "";
+      for (const page of pages) {
+        const group = document.createElement("div");
+        group.className = "docs-search-group";
+
+        const heading = document.createElement("div");
+        heading.className = "docs-search-page";
+        heading.textContent = page.meta?.title ?? page.url;
+        group.appendChild(heading);
+
+        // Prefer the per-section sub-results (they deep-link to the heading
+        // anchor); fall back to the whole-page excerpt when there are none.
+        const subs: SubResult[] = page.sub_results?.length
+          ? page.sub_results.slice(0, 3)
+          : [{ title: "", url: page.url, excerpt: page.excerpt }];
+
+        for (const sub of subs) {
+          const hit = document.createElement("a");
+          hit.className = "docs-search-hit";
+          hit.href = cleanUrl(sub.url);
+          hit.setAttribute("role", "option");
+          hit.setAttribute("aria-selected", "false");
+
+          if (sub.title) {
+            const title = document.createElement("span");
+            title.className = "docs-search-hit-title";
+            title.textContent = sub.title;
+            hit.appendChild(title);
+          }
+
+          const excerpt = document.createElement("span");
+          excerpt.className = "docs-search-hit-excerpt";
+          // Pagefind's excerpt is our own build-time content with <mark> around
+          // the matched terms — the documented way to render a hit.
+          excerpt.innerHTML = sub.excerpt;
+          hit.appendChild(excerpt);
+
+          hit.addEventListener("mouseenter", () => setActive(items().indexOf(hit)));
+          group.appendChild(hit);
+        }
+        list.appendChild(group);
+      }
+      setActive(0);
+    }
+
+    async function run(query: string) {
+      const token = ++seq;
+      if (!query.trim()) {
+        list.innerHTML = "";
+        active = -1;
+        setStatus("");
+        return;
+      }
+
+      const pf = await loadPagefind();
+      if (token !== seq) return;
+      if (!pf) {
+        list.innerHTML = "";
+        setStatus(strings.unavailable);
+        return;
+      }
+
+      const search = await pf.search(query);
+      if (token !== seq) return;
+
+      // Eight pages is about two screens of the panel; deeper hits are better
+      // served by refining the query.
+      const pages = await Promise.all(search.results.slice(0, 8).map((r) => r.data()));
+      if (token !== seq) return;
+
+      if (!pages.length) {
+        list.innerHTML = "";
+        active = -1;
+        setStatus(strings.empty);
+        return;
+      }
+      setStatus("");
+      render(pages);
+    }
+
+    function open() {
+      if (dialog.open) return;
+      dialog.showModal();
+      input.value = "";
+      list.innerHTML = "";
+      active = -1;
+      setStatus("");
+      // Warm the bundle while the user is still typing their first character.
+      void loadPagefind();
+      input.focus();
+    }
+
+    trigger.addEventListener("click", open);
+
+    input.addEventListener("input", () => {
+      clearTimeout(debounce);
+      const query = input.value;
+      debounce = setTimeout(() => void run(query), 140);
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setActive(active + 1);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setActive(active - 1);
+      } else if (e.key === "Enter") {
+        const hit = items()[active];
+        if (hit) {
+          e.preventDefault();
+          window.location.href = hit.href;
+        }
+      }
+    });
+
+    // Clicking the backdrop (the dialog element itself, outside the panel) closes.
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      const target = e.target as HTMLElement | null;
+      const typing =
+        target?.isContentEditable ||
+        ["INPUT", "TEXTAREA", "SELECT"].includes(target?.tagName ?? "");
+
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        dialog.open ? dialog.close() : open();
+      } else if (e.key === "/" && !typing && !dialog.open) {
+        e.preventDefault();
+        open();
+      }
+    });
+  }
+
+  const dialog = document.querySelector<HTMLDialogElement>("[data-search-dialog]");
+  const trigger = document.querySelector<HTMLButtonElement>("[data-search-open]");
+  const input = dialog?.querySelector<HTMLInputElement>("[data-search-input]");
+  const list = dialog?.querySelector<HTMLDivElement>("[data-search-results]");
+  const status = dialog?.querySelector<HTMLParagraphElement>("[data-search-status]");
+
+  if (dialog && trigger && input && list && status) {
+    initSearch(dialog, trigger, input, list, status);
+  }
+</script>

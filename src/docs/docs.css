@@ -158,3 +158,190 @@
 @media (prefers-reduced-motion: reduce) {
   .docs-sidebar-aside, .docs-sidebar-backdrop { transition: none; }
 }
+
+/* ── Search (Pagefind) ─────────────────────────────────────────────────────
+   A native <dialog>, so focus trapping, Esc-to-close and top-layer stacking
+   come from the platform; the script in DocsSearch.astro only fetches results.
+   The Pagefind bundle it loads is emitted into dist/pagefind by the CLI step in
+   `npm run build`, so search is inert under `astro dev` (the panel says so). */
+
+.docs-search-kbd {
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 0.625rem;
+  line-height: 1;
+  padding: 0.25rem 0.35rem;
+  border-radius: 0.3rem;
+  color: #64748B;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.docs-search-dialog {
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  max-width: min(40rem, calc(100vw - 2rem));
+  width: 100%;
+  /* Sit in the upper third: the eye starts there and the results grow down. */
+  margin-top: min(12vh, 6rem);
+}
+.docs-search-dialog::backdrop {
+  background: rgba(2, 6, 23, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+/* Gentle entrance — the panel settles in rather than snapping. */
+@keyframes docs-search-in {
+  from { opacity: 0; transform: translateY(-0.5rem) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes docs-search-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.docs-search-dialog[open] { animation: docs-search-in 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
+.docs-search-dialog[open]::backdrop { animation: docs-search-backdrop-in 0.22s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .docs-search-dialog[open],
+  .docs-search-dialog[open]::backdrop { animation: none; }
+  .docs-toc a { transition: none; }
+}
+
+.docs-search-panel {
+  background: #0F172A;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 1.25rem;
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+.docs-search-inputrow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+.docs-search-inputrow input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+  outline: none;
+  color: #F1F5F9;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+.docs-search-inputrow input::placeholder { color: #64748B; }
+/* The type=search clear affordance duplicates Esc and breaks the row rhythm. */
+.docs-search-inputrow input::-webkit-search-cancel-button { display: none; }
+
+.docs-search-results {
+  max-height: min(60vh, 26rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.docs-search-results:not(:empty) { padding: 0.5rem; }
+
+.docs-search-group + .docs-search-group { margin-top: 0.35rem; }
+.docs-search-page {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #FB923C;
+  padding: 0.55rem 0.65rem 0.3rem;
+}
+
+.docs-search-hit {
+  display: block;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.65rem;
+  text-decoration: none;
+  color: #94A3B8;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  border: 1px solid transparent;
+}
+.docs-search-hit.is-active {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+.docs-search-hit-title {
+  display: block;
+  color: #F1F5F9;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+.docs-search-hit-excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.docs-search-hit mark {
+  background: none;
+  color: #EF4444;
+  font-weight: 600;
+}
+
+.docs-search-status {
+  padding: 1.1rem 1.25rem;
+  color: #64748B;
+  font-size: 0.8125rem;
+}
+.docs-search-status[hidden] { display: none; }
+
+/* ── On this page ──────────────────────────────────────────────────────────
+   A third column at xl+ only; below that the sidebar already carries the
+   navigation load and the content column needs the width more. */
+
+.docs-toc-aside { display: none; }
+
+/* 1200px. An earlier 1360px cutoff protected the full 760px content column but
+   hid the rail outright on ordinary ~1280px laptop viewports — and a narrower
+   measure reads better, not worse. At 1200px a 14rem rail still leaves ~640px
+   of prose (240 sidebar + 224 rail + 96 padding), widening from there. */
+@media (min-width: 1200px) {
+  .docs-toc-aside {
+    display: block;
+    flex-shrink: 0;
+    width: 14rem;
+    position: sticky;
+    top: 3.5rem;
+    align-self: flex-start;
+    max-height: calc(100vh - 3.5rem);
+    overflow-y: auto;
+    padding: 2.5rem 1.25rem 2rem 0;
+  }
+}
+
+/* Past the point where the content column is capped at its 760px max, give the
+   rail back its full width. */
+@media (min-width: 1440px) {
+  .docs-toc-aside { width: 15rem; padding-right: 1.5rem; }
+}
+
+.docs-toc ul { list-style: none; margin: 0; padding: 0; }
+.docs-toc li[hidden] { display: none; }
+.docs-toc li[data-toc-depth="3"] { padding-left: 0.85rem; }
+.docs-toc a {
+  display: block;
+  padding: 0.3rem 0 0.3rem 0.75rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.09);
+  color: #64748B;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.docs-toc a:hover { color: #E2E8F0; border-left-color: rgba(255, 255, 255, 0.25); }
+.docs-toc li.is-active > a { color: #EF4444; border-left-color: #EF4444; font-weight: 600; }
+
+.docs-toc::-webkit-scrollbar { width: 4px; }
+.docs-toc-aside::-webkit-scrollbar { width: 4px; }
+.docs-toc-aside::-webkit-scrollbar-track { background: transparent; }
+.docs-toc-aside::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+.docs-toc-aside { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.1) transparent; }
