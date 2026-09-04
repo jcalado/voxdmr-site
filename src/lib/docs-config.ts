@@ -28,6 +28,13 @@ export const docsConfig: DocGroup[] = [
     ],
   },
   {
+    label: "PoC Radios",
+    pages: [
+      { slug: "poc-radios", title: "PoC Radios" },
+      { slug: "hytera-p50", title: "Hytera P50" },
+    ],
+  },
+  {
     label: "Reference",
     pages: [
       { slug: "troubleshooting", title: "Troubleshooting" },
