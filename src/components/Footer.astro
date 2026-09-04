@@ -23,6 +23,8 @@ const links = [
   { label: t("footer.github"), href: "https://github.com/jcalado/voxdmr-site/releases", external: true },
 ];
 
+const callsign = "CT7BLE";
+
 const [copyBefore, copyAfter] = t("footer.copyright").split("{callsign}");
 ---
 <footer class="bg-slate-950 py-16 border-t border-border">
@@ -46,11 +48,11 @@ const [copyBefore, copyAfter] = t("footer.copyright").split("{callsign}");
 
     <div class="text-on-surface-muted text-sm font-medium text-center md:text-right">
       {copyBefore}<a
-        href="https://www.qrz.com/db/CS7BLE"
+        href={`https://www.qrz.com/db/${callsign}`}
         target="_blank"
         rel="noopener noreferrer"
         class="text-white font-semibold hover:text-vibrant-red transition-colors"
-      >CS7BLE</a>{copyAfter}
+      >{callsign}</a>{copyAfter}
     </div>
   </div>
 </footer>
