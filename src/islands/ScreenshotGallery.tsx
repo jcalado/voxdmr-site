@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { Monitor, Smartphone, X } from "lucide-react";
 import { getT, type Lang } from "@/src/i18n/t";
@@ -48,16 +48,45 @@ export default function ScreenshotGallery({ lang }: ScreenshotGalleryProps) {
       : "columns-1 lg:columns-2";
 
   const [zoomed, setZoomed] = useState<{ src: string; alt: string; label: string } | null>(null);
+  /** The thumbnail that opened the lightbox, so focus can go back to it. */
+  const openerRef = useRef<HTMLElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!zoomed) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setZoomed(null); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setZoomed(null);
+        return;
+      }
+      // The overlay is modal, so Tab must not walk out into the page behind
+      // it. The close button is its only focusable element, which makes the
+      // trap a single stop rather than a cycle.
+      if (e.key === "Tab") {
+        e.preventDefault();
+        closeButtonRef.current?.focus();
+      }
+    };
     document.addEventListener("keydown", onKey);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
+    };
+  }, [zoomed]);
+
+  // Move focus into the dialog on open and return it to the thumbnail on
+  // close. Without this the overlay claimed aria-modal while a screen reader's
+  // focus stayed on the page underneath it.
+  useEffect(() => {
+    if (!zoomed) return;
+    closeButtonRef.current?.focus();
+    return () => {
+      const opener = openerRef.current;
+      // The thumbnail is gone if the platform toggle swapped the gallery out.
+      if (opener && document.contains(opener)) opener.focus();
+      openerRef.current = null;
     };
   }, [zoomed]);
 
@@ -80,7 +109,9 @@ export default function ScreenshotGallery({ lang }: ScreenshotGalleryProps) {
     <>
       <div className="mb-12 lg:mb-16 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-2xl">
-          <h2 className="text-4xl lg:text-5xl font-headline font-bold text-white mb-4 tracking-tight">{t("screenshots.heading")}</h2>
+          {/* Named so the wrapping <section> in LandingBody can point its
+              aria-labelledby here. */}
+          <h2 id="screenshots-heading" className="text-4xl lg:text-5xl font-headline font-bold text-white mb-4 tracking-tight">{t("screenshots.heading")}</h2>
           <p className="text-on-surface-muted text-lg leading-relaxed">{t("screenshots.subheading")}</p>
         </div>
         <div
@@ -104,7 +135,7 @@ export default function ScreenshotGallery({ lang }: ScreenshotGalleryProps) {
                   <motion.span
                     layoutId="platform-toggle-indicator"
                     aria-hidden
-                    className="absolute inset-0 bg-vibrant-red rounded-full"
+                    className="absolute inset-0 bg-red-cta rounded-full"
                     transition={slideTransition}
                   />
                 )}
@@ -133,7 +164,10 @@ export default function ScreenshotGallery({ lang }: ScreenshotGalleryProps) {
               <motion.button
                 type="button"
                 layoutId={`zoom-${item.src}`}
-                onClick={() => setZoomed(item)}
+                onClick={(e) => {
+                  openerRef.current = e.currentTarget as HTMLElement;
+                  setZoomed(item);
+                }}
                 animate={{ opacity: isZoomed ? 0 : 1 }}
                 transition={zoomLayoutTransition}
                 aria-label={`${t("screenshots.zoomOpen")} ${item.label}`}
@@ -185,6 +219,7 @@ export default function ScreenshotGallery({ lang }: ScreenshotGalleryProps) {
               </picture>
             </motion.div>
             <motion.button
+              ref={closeButtonRef}
               type="button"
               onClick={() => setZoomed(null)}
               aria-label={t("screenshots.zoomClose")}
@@ -192,7 +227,7 @@ export default function ScreenshotGallery({ lang }: ScreenshotGalleryProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: prefersReducedMotion ? 0 : 0.22, delay: prefersReducedMotion ? 0 : 0.15 }}
-              className="absolute top-4 right-4 lg:top-6 lg:right-6 inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface-raised border border-border text-white hover:bg-vibrant-red hover:border-vibrant-red transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-red focus-visible:ring-offset-2 focus-visible:ring-offset-community-bg"
+              className="absolute top-4 right-4 lg:top-6 lg:right-6 inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface-raised border border-border text-white hover:bg-red-cta hover:border-red-cta transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-red focus-visible:ring-offset-2 focus-visible:ring-offset-community-bg"
             >
               <X className="w-5 h-5" />
             </motion.button>

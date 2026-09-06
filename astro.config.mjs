@@ -7,6 +7,7 @@ import remarkDirective from 'remark-directive';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { remarkPlatform } from './src/lib/remark-platform.ts';
+import { rehypeAnchorLabel } from './src/lib/rehype-anchor-label.ts';
 
 // lucide `link` icon as hast, prepended to h2+ as a hover-revealed permalink
 // (styled by `.heading-anchor` in docs.css).
@@ -39,6 +40,10 @@ export default defineConfig({
   // platform directives (remark-directive + remark-platform) and heading
   // anchors keep working.
   markdown: {
+    // The default `github-dark` renders comments at #6a737d on #24292e —
+    // 3.04:1, under the AA floor, which put every code comment in the docs
+    // below the threshold. Same family, palette that clears it.
+    shikiConfig: { theme: 'github-dark-default' },
     processor: unified({
       remarkPlugins: [remarkDirective, remarkPlatform],
       rehypePlugins: [
@@ -51,12 +56,15 @@ export default defineConfig({
             test: ['h2', 'h3', 'h4', 'h5', 'h6'],
             properties: {
               className: ['heading-anchor'],
-              'aria-label': 'Permalink to this section',
               tabindex: -1,
             },
             content: anchorIcon,
           },
         ],
+        // The label above is static config, so it cannot vary by locale;
+        // this rewrites it per the file's language (it was announcing the
+        // English string on the Portuguese docs).
+        rehypeAnchorLabel,
       ],
     }),
   },

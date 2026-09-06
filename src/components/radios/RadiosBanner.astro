@@ -67,10 +67,11 @@ const DONATE_RADIO_URL =
         href="https://github.com/jcalado/voxdmr-site/releases"
         target="_blank"
         rel="noopener noreferrer"
-        class="btn-press group/cta mt-auto inline-flex items-center justify-center gap-2 bg-vibrant-red hover:bg-red-500 text-white px-6 py-3 rounded-2xl font-bold hover:scale-105 transition-all whitespace-nowrap shadow-lg shadow-vibrant-red/20"
+        class="btn-press group/cta mt-auto inline-flex items-center justify-center gap-2 bg-red-cta hover:bg-red-cta-hover text-white px-6 py-3 rounded-2xl font-bold hover:scale-105 transition-all whitespace-nowrap shadow-lg shadow-vibrant-red/20"
       >
         <Download class="w-4 h-4 transition-transform group-hover/cta:translate-y-0.5 motion-reduce:transform-none" />
         {t("radios.apk.cta")}
+        <span class="sr-only"> ({t("a11y.newTab")})</span>
       </a>
     </div>
 
@@ -95,12 +96,13 @@ const DONATE_RADIO_URL =
             >
               Ko-fi
               <ExternalLink class="w-3 h-3" />
+              <span class="sr-only"> ({t("a11y.newTab")})</span>
             </a>
             . {t("radios.donate.kofiUnit")}
           </p>
         </div>
       </div>
-      <p class="flex items-start gap-1.5 text-xs text-on-surface-muted/70 leading-relaxed">
+      <p class="flex items-start gap-1.5 text-xs text-on-surface-muted/75 leading-relaxed">
         <AlertCircle class="w-3.5 h-3.5 mt-0.5 shrink-0" />
         <span>{t("radios.donate.disclaimer")}</span>
       </p>

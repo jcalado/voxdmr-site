@@ -10,10 +10,16 @@ interface Props {
 
 const { lang, pathname } = Astro.props;
 const href = altLocalePath(pathname);
+
+// The label is deliberately written in the language being switched *to*, so the
+// anchor declares that language — otherwise a screen reader reads "Mudar para
+// Português" with an English voice.
+const labelLang = lang === "en" ? "pt" : "en";
 ---
 <a
   href={href}
   class="flex items-center gap-1.5 text-on-surface-muted hover:text-vibrant-red transition-colors px-2 py-1 rounded-lg"
+  lang={labelLang}
   aria-label={lang === "en" ? "Mudar para Português" : "Switch to English"}
 >
   <Globe class="w-4 h-4" />

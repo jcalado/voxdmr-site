@@ -1,9 +1,9 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { LucideIcon } from "lucide-react";
 import { ChevronDown, Cpu, Download, Monitor, Smartphone, Terminal } from "lucide-react";
 import { getT, type Lang } from "@/src/i18n/t";
-import { downloads, type Download as DownloadTarget } from "@/src/downloads";
+import { type Download as DownloadTarget } from "@/src/downloads";
 
 const ICONS: Record<DownloadTarget["key"], LucideIcon> = {
   playStore: Smartphone,
@@ -14,6 +14,8 @@ const ICONS: Record<DownloadTarget["key"], LucideIcon> = {
 
 type DownloadMenuProps = {
   lang: Lang;
+  /** Resolved at build time against the latest release (see lib/release.ts). */
+  downloads: DownloadTarget[];
   /** Classes for the trigger button so it can match each call site's CTA style. */
   triggerClassName: string;
   /** Wrapper classes — used to inherit sizing (e.g. `w-full sm:w-auto`). */
@@ -24,6 +26,7 @@ type DownloadMenuProps = {
 
 export default function DownloadMenu({
   lang,
+  downloads,
   triggerClassName,
   className,
   align = "left",
@@ -33,8 +36,25 @@ export default function DownloadMenu({
   const [coords, setCoords] = useState({ top: 0, left: 0 });
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const menuId = useId();
+  /** Which item to focus once the menu mounts, or null for a mouse open. */
+  const focusOnOpen = useRef<"first" | "last" | null>(null);
 
   const MENU_WIDTH = 256; // matches w-64
+
+  const menuItems = () =>
+    Array.from(menuRef.current?.querySelectorAll<HTMLAnchorElement>("[role='menuitem']") ?? []);
+
+  /** Close and hand focus back to the trigger — the expected exit for Escape. */
+  function closeAndRestore() {
+    setOpen(false);
+    triggerRef.current?.focus();
+  }
+
+  function openWithFocus(focus: "first" | "last" | null) {
+    focusOnOpen.current = focus;
+    setOpen(true);
+  }
 
   // The menu is portaled to <body> so no `overflow-hidden` ancestor (e.g. the
   // hero header) can clip it. Position it as a fixed box anchored to the
@@ -67,7 +87,10 @@ export default function DownloadMenu({
       }
     };
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeAndRestore();
+      }
     };
     document.addEventListener("mousedown", onPointerDown);
     document.addEventListener("keydown", onKeyDown);
@@ -77,14 +100,88 @@ export default function DownloadMenu({
     };
   }, [open]);
 
+  // The menu is portaled to <body>, so it is nowhere near the trigger in the
+  // tab order. Moving focus into it on a keyboard open is what makes it
+  // reachable at all; Tab out then closes it and resumes from the trigger.
+  useEffect(() => {
+    if (!open || !focusOnOpen.current) return;
+    const items = menuItems();
+    const target = focusOnOpen.current === "last" ? items[items.length - 1] : items[0];
+    focusOnOpen.current = null;
+    target?.focus();
+  }, [open]);
+
+  // A menu left open behind the user is worse than one that closes: its
+  // document-level Escape handler would otherwise yank focus back to the
+  // trigger from wherever they had tabbed on to.
+  function onFocusOut(e: React.FocusEvent<HTMLDivElement>) {
+    const next = e.relatedTarget as Node | null;
+    if (!next) return; // Focus left the window entirely; leave the menu alone.
+    if (!triggerRef.current?.contains(next) && !menuRef.current?.contains(next)) {
+      setOpen(false);
+    }
+  }
+
+  /** Roving arrow-key movement between menu items, per the ARIA menu pattern. */
+  function onMenuKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    const items = menuItems();
+    if (!items.length) return;
+    const i = items.indexOf(document.activeElement as HTMLAnchorElement);
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      items[(i + 1) % items.length].focus();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      items[(i - 1 + items.length) % items.length].focus();
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      items[0].focus();
+    } else if (e.key === "End") {
+      e.preventDefault();
+      items[items.length - 1].focus();
+    } else if (e.key === " ") {
+      // Native anchors ignore Space; the ARIA menu pattern expects it to
+      // activate the item just like Enter does.
+      e.preventDefault();
+      (document.activeElement as HTMLAnchorElement | null)?.click();
+    } else if (e.key === "Tab") {
+      // Let Tab do its normal thing, but from the trigger — otherwise focus
+      // would land wherever the portal sits at the end of <body>.
+      closeAndRestore();
+    }
+  }
+
+  function onTriggerKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+    e.preventDefault();
+    const edge = e.key === "ArrowDown" ? "first" : "last";
+    if (!open) {
+      openWithFocus(edge);
+      return;
+    }
+    const items = menuItems();
+    (edge === "first" ? items[0] : items[items.length - 1])?.focus();
+  }
+
   return (
-    <div className={className}>
+    <div className={className} onBlur={onFocusOut}>
       <button
         ref={triggerRef}
+        id={`${menuId}-trigger`}
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        // Enter and Space on a button arrive as a click, not a keydown, so this
+        // — not onKeyDown — is the path most keyboard users take. `detail === 0`
+        // marks a click the browser synthesised from a key press, which is what
+        // distinguishes it from a real pointer click.
+        onClick={(e) => {
+          if (open) setOpen(false);
+          else openWithFocus(e.detail === 0 ? "first" : null);
+        }}
+        onKeyDown={onTriggerKeyDown}
         aria-haspopup="menu"
         aria-expanded={open}
+        aria-controls={open ? menuId : undefined}
         className={triggerClassName}
       >
         <Download className="w-5 h-5" />
@@ -96,7 +193,10 @@ export default function DownloadMenu({
         createPortal(
           <div
             ref={menuRef}
+            id={menuId}
             role="menu"
+            aria-labelledby={`${menuId}-trigger`}
+            onKeyDown={onMenuKeyDown}
             style={{ top: coords.top, left: coords.left, width: MENU_WIDTH }}
             className="fixed z-[60] origin-top rounded-2xl border border-border bg-slate-900/95 p-2 shadow-2xl shadow-black/50 backdrop-blur-xl"
           >
@@ -113,6 +213,7 @@ export default function DownloadMenu({
                 >
                   <Icon className="w-4 h-4 shrink-0 text-vibrant-blue" />
                   {t(labelKey)}
+                  {external && <span className="sr-only"> ({t("a11y.newTab")})</span>}
                 </a>
               );
             })}

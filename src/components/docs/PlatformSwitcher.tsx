@@ -51,6 +51,11 @@ export function PlatformSwitcher({ lang }: { lang: Lang }) {
             type="button"
             onClick={() => select(id)}
             aria-pressed={isActive}
+            // Below `sm` the inactive button's text label is display:none, which
+            // would leave a button whose only content is a decorative icon and
+            // therefore no accessible name. The label matches the visible text
+            // exactly, so it stays consistent once that text is shown again.
+            aria-label={t(labelKey)}
             className={`relative flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold [transition:color_280ms_cubic-bezier(0.16,1,0.3,1)] ${
               isActive ? "text-white" : "text-on-surface-muted hover:text-white"
             }`}
@@ -59,7 +64,7 @@ export function PlatformSwitcher({ lang }: { lang: Lang }) {
               <motion.span
                 layoutId="platform-toggle-indicator"
                 aria-hidden
-                className="absolute inset-0 bg-vibrant-red rounded-full"
+                className="absolute inset-0 bg-red-cta rounded-full"
                 transition={slideTransition}
               />
             )}

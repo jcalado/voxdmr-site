@@ -48,8 +48,16 @@
 .prose h2 { color: white; font-size: 1.35rem; font-weight: 700; margin: 3.5rem 0 0.75rem 0; }
 .prose h3 { color: white; font-size: 1.1rem; font-weight: 600; margin: 2rem 0 0.5rem 0; }
 .prose p { margin: 0 0 1rem 0; }
-.prose a { color: #EF4444; text-decoration: none; }
-.prose a:hover { text-decoration: underline; }
+/* Underlined, not colour-only. Red on the body text around it is 1.97:1 —
+   well under the 3:1 that WCAG 1.4.1 requires before colour alone may carry
+   the "this is a link" meaning. The underline is what makes them findable for
+   anyone who cannot separate the two hues. */
+.prose a { color: #EF4444; text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+.prose a:hover { text-decoration-thickness: 2px; }
+/* Blockquotes and callouts sit on a lighter ground, where #EF4444 drops to
+   3.89:1 and 3.6:1. A step lighter clears AA on both without changing the
+   colour's character. */
+.prose blockquote a, .prose .callout a { color: #F87171; }
 .prose ul, .prose ol { margin: 0 0 1rem 0; padding-left: 1.5rem; }
 .prose ol { list-style-type: decimal; }
 .prose ul { list-style-type: disc; }
@@ -106,6 +114,11 @@
 .prose hr { border: none; border-top: 1px solid rgba(255, 255, 255, 0.07); margin: 2rem 0; }
 .prose img { max-width: 260px; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.07); cursor: zoom-in; transition: opacity 0.15s; }
 .prose img:hover { opacity: 0.85; }
+
+/* Every content image is wrapped in a real <button> at runtime (DocsLayout.astro)
+   so the lightbox can be opened from the keyboard — a bare <img> with a click
+   handler is mouse-only. The button is a bare box; the image keeps its own look. */
+.prose .doc-zoom-btn { display: block; width: fit-content; padding: 0; border: 0; background: none; cursor: zoom-in; }
 .prose strong { color: white; font-weight: 600; }
 
 /* Embedded video (::youtube directive) */
@@ -113,8 +126,14 @@
 .prose .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 /* Image modal */
-.doc-modal-backdrop { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); cursor: zoom-out; }
-.doc-modal-img { max-height: 90vh; max-width: 90vw; border-radius: 0.75rem; object-fit: contain; view-transition-name: doc-image; }
+/* A native <dialog>, so the focus trap, Esc-to-close and focus restore on close
+   all come from the platform rather than hand-rolled listeners. */
+.doc-modal { padding: 0; border: 0; background: transparent; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; cursor: zoom-out; }
+.doc-modal[open] { display: flex; align-items: center; justify-content: center; }
+.doc-modal::backdrop { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); }
+.doc-modal-img { max-height: 90vh; max-width: 90vw; border-radius: 0.75rem; object-fit: contain; view-transition-name: doc-image; cursor: default; }
+.doc-modal-close { position: fixed; top: 1rem; right: 1rem; display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; border-radius: 9999px; border: 1px solid rgba(255, 255, 255, 0.07); background: #1E293B; color: #fff; cursor: pointer; }
+.doc-modal-close:hover { background: #DC2626; border-color: #DC2626; }
 
 /* View Transition animation */
 ::view-transition-old(doc-image),
@@ -141,12 +160,18 @@
 }
 
 @media (max-width: 1023px) {
+  /* `visibility: hidden` is what keeps the closed drawer out of the tab order
+     and the accessibility tree — translating it off-screen alone leaves every
+     sidebar link focusable. Transitioning visibility alongside the transform
+     defers the flip to the end of the slide, so the animation still plays out
+     (same trick as `.site-mobile-menu` in index.css). */
   .docs-sidebar-aside {
     position: fixed; top: 3.5rem; left: 0; bottom: 0; z-index: 40;
     transform: translateX(-100%);
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    visibility: hidden;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
   }
-  .docs-sidebar-open .docs-sidebar-aside { transform: translateX(0); }
+  .docs-sidebar-open .docs-sidebar-aside { transform: translateX(0); visibility: visible; }
   .docs-sidebar-backdrop {
     display: block; position: fixed; inset: 3.5rem 0 0 0; z-index: 30;
     background: rgba(0, 0, 0, 0.6); opacity: 0; pointer-events: none;
@@ -171,7 +196,8 @@
   line-height: 1;
   padding: 0.25rem 0.35rem;
   border-radius: 0.3rem;
-  color: #64748B;
+  /* #64748B read at 2.91:1 on this chip — under AA for 10px text. */
+  color: #94A3B8;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -234,9 +260,7 @@
   font-size: 0.95rem;
   font-family: inherit;
 }
-.docs-search-inputrow input::placeholder { color: #64748B; }
-/* The type=search clear affordance duplicates Esc and breaks the row rhythm. */
-.docs-search-inputrow input::-webkit-search-cancel-button { display: none; }
+.docs-search-inputrow input::placeholder { color: #94A3B8; }
 
 .docs-search-results {
   max-height: min(60vh, 26rem);
@@ -283,13 +307,15 @@
 }
 .docs-search-hit mark {
   background: none;
-  color: #EF4444;
+  /* 4.28:1 against the highlighted row; a step lighter clears AA. */
+  color: #F87171;
   font-weight: 600;
 }
 
 .docs-search-status {
   padding: 1.1rem 1.25rem;
-  color: #64748B;
+  /* 3.75:1 before — this is the "no results" / "unavailable" copy. */
+  color: #94A3B8;
   font-size: 0.8125rem;
 }
 .docs-search-status[hidden] { display: none; }
@@ -324,14 +350,17 @@
   .docs-toc-aside { width: 15rem; padding-right: 1.5rem; }
 }
 
-.docs-toc ul { list-style: none; margin: 0; padding: 0; }
+/* Room for the focus ring's left edge: the links sit flush against the rail's
+   left edge, and the scroll container clipped the outline there. */
+.docs-toc ul { list-style: none; margin: 0; padding: 0 0 0 3px; }
 .docs-toc li[hidden] { display: none; }
 .docs-toc li[data-toc-depth="3"] { padding-left: 0.85rem; }
 .docs-toc a {
   display: block;
   padding: 0.3rem 0 0.3rem 0.75rem;
   border-left: 2px solid rgba(255, 255, 255, 0.09);
-  color: #64748B;
+  /* #64748B read at 4.24:1 on the page ground — just under AA at 13px. */
+  color: #94A3B8;
   font-size: 0.8125rem;
   line-height: 1.45;
   text-decoration: none;

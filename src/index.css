@@ -33,6 +33,12 @@ html {
   --color-vibrant-blue: #38BDF8;
   --color-vibrant-orange: #FB923C;
   --color-vibrant-red: #EF4444;
+  /* Filled-button red. White on --color-vibrant-red is only 3.76:1, under the
+     4.5:1 WCAG AA floor, so every red fill that carries white text uses these
+     two darker steps instead (4.83:1 and 6.47:1). --color-vibrant-red stays the
+     accent for red *text* on a dark ground, where it reads at 5.36:1. */
+  --color-red-cta: #DC2626;
+  --color-red-cta-hover: #B91C1C;
   --color-accent-tertiary: #818CF8;
   --color-status-online: #22C55E;
   --color-community-bg: #020617;
@@ -47,6 +53,58 @@ html {
   .soft-shadow {
     box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.4);
   }
+}
+
+/* Site-wide focus indicator. Most interactive elements had none of their own
+   and fell back to the UA outline, which is close to invisible on these
+   near-black backgrounds in Firefox. Blue rather than the red accent so the
+   ring never reads as a hover state on the red CTAs.
+
+   Components that define their own `focus-visible:ring-*` also carry
+   `focus:outline-none`, whose higher specificity suppresses this outline —
+   so they keep their ring and nothing doubles up. */
+:focus-visible {
+  outline: 2px solid var(--color-vibrant-blue);
+  outline-offset: 2px;
+}
+
+/* The skip link's target. Two things need handling:
+   - The docs <main> is a scroll container, which makes it programmatically
+     focusable, so following the skip link drew the focus ring around the
+     entire content column. Suppress it there — the ring is meant for
+     controls, and the jump is already obvious from the scroll.
+   - Landing on the target puts its top edge exactly under the sticky nav,
+     hiding the first line of the heading. scroll-margin-top clears it. */
+#main-content {
+  scroll-margin-top: 7rem; /* clears the 6rem site nav */
+}
+#main-content:focus {
+  outline: none;
+}
+[data-docs-root] #main-content {
+  scroll-margin-top: 4.5rem; /* the docs nav is 3.5rem */
+}
+
+/* Skip link (rendered in Layout.astro). Off-screen until it takes focus. */
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 1rem 1rem;
+  background: var(--color-surface-raised);
+  color: var(--color-on-surface);
+  font-weight: 700;
+  /* transform rather than `top` so revealing it doesn't trigger layout. */
+  transform: translateY(-150%);
+  transition: transform 0.15s ease;
+}
+/* `:focus`, not `:focus-visible` — a skip link is only ever reached by
+   keyboard, and this keeps it working in engines that scope focus-visible
+   more tightly. */
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 /* Mobile nav dropdown (SiteNav). Pure CSS; a tiny script flips data-open. */
@@ -121,6 +179,10 @@ html {
   opacity: 1;
   transform: translateY(0);
 }
+/* Note: without JS the IntersectionObserver never runs and `.revealed` is
+   never added, which would leave most of the page at opacity 0 — a blank site
+   rather than a site without animation. The <noscript> block in
+   Layout.astro's <head> neutralises this rule in that case. */
 
 /* Decorative animations migrated out of Framer Motion (hero blobs, hero glow,
    CTA logo pulse). Values match the original motion props 1:1. */

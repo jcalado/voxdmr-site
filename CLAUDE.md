@@ -12,6 +12,7 @@ VoxDMR is a landing and documentation site for VoxDMR — a cross-platform app t
 - `npm run build` — Static production build to `dist/`, then `pagefind --site dist` to emit the search index into `dist/pagefind/`
 - `npm run preview` — Serve the built `dist/` locally
 - `npm run lint` — `astro check` + `tsc --noEmit` (no ESLint)
+- `npm run test:a11y` — axe-core over the **built** `dist/` (run `npm run build` first): 11 pages in both locales at 1280 and 390, plus 5 opened states (search dialog, download menu, lightbox, mobile nav, docs drawer). Exits non-zero on any violation. Needs a Chromium once (`npx playwright install chromium`, or `CHROME_PATH=/usr/bin/chromium npm run test:a11y`).
 - `npm run clean` — Remove `dist/`
 
 ## Architecture
@@ -84,6 +85,31 @@ Uses Tailwind CSS v4 with the `@tailwindcss/vite` plugin (not PostCSS). Custom t
 - Fonts: `font-sans` (Inter), `font-headline` (Poppins)
 - Key colors: `vibrant-red` (#EF4444, primary accent), `vibrant-orange` (#FB923C, secondary), `vibrant-blue` (#38BDF8, tertiary), `community-bg` (#020617), `background` (#0F172A), `surface-raised` (#1E293B)
 - Custom utility: `.soft-shadow`
+
+**`vibrant-red` is for red *text* on a dark ground, never for a red fill behind white text** — white on #EF4444 is 3.76:1, under the AA floor. Filled buttons and active pills use `bg-red-cta` (#DC2626) with `hover:bg-red-cta-hover` (#B91C1C). Note `vibrant-red` itself only passes on `community-bg` (5.36:1) and `background` (4.74:1); on `surface-raised` it is 3.89:1, so red text there needs `red-400` instead.
+
+## Download links
+
+`src/downloads.ts` holds the target list; `src/lib/release.ts` resolves each one against the **actual assets of the latest GitHub release at build time** (one fetch per build, memoized) and that is what the pages render. `src/downloads.ts` is only the fallback for an unreachable API.
+
+- Resolving in the browser is deliberately avoided: unauthenticated GitHub is 60 req/hour **per IP**, so one NAT'd office would break the links for everyone behind it, and it would make downloads depend on JS.
+- **A new release does not reach the site until the site rebuilds.**
+- The build sends `GITHUB_TOKEN` (or `GH_TOKEN`) if set — the deploy workflow passes the one it already has. Unauthenticated is 60 req/hour **per IP** and CI runners share IPs; authenticated is 5000. Without it the build still succeeds but silently falls back. The build log says which mode it used.
+- API unreachable → warn, fall back, build succeeds. API answers but a pattern matches nothing (an asset was renamed) → **the production build fails**, rather than shipping links that 404. Update `ASSET_PATTERNS` in `release.ts` when release filenames change.
+- `Download` objects are serialized into the `DownloadMenu` island's props, so they must stay JSON-safe — the matching RegExps live in `release.ts`, not on the type.
+
+## Accessibility
+
+`npm run test:a11y` gates this — keep it at zero violations. Conventions worth knowing before adding UI:
+
+- **Focus.** `src/index.css` defines a site-wide `:focus-visible` outline. Only add `focus:outline-none` to a control if you are replacing it with a `focus-visible:ring-*` of your own; never to remove the indicator.
+- **Landmarks.** Every page's main region needs `id="main-content"` — the skip link in `Layout.astro` targets it on every route. Don't wrap a labelled `<nav>` in an `<aside>`; that adds a second, unnamed landmark.
+- **Localized ARIA.** `aria-label` and other announced strings come from `src/i18n/*.json` (the `a11y.*` keys), never hardcoded English — the site ships in two locales.
+- **New tabs.** Links with `target="_blank"` carry `<span class="sr-only"> ({t("a11y.newTab")})</span>`.
+- **Colour is never the only signal.** Links inside body copy are underlined, not just tinted; active states pair colour with `aria-current` or `aria-pressed`.
+- **Modals and menus** move focus in, trap Tab, and restore focus to whatever opened them. The docs search and image lightbox use a native `<dialog>` + `showModal()` so the platform does this; `ScreenshotGallery` and `DownloadMenu` do it by hand.
+- **No-JS.** `.scroll-reveal` starts at `opacity: 0`, and motion islands server-render an inline `style="opacity:0"`. A `<noscript>` block in `Layout.astro`'s head neutralises both. Don't add a reveal mechanism without a matching fallback — with JS off, `/radios` otherwise renders 22 invisible cards.
+- **Entrance animations hide content from axe.** axe does not evaluate text at `opacity: 0` — it neither passes nor flags it. The suite therefore scrolls each page to fire every reveal and then *fails* the page if any text is still invisible, because a clean result on faded-out content means nothing. If you add an entrance animation, make sure it settles under `prefers-reduced-motion`.
 
 ## Dependencies of Note
 

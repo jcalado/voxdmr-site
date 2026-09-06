@@ -3,6 +3,7 @@ import MessageCircle from "@/src/components/icons/MessageCircle.astro";
 import Coffee from "@/src/components/icons/Coffee.astro";
 import DownloadMenu from "@/src/islands/DownloadMenu.tsx";
 import { getT, type Lang } from "@/src/i18n/t";
+import { resolveDownloads } from "@/src/lib/release";
 
 const TELEGRAM_URL = "https://t.me/+6-ncS_eluTUxNmU0";
 const KOFI_URL = "https://ko-fi.com/jcalado";
@@ -19,22 +20,26 @@ interface Props {
 
 const { lang, className = "" } = Astro.props;
 const t = getT(lang);
+const downloads = await resolveDownloads();
 ---
 <div
   class={`grid w-full grid-cols-2 gap-1.5 rounded-3xl border border-border bg-surface-raised/40 p-1.5 sm:inline-flex sm:w-auto sm:flex-wrap sm:items-center sm:gap-1.5 sm:rounded-full ${className}`}
 >
   <DownloadMenu
     lang={lang}
+    downloads={downloads}
     className="col-span-2 sm:col-span-1"
-    triggerClassName={`${SEGMENT} w-full sm:w-auto bg-vibrant-red hover:bg-red-500 text-white font-bold`}
+    triggerClassName={`${SEGMENT} w-full sm:w-auto bg-red-cta hover:bg-red-cta-hover text-white font-bold`}
     client:load
   />
   <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" class={`${SEGMENT} bg-white/5 hover:bg-white/10 text-on-surface font-semibold`}>
     <MessageCircle class="w-5 h-5" />
     {t("cta.community")}
+    <span class="sr-only"> ({t("a11y.newTab")})</span>
   </a>
   <a href={KOFI_URL} target="_blank" rel="noopener noreferrer" class={`${SEGMENT} bg-vibrant-orange/15 hover:bg-vibrant-orange/25 text-vibrant-orange font-semibold`}>
     <Coffee class="w-5 h-5" />
     {t("cta.donate")}
+    <span class="sr-only"> ({t("a11y.newTab")})</span>
   </a>
 </div>

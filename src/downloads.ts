@@ -1,11 +1,17 @@
 /**
- * The download targets, shared by the `DownloadMenu` island and the mobile nav
- * so the two can't drift apart.
+ * The download targets, shared by the `DownloadMenu` island, the mobile nav and
+ * the footer so they can't drift apart.
  *
- * The desktop assets resolve through GitHub's `/releases/latest/download/<asset>`
- * redirect, so these URLs never need a version bump. The APKs have
- * version-stamped filenames, so the 32-bit build links to the releases page
- * rather than a direct asset.
+ * These are the **fallback** URLs. `src/lib/release.ts` resolves them against
+ * the real assets of the latest GitHub release at build time and is what the
+ * pages actually render; this list is what ships if the API is unreachable.
+ * Keep it working on its own: the desktop entries go through GitHub's
+ * `/releases/latest/download/<asset>` redirect so they survive a version bump,
+ * and the APK — whose filename is version-stamped and so cannot be guessed —
+ * points at the releases page.
+ *
+ * Everything here is serialized into the DownloadMenu island's props, so it
+ * must stay JSON-safe (the asset-matching patterns live in release.ts).
  */
 const RELEASES = "https://github.com/jcalado/voxdmr-site/releases";
 

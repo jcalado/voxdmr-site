@@ -42,14 +42,21 @@ const home = localizePath("/", lang);
 </script>
 
 <div class="min-h-screen bg-community-bg text-on-surface font-sans" data-docs-root>
-  <nav class="h-14 bg-surface border-b border-border flex items-center justify-between px-4 lg:px-6 sticky top-0 z-50">
-    <div class="flex items-center gap-3">
+  <nav
+    class="h-14 bg-surface border-b border-border flex items-center justify-between px-3 sm:px-4 lg:px-6 sticky top-0 z-50"
+    aria-label={t("a11y.primaryNav")}
+  >
+    {/* Tighter padding and gaps below `sm`: at 390px the row measured 410px
+        wide, pushing the language switcher off-canvas and making the page
+        scroll sideways (WCAG 1.4.10). */}
+    <div class="flex items-center gap-2 sm:gap-3">
       <button
         type="button"
         class="lg:hidden text-on-surface-muted hover:text-white transition-colors p-1"
         data-sidebar-toggle
-        aria-label="Toggle sidebar"
+        aria-label={t("a11y.docsSections")}
         aria-expanded="false"
+        aria-controls="docs-sidebar"
       >
         <span data-icon-menu><Menu class="w-5 h-5" /></span>
         <span data-icon-close class="hidden"><X class="w-5 h-5" /></span>
@@ -60,7 +67,7 @@ const home = localizePath("/", lang);
       </a>
       <span class="hidden sm:inline text-on-surface-muted text-sm">{t("docs.slash")}</span>
     </div>
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2 sm:gap-3">
       <DocsSearch lang={lang} />
       <PlatformSwitcher lang={lang} client:idle />
       <LanguageSwitcher lang={lang} pathname={pathname} />
@@ -75,33 +82,54 @@ const home = localizePath("/", lang);
 
   <div class="flex">
     <div class="docs-sidebar-backdrop" data-sidebar-backdrop aria-hidden="true"></div>
-    <aside class="docs-sidebar-aside" data-sidebar>
-      <div class="docs-sidebar w-60 h-full bg-surface-raised/30 backdrop-blur-xl border-r border-border p-4 overflow-y-auto">
-        {groups.map((group) => (
+    {/* A plain div, not <aside>: this is only the positioning/drawer wrapper,
+        and as an <aside> it exposed a second, unnamed `complementary` landmark
+        wrapping the `navigation` one that actually holds the links. */}
+    <div class="docs-sidebar-aside" data-sidebar>
+      {/* A <nav>, not a bare div — this is the docs' section navigation and it
+          needs to be reachable as a landmark and distinguishable from the top
+          nav. Each group is a labelled list so its size is announced. */}
+      <nav
+        id="docs-sidebar"
+        class="docs-sidebar w-60 h-full bg-surface-raised/30 backdrop-blur-xl border-r border-border p-4 overflow-y-auto"
+        aria-label={t("a11y.docsSections")}
+      >
+        {groups.map((group, i) => (
           <div class="mb-6">
-            <div class="text-xs font-bold uppercase tracking-widest text-vibrant-orange mb-2 px-2">
+            {/* Deliberately not a heading: the <ul> borrows it via
+                aria-labelledby, so the group is announced without injecting
+                sidebar entries into the page's own heading outline. */}
+            <div
+              id={`docs-sidebar-group-${i}`}
+              class="text-xs font-bold uppercase tracking-widest text-vibrant-orange mb-2 px-2"
+            >
               {group.label}
             </div>
-            {group.pages.map((page) => (
-              <a
-                href={localizePath(`/docs/${page.slug}`, lang)}
-                class={`block text-sm rounded-lg px-3 py-2 mb-0.5 transition-colors ${
-                  page.slug === slug
-                    ? "bg-vibrant-red text-white font-semibold"
-                    : "text-on-surface-muted hover:bg-surface-raised/40"
-                }`}
-              >
-                {page.title}
-              </a>
-            ))}
+            <ul aria-labelledby={`docs-sidebar-group-${i}`}>
+              {group.pages.map((page) => (
+                <li>
+                  <a
+                    href={localizePath(`/docs/${page.slug}`, lang)}
+                    {...(page.slug === slug ? { "aria-current": "page" } : {})}
+                    class={`block text-sm rounded-lg px-3 py-2 mb-0.5 transition-colors ${
+                      page.slug === slug
+                        ? "bg-red-cta text-white font-semibold"
+                        : "text-on-surface-muted hover:bg-surface-raised/40"
+                    }`}
+                  >
+                    {page.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
-      </div>
-    </aside>
+      </nav>
+    </div>
 
-    <main class="flex-1 p-6 lg:py-10 lg:px-12 overflow-y-auto bg-community-bg">
+    <main id="main-content" class="flex-1 p-6 lg:py-10 lg:px-12 overflow-y-auto bg-community-bg">
       <div class="max-w-[760px]">
-        <div class="prose" data-docs-content data-pagefind-body>
+        <div class="prose" data-docs-content data-pagefind-body data-zoom-label={t("docs.image.zoom")}>
           <slot />
         </div>
         {(prev || next) && (
@@ -137,6 +165,29 @@ const home = localizePath("/", lang);
 
     <TableOfContents lang={lang} headings={headings} />
   </div>
+
+  {/* Image lightbox. A native <dialog> opened with showModal(), so focus
+      trapping, Esc-to-close and focus restore to the thumbnail are the
+      platform's job. Populated by the script below. */}
+  <dialog class="doc-modal" data-doc-lightbox data-pagefind-ignore>
+    {/* Transparent 1x1 placeholder rather than src="" — the latter re-requests
+        the page URL in some browsers. The script swaps in the real image
+        before the dialog is ever shown. */}
+    <img
+      class="doc-modal-img"
+      data-doc-lightbox-img
+      src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+      alt=""
+    />
+    <button
+      type="button"
+      class="doc-modal-close"
+      data-doc-lightbox-close
+      aria-label={t("docs.image.close")}
+    >
+      <X class="w-5 h-5" />
+    </button>
+  </dialog>
 </div>
 
 <script>
@@ -156,30 +207,65 @@ const home = localizePath("/", lang);
     setSidebar(!root?.classList.contains("docs-sidebar-open")),
   );
   backdrop?.addEventListener("click", () => setSidebar(false));
-
-  // Image lightbox: zoom any .prose img on click (progressive enhancement).
-  const content = document.querySelector("[data-docs-content]");
-  let modal: HTMLDivElement | null = null;
-  function closeModal() {
-    modal?.remove();
-    modal = null;
-    document.body.style.overflow = "";
-  }
-  content?.addEventListener("click", (e) => {
-    const img = e.target;
-    if (!(img instanceof HTMLImageElement)) return;
-    modal = document.createElement("div");
-    modal.className = "doc-modal-backdrop";
-    const big = document.createElement("img");
-    big.src = img.src;
-    big.alt = img.alt;
-    big.className = "doc-modal-img";
-    modal.appendChild(big);
-    modal.addEventListener("click", closeModal);
-    document.body.appendChild(modal);
-    document.body.style.overflow = "hidden";
-  });
+  // Escape closes the drawer and hands focus back to the button that opened it.
+  // A modal <dialog> (the search panel) sits above the drawer and handles its
+  // own Escape, so defer to it rather than closing both and fighting over focus.
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeModal();
+    if (e.key !== "Escape" || !root?.classList.contains("docs-sidebar-open")) return;
+    if (document.querySelector("dialog[open]")) return;
+    setSidebar(false);
+    (toggle as HTMLElement | null)?.focus();
   });
+
+  /*
+   * Image lightbox (progressive enhancement). Each content image is wrapped in
+   * a real <button> so it can be focused and activated from the keyboard — the
+   * previous version bound a click handler straight to the <img>, which is
+   * unreachable without a mouse. The overlay is a native <dialog> opened with
+   * showModal(), so the focus trap, Esc-to-close and focus restore back to the
+   * thumbnail all come from the platform.
+   */
+  const content = document.querySelector<HTMLElement>("[data-docs-content]");
+  const lightbox = document.querySelector<HTMLDialogElement>("[data-doc-lightbox]");
+  const lightboxImg = lightbox?.querySelector<HTMLImageElement>("[data-doc-lightbox-img]");
+  const lightboxClose = lightbox?.querySelector<HTMLButtonElement>("[data-doc-lightbox-close]");
+
+  if (content && lightbox && lightboxImg && lightboxClose) {
+    const zoomLabel = content.dataset.zoomLabel ?? "";
+
+    for (const img of Array.from(content.querySelectorAll("img"))) {
+      // A linked image — `[![alt](img)](url)` in Markdown — would nest this
+      // button inside an <a>, which is invalid and would both navigate and
+      // open the lightbox on one click. Leave the link as the control.
+      if (img.closest("a")) continue;
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "doc-zoom-btn";
+      // The image's alt text is the subject; the label names the action on it,
+      // matching how the landing-page gallery labels its own zoom buttons.
+      button.setAttribute("aria-label", `${zoomLabel} ${img.alt}`.trim());
+      img.replaceWith(button);
+      button.appendChild(img);
+
+      button.addEventListener("click", () => {
+        // currentSrc resolves whichever <source> the browser actually picked.
+        lightboxImg.src = img.currentSrc || img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.setAttribute("aria-label", img.alt);
+        lightbox.showModal();
+        document.body.style.overflow = "hidden";
+      });
+    }
+
+    lightboxClose.addEventListener("click", () => lightbox.close());
+    // Clicking the backdrop area — the dialog itself, outside the image — closes.
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) lightbox.close();
+    });
+    // Fires for Esc and the close button alike, so the scroll lock lifts once.
+    lightbox.addEventListener("close", () => {
+      document.body.style.overflow = "";
+    });
+  }
 </script>

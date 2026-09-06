@@ -111,7 +111,7 @@ function BoolCell({ value, t }: { value: Support; t: TFn }) {
     );
   if (value === "na")
     return (
-      <span className="text-xs font-semibold uppercase tracking-wide text-on-surface-muted/70">
+      <span className="text-xs font-semibold uppercase tracking-wide text-on-surface-muted">
         {t("radios.na")}
       </span>
     );
@@ -142,7 +142,9 @@ function ScoreMeter({ radio, score, t }: { radio: Radio; score: number; t: TFn }
           <button
             type="button"
             aria-label={t("radios.scoreHelp")}
-            className="text-on-surface-muted/70 hover:text-on-surface focus:outline-none focus-visible:text-on-surface cursor-help"
+            // No focus:outline-none here: a colour shift was this button's only
+            // focus cue, so it needs the site-wide focus ring.
+            className="text-on-surface-muted/75 hover:text-on-surface focus-visible:text-on-surface cursor-help"
           >
             <Info className="w-3.5 h-3.5" aria-hidden="true" />
           </button>
@@ -155,11 +157,11 @@ function ScoreMeter({ radio, score, t }: { radio: Radio; score: number; t: TFn }
               <span key={p.key} className="flex items-center justify-between gap-6">
                 <span className="text-on-surface-muted">{t(`radios.col.${p.key}`)}</span>
                 {p.counted ? (
-                  <span className={`tabular-nums font-semibold ${p.earned > 0 ? "text-emerald-300" : "text-on-surface-muted/60"}`}>
+                  <span className={`tabular-nums font-semibold ${p.earned > 0 ? "text-emerald-300" : "text-on-surface-muted"}`}>
                     {p.earned}/{p.weight}
                   </span>
                 ) : (
-                  <span className="tabular-nums font-semibold text-on-surface-muted/60">{t("radios.na")}</span>
+                  <span className="tabular-nums font-semibold text-on-surface-muted">{t("radios.na")}</span>
                 )}
               </span>
             ))}
@@ -228,7 +230,7 @@ function RadioCard({
               >
                 {radio.maker}
                 <ExternalLink className="w-3 h-3" aria-hidden="true" />
-                <span className="sr-only">{t("radios.makerAria")}</span>
+                <span className="sr-only">{t("radios.makerAria")} ({t("a11y.newTab")})</span>
               </a>
             ) : (
               <p className="mt-1 text-xs text-on-surface-muted">{radio.maker}</p>
@@ -307,6 +309,7 @@ function RadioCard({
                     <ExternalLink className="w-3.5 h-3.5 shrink-0 text-vibrant-blue" aria-hidden="true" />
                   )}
                   {t(link.labelKey)}
+                  <span className="sr-only"> ({t("a11y.newTab")})</span>
                 </a>
               ))}
             </div>
@@ -439,12 +442,16 @@ export default function RadiosGrid({ lang }: RadiosGridProps) {
                         ? { duration: 0 }
                         : { type: "tween", duration: 0.28, ease: [0.22, 1, 0.36, 1] }
                     }
-                    className="absolute inset-0 rounded-full bg-vibrant-red"
+                    className="absolute inset-0 rounded-full bg-red-cta"
                   />
                 )}
                 <span className="relative inline-flex items-center gap-1.5">
                   {s === "all" ? t("radios.filter.all") : t(`radios.status.${s}`)}
-                  <span className={`tabular-nums text-xs ${active ? "text-white/70" : "text-on-surface-muted/60"}`}>
+                  {/* The counts were dimmed to /70 and /60, which land at 2.99:1
+                      and 3.39:1 — under AA for this 12px text. The smaller size
+                      already de-emphasises them, so the opacity that was doing
+                      the same job is dialled back to where both pass. */}
+                  <span className={`tabular-nums text-xs ${active ? "text-white" : "text-on-surface-muted/75"}`}>
                     {statusCount(s)}
                   </span>
                 </span>
@@ -454,8 +461,15 @@ export default function RadiosGrid({ lang }: RadiosGridProps) {
         </div>
       </div>
 
-      {/* Result count */}
-      <p className="text-sm text-on-surface-muted mb-5 tabular-nums">
+      {/* Result count. A live region so typing in the search box or flipping a
+          filter announces how many radios are left — the change was previously
+          silent, visible only in this line. */}
+      <p
+        className="text-sm text-on-surface-muted mb-5 tabular-nums"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         {filtersActive
           ? `${visible.length} ${t("radios.countOf")} ${radios.length} ${t("radios.unit")}`
           : `${radios.length} ${t("radios.unit")}`}

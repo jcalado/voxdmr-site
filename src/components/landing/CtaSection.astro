@@ -5,6 +5,7 @@ import Coffee from "@/src/components/icons/Coffee.astro";
 import DownloadMenu from "@/src/islands/DownloadMenu.tsx";
 import { getT, type Lang } from "@/src/i18n/t";
 import { localizePath } from "@/src/i18n/routing";
+import { resolveDownloads } from "@/src/lib/release";
 
 interface Props {
   lang: Lang;
@@ -12,6 +13,8 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getT(lang);
+
+const downloads = await resolveDownloads();
 
 const docsHref = localizePath("/docs", lang);
 ---
@@ -28,8 +31,9 @@ const docsHref = localizePath("/docs", lang);
     <div class="flex justify-center">
       <DownloadMenu
         lang={lang}
+        downloads={downloads}
         className="w-full sm:w-auto"
-        triggerClassName="btn-press w-full sm:w-auto bg-vibrant-red hover:bg-red-500 text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl inline-flex items-center justify-center gap-3 transition-all hover:-translate-y-1 whitespace-nowrap"
+        triggerClassName="btn-press w-full sm:w-auto bg-red-cta hover:bg-red-cta-hover text-white font-bold text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-2xl inline-flex items-center justify-center gap-3 transition-all hover:-translate-y-1 whitespace-nowrap"
         client:load
       />
     </div>
@@ -47,9 +51,10 @@ const docsHref = localizePath("/docs", lang);
       >
         <Coffee class="w-4 h-4" />
         {t("support.cta")}
+        <span class="sr-only"> ({t("a11y.newTab")})</span>
       </a>
     </div>
-    <p class="mt-4 text-xs text-on-surface-muted/70">
+    <p class="mt-4 text-xs text-on-surface-muted/75">
       {t("support.note")}
     </p>
   </div>
