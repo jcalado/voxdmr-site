@@ -2,6 +2,27 @@
 
 Release notes for VoxDMR. Each release page on GitHub has the full commit list and the signed binaries; this is the human summary.
 
+## v0.15.1
+
+::platforms[desktop mobile]
+
+_Released September 2026. Desktop + Android._
+
+A small follow-up to 0.15.0, about how the app shuts down and how it comes back.
+
+- **Quit really quits, and opening the app reconnects (Android).** Quitting from the app
+  bar — or from the drawer on a small-panel radio — ended the session and closed the
+  window, but left VoxDMR running in the background. Quit now shuts it down for real,
+  which makes opening the app a fresh start: with **Connect when the app opens** switched
+  on, it connects and rejoins your last talkgroup in about a second.
+- **Coming back to the app no longer fights a reconnect already in progress (Android).**
+  Returning to VoxDMR while it was retrying a dropped connection could start a second
+  attempt over the top of the first; it now waits for the one already under way. A
+  password the server has rejected is no longer retried every time you open the app
+  either — repeatedly presenting a bad password to a master is how a DMR ID gets blocked,
+  so it waits for you to correct it. See [Auto-reconnect](./auto-reconnect).
+- **Website link in About (Desktop).** Points at voxdmr.com.
+
 ## v0.15.0
 
 ::platforms[desktop mobile]

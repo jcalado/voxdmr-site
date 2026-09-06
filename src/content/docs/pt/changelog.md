@@ -2,6 +2,28 @@
 
 Notas de versão do VoxDMR. Cada página de release no GitHub tem a lista completa de commits e os binários assinados; isto é o resumo humano.
 
+## v0.15.1
+
+::platforms[desktop mobile]
+
+_Lançada em setembro de 2026. Desktop + Android._
+
+Um pequeno seguimento à 0.15.0, sobre a forma como a app fecha e como volta a arrancar.
+
+- **Sair fecha mesmo a app, e abri-la volta a ligar (Android).** Sair pela barra da app —
+  ou pelo menu lateral num rádio de painel pequeno — terminava a sessão e fechava a
+  janela, mas deixava o VoxDMR a correr em segundo plano. Agora sair encerra-o mesmo, o
+  que faz de cada abertura um arranque limpo: com **Connect when the app opens** ativado,
+  liga-se e volta ao teu último talkgroup em cerca de um segundo.
+- **Voltar à app já não colide com uma reconexão em curso (Android).** Regressar ao VoxDMR
+  enquanto ele tentava recuperar uma ligação perdida podia iniciar uma segunda tentativa
+  por cima da primeira; agora espera pela que já está a decorrer. Uma palavra-passe que o
+  servidor rejeitou também deixa de ser repetida sempre que abres a app — apresentar
+  repetidamente uma palavra-passe errada a um master é a maneira mais certa de um ID DMR
+  ser bloqueado, por isso fica à espera que a corrijas. Vê
+  [Reconexão automática](./auto-reconnect).
+- **Link do site em About (Desktop).** Aponta para voxdmr.com.
+
 ## v0.15.0
 
 ::platforms[desktop mobile]
