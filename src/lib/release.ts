@@ -43,19 +43,37 @@ interface ReleaseAsset {
 let cached: Promise<Download[]> | null = null;
 
 async function fetchAssets(): Promise<ReleaseAsset[] | null> {
+  // Unauthenticated GitHub allows 60 requests/hour *per IP*, and CI runners
+  // share IPs — so an unauthenticated build is one that quietly falls back
+  // whenever a neighbour has used up the budget. The deploy workflow passes
+  // the token it already has, which raises this to 5000/hour.
+  const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+  const headers: Record<string, string> = {
+    Accept: "application/vnd.github+json",
+    "User-Agent": "voxdmr-site-build",
+  };
+  if (token) headers.Authorization = `Bearer ${token}`;
+
   try {
-    const res = await fetch(API, {
-      headers: {
-        Accept: "application/vnd.github+json",
-        "User-Agent": "voxdmr-site-build",
-      },
-    });
+    const res = await fetch(API, { headers });
     if (!res.ok) {
-      console.warn(`[downloads] GitHub API returned ${res.status}; using fallback URLs.`);
+      const remaining = res.headers.get("x-ratelimit-remaining");
+      const rateLimited = res.status === 403 && remaining === "0";
+      console.warn(
+        `[downloads] GitHub API returned ${res.status}` +
+          (remaining === null ? "" : ` (rate limit remaining: ${remaining})`) +
+          "; using fallback URLs." +
+          (rateLimited && !token
+            ? " Set GITHUB_TOKEN to authenticate — the unauthenticated limit is 60/hour per IP."
+            : ""),
+      );
       return null;
     }
     const release = (await res.json()) as { tag_name?: string; assets?: ReleaseAsset[] };
-    console.log(`[downloads] resolved against release ${release.tag_name ?? "?"}`);
+    console.log(
+      `[downloads] resolved against release ${release.tag_name ?? "?"}` +
+        ` (${token ? "authenticated" : "unauthenticated"})`,
+    );
     return release.assets ?? [];
   } catch (err) {
     // An unreachable network must not break the build — a stale-but-valid URL

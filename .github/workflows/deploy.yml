@@ -24,7 +24,15 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # The build resolves the download links against the latest release's
+      # assets (src/lib/release.ts). Unauthenticated GitHub allows 60 requests
+      # per hour per IP and runners share IPs, so pass the token the job
+      # already has — `contents: read` above is enough to read releases.
+      # Without it the build still succeeds, but falls back to the static URLs
+      # in src/downloads.ts and loses the direct APK link.
       - run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist

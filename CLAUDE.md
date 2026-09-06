@@ -94,6 +94,7 @@ Uses Tailwind CSS v4 with the `@tailwindcss/vite` plugin (not PostCSS). Custom t
 
 - Resolving in the browser is deliberately avoided: unauthenticated GitHub is 60 req/hour **per IP**, so one NAT'd office would break the links for everyone behind it, and it would make downloads depend on JS.
 - **A new release does not reach the site until the site rebuilds.**
+- The build sends `GITHUB_TOKEN` (or `GH_TOKEN`) if set — the deploy workflow passes the one it already has. Unauthenticated is 60 req/hour **per IP** and CI runners share IPs; authenticated is 5000. Without it the build still succeeds but silently falls back. The build log says which mode it used.
 - API unreachable → warn, fall back, build succeeds. API answers but a pattern matches nothing (an asset was renamed) → **the production build fails**, rather than shipping links that 404. Update `ASSET_PATTERNS` in `release.ts` when release filenames change.
 - `Download` objects are serialized into the `DownloadMenu` island's props, so they must stay JSON-safe — the matching RegExps live in `release.ts`, not on the type.
 
