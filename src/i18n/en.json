@@ -3,7 +3,7 @@
   "a11y.primaryNav": "Main",
   "a11y.footerNav": "Footer",
   "a11y.toggleMenu": "Menu",
-  "a11y.toggleSidebar": "Documentation sections",
+  "a11y.docsSections": "Documentation sections",
   "a11y.newTab": "opens in a new tab",
 
   "nav.screenshots": "Screenshots",

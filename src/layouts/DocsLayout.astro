@@ -51,7 +51,7 @@ const home = localizePath("/", lang);
         type="button"
         class="lg:hidden text-on-surface-muted hover:text-white transition-colors p-1"
         data-sidebar-toggle
-        aria-label={t("a11y.toggleSidebar")}
+        aria-label={t("a11y.docsSections")}
         aria-expanded="false"
         aria-controls="docs-sidebar"
       >
@@ -89,7 +89,7 @@ const home = localizePath("/", lang);
       <nav
         id="docs-sidebar"
         class="docs-sidebar w-60 h-full bg-surface-raised/30 backdrop-blur-xl border-r border-border p-4 overflow-y-auto"
-        aria-label={t("a11y.toggleSidebar")}
+        aria-label={t("a11y.docsSections")}
       >
         {groups.map((group, i) => (
           <div class="mb-6">

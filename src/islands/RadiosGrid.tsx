@@ -142,7 +142,9 @@ function ScoreMeter({ radio, score, t }: { radio: Radio; score: number; t: TFn }
           <button
             type="button"
             aria-label={t("radios.scoreHelp")}
-            className="text-on-surface-muted/70 hover:text-on-surface focus:outline-none focus-visible:text-on-surface cursor-help"
+            // No focus:outline-none here: a colour shift was this button's only
+            // focus cue, so it needs the site-wide focus ring.
+            className="text-on-surface-muted/75 hover:text-on-surface focus-visible:text-on-surface cursor-help"
           >
             <Info className="w-3.5 h-3.5" aria-hidden="true" />
           </button>

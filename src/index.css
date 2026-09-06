@@ -68,6 +68,23 @@ html {
   outline-offset: 2px;
 }
 
+/* The skip link's target. Two things need handling:
+   - The docs <main> is a scroll container, which makes it programmatically
+     focusable, so following the skip link drew the focus ring around the
+     entire content column. Suppress it there — the ring is meant for
+     controls, and the jump is already obvious from the scroll.
+   - Landing on the target puts its top edge exactly under the sticky nav,
+     hiding the first line of the heading. scroll-margin-top clears it. */
+#main-content {
+  scroll-margin-top: 7rem; /* clears the 6rem site nav */
+}
+#main-content:focus {
+  outline: none;
+}
+[data-docs-root] #main-content {
+  scroll-margin-top: 4.5rem; /* the docs nav is 3.5rem */
+}
+
 /* Skip link (rendered in Layout.astro). Off-screen until it takes focus. */
 .skip-link {
   position: absolute;

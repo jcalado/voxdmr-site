@@ -42,9 +42,15 @@ const strings = JSON.stringify({
           the listbox below while focus stays here, and only aria-activedescendant
           tells a screen reader which hit is currently selected. Without it the
           arrow-key navigation was completely silent. */}
+      {/* type="text", not "search": ARIA in HTML allows no role but `searchbox`
+          on type=search, so role="combobox" would be a conformance error — and
+          the native type=search Escape behaviour swallowed the first Escape to
+          clear the field instead of closing the dialog, contradicting the
+          "Esc" chip beside it. inputmode keeps the search key on phones. */}
       <input
         data-search-input
-        type="search"
+        type="text"
+        inputmode="search"
         autocomplete="off"
         spellcheck="false"
         enterkeyhint="search"
@@ -167,16 +173,24 @@ const strings = JSON.stringify({
 
     function render(pages: ResultData[]) {
       list.innerHTML = "";
-      // Options need stable ids for aria-activedescendant to point at them.
+      // Options need stable ids for aria-activedescendant to point at them,
+      // and each group needs one for its own label.
       let hitIndex = 0;
+      let groupIndex = 0;
       for (const page of pages) {
         const group = document.createElement("div");
         group.className = "docs-search-group";
 
         const heading = document.createElement("div");
         heading.className = "docs-search-page";
+        heading.id = `docs-search-group-${groupIndex++}`;
         heading.textContent = page.meta?.title ?? page.url;
         group.appendChild(heading);
+        // Without this the page title is loose text inside the listbox and the
+        // options below it are unattributed; as a labelled group, a hit is
+        // announced along with the page it came from.
+        group.setAttribute("role", "group");
+        group.setAttribute("aria-labelledby", heading.id);
 
         // Prefer the per-section sub-results (they deep-link to the heading
         // anchor); fall back to the whole-page excerpt when there are none.

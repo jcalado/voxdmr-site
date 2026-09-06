@@ -15,9 +15,12 @@ const t = getT(lang);
 const entries = headings.filter((h) => h.depth === 2 || h.depth === 3);
 ---
 
+{/* The wrapper is a div, not an <aside>: the <nav> inside is the landmark, and
+    as an <aside> this element added a second, unnamed `complementary` landmark
+    around it — the same redundancy removed from the docs sidebar. */}
 {
   entries.length > 1 && (
-    <aside class="docs-toc-aside" data-pagefind-ignore>
+    <div class="docs-toc-aside" data-pagefind-ignore>
       <nav class="docs-toc" aria-labelledby="docs-toc-title">
         <div id="docs-toc-title" class="text-xs font-bold uppercase tracking-widest text-vibrant-orange mb-3">
           {t("docs.onThisPage")}
@@ -30,7 +33,7 @@ const entries = headings.filter((h) => h.depth === 2 || h.depth === 3);
           ))}
         </ul>
       </nav>
-    </aside>
+    </div>
   )
 }
 

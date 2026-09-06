@@ -54,6 +54,10 @@
    anyone who cannot separate the two hues. */
 .prose a { color: #EF4444; text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 .prose a:hover { text-decoration-thickness: 2px; }
+/* Blockquotes and callouts sit on a lighter ground, where #EF4444 drops to
+   3.89:1 and 3.6:1. A step lighter clears AA on both without changing the
+   colour's character. */
+.prose blockquote a, .prose .callout a { color: #F87171; }
 .prose ul, .prose ol { margin: 0 0 1rem 0; padding-left: 1.5rem; }
 .prose ol { list-style-type: decimal; }
 .prose ul { list-style-type: disc; }
@@ -256,9 +260,7 @@
   font-size: 0.95rem;
   font-family: inherit;
 }
-.docs-search-inputrow input::placeholder { color: #64748B; }
-/* The type=search clear affordance duplicates Esc and breaks the row rhythm. */
-.docs-search-inputrow input::-webkit-search-cancel-button { display: none; }
+.docs-search-inputrow input::placeholder { color: #94A3B8; }
 
 .docs-search-results {
   max-height: min(60vh, 26rem);
@@ -305,13 +307,15 @@
 }
 .docs-search-hit mark {
   background: none;
-  color: #EF4444;
+  /* 4.28:1 against the highlighted row; a step lighter clears AA. */
+  color: #F87171;
   font-weight: 600;
 }
 
 .docs-search-status {
   padding: 1.1rem 1.25rem;
-  color: #64748B;
+  /* 3.75:1 before — this is the "no results" / "unavailable" copy. */
+  color: #94A3B8;
   font-size: 0.8125rem;
 }
 .docs-search-status[hidden] { display: none; }
@@ -346,14 +350,17 @@
   .docs-toc-aside { width: 15rem; padding-right: 1.5rem; }
 }
 
-.docs-toc ul { list-style: none; margin: 0; padding: 0; }
+/* Room for the focus ring's left edge: the links sit flush against the rail's
+   left edge, and the scroll container clipped the outline there. */
+.docs-toc ul { list-style: none; margin: 0; padding: 0 0 0 3px; }
 .docs-toc li[hidden] { display: none; }
 .docs-toc li[data-toc-depth="3"] { padding-left: 0.85rem; }
 .docs-toc a {
   display: block;
   padding: 0.3rem 0 0.3rem 0.75rem;
   border-left: 2px solid rgba(255, 255, 255, 0.09);
-  color: #64748B;
+  /* #64748B read at 4.24:1 on the page ground — just under AA at 13px. */
+  color: #94A3B8;
   font-size: 0.8125rem;
   line-height: 1.45;
   text-decoration: none;
