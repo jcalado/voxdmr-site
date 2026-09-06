@@ -88,6 +88,15 @@ Uses Tailwind CSS v4 with the `@tailwindcss/vite` plugin (not PostCSS). Custom t
 
 **`vibrant-red` is for red *text* on a dark ground, never for a red fill behind white text** — white on #EF4444 is 3.76:1, under the AA floor. Filled buttons and active pills use `bg-red-cta` (#DC2626) with `hover:bg-red-cta-hover` (#B91C1C). Note `vibrant-red` itself only passes on `community-bg` (5.36:1) and `background` (4.74:1); on `surface-raised` it is 3.89:1, so red text there needs `red-400` instead.
 
+## Download links
+
+`src/downloads.ts` holds the target list; `src/lib/release.ts` resolves each one against the **actual assets of the latest GitHub release at build time** (one fetch per build, memoized) and that is what the pages render. `src/downloads.ts` is only the fallback for an unreachable API.
+
+- Resolving in the browser is deliberately avoided: unauthenticated GitHub is 60 req/hour **per IP**, so one NAT'd office would break the links for everyone behind it, and it would make downloads depend on JS.
+- **A new release does not reach the site until the site rebuilds.**
+- API unreachable → warn, fall back, build succeeds. API answers but a pattern matches nothing (an asset was renamed) → **the production build fails**, rather than shipping links that 404. Update `ASSET_PATTERNS` in `release.ts` when release filenames change.
+- `Download` objects are serialized into the `DownloadMenu` island's props, so they must stay JSON-safe — the matching RegExps live in `release.ts`, not on the type.
+
 ## Accessibility
 
 `npm run test:a11y` gates this — keep it at zero violations. Conventions worth knowing before adding UI:

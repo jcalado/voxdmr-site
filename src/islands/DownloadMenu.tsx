@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import type { LucideIcon } from "lucide-react";
 import { ChevronDown, Cpu, Download, Monitor, Smartphone, Terminal } from "lucide-react";
 import { getT, type Lang } from "@/src/i18n/t";
-import { downloads, type Download as DownloadTarget } from "@/src/downloads";
+import { type Download as DownloadTarget } from "@/src/downloads";
 
 const ICONS: Record<DownloadTarget["key"], LucideIcon> = {
   playStore: Smartphone,
@@ -14,6 +14,8 @@ const ICONS: Record<DownloadTarget["key"], LucideIcon> = {
 
 type DownloadMenuProps = {
   lang: Lang;
+  /** Resolved at build time against the latest release (see lib/release.ts). */
+  downloads: DownloadTarget[];
   /** Classes for the trigger button so it can match each call site's CTA style. */
   triggerClassName: string;
   /** Wrapper classes — used to inherit sizing (e.g. `w-full sm:w-auto`). */
@@ -24,6 +26,7 @@ type DownloadMenuProps = {
 
 export default function DownloadMenu({
   lang,
+  downloads,
   triggerClassName,
   className,
   align = "left",

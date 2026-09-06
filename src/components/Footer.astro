@@ -2,7 +2,7 @@
 import Logo from "@/src/components/Logo.astro";
 import { getT, type Lang } from "@/src/i18n/t";
 import { localizePath } from "@/src/i18n/routing";
-import { downloads } from "@/src/downloads";
+import { resolveDownloads } from "@/src/lib/release";
 
 interface Props {
   lang: Lang;
@@ -10,6 +10,8 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getT(lang);
+
+const downloads = await resolveDownloads();
 
 const docsHref = localizePath("/docs", lang);
 const radiosHref = localizePath("/radios", lang);

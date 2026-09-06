@@ -6,7 +6,7 @@ import Menu from "@/src/components/icons/Menu.astro";
 import X from "@/src/components/icons/X.astro";
 import { getT, type Lang } from "@/src/i18n/t";
 import { localizePath } from "@/src/i18n/routing";
-import { downloads } from "@/src/downloads";
+import { resolveDownloads } from "@/src/lib/release";
 
 const linkClass =
   "nav-link font-medium text-on-surface-muted hover:text-vibrant-red transition-colors px-2 py-1";
@@ -34,6 +34,9 @@ const navLinks = [
 const isCurrent = (href: string) =>
   !href.includes("#") && (pathname === href || pathname.startsWith(`${href}/`));
 
+// Resolved against the latest release's actual assets at build time.
+const downloads = await resolveDownloads();
+
 // The phone menu leads with the Play Store and demotes the rest.
 const primary = downloads.find((d) => d.key === "playStore")!;
 const secondary = downloads.filter((d) => d.key !== "playStore");
@@ -60,6 +63,7 @@ const secondary = downloads.filter((d) => d.key !== "playStore");
       <LanguageSwitcher lang={lang} pathname={pathname} />
       <DownloadMenu
         lang={lang}
+        downloads={downloads}
         align="right"
         className="hidden lg:block"
         triggerClassName="btn-press inline-flex items-center gap-2 bg-red-cta hover:bg-red-cta-hover text-white px-5 lg:px-6 py-2.5 lg:py-3 rounded-2xl font-bold hover:scale-105 transition-all"
