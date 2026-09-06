@@ -2,6 +2,7 @@
 import Logo from "@/src/components/Logo.astro";
 import { getT, type Lang } from "@/src/i18n/t";
 import { localizePath } from "@/src/i18n/routing";
+import { downloads } from "@/src/downloads";
 
 interface Props {
   lang: Lang;
@@ -28,32 +29,69 @@ const callsign = "CT7BLE";
 const [copyBefore, copyAfter] = t("footer.copyright").split("{callsign}");
 ---
 <footer class="bg-slate-950 py-16 border-t border-border">
-  <div class="flex flex-col md:flex-row justify-between items-center px-6 lg:px-12 gap-10 max-w-7xl mx-auto">
-    <div class="flex items-center gap-4">
-      <Logo size="sm" />
-      <span class="font-bold font-headline text-white text-2xl tracking-tight">VoxDMR</span>
-    </div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    {/*
+      The download targets as plain links, not only inside the DownloadMenu
+      dropdown. Every "Download" affordance elsewhere on the site is a button
+      that reveals its targets on activation, so before this the four of them
+      were absent from a screen reader's links list — the fastest way most
+      screen reader users scan a page — and the only listed route to a download
+      was the GitHub link below, which lands on a releases page.
 
-    <nav class="flex flex-wrap justify-center gap-6 lg:gap-10" aria-label={t("a11y.footerNav")}>
-      {links.map((link) => (
-        <a
-          class="text-sm font-semibold text-on-surface-muted hover:text-vibrant-red transition-colors"
-          href={link.href}
-          {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-        >
-          {link.label}
-          {link.external && <span class="sr-only"> ({t("a11y.newTab")})</span>}
-        </a>
-      ))}
+      A labelled <nav> so it is also reachable by landmark navigation, and
+      driven by the same `downloads` array as the menu so the two can't drift.
+    */}
+    <nav
+      class="flex flex-col items-center gap-4 border-b border-border pb-10 sm:flex-row sm:justify-center sm:gap-8"
+      aria-labelledby="footer-download-label"
+    >
+      <span
+        id="footer-download-label"
+        class="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-on-surface-muted"
+      >
+        {t("download.label")}
+      </span>
+      <div class="flex flex-wrap justify-center gap-x-6 gap-y-3">
+        {downloads.map((d) => (
+          <a
+            href={d.href}
+            {...(d.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            class="text-sm font-semibold text-on-surface hover:text-vibrant-red transition-colors"
+          >
+            {t(d.labelKey)}
+            {d.external && <span class="sr-only"> ({t("a11y.newTab")})</span>}
+          </a>
+        ))}
+      </div>
     </nav>
 
-    <div class="text-on-surface-muted text-sm font-medium text-center md:text-right">
-      {copyBefore}<a
-        href={`https://www.qrz.com/db/${callsign}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-white font-semibold hover:text-vibrant-red transition-colors"
-      >{callsign}<span class="sr-only"> ({t("a11y.newTab")})</span></a>{copyAfter}
+    <div class="flex flex-col md:flex-row justify-between items-center gap-10 pt-10">
+      <div class="flex items-center gap-4">
+        <Logo size="sm" />
+        <span class="font-bold font-headline text-white text-2xl tracking-tight">VoxDMR</span>
+      </div>
+
+      <nav class="flex flex-wrap justify-center gap-6 lg:gap-10" aria-label={t("a11y.footerNav")}>
+        {links.map((link) => (
+          <a
+            class="text-sm font-semibold text-on-surface-muted hover:text-vibrant-red transition-colors"
+            href={link.href}
+            {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          >
+            {link.label}
+            {link.external && <span class="sr-only"> ({t("a11y.newTab")})</span>}
+          </a>
+        ))}
+      </nav>
+
+      <div class="text-on-surface-muted text-sm font-medium text-center md:text-right">
+        {copyBefore}<a
+          href={`https://www.qrz.com/db/${callsign}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-white font-semibold hover:text-vibrant-red transition-colors"
+        >{callsign}<span class="sr-only"> ({t("a11y.newTab")})</span></a>{copyAfter}
+      </div>
     </div>
   </div>
 </footer>
