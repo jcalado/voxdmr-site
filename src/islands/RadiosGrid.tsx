@@ -230,7 +230,7 @@ function RadioCard({
               >
                 {radio.maker}
                 <ExternalLink className="w-3 h-3" aria-hidden="true" />
-                <span className="sr-only">{t("radios.makerAria")}</span>
+                <span className="sr-only">{t("radios.makerAria")} ({t("a11y.newTab")})</span>
               </a>
             ) : (
               <p className="mt-1 text-xs text-on-surface-muted">{radio.maker}</p>
@@ -309,6 +309,7 @@ function RadioCard({
                     <ExternalLink className="w-3.5 h-3.5 shrink-0 text-vibrant-blue" aria-hidden="true" />
                   )}
                   {t(link.labelKey)}
+                  <span className="sr-only"> ({t("a11y.newTab")})</span>
                 </a>
               ))}
             </div>

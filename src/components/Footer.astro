@@ -42,6 +42,7 @@ const [copyBefore, copyAfter] = t("footer.copyright").split("{callsign}");
           {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         >
           {link.label}
+          {link.external && <span class="sr-only"> ({t("a11y.newTab")})</span>}
         </a>
       ))}
     </nav>
@@ -52,7 +53,7 @@ const [copyBefore, copyAfter] = t("footer.copyright").split("{callsign}");
         target="_blank"
         rel="noopener noreferrer"
         class="text-white font-semibold hover:text-vibrant-red transition-colors"
-      >{callsign}</a>{copyAfter}
+      >{callsign}<span class="sr-only"> ({t("a11y.newTab")})</span></a>{copyAfter}
     </div>
   </div>
 </footer>

@@ -210,6 +210,7 @@ export default function DownloadMenu({
                 >
                   <Icon className="w-4 h-4 shrink-0 text-vibrant-blue" />
                   {t(labelKey)}
+                  {external && <span className="sr-only"> ({t("a11y.newTab")})</span>}
                 </a>
               );
             })}

@@ -117,6 +117,7 @@ const secondary = downloads.filter((d) => d.key !== "playStore");
           class="btn-press w-full bg-red-cta hover:bg-red-cta-hover text-white text-center px-6 py-3 rounded-2xl font-bold transition-colors"
         >
           {t(primary.labelKey)}
+          <span class="sr-only"> ({t("a11y.newTab")})</span>
         </a>
         <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 pb-1">
           {secondary.map((d) => (
@@ -127,6 +128,7 @@ const secondary = downloads.filter((d) => d.key !== "playStore");
               class="text-sm font-medium text-on-surface-muted hover:text-white transition-colors"
             >
               {t(d.labelKey)}
+              {d.external && <span class="sr-only"> ({t("a11y.newTab")})</span>}
             </a>
           ))}
         </div>

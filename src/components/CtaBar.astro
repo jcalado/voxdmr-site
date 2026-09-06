@@ -32,9 +32,11 @@ const t = getT(lang);
   <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" class={`${SEGMENT} bg-white/5 hover:bg-white/10 text-on-surface font-semibold`}>
     <MessageCircle class="w-5 h-5" />
     {t("cta.community")}
+    <span class="sr-only"> ({t("a11y.newTab")})</span>
   </a>
   <a href={KOFI_URL} target="_blank" rel="noopener noreferrer" class={`${SEGMENT} bg-vibrant-orange/15 hover:bg-vibrant-orange/25 text-vibrant-orange font-semibold`}>
     <Coffee class="w-5 h-5" />
     {t("cta.donate")}
+    <span class="sr-only"> ({t("a11y.newTab")})</span>
   </a>
 </div>

@@ -179,6 +179,10 @@ html {
   opacity: 1;
   transform: translateY(0);
 }
+/* Note: without JS the IntersectionObserver never runs and `.revealed` is
+   never added, which would leave most of the page at opacity 0 — a blank site
+   rather than a site without animation. The <noscript> block in
+   Layout.astro's <head> neutralises this rule in that case. */
 
 /* Decorative animations migrated out of Framer Motion (hero blobs, hero glow,
    CTA logo pulse). Values match the original motion props 1:1. */

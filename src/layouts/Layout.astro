@@ -68,6 +68,16 @@ const ptHref = lang === 'pt' ? pathname : altPath;
     <meta name="twitter:image" content={ogImageUrl} />
 
     <meta name="generator" content={Astro.generator} />
+
+    {/* The scroll-reveal entrance starts elements at opacity 0 and relies on an
+        IntersectionObserver to reveal them. With scripting off that observer
+        never runs, so most of the page would render blank rather than merely
+        un-animated. */}
+    <noscript>
+      <style>
+        .scroll-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      </style>
+    </noscript>
   </head>
   <body>
     {/* First stop in the tab order on every page, so keyboard and screen
