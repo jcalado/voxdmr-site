@@ -76,6 +76,11 @@ const ptHref = lang === 'pt' ? pathname : altPath;
     <noscript>
       <style>
         .scroll-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+        /* Motion islands server-render their entrance state as an inline
+           style="opacity:0;transform:…", which no class selector can reach.
+           Without this the radios grid renders 22 invisible cards and the FAQ
+           renders none of its questions. */
+        [style*="opacity:0"] { opacity: 1 !important; transform: none !important; }
       </style>
     </noscript>
   </head>

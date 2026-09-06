@@ -12,7 +12,7 @@ VoxDMR is a landing and documentation site for VoxDMR — a cross-platform app t
 - `npm run build` — Static production build to `dist/`, then `pagefind --site dist` to emit the search index into `dist/pagefind/`
 - `npm run preview` — Serve the built `dist/` locally
 - `npm run lint` — `astro check` + `tsc --noEmit` (no ESLint)
-- `npm run test:a11y` — axe-core over the **built** `dist/` (run `npm run build` first) across 11 pages in both locales; exits non-zero on any violation. Needs a Chromium once (`npx playwright install chromium`, or `CHROME_PATH=/usr/bin/chromium npm run test:a11y`).
+- `npm run test:a11y` — axe-core over the **built** `dist/` (run `npm run build` first): 11 pages in both locales at 1280 and 390, plus 5 opened states (search dialog, download menu, lightbox, mobile nav, docs drawer). Exits non-zero on any violation. Needs a Chromium once (`npx playwright install chromium`, or `CHROME_PATH=/usr/bin/chromium npm run test:a11y`).
 - `npm run clean` — Remove `dist/`
 
 ## Architecture
@@ -98,7 +98,8 @@ Uses Tailwind CSS v4 with the `@tailwindcss/vite` plugin (not PostCSS). Custom t
 - **New tabs.** Links with `target="_blank"` carry `<span class="sr-only"> ({t("a11y.newTab")})</span>`.
 - **Colour is never the only signal.** Links inside body copy are underlined, not just tinted; active states pair colour with `aria-current` or `aria-pressed`.
 - **Modals and menus** move focus in, trap Tab, and restore focus to whatever opened them. The docs search and image lightbox use a native `<dialog>` + `showModal()` so the platform does this; `ScreenshotGallery` and `DownloadMenu` do it by hand.
-- **No-JS.** `.scroll-reveal` starts at `opacity: 0`, so a `<noscript>` block in `Layout.astro`'s head neutralises it. Don't add a reveal mechanism without a matching fallback.
+- **No-JS.** `.scroll-reveal` starts at `opacity: 0`, and motion islands server-render an inline `style="opacity:0"`. A `<noscript>` block in `Layout.astro`'s head neutralises both. Don't add a reveal mechanism without a matching fallback — with JS off, `/radios` otherwise renders 22 invisible cards.
+- **Entrance animations hide content from axe.** axe does not evaluate text at `opacity: 0` — it neither passes nor flags it. The suite therefore scrolls each page to fire every reveal and then *fails* the page if any text is still invisible, because a clean result on faded-out content means nothing. If you add an entrance animation, make sure it settles under `prefers-reduced-motion`.
 
 ## Dependencies of Note
 

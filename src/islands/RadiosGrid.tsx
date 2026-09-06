@@ -111,7 +111,7 @@ function BoolCell({ value, t }: { value: Support; t: TFn }) {
     );
   if (value === "na")
     return (
-      <span className="text-xs font-semibold uppercase tracking-wide text-on-surface-muted/75">
+      <span className="text-xs font-semibold uppercase tracking-wide text-on-surface-muted">
         {t("radios.na")}
       </span>
     );
@@ -157,11 +157,11 @@ function ScoreMeter({ radio, score, t }: { radio: Radio; score: number; t: TFn }
               <span key={p.key} className="flex items-center justify-between gap-6">
                 <span className="text-on-surface-muted">{t(`radios.col.${p.key}`)}</span>
                 {p.counted ? (
-                  <span className={`tabular-nums font-semibold ${p.earned > 0 ? "text-emerald-300" : "text-on-surface-muted/60"}`}>
+                  <span className={`tabular-nums font-semibold ${p.earned > 0 ? "text-emerald-300" : "text-on-surface-muted"}`}>
                     {p.earned}/{p.weight}
                   </span>
                 ) : (
-                  <span className="tabular-nums font-semibold text-on-surface-muted/60">{t("radios.na")}</span>
+                  <span className="tabular-nums font-semibold text-on-surface-muted">{t("radios.na")}</span>
                 )}
               </span>
             ))}
