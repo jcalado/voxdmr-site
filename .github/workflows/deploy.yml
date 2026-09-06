@@ -3,6 +3,12 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # The build resolves the download links against the latest release's assets,
+  # so publishing a release has to rebuild the site or the links keep pointing
+  # at the previous version. Releases are cut in this repo, so this is a plain
+  # `release` trigger — no repository_dispatch or cross-repo token needed.
+  release:
+    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -18,7 +24,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Always build the current main. On a `release` event the default
+      # checkout is the tagged commit, which would deploy the site as it looked
+      # at the tag rather than as it is now — the release is a trigger to
+      # re-resolve the download links, not the content to publish.
       - uses: actions/checkout@v7
+        with:
+          ref: main
       - uses: actions/setup-node@v6
         with:
           node-version: 22
