@@ -34,7 +34,7 @@ const [copyBefore, copyAfter] = t("footer.copyright").split("{callsign}");
       <span class="font-bold font-headline text-white text-2xl tracking-tight">VoxDMR</span>
     </div>
 
-    <div class="flex flex-wrap justify-center gap-6 lg:gap-10">
+    <nav class="flex flex-wrap justify-center gap-6 lg:gap-10" aria-label={t("a11y.footerNav")}>
       {links.map((link) => (
         <a
           class="text-sm font-semibold text-on-surface-muted hover:text-vibrant-red transition-colors"
@@ -44,7 +44,7 @@ const [copyBefore, copyAfter] = t("footer.copyright").split("{callsign}");
           {link.label}
         </a>
       ))}
-    </div>
+    </nav>
 
     <div class="text-on-surface-muted text-sm font-medium text-center md:text-right">
       {copyBefore}<a

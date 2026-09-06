@@ -10,11 +10,16 @@ const logoSizes = {
 interface Props {
   size?: keyof typeof logoSizes;
   className?: string;
+  /** Alt text. Defaults to empty: every current use sits beside a visible
+      "VoxDMR" wordmark inside the same link, where a described logo makes a
+      screen reader announce the name twice. Pass one only when the mark
+      stands alone. */
+  alt?: string;
 }
 
-const { size = "md", className = "" } = Astro.props;
+const { size = "md", className = "", alt = "" } = Astro.props;
 const s = logoSizes[size];
 ---
 <div class={`${s.container} bg-surface-raised overflow-hidden flex items-center justify-center ${className}`}>
-  <img alt="VoxDMR Logo" class={`${s.img} object-cover`} src={LOGO_URL} />
+  <img alt={alt} class={`${s.img} object-cover`} src={LOGO_URL} />
 </div>

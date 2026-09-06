@@ -42,14 +42,18 @@ const home = localizePath("/", lang);
 </script>
 
 <div class="min-h-screen bg-community-bg text-on-surface font-sans" data-docs-root>
-  <nav class="h-14 bg-surface border-b border-border flex items-center justify-between px-4 lg:px-6 sticky top-0 z-50">
+  <nav
+    class="h-14 bg-surface border-b border-border flex items-center justify-between px-4 lg:px-6 sticky top-0 z-50"
+    aria-label={t("a11y.primaryNav")}
+  >
     <div class="flex items-center gap-3">
       <button
         type="button"
         class="lg:hidden text-on-surface-muted hover:text-white transition-colors p-1"
         data-sidebar-toggle
-        aria-label="Toggle sidebar"
+        aria-label={t("a11y.toggleSidebar")}
         aria-expanded="false"
+        aria-controls="docs-sidebar"
       >
         <span data-icon-menu><Menu class="w-5 h-5" /></span>
         <span data-icon-close class="hidden"><X class="w-5 h-5" /></span>
@@ -75,31 +79,52 @@ const home = localizePath("/", lang);
 
   <div class="flex">
     <div class="docs-sidebar-backdrop" data-sidebar-backdrop aria-hidden="true"></div>
-    <aside class="docs-sidebar-aside" data-sidebar>
-      <div class="docs-sidebar w-60 h-full bg-surface-raised/30 backdrop-blur-xl border-r border-border p-4 overflow-y-auto">
-        {groups.map((group) => (
+    {/* A plain div, not <aside>: this is only the positioning/drawer wrapper,
+        and as an <aside> it exposed a second, unnamed `complementary` landmark
+        wrapping the `navigation` one that actually holds the links. */}
+    <div class="docs-sidebar-aside" data-sidebar>
+      {/* A <nav>, not a bare div — this is the docs' section navigation and it
+          needs to be reachable as a landmark and distinguishable from the top
+          nav. Each group is a labelled list so its size is announced. */}
+      <nav
+        id="docs-sidebar"
+        class="docs-sidebar w-60 h-full bg-surface-raised/30 backdrop-blur-xl border-r border-border p-4 overflow-y-auto"
+        aria-label={t("a11y.toggleSidebar")}
+      >
+        {groups.map((group, i) => (
           <div class="mb-6">
-            <div class="text-xs font-bold uppercase tracking-widest text-vibrant-orange mb-2 px-2">
+            {/* Deliberately not a heading: the <ul> borrows it via
+                aria-labelledby, so the group is announced without injecting
+                sidebar entries into the page's own heading outline. */}
+            <div
+              id={`docs-sidebar-group-${i}`}
+              class="text-xs font-bold uppercase tracking-widest text-vibrant-orange mb-2 px-2"
+            >
               {group.label}
             </div>
-            {group.pages.map((page) => (
-              <a
-                href={localizePath(`/docs/${page.slug}`, lang)}
-                class={`block text-sm rounded-lg px-3 py-2 mb-0.5 transition-colors ${
-                  page.slug === slug
-                    ? "bg-red-cta text-white font-semibold"
-                    : "text-on-surface-muted hover:bg-surface-raised/40"
-                }`}
-              >
-                {page.title}
-              </a>
-            ))}
+            <ul aria-labelledby={`docs-sidebar-group-${i}`}>
+              {group.pages.map((page) => (
+                <li>
+                  <a
+                    href={localizePath(`/docs/${page.slug}`, lang)}
+                    {...(page.slug === slug ? { "aria-current": "page" } : {})}
+                    class={`block text-sm rounded-lg px-3 py-2 mb-0.5 transition-colors ${
+                      page.slug === slug
+                        ? "bg-red-cta text-white font-semibold"
+                        : "text-on-surface-muted hover:bg-surface-raised/40"
+                    }`}
+                  >
+                    {page.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
-      </div>
-    </aside>
+      </nav>
+    </div>
 
-    <main class="flex-1 p-6 lg:py-10 lg:px-12 overflow-y-auto bg-community-bg">
+    <main id="main-content" class="flex-1 p-6 lg:py-10 lg:px-12 overflow-y-auto bg-community-bg">
       <div class="max-w-[760px]">
         <div class="prose" data-docs-content data-pagefind-body data-zoom-label={t("docs.image.zoom")}>
           <slot />

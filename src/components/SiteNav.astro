@@ -28,11 +28,20 @@ const navLinks = [
   { href: localizePath("/radios", lang), label: t("nav.radios") },
 ];
 
+/** aria-current for the section the reader is in — the active link was marked
+    by colour alone, which says nothing to a screen reader. In-page anchors are
+    excluded: they point within the current page rather than away from it. */
+const isCurrent = (href: string) =>
+  !href.includes("#") && (pathname === href || pathname.startsWith(`${href}/`));
+
 // The phone menu leads with the Play Store and demotes the rest.
 const primary = downloads.find((d) => d.key === "playStore")!;
 const secondary = downloads.filter((d) => d.key !== "playStore");
 ---
-<nav class="w-full top-0 sticky z-50 bg-slate-950/80 backdrop-blur-xl h-24 flex items-center border-b border-border">
+<nav
+  class="w-full top-0 sticky z-50 bg-slate-950/80 backdrop-blur-xl h-24 flex items-center border-b border-border"
+  aria-label={t("a11y.primaryNav")}
+>
   <div class="flex justify-between items-center max-w-7xl mx-auto px-6 lg:px-10 w-full">
     <a href={home} class="flex items-center gap-4 lg:gap-5">
       <Logo size="md" className="shadow-lg shadow-black/40" />
@@ -40,7 +49,11 @@ const secondary = downloads.filter((d) => d.key !== "playStore");
     </a>
 
     <div class="hidden lg:flex gap-12 items-center">
-      {navLinks.map((l) => <a class={linkClass} href={l.href}>{l.label}</a>)}
+      {navLinks.map((l) => (
+        <a class={linkClass} href={l.href} {...(isCurrent(l.href) ? { "aria-current": "page" } : {})}>
+          {l.label}
+        </a>
+      ))}
     </div>
 
     <div class="flex items-center gap-3 lg:gap-4">
@@ -56,7 +69,7 @@ const secondary = downloads.filter((d) => d.key !== "playStore");
         type="button"
         class="lg:hidden text-on-surface-muted hover:text-white transition-colors p-1.5 -mr-1.5"
         data-nav-toggle
-        aria-label="Toggle menu"
+        aria-label={t("a11y.toggleMenu")}
         aria-expanded="false"
         aria-controls="site-mobile-menu"
       >
@@ -78,6 +91,7 @@ const secondary = downloads.filter((d) => d.key !== "playStore");
         <a
           href={l.href}
           data-nav-link
+          {...(isCurrent(l.href) ? { "aria-current": "page" } : {})}
           class="text-on-surface-muted hover:text-white font-medium text-lg py-3 border-b border-border/60 last:border-0 transition-colors"
         >
           {l.label}
@@ -141,8 +155,11 @@ const secondary = downloads.filter((d) => d.key !== "playStore");
   document
     .querySelectorAll("[data-nav-link]")
     .forEach((a) => a.addEventListener("click", () => setOpen(false)));
-  // Close on Escape.
+  // Close on Escape, handing focus back to the button that opened the menu —
+  // otherwise focus is left inside a menu that is no longer visible.
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") setOpen(false);
+    if (e.key !== "Escape" || menu?.getAttribute("data-open") !== "true") return;
+    setOpen(false);
+    (toggle as HTMLElement | null)?.focus();
   });
 </script>

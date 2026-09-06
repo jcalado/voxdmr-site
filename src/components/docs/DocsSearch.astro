@@ -16,6 +16,8 @@ const strings = JSON.stringify({
   empty: t("docs.search.empty"),
   unavailable: t("docs.search.unavailable"),
   results: t("docs.search.results"),
+  countOne: t("docs.search.countOne"),
+  countMany: t("docs.search.countMany"),
 });
 ---
 
@@ -36,6 +38,10 @@ const strings = JSON.stringify({
   <div class="docs-search-panel">
     <div class="docs-search-inputrow">
       <Search class="w-4 h-4 shrink-0 text-on-surface-muted" />
+      {/* A combobox, not a bare input: the arrow keys move a highlight through
+          the listbox below while focus stays here, and only aria-activedescendant
+          tells a screen reader which hit is currently selected. Without it the
+          arrow-key navigation was completely silent. */}
       <input
         data-search-input
         type="search"
@@ -44,12 +50,19 @@ const strings = JSON.stringify({
         enterkeyhint="search"
         placeholder={t("docs.search.placeholder")}
         aria-label={t("docs.search.label")}
+        role="combobox"
+        aria-expanded="false"
         aria-controls="docs-search-results"
+        aria-autocomplete="list"
+        aria-haspopup="listbox"
       />
       <kbd class="docs-search-kbd">Esc</kbd>
     </div>
     <div id="docs-search-results" class="docs-search-results" data-search-results role="listbox" aria-label={t("docs.search.results")}></div>
     <p data-search-status class="docs-search-status" role="status" aria-live="polite"></p>
+    {/* Result counts go to their own off-screen region so the visible status
+        line stays reserved for the "no results" / "unavailable" messages. */}
+    <p data-search-count class="sr-only" role="status" aria-live="polite"></p>
   </div>
 </dialog>
 
@@ -76,6 +89,7 @@ const strings = JSON.stringify({
     input: HTMLInputElement,
     list: HTMLDivElement,
     status: HTMLParagraphElement,
+    count: HTMLParagraphElement,
   ) {
     const strings = JSON.parse(dialog.dataset.strings || "{}") as Record<string, string>;
 
@@ -122,6 +136,7 @@ const strings = JSON.stringify({
       const all = items();
       if (!all.length) {
         active = -1;
+        input.removeAttribute("aria-activedescendant");
         return;
       }
       // Wrap around in both directions.
@@ -130,12 +145,30 @@ const strings = JSON.stringify({
         const on = i === active;
         el.classList.toggle("is-active", on);
         el.setAttribute("aria-selected", String(on));
-        if (on) el.scrollIntoView({ block: "nearest" });
+        if (on) {
+          // Focus stays in the input, so this is the only thing that tells a
+          // screen reader which option the arrow keys just landed on.
+          input.setAttribute("aria-activedescendant", el.id);
+          el.scrollIntoView({ block: "nearest" });
+        }
       });
+    }
+
+    /** Keeps the combobox's popup state and the off-screen count in step. */
+    function setResultCount(n: number) {
+      input.setAttribute("aria-expanded", String(n > 0));
+      if (!n) {
+        count.textContent = "";
+        return;
+      }
+      count.textContent =
+        n === 1 ? strings.countOne : strings.countMany.replace("{n}", String(n));
     }
 
     function render(pages: ResultData[]) {
       list.innerHTML = "";
+      // Options need stable ids for aria-activedescendant to point at them.
+      let hitIndex = 0;
       for (const page of pages) {
         const group = document.createElement("div");
         group.className = "docs-search-group";
@@ -155,6 +188,7 @@ const strings = JSON.stringify({
           const hit = document.createElement("a");
           hit.className = "docs-search-hit";
           hit.href = cleanUrl(sub.url);
+          hit.id = `docs-search-hit-${hitIndex++}`;
           hit.setAttribute("role", "option");
           hit.setAttribute("aria-selected", "false");
 
@@ -178,13 +212,21 @@ const strings = JSON.stringify({
         list.appendChild(group);
       }
       setActive(0);
+      setResultCount(hitIndex);
+    }
+
+    /** Empty the listbox and reset every attribute that describes it. */
+    function clearResults() {
+      list.innerHTML = "";
+      active = -1;
+      input.removeAttribute("aria-activedescendant");
+      setResultCount(0);
     }
 
     async function run(query: string) {
       const token = ++seq;
       if (!query.trim()) {
-        list.innerHTML = "";
-        active = -1;
+        clearResults();
         setStatus("");
         return;
       }
@@ -192,7 +234,7 @@ const strings = JSON.stringify({
       const pf = await loadPagefind();
       if (token !== seq) return;
       if (!pf) {
-        list.innerHTML = "";
+        clearResults();
         setStatus(strings.unavailable);
         return;
       }
@@ -206,8 +248,7 @@ const strings = JSON.stringify({
       if (token !== seq) return;
 
       if (!pages.length) {
-        list.innerHTML = "";
-        active = -1;
+        clearResults();
         setStatus(strings.empty);
         return;
       }
@@ -219,8 +260,7 @@ const strings = JSON.stringify({
       if (dialog.open) return;
       dialog.showModal();
       input.value = "";
-      list.innerHTML = "";
-      active = -1;
+      clearResults();
       setStatus("");
       // Warm the bundle while the user is still typing their first character.
       void loadPagefind();
@@ -277,8 +317,9 @@ const strings = JSON.stringify({
   const input = dialog?.querySelector<HTMLInputElement>("[data-search-input]");
   const list = dialog?.querySelector<HTMLDivElement>("[data-search-results]");
   const status = dialog?.querySelector<HTMLParagraphElement>("[data-search-status]");
+  const count = dialog?.querySelector<HTMLParagraphElement>("[data-search-count]");
 
-  if (dialog && trigger && input && list && status) {
-    initSearch(dialog, trigger, input, list, status);
+  if (dialog && trigger && input && list && status && count) {
+    initSearch(dialog, trigger, input, list, status, count);
   }
 </script>

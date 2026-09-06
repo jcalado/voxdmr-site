@@ -1,4 +1,11 @@
 {
+  "a11y.skipToContent": "Skip to content",
+  "a11y.primaryNav": "Main",
+  "a11y.footerNav": "Footer",
+  "a11y.toggleMenu": "Menu",
+  "a11y.toggleSidebar": "Documentation sections",
+  "a11y.newTab": "opens in a new tab",
+
   "nav.screenshots": "Screenshots",
   "nav.features": "Features",
   "nav.docs": "Docs",
@@ -158,6 +165,8 @@
   "docs.search.placeholder": "Search the docs…",
   "docs.search.results": "Search results",
   "docs.search.empty": "No results. Try a different word.",
+  "docs.search.countOne": "1 result",
+  "docs.search.countMany": "{n} results",
   "docs.search.unavailable": "Search is only available in the built site — run `npm run build`.",
   "docs.previous": "Previous",
   "docs.next": "Next",

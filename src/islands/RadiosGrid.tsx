@@ -111,7 +111,7 @@ function BoolCell({ value, t }: { value: Support; t: TFn }) {
     );
   if (value === "na")
     return (
-      <span className="text-xs font-semibold uppercase tracking-wide text-on-surface-muted/70">
+      <span className="text-xs font-semibold uppercase tracking-wide text-on-surface-muted/75">
         {t("radios.na")}
       </span>
     );
@@ -458,8 +458,15 @@ export default function RadiosGrid({ lang }: RadiosGridProps) {
         </div>
       </div>
 
-      {/* Result count */}
-      <p className="text-sm text-on-surface-muted mb-5 tabular-nums">
+      {/* Result count. A live region so typing in the search box or flipping a
+          filter announces how many radios are left — the change was previously
+          silent, visible only in this line. */}
+      <p
+        className="text-sm text-on-surface-muted mb-5 tabular-nums"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         {filtersActive
           ? `${visible.length} ${t("radios.countOf")} ${radios.length} ${t("radios.unit")}`
           : `${radios.length} ${t("radios.unit")}`}

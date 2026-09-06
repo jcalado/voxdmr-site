@@ -7,7 +7,7 @@ import '@fontsource/poppins/700.css';
 import '@fontsource/space-mono/400.css';
 import '@fontsource/space-mono/700.css';
 import '@/src/index.css';
-import type { Lang } from '@/src/i18n/t';
+import { getT, type Lang } from '@/src/i18n/t';
 import { altLocalePath } from '@/src/i18n/routing';
 
 interface Props {
@@ -26,6 +26,7 @@ const {
   ogImage = '/social.jpg',
 } = Astro.props;
 
+const t = getT(lang);
 const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://www.voxdmr.com';
 const canonical = site + pathname;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : site + ogImage;
@@ -69,6 +70,10 @@ const ptHref = lang === 'pt' ? pathname : altPath;
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
+    {/* First stop in the tab order on every page, so keyboard and screen
+        reader users can jump the nav instead of tabbing through it each time.
+        Off-screen until focused; every page's main region carries the id. */}
+    <a href="#main-content" class="skip-link">{t('a11y.skipToContent')}</a>
     <slot />
   </body>
 </html>

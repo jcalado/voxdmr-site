@@ -48,8 +48,12 @@
 .prose h2 { color: white; font-size: 1.35rem; font-weight: 700; margin: 3.5rem 0 0.75rem 0; }
 .prose h3 { color: white; font-size: 1.1rem; font-weight: 600; margin: 2rem 0 0.5rem 0; }
 .prose p { margin: 0 0 1rem 0; }
-.prose a { color: #EF4444; text-decoration: none; }
-.prose a:hover { text-decoration: underline; }
+/* Underlined, not colour-only. Red on the body text around it is 1.97:1 —
+   well under the 3:1 that WCAG 1.4.1 requires before colour alone may carry
+   the "this is a link" meaning. The underline is what makes them findable for
+   anyone who cannot separate the two hues. */
+.prose a { color: #EF4444; text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+.prose a:hover { text-decoration-thickness: 2px; }
 .prose ul, .prose ol { margin: 0 0 1rem 0; padding-left: 1.5rem; }
 .prose ol { list-style-type: decimal; }
 .prose ul { list-style-type: disc; }
@@ -188,7 +192,8 @@
   line-height: 1;
   padding: 0.25rem 0.35rem;
   border-radius: 0.3rem;
-  color: #64748B;
+  /* #64748B read at 2.91:1 on this chip — under AA for 10px text. */
+  color: #94A3B8;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }

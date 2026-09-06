@@ -15,7 +15,7 @@ const description = t('privacy.overview.text', lang);
   <div class="min-h-screen bg-community-bg text-on-surface font-sans">
     <SiteNav lang={lang} pathname={pathname} />
 
-    <main class="max-w-3xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+    <main id="main-content" class="max-w-3xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
       <h1 class="text-4xl lg:text-5xl font-headline font-bold text-white mb-2 tracking-tight">
         {t('privacy.title', lang)}
       </h1>
@@ -89,7 +89,7 @@ const description = t('privacy.overview.text', lang);
           <h2 class="text-2xl font-headline font-bold text-white mb-4">{t('privacy.contact.title', lang)}</h2>
           <p>
             {t('privacy.contact.text', lang)}{' '}
-            <a href="mailto:voxdmr@jcalado.com" class="text-vibrant-blue hover:underline">voxdmr@jcalado.com</a>
+            <a href="mailto:voxdmr@jcalado.com" class="text-vibrant-blue underline underline-offset-2 hover:decoration-2">voxdmr@jcalado.com</a>
           </p>
         </section>
       </div>

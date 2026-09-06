@@ -55,6 +55,41 @@ html {
   }
 }
 
+/* Site-wide focus indicator. Most interactive elements had none of their own
+   and fell back to the UA outline, which is close to invisible on these
+   near-black backgrounds in Firefox. Blue rather than the red accent so the
+   ring never reads as a hover state on the red CTAs.
+
+   Components that define their own `focus-visible:ring-*` also carry
+   `focus:outline-none`, whose higher specificity suppresses this outline —
+   so they keep their ring and nothing doubles up. */
+:focus-visible {
+  outline: 2px solid var(--color-vibrant-blue);
+  outline-offset: 2px;
+}
+
+/* Skip link (rendered in Layout.astro). Off-screen until it takes focus. */
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 1rem 1rem;
+  background: var(--color-surface-raised);
+  color: var(--color-on-surface);
+  font-weight: 700;
+  /* transform rather than `top` so revealing it doesn't trigger layout. */
+  transform: translateY(-150%);
+  transition: transform 0.15s ease;
+}
+/* `:focus`, not `:focus-visible` — a skip link is only ever reached by
+   keyboard, and this keeps it working in engines that scope focus-visible
+   more tightly. */
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 /* Mobile nav dropdown (SiteNav). Pure CSS; a tiny script flips data-open. */
 .site-mobile-menu {
   opacity: 0;
