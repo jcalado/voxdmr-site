@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { LucideIcon } from "lucide-react";
 import { ChevronDown, Cpu, Download, Monitor, Smartphone, Terminal } from "lucide-react";
@@ -33,8 +33,25 @@ export default function DownloadMenu({
   const [coords, setCoords] = useState({ top: 0, left: 0 });
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const menuId = useId();
+  /** Set when the menu was opened from the keyboard, so focus moves into it. */
+  const focusOnOpen = useRef(false);
 
   const MENU_WIDTH = 256; // matches w-64
+
+  const menuItems = () =>
+    Array.from(menuRef.current?.querySelectorAll<HTMLAnchorElement>("[role='menuitem']") ?? []);
+
+  /** Close and hand focus back to the trigger — the expected exit for Escape. */
+  function closeAndRestore() {
+    setOpen(false);
+    triggerRef.current?.focus();
+  }
+
+  function openWithFocus(fromKeyboard: boolean) {
+    focusOnOpen.current = fromKeyboard;
+    setOpen(true);
+  }
 
   // The menu is portaled to <body> so no `overflow-hidden` ancestor (e.g. the
   // hero header) can clip it. Position it as a fixed box anchored to the
@@ -67,7 +84,10 @@ export default function DownloadMenu({
       }
     };
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeAndRestore();
+      }
     };
     document.addEventListener("mousedown", onPointerDown);
     document.addEventListener("keydown", onKeyDown);
@@ -77,14 +97,59 @@ export default function DownloadMenu({
     };
   }, [open]);
 
+  // The menu is portaled to <body>, so it is nowhere near the trigger in the
+  // tab order. Moving focus into it on a keyboard open is what makes it
+  // reachable at all; Tab out then closes it and resumes from the trigger.
+  useEffect(() => {
+    if (!open || !focusOnOpen.current) return;
+    focusOnOpen.current = false;
+    menuItems()[0]?.focus();
+  }, [open]);
+
+  /** Roving arrow-key movement between menu items, per the ARIA menu pattern. */
+  function onMenuKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    const items = menuItems();
+    if (!items.length) return;
+    const i = items.indexOf(document.activeElement as HTMLAnchorElement);
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      items[(i + 1) % items.length].focus();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      items[(i - 1 + items.length) % items.length].focus();
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      items[0].focus();
+    } else if (e.key === "End") {
+      e.preventDefault();
+      items[items.length - 1].focus();
+    } else if (e.key === "Tab") {
+      // Let Tab do its normal thing, but from the trigger — otherwise focus
+      // would land wherever the portal sits at the end of <body>.
+      closeAndRestore();
+    }
+  }
+
+  function onTriggerKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      if (open) menuItems()[e.key === "ArrowDown" ? 0 : menuItems().length - 1]?.focus();
+      else openWithFocus(true);
+    }
+  }
+
   return (
     <div className={className}>
       <button
         ref={triggerRef}
+        id={`${menuId}-trigger`}
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => (open ? setOpen(false) : openWithFocus(false))}
+        onKeyDown={onTriggerKeyDown}
         aria-haspopup="menu"
         aria-expanded={open}
+        aria-controls={open ? menuId : undefined}
         className={triggerClassName}
       >
         <Download className="w-5 h-5" />
@@ -96,7 +161,10 @@ export default function DownloadMenu({
         createPortal(
           <div
             ref={menuRef}
+            id={menuId}
             role="menu"
+            aria-labelledby={`${menuId}-trigger`}
+            onKeyDown={onMenuKeyDown}
             style={{ top: coords.top, left: coords.left, width: MENU_WIDTH }}
             className="fixed z-[60] origin-top rounded-2xl border border-border bg-slate-900/95 p-2 shadow-2xl shadow-black/50 backdrop-blur-xl"
           >

@@ -33,6 +33,12 @@ html {
   --color-vibrant-blue: #38BDF8;
   --color-vibrant-orange: #FB923C;
   --color-vibrant-red: #EF4444;
+  /* Filled-button red. White on --color-vibrant-red is only 3.76:1, under the
+     4.5:1 WCAG AA floor, so every red fill that carries white text uses these
+     two darker steps instead (4.83:1 and 6.47:1). --color-vibrant-red stays the
+     accent for red *text* on a dark ground, where it reads at 5.36:1. */
+  --color-red-cta: #DC2626;
+  --color-red-cta-hover: #B91C1C;
   --color-accent-tertiary: #818CF8;
   --color-status-online: #22C55E;
   --color-community-bg: #020617;

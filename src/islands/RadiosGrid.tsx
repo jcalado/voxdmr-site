@@ -439,7 +439,7 @@ export default function RadiosGrid({ lang }: RadiosGridProps) {
                         ? { duration: 0 }
                         : { type: "tween", duration: 0.28, ease: [0.22, 1, 0.36, 1] }
                     }
-                    className="absolute inset-0 rounded-full bg-vibrant-red"
+                    className="absolute inset-0 rounded-full bg-red-cta"
                   />
                 )}
                 <span className="relative inline-flex items-center gap-1.5">

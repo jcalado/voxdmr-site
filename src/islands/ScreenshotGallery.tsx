@@ -104,7 +104,7 @@ export default function ScreenshotGallery({ lang }: ScreenshotGalleryProps) {
                   <motion.span
                     layoutId="platform-toggle-indicator"
                     aria-hidden
-                    className="absolute inset-0 bg-vibrant-red rounded-full"
+                    className="absolute inset-0 bg-red-cta rounded-full"
                     transition={slideTransition}
                   />
                 )}
@@ -192,7 +192,7 @@ export default function ScreenshotGallery({ lang }: ScreenshotGalleryProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: prefersReducedMotion ? 0 : 0.22, delay: prefersReducedMotion ? 0 : 0.15 }}
-              className="absolute top-4 right-4 lg:top-6 lg:right-6 inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface-raised border border-border text-white hover:bg-vibrant-red hover:border-vibrant-red transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-red focus-visible:ring-offset-2 focus-visible:ring-offset-community-bg"
+              className="absolute top-4 right-4 lg:top-6 lg:right-6 inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface-raised border border-border text-white hover:bg-red-cta hover:border-red-cta transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-red focus-visible:ring-offset-2 focus-visible:ring-offset-community-bg"
             >
               <X className="w-5 h-5" />
             </motion.button>

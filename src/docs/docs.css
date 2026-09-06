@@ -106,6 +106,11 @@
 .prose hr { border: none; border-top: 1px solid rgba(255, 255, 255, 0.07); margin: 2rem 0; }
 .prose img { max-width: 260px; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.07); cursor: zoom-in; transition: opacity 0.15s; }
 .prose img:hover { opacity: 0.85; }
+
+/* Every content image is wrapped in a real <button> at runtime (DocsLayout.astro)
+   so the lightbox can be opened from the keyboard — a bare <img> with a click
+   handler is mouse-only. The button is a bare box; the image keeps its own look. */
+.prose .doc-zoom-btn { display: block; width: fit-content; padding: 0; border: 0; background: none; cursor: zoom-in; }
 .prose strong { color: white; font-weight: 600; }
 
 /* Embedded video (::youtube directive) */
@@ -113,8 +118,14 @@
 .prose .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 /* Image modal */
-.doc-modal-backdrop { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); cursor: zoom-out; }
-.doc-modal-img { max-height: 90vh; max-width: 90vw; border-radius: 0.75rem; object-fit: contain; view-transition-name: doc-image; }
+/* A native <dialog>, so the focus trap, Esc-to-close and focus restore on close
+   all come from the platform rather than hand-rolled listeners. */
+.doc-modal { padding: 0; border: 0; background: transparent; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; cursor: zoom-out; }
+.doc-modal[open] { display: flex; align-items: center; justify-content: center; }
+.doc-modal::backdrop { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); }
+.doc-modal-img { max-height: 90vh; max-width: 90vw; border-radius: 0.75rem; object-fit: contain; view-transition-name: doc-image; cursor: default; }
+.doc-modal-close { position: fixed; top: 1rem; right: 1rem; display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; border-radius: 9999px; border: 1px solid rgba(255, 255, 255, 0.07); background: #1E293B; color: #fff; cursor: pointer; }
+.doc-modal-close:hover { background: #DC2626; border-color: #DC2626; }
 
 /* View Transition animation */
 ::view-transition-old(doc-image),
@@ -141,12 +152,18 @@
 }
 
 @media (max-width: 1023px) {
+  /* `visibility: hidden` is what keeps the closed drawer out of the tab order
+     and the accessibility tree — translating it off-screen alone leaves every
+     sidebar link focusable. Transitioning visibility alongside the transform
+     defers the flip to the end of the slide, so the animation still plays out
+     (same trick as `.site-mobile-menu` in index.css). */
   .docs-sidebar-aside {
     position: fixed; top: 3.5rem; left: 0; bottom: 0; z-index: 40;
     transform: translateX(-100%);
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    visibility: hidden;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
   }
-  .docs-sidebar-open .docs-sidebar-aside { transform: translateX(0); }
+  .docs-sidebar-open .docs-sidebar-aside { transform: translateX(0); visibility: visible; }
   .docs-sidebar-backdrop {
     display: block; position: fixed; inset: 3.5rem 0 0 0; z-index: 30;
     background: rgba(0, 0, 0, 0.6); opacity: 0; pointer-events: none;

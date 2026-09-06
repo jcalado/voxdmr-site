@@ -166,6 +166,8 @@
   "docs.goToInstallation": "Go to Installation →",
   "docs.backToSite": "← Back to site",
   "docs.slash": "/ Docs",
+  "docs.image.zoom": "Zoom in on",
+  "docs.image.close": "Close image",
   "docs.platform.label": "Show instructions for",
   "docs.platform.desktop": "Desktop",
   "docs.platform.mobile": "Mobile",

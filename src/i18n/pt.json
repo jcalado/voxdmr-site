@@ -166,6 +166,8 @@
   "docs.goToInstallation": "Ir para Instalação →",
   "docs.backToSite": "← Voltar ao site",
   "docs.slash": "/ Documentação",
+  "docs.image.zoom": "Ampliar",
+  "docs.image.close": "Fechar imagem",
   "docs.platform.label": "Mostrar instruções para",
   "docs.platform.desktop": "Desktop",
   "docs.platform.mobile": "Telemóvel",
