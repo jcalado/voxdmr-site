@@ -180,8 +180,11 @@ const home = localizePath("/", lang);
   );
   backdrop?.addEventListener("click", () => setSidebar(false));
   // Escape closes the drawer and hands focus back to the button that opened it.
+  // A modal <dialog> (the search panel) sits above the drawer and handles its
+  // own Escape, so defer to it rather than closing both and fighting over focus.
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape" || !root?.classList.contains("docs-sidebar-open")) return;
+    if (document.querySelector("dialog[open]")) return;
     setSidebar(false);
     (toggle as HTMLElement | null)?.focus();
   });
@@ -203,6 +206,11 @@ const home = localizePath("/", lang);
     const zoomLabel = content.dataset.zoomLabel ?? "";
 
     for (const img of Array.from(content.querySelectorAll("img"))) {
+      // A linked image — `[![alt](img)](url)` in Markdown — would nest this
+      // button inside an <a>, which is invalid and would both navigate and
+      // open the lightbox on one click. Leave the link as the control.
+      if (img.closest("a")) continue;
+
       const button = document.createElement("button");
       button.type = "button";
       button.className = "doc-zoom-btn";

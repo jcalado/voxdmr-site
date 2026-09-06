@@ -444,7 +444,11 @@ export default function RadiosGrid({ lang }: RadiosGridProps) {
                 )}
                 <span className="relative inline-flex items-center gap-1.5">
                   {s === "all" ? t("radios.filter.all") : t(`radios.status.${s}`)}
-                  <span className={`tabular-nums text-xs ${active ? "text-white/70" : "text-on-surface-muted/60"}`}>
+                  {/* The counts were dimmed to /70 and /60, which land at 2.99:1
+                      and 3.39:1 — under AA for this 12px text. The smaller size
+                      already de-emphasises them, so the opacity that was doing
+                      the same job is dialled back to where both pass. */}
+                  <span className={`tabular-nums text-xs ${active ? "text-white" : "text-on-surface-muted/75"}`}>
                     {statusCount(s)}
                   </span>
                 </span>

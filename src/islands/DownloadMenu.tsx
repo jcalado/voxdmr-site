@@ -34,8 +34,8 @@ export default function DownloadMenu({
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
-  /** Set when the menu was opened from the keyboard, so focus moves into it. */
-  const focusOnOpen = useRef(false);
+  /** Which item to focus once the menu mounts, or null for a mouse open. */
+  const focusOnOpen = useRef<"first" | "last" | null>(null);
 
   const MENU_WIDTH = 256; // matches w-64
 
@@ -48,8 +48,8 @@ export default function DownloadMenu({
     triggerRef.current?.focus();
   }
 
-  function openWithFocus(fromKeyboard: boolean) {
-    focusOnOpen.current = fromKeyboard;
+  function openWithFocus(focus: "first" | "last" | null) {
+    focusOnOpen.current = focus;
     setOpen(true);
   }
 
@@ -102,9 +102,22 @@ export default function DownloadMenu({
   // reachable at all; Tab out then closes it and resumes from the trigger.
   useEffect(() => {
     if (!open || !focusOnOpen.current) return;
-    focusOnOpen.current = false;
-    menuItems()[0]?.focus();
+    const items = menuItems();
+    const target = focusOnOpen.current === "last" ? items[items.length - 1] : items[0];
+    focusOnOpen.current = null;
+    target?.focus();
   }, [open]);
+
+  // A menu left open behind the user is worse than one that closes: its
+  // document-level Escape handler would otherwise yank focus back to the
+  // trigger from wherever they had tabbed on to.
+  function onFocusOut(e: React.FocusEvent<HTMLDivElement>) {
+    const next = e.relatedTarget as Node | null;
+    if (!next) return; // Focus left the window entirely; leave the menu alone.
+    if (!triggerRef.current?.contains(next) && !menuRef.current?.contains(next)) {
+      setOpen(false);
+    }
+  }
 
   /** Roving arrow-key movement between menu items, per the ARIA menu pattern. */
   function onMenuKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
@@ -124,6 +137,11 @@ export default function DownloadMenu({
     } else if (e.key === "End") {
       e.preventDefault();
       items[items.length - 1].focus();
+    } else if (e.key === " ") {
+      // Native anchors ignore Space; the ARIA menu pattern expects it to
+      // activate the item just like Enter does.
+      e.preventDefault();
+      (document.activeElement as HTMLAnchorElement | null)?.click();
     } else if (e.key === "Tab") {
       // Let Tab do its normal thing, but from the trigger — otherwise focus
       // would land wherever the portal sits at the end of <body>.
@@ -132,20 +150,31 @@ export default function DownloadMenu({
   }
 
   function onTriggerKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
-    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-      e.preventDefault();
-      if (open) menuItems()[e.key === "ArrowDown" ? 0 : menuItems().length - 1]?.focus();
-      else openWithFocus(true);
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+    e.preventDefault();
+    const edge = e.key === "ArrowDown" ? "first" : "last";
+    if (!open) {
+      openWithFocus(edge);
+      return;
     }
+    const items = menuItems();
+    (edge === "first" ? items[0] : items[items.length - 1])?.focus();
   }
 
   return (
-    <div className={className}>
+    <div className={className} onBlur={onFocusOut}>
       <button
         ref={triggerRef}
         id={`${menuId}-trigger`}
         type="button"
-        onClick={() => (open ? setOpen(false) : openWithFocus(false))}
+        // Enter and Space on a button arrive as a click, not a keydown, so this
+        // — not onKeyDown — is the path most keyboard users take. `detail === 0`
+        // marks a click the browser synthesised from a key press, which is what
+        // distinguishes it from a real pointer click.
+        onClick={(e) => {
+          if (open) setOpen(false);
+          else openWithFocus(e.detail === 0 ? "first" : null);
+        }}
         onKeyDown={onTriggerKeyDown}
         aria-haspopup="menu"
         aria-expanded={open}
