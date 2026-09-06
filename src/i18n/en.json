@@ -281,5 +281,18 @@
   "radios.notes.motorola-ion": "Full hardware support once set up: the PTT key, programmable side keys, and audio all work well. It has no rotary knob, but the channel rocker steps talkgroups in its place. Its hardware PTT button ships locked to Motorola's own PTT client, so a one-time enabler APK is required (see tip).",
   "radios.tips.motorola-ion": "The ION's PTT button is bound to Motorola's built-in PTT service out of the box, so third-party apps never see it being pressed. The PTT Enabler bridges it, but installing the APK is only half of it: Android won't let you grant log access from the UI, so run adb shell pm grant com.jcalado.voxptt android.permission.READ_LOGS once as well. Then open the app (it shows up as Vox PTT), pick VoxDMR as the target, and tap Start bridge — it restarts on boot from then on.",
   "radios.links.motorola-ion.ptt-apk": "PTT Enabler APK",
-  "radios.notes.motorola-lex-l11": "Everything works out of the box, with no enabler APK needed: the PTT key and programmable side keys both work, with good audio. This is a touchscreen POC handset, so it has no rotary knob."
+  "radios.notes.motorola-lex-l11": "Everything works out of the box, with no enabler APK needed: the PTT key and programmable side keys both work, with good audio. This is a touchscreen POC handset, so it has no rotary knob.",
+  "radios.notes.hiroyasu-hi-b10": "Full hardware support: PTT, rotary knob, and programmable side keys all work, with good audio — private calls checked out too. Tested on Android 10.",
+  "radios.notes.uniwa-w999": "PTT keys correctly and the DMR ID registers on the network, and RX audio is good — but nothing is ever transmitted: the TX meter stays flat even though the microphone indicator lights up. Other PTT apps transmit fine on the same handset, so this looks like an app-side capture problem rather than a hardware limit. This model has no rotary knob. Tested on Android 13.",
+  "radios.notes.shj-h28y": "PTT and programmable side keys both work, with good audio. This model has no rotary knob. Tested on Android 8.1.",
+  "radios.notes.hytera-p50-pro": "Full hardware support: PTT, rotary knob, and programmable side keys all work, with good audio. Tested on Android 12.",
+  "radios.notes.talkpod-n59a": "Full hardware support: PTT, rotary knob, and programmable side keys all work, with good audio. Tested on Android 9.",
+  "radios.notes.inrico-s300": "PTT and programmable side keys both work, with good audio. This model has no rotary knob. Tested on Android 15.",
+  "radios.notes.ruggear-rg360": "PTT and programmable side keys both work, with good audio. This rugged phone has no rotary knob. Tested on Android 10 (Go edition).",
+  "radios.notes.inrico-t330": "Full hardware support: PTT, rotary knob, and programmable side keys all work, with good audio. Tested on Android 13.",
+  "radios.notes.intelbras-rpc-360s": "PTT works and audio quality is OK. This model has no rotary knob or programmable side keys — just PTT, volume, and an emergency key. Tested on Android 7.1.2.",
+  "radios.notes.shj-360": "PTT and programmable side keys both work, with good audio — the side keys handle PTT and talkgroup up/down. This model has no rotary knob, just a volume rocker. Tested on Android 8.1.",
+  "radios.notes.hiroyasu-hi-b8": "Full hardware support: PTT, rotary knob, and programmable side keys all work, with good audio. Tested on Android 9.",
+  "radios.notes.hytera-pnc370se": "PTT responds reliably and the radio connects to BrandMeister with a normal site status, but remote parties can't hear any audio. The rotary knob and programmable side keys don't work either. Tested on Android 7.0.",
+  "radios.notes.retevis-l71": "PTT and programmable side keys both work, with good audio. This is a touchscreen POC handset with no rotary knob, and the small display makes navigation a bit cramped. Tested on Android 10."
 }
