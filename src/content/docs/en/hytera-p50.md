@@ -95,9 +95,15 @@ or Bluetooth headset, whichever is in use.
 With a secure lock screen set, the P50 stops hardware buttons from reaching running apps, so
 PTT would go dead every time the radio locked.
 
-VoxDMR includes an optional accessibility service that keeps your bound PTT and channel keys
-working while the radio is locked. Enable it in Android's accessibility settings. It's
-optional — without it, everything still works with the screen unlocked.
+Recent P50 firmware solves this itself. On the radio, open *Settings → Security → Screen lock*
+and enable **Quick PTT**: the PTT button and the channel knob keep working while the radio is
+locked, with nothing to set up in VoxDMR.
+
+![The P50's Screen lock settings page with "Quick PTT" switched on and highlighted, above the firmware's own note: "After closing, the PTT button will not respond when the screen is turned off or locked, and will only respond after unlocking"](/screenshots/p50-quick-ptt.webp)
+
+If your firmware has no Quick PTT, VoxDMR includes an optional accessibility service that does
+the same for your bound PTT and channel keys — enable it in Android's accessibility settings.
+Either way, everything still works with the screen unlocked.
 
 ## Other Hytera radios
 

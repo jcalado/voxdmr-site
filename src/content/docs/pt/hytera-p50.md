@@ -99,9 +99,16 @@ ouvir — altifalante ou auricular Bluetooth, conforme o que estiver em uso.
 Com um bloqueio de ecrã seguro definido, o P50 impede os botões físicos de chegarem às
 aplicações em execução, por isso o PTT ficaria morto sempre que o rádio bloqueasse.
 
-O VoxDMR inclui um serviço de acessibilidade opcional que mantém as teclas de PTT e de canal
-atribuídas a funcionar com o rádio bloqueado. Ativa-o nas definições de acessibilidade do
-Android. É opcional — sem ele, tudo continua a funcionar com o ecrã desbloqueado.
+O firmware recente do P50 resolve isto sozinho. No rádio, abre *Settings → Security → Screen
+lock* e ativa o **Quick PTT**: o botão de PTT e o botão rotativo de canal continuam a funcionar
+com o rádio bloqueado, sem nada para configurar no VoxDMR.
+
+![A página de definições Screen lock do P50 com o "Quick PTT" ligado e destacado, por cima da nota do próprio firmware: "After closing, the PTT button will not respond when the screen is turned off or locked, and will only respond after unlocking"](/screenshots/p50-quick-ptt.webp)
+
+Se o teu firmware não tiver Quick PTT, o VoxDMR inclui um serviço de acessibilidade opcional
+que faz o mesmo pelas teclas de PTT e de canal atribuídas — ativa-o nas definições de
+acessibilidade do Android. De qualquer forma, tudo continua a funcionar com o ecrã
+desbloqueado.
 
 ## Outros rádios Hytera
 
