@@ -2,6 +2,49 @@
 
 Release notes for VoxDMR. Each release page on GitHub has the full commit list and the signed binaries; this is the human summary.
 
+## v0.15.3
+
+::platforms[desktop mobile]
+
+_Released September 2026. Desktop + Android._
+
+Two Android fixes, and a desktop build that reports its own version correctly.
+
+- **The updater stops offering an update you already installed (Desktop).** The 0.15.2
+  desktop binaries carried the previous version number, so the app kept finding itself out
+  of date and asking again on every launch. Installing 0.15.3 ends the loop; nothing else
+  about the desktop app changed.
+- **Transmit audio is back to its old level on radios that went quiet (Android).** Since
+  0.15.0, VoxDMR switched the radio's own gain control off for the neural noise reduction —
+  which ships off, and cost around 12 dB on radios like the Inrico T320. The microphone is
+  now left alone unless noise reduction is actually running. Takes effect from your next
+  over. See [Audio settings](./audio-settings).
+- **Profiles restored from a backup can be deleted again (Android).** Delete was hidden for
+  the active profile, which is exactly what a restored profile becomes. See
+  [Server profiles](./server-profiles).
+- **A restored backup keeps your scan list (Android).** Favourites came back with every scan
+  flag cleared. See [Talkgroups](./talkgroups).
+
+## v0.15.2
+
+::platforms[mobile]
+
+_Released September 2026. Android._
+
+Three fixes for PoC radios.
+
+- **Transmit audio works again on radios that mis-report their microphone.** Some radios
+  accept a request for the least-processed microphone and then hand back one wired to
+  nothing: the over keys up and not a sample leaves. VoxDMR now notices the silence, moves
+  to the next source mid-over, and remembers the radio for later launches. See
+  [Troubleshooting](./troubleshooting).
+- **The app no longer opens onto a blank screen (Hytera PoC radios).** The PoC softkey was
+  quietly starting a second copy of the app and taking the running one's engine. There is
+  one copy now, whichever way you open it.
+- **Starting on boot is a switch of its own.** *Settings → Connection → Running in the
+  background* ends with *Start on boot*, which used to come welded to *Always on*. Radios
+  already set to *Always on* keep starting on boot.
+
 ## v0.15.1
 
 ::platforms[desktop mobile]
