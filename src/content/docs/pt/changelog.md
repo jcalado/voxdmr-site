@@ -2,6 +2,50 @@
 
 Notas de versão do VoxDMR. Cada página de release no GitHub tem a lista completa de commits e os binários assinados; isto é o resumo humano.
 
+## v0.15.3
+
+::platforms[desktop mobile]
+
+_Lançada em setembro de 2026. Desktop + Android._
+
+Duas correções no Android, e uma versão desktop que diz a versão certa.
+
+- **O atualizador deixa de propor uma atualização que já instalaste (Desktop).** Os binários
+  desktop da 0.15.2 traziam o número da versão anterior, por isso a app dava-se sempre como
+  desatualizada e voltava a perguntar em cada arranque. Instalar a 0.15.3 termina o ciclo;
+  não há mais nada alterado no desktop.
+- **O áudio de transmissão volta ao nível de antes em rádios que ficaram baixos (Android).**
+  Desde a 0.15.0, o VoxDMR desligava o controlo de ganho do próprio rádio por causa da
+  redução de ruído neural — que vem desativada, e custava cerca de 12 dB em rádios como o
+  Inrico T320. O microfone passa a ser deixado em paz a não ser que a redução de ruído
+  esteja mesmo a funcionar. Aplica-se a partir da tua próxima transmissão. Vê
+  [Definições de áudio](./audio-settings).
+- **Perfis restaurados de uma cópia de segurança voltam a poder ser apagados (Android).**
+  Apagar estava escondido no perfil ativo, que é precisamente o que um perfil restaurado se
+  torna. Vê [Perfis de servidor](./server-profiles).
+- **Uma cópia restaurada mantém a tua lista de scan (Android).** Os favoritos voltavam com
+  todas as marcas de scan limpas. Vê [Talkgroups](./talkgroups).
+
+## v0.15.2
+
+::platforms[mobile]
+
+_Lançada em setembro de 2026. Android._
+
+Três correções para rádios PoC.
+
+- **O áudio de transmissão volta a funcionar em rádios que declaram mal o microfone.** Alguns
+  rádios aceitam um pedido do microfone menos processado e devolvem um que não está ligado a
+  nada: a transmissão abre e não sai uma única amostra. O VoxDMR passa a dar pelo silêncio,
+  muda para a fonte seguinte a meio da transmissão, e memoriza o rádio para os arranques
+  seguintes. Vê [Resolução de problemas](./troubleshooting).
+- **A app deixa de abrir num ecrã em branco (rádios PoC Hytera).** A tecla PoC estava a abrir
+  uma segunda cópia da app e a tirar o motor à que já corria. Agora há uma só cópia, seja
+  qual for a forma de a abrir.
+- **Arrancar com o rádio é agora um interruptor próprio.** *Settings → Connection → Running
+  in the background* termina com *Start on boot*, que antes vinha colado ao *Always on*.
+  Rádios já em *Always on* continuam a arrancar com o rádio.
+
 ## v0.15.1
 
 ::platforms[desktop mobile]
