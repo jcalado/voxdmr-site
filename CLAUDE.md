@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-VoxDMR is a landing and documentation site for VoxDMR — a cross-platform app that streams audio to DMR talkgroups (BrandMeister and other DMR networks) via the Rewind protocol. Available as a Rust desktop app for Linux and Windows (GitHub Releases) and as an Android app on Google Play. Built with **Astro** (static output, SSG) using React **islands** for interactivity, Tailwind CSS v4, and Framer Motion (via `motion/react`).
+VoxDMR is a landing and documentation site for VoxDMR — a cross-platform app that streams audio to DMR talkgroups (BrandMeister and other DMR networks) via the Rewind protocol. Available as a Rust desktop app for Linux, Windows and macOS (GitHub Releases) and as an Android app on Google Play. Built with **Astro** (static output, SSG) using React **islands** for interactivity, Tailwind CSS v4, and Framer Motion (via `motion/react`).
 
 ## Commands
 
@@ -96,6 +96,7 @@ Uses Tailwind CSS v4 with the `@tailwindcss/vite` plugin (not PostCSS). Custom t
 - **A new release does not reach the site until the site rebuilds.**
 - The build sends `GITHUB_TOKEN` (or `GH_TOKEN`) if set — the deploy workflow passes the one it already has. Unauthenticated is 60 req/hour **per IP** and CI runners share IPs; authenticated is 5000. Without it the build still succeeds but silently falls back. The build log says which mode it used.
 - API unreachable → warn, fall back, build succeeds. API answers but a pattern matches nothing (an asset was renamed) → **the production build fails**, rather than shipping links that 404. Update `ASSET_PATTERNS` in `release.ts` when release filenames change.
+- Targets in `OPTIONAL` (currently just macOS, since the `.dmg` needs the self-hosted runner) are exempt: a release without that asset drops the entry from the menu instead of failing the build.
 - `Download` objects are serialized into the `DownloadMenu` island's props, so they must stay JSON-safe — the matching RegExps live in `release.ts`, not on the type.
 
 ## Accessibility
@@ -126,7 +127,7 @@ Uses Tailwind CSS v4 with the `@tailwindcss/vite` plugin (not PostCSS). Custom t
 
 VoxDMR connects to DMR talkgroups (BrandMeister and other DMR networks) via the Rewind protocol. The AMBE+2 vocoder is powered by the MD-380 firmware, downloaded at runtime on first launch (SHA-256 verified). Available on:
 
-- **Desktop** — Rust app for Linux and Windows. Published as binaries on GitHub Releases.
+- **Desktop** — Rust app for Linux, Windows and macOS (Apple Silicon). Published as binaries on GitHub Releases.
 - **Android** — Native app on Google Play (`com.jcalado.voxdmr`).
 
 ### Users

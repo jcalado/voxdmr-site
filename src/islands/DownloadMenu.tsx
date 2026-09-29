@@ -1,13 +1,14 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { LucideIcon } from "lucide-react";
-import { ChevronDown, Cpu, Download, Monitor, Smartphone, Terminal } from "lucide-react";
+import { ChevronDown, Cpu, Download, Laptop, Monitor, Smartphone, Terminal } from "lucide-react";
 import { getT, type Lang } from "@/src/i18n/t";
 import { type Download as DownloadTarget } from "@/src/downloads";
 
 const ICONS: Record<DownloadTarget["key"], LucideIcon> = {
   playStore: Smartphone,
   windows: Monitor,
+  macos: Laptop,
   linuxAppImage: Terminal,
   apk32: Cpu,
 };

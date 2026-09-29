@@ -17,7 +17,7 @@ VoxDMR's audio settings live in **Settings → Audio** on desktop, and in the **
 
 ## Input device
 
-The microphone or line input VoxDMR captures from. The picker lists every input device the OS exposes. On Linux that's PulseAudio / PipeWire / ALSA; on Windows, WASAPI shared-mode endpoints.
+The microphone or line input VoxDMR captures from. The picker lists every input device the OS exposes. On Linux that's PulseAudio / PipeWire / ALSA; on Windows, WASAPI shared-mode endpoints; on macOS, Core Audio devices.
 
 VoxDMR remembers the device by its name. If you hot-swap headsets, the picker updates and VoxDMR re-selects the saved device by name on next launch (with a fallback to the system default if it's gone).
 

@@ -13,6 +13,7 @@
   "download.label": "Transferir",
   "download.playStore": "Play Store",
   "download.windows": "Windows",
+  "download.macos": "macOS · Apple Silicon",
   "download.linuxAppImage": "Linux · AppImage",
   "download.apk32": "APK Android · 32-bit (PoC)",
 
@@ -41,7 +42,7 @@
 
   "hero.title1": "Entra no DMR",
   "hero.title2": "sem o rádio.",
-  "hero.subtitle": "App gratuita para Android, Windows e Linux. Liga-se diretamente à BrandMeister, à TGIF e às outras redes DMR, por isso não há hotspot pelo meio. O áudio é AMBE+2 a sério.",
+  "hero.subtitle": "App gratuita para Android, Windows, macOS e Linux. Liga-se diretamente à BrandMeister, à TGIF e às outras redes DMR, por isso não há hotspot pelo meio. O áudio é AMBE+2 a sério.",
   "hero.joinCommunity": "Ver no GitHub",
   "nav.getAndroid": "Google Play",
   "nav.getDesktop": "PC",
@@ -59,7 +60,7 @@
   "features.free.title": "Gratuito",
   "features.free.description": "Sem conta, sem telemetria, sem subscrição. Descarrega um binário e começa a transmitir.",
   "features.crossPlatform.title": "Multiplataforma",
-  "features.crossPlatform.description": "Binários nativos para Linux e Windows, e uma app Android na Google Play. A interface e o motor de áudio são os mesmos nos três.",
+  "features.crossPlatform.description": "Apps nativas para Linux, Windows e macOS, e uma app Android na Google Play. A interface e o motor de áudio são os mesmos em todas.",
 
   "useCases.heading": "Onde dá jeito",
   "useCases.subheading": "Nenhum destes precisa de rádio nem de hotspot.",
@@ -75,7 +76,7 @@
   "faq.q1.question": "Preciso de licença de radioamador?",
   "faq.q1.answer": "Sim. O VoxDMR exige uma licença válida de radioamador e um ID DMR emitido pelo radioid.net. Não é para uso sem licença, e as redes DMR a que se liga são exclusivas para radioamadores licenciados.",
   "faq.q2.question": "Em que é diferente do Droidstar ou do BlueDV?",
-  "faq.q2.answer": "Uma só app, a mesma interface e o mesmo motor de áudio no Android, Windows e Linux. Binários nativos nos três. Sem componentes pagos, sem bases de código separadas para móvel e PC.",
+  "faq.q2.answer": "Uma só app, a mesma interface e o mesmo motor de áudio no Android, Windows, macOS e Linux. Builds nativas em todos. Sem componentes pagos, sem bases de código separadas para móvel e PC.",
   "faq.q3.question": "O vocoder AMBE+2 é legal?",
   "faq.q3.answer": "O VoxDMR descarrega o firmware oficial do MD-380 a partir de md380.org e do GitHub no primeiro arranque (verificado por SHA-256) e corre-o em emulação de software. É o mesmo firmware que corre em dezenas de milhares de rádios Tytera MD-380. Mesma postura legal do Droidstar.",
   "faq.q4.question": "Preciso de hotspot ou repetidor?",

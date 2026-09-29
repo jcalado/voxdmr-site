@@ -30,9 +30,17 @@ const API = `https://api.github.com/repos/${REPO}/releases/latest`;
  */
 const ASSET_PATTERNS: Partial<Record<Download["key"], RegExp>> = {
   windows: /^VoxDMR-windows-.*\.exe$/i,
+  macos: /\.dmg$/i,
   linuxAppImage: /\.AppImage$/i,
   apk32: /armeabi-v7a\.apk$/i,
 };
+
+/**
+ * Targets not every release ships. A release without one simply drops it from
+ * the list instead of failing the build as drift. macOS builds need the
+ * self-hosted runner, so a release can go out without them.
+ */
+const OPTIONAL: ReadonlySet<Download["key"]> = new Set(["macos"]);
 
 interface ReleaseAsset {
   name: string;
@@ -88,19 +96,20 @@ async function resolve(): Promise<Download[]> {
   if (!assets) return downloads;
 
   const missing: string[] = [];
-  const resolved = downloads.map((d) => {
+  const resolved = downloads.flatMap((d) => {
     const pattern = ASSET_PATTERNS[d.key];
-    if (!pattern) return d; // Play Store isn't a GitHub asset.
+    if (!pattern) return [d]; // Play Store isn't a GitHub asset.
 
     const match = assets.find((a) => pattern.test(a.name));
     if (!match) {
+      if (OPTIONAL.has(d.key)) return [];
       missing.push(`${d.key} (no asset matching ${pattern})`);
-      return d;
+      return [d];
     }
     // A resolved asset is a direct file link, so it downloads in place rather
     // than opening a tab — this is what turns the version-stamped APK from a
     // "go and find it" page link into an actual download.
-    return { ...d, href: match.browser_download_url, external: false };
+    return [{ ...d, href: match.browser_download_url, external: false }];
   });
 
   if (missing.length) {

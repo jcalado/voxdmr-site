@@ -13,6 +13,7 @@
   "download.label": "Download",
   "download.playStore": "Play Store",
   "download.windows": "Windows",
+  "download.macos": "macOS · Apple Silicon",
   "download.linuxAppImage": "Linux · AppImage",
   "download.apk32": "Android APK · 32-bit (PoC)",
 
@@ -41,7 +42,7 @@
 
   "hero.title1": "Get on DMR",
   "hero.title2": "without the radio.",
-  "hero.subtitle": "A free app for Android, Windows and Linux. It connects straight to BrandMeister, TGIF and the other DMR networks, so there's no hotspot in between. The audio is real AMBE+2.",
+  "hero.subtitle": "A free app for Android, Windows, macOS and Linux. It connects straight to BrandMeister, TGIF and the other DMR networks, so there's no hotspot in between. The audio is real AMBE+2.",
   "hero.joinCommunity": "View on GitHub",
   "nav.getAndroid": "Google Play",
   "nav.getDesktop": "Desktop",
@@ -59,7 +60,7 @@
   "features.free.title": "Free to Use",
   "features.free.description": "No account, no telemetry, no subscription. Download a release binary and start transmitting.",
   "features.crossPlatform.title": "Cross-Platform",
-  "features.crossPlatform.description": "Native binaries for Linux and Windows, plus an Android app on Google Play. The UI and the audio engine are the same on all three.",
+  "features.crossPlatform.description": "Native apps for Linux, Windows and macOS, plus an Android app on Google Play. The UI and the audio engine are the same everywhere.",
 
   "useCases.heading": "Where it's useful",
   "useCases.subheading": "None of these need a radio or a hotspot.",
@@ -75,7 +76,7 @@
   "faq.q1.question": "Do I need a ham license?",
   "faq.q1.answer": "Yes. VoxDMR requires a valid amateur radio license and a DMR ID issued by radioid.net. It is not for unlicensed use, and the DMR networks it connects to are licensed-amateurs-only.",
   "faq.q2.question": "How is this different from Droidstar or BlueDV?",
-  "faq.q2.answer": "One app, the same UI and the same audio engine across Android, Windows and Linux. Native binaries on all three. No paid components, no separate desktop and mobile codebases.",
+  "faq.q2.answer": "One app, the same UI and the same audio engine across Android, Windows, macOS and Linux. Native builds on every one. No paid components, no separate desktop and mobile codebases.",
   "faq.q3.question": "Is the AMBE+2 vocoder legal?",
   "faq.q3.answer": "VoxDMR downloads the official MD-380 firmware from md380.org and GitHub on first launch (SHA-256 verified) and runs it in software emulation. It is the same firmware running on tens of thousands of Tytera MD-380 radios. Same legal posture as Droidstar.",
   "faq.q4.question": "Do I need a hotspot or repeater?",

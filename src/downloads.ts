@@ -17,7 +17,7 @@ const RELEASES = "https://github.com/jcalado/voxdmr-site/releases";
 
 export interface Download {
   /** Stable id; also picks the icon in `DownloadMenu`. */
-  key: "playStore" | "windows" | "linuxAppImage" | "apk32";
+  key: "playStore" | "windows" | "macos" | "linuxAppImage" | "apk32";
   /** i18n key for the visible label, e.g. "download.windows". */
   labelKey: string;
   href: string;
@@ -36,6 +36,11 @@ export const downloads: Download[] = [
     key: "windows",
     labelKey: "download.windows",
     href: `${RELEASES}/latest/download/VoxDMR-windows-x86_64.exe`,
+  },
+  {
+    key: "macos",
+    labelKey: "download.macos",
+    href: `${RELEASES}/latest/download/VoxDMR-macos.dmg`,
   },
   {
     key: "linuxAppImage",
