@@ -1,6 +1,6 @@
 # Troubleshooting
 
-A short index of the things most likely to break and how to fix them. The bottom-bar log line on desktop (and the event log on the Android Connection tab) is the first place to look — most failures print there. The full activity log on desktop is in the [logs directory](./installation) (`~/.local/state/voxdmr/logs/` on Linux, `%LOCALAPPDATA%\voxdmr\logs\` on Windows); on Android it's accessible from **Settings → About**.
+A short index of the things most likely to break and how to fix them. The bottom-bar log line on desktop (and the event log on the Android Connection tab) is the first place to look — most failures print there. The full activity log on desktop is in the [logs directory](./installation) (`~/.local/state/voxdmr/logs/` on Linux, `%LOCALAPPDATA%\voxdmr\logs\` on Windows, `~/Library/Logs/voxdmr/` on macOS); on Android it's accessible from **Settings → About**.
 
 ## Connection
 
@@ -66,6 +66,7 @@ The CLIP indicator on the right of the TX meter latches red when peaks saturate.
 
 - **Linux**: most distros expose all input devices to all apps. If you're on a sandboxed Flatpak or Snap (not how VoxDMR is currently distributed), the sandbox needs to grant audio access.
 - **Windows**: open **Settings → Privacy & security → Microphone**. Make sure "Let apps access your microphone" is on, and that VoxDMR (or "Desktop apps") is allowed. After changing this, restart VoxDMR.
+- **macOS**: macOS asks the first time VoxDMR captures audio. If you denied it, open **System Settings → Privacy & Security → Microphone** and turn VoxDMR on, then restart VoxDMR.
 - **Android**: the mic permission is requested the first time you press PTT. If you denied it, open Android **Settings → Apps → VoxDMR → Permissions → Microphone** and grant it manually. *Microphone permission denied* in the snackbar means VoxDMR couldn't capture audio.
 
 :::mobile
@@ -195,5 +196,5 @@ VoxDMR is built on iced + wgpu. On rare GPU-driver combinations the renderer doe
 
 ## Still stuck?
 
-- Read the full log file (`~/.local/state/voxdmr/logs/` on Linux, `%LOCALAPPDATA%\voxdmr\logs\` on Windows).
+- Read the full log file (`~/.local/state/voxdmr/logs/` on Linux, `%LOCALAPPDATA%\voxdmr\logs\` on Windows, `~/Library/Logs/voxdmr/` on macOS).
 - Open an issue on [GitHub](https://github.com/jcalado/voxdmr-site/issues) with the log and a description of what you were trying to do.

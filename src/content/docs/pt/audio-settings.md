@@ -17,7 +17,7 @@ As definições de áudio do VoxDMR estão em **Definições → Audio** no desk
 
 ## Dispositivo de entrada
 
-O microfone ou entrada de linha de onde o VoxDMR captura. O seletor lista todos os dispositivos de entrada que o sistema operativo expõe. Em Linux são PulseAudio / PipeWire / ALSA; em Windows, endpoints WASAPI em modo partilhado.
+O microfone ou entrada de linha de onde o VoxDMR captura. O seletor lista todos os dispositivos de entrada que o sistema operativo expõe. Em Linux são PulseAudio / PipeWire / ALSA; em Windows, endpoints WASAPI em modo partilhado; em macOS, dispositivos Core Audio.
 
 O VoxDMR memoriza o dispositivo pelo nome. Se trocares de auscultadores, o seletor atualiza e o VoxDMR volta a selecionar o dispositivo guardado pelo nome no arranque seguinte (com recurso ao predefinido do sistema se já não existir).
 

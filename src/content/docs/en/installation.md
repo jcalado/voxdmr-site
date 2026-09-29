@@ -1,6 +1,6 @@
 # Installation
 
-VoxDMR runs on Android, Linux, and Windows. Pick your platform below.
+VoxDMR runs on Android, Linux, Windows, and macOS. Pick your platform below.
 
 ## Requirements
 
@@ -46,12 +46,13 @@ App data lives in the standard Android app-private directory. Uninstalling the a
 
 :::desktop
 
-VoxDMR Desktop ships as a single self-contained binary. No installer, no package manager, no system services. Download, verify, run.
+VoxDMR Desktop ships as a single self-contained binary on Linux and Windows, and as a signed app in a `.dmg` on macOS. No installer, no package manager, no system services. Download, verify, run.
 
 ### Platform requirements
 
 - **Linux:** ALSA support (`libasound2` on Debian/Ubuntu/Mint; `alsa-lib` on Arch; built into most distros).
 - **Windows:** Windows 10 1809 or later (x64). All other dependencies are statically linked.
+- **macOS:** macOS 11 (Big Sur) or later, on Apple Silicon (M1 or newer). There is no Intel build.
 
 ### Linux (x86_64)
 
@@ -82,17 +83,28 @@ chmod +x VoxDMR-linux-x86_64
 
 The first time you run it, Windows SmartScreen may warn you the app is from an "unknown publisher". VoxDMR isn't code-signed yet. Click **More info** → **Run anyway** to continue.
 
+### macOS (Apple Silicon)
+
+1. Open the [latest release page](https://github.com/jcalado/voxdmr-site/releases/latest).
+2. Download `VoxDMR-macos.dmg`.
+3. Optional but recommended: also download `SHA256SUMS` and verify in Terminal, from the folder you downloaded to:
+   ```bash
+   shasum -a 256 -c SHA256SUMS --ignore-missing
+   ```
+4. Open the `.dmg` and drag **VoxDMR** onto **Applications**.
+5. Launch VoxDMR from Applications or Launchpad.
+
+The app is signed and notarized by Apple, so it opens without a Gatekeeper warning. macOS asks for microphone access the first time VoxDMR captures audio; allow it, or you won't be able to transmit.
+
 ### Where VoxDMR Desktop stores things
 
 VoxDMR follows OS conventions for config, data, and logs:
 
-| Type | Linux | Windows | macOS¹ |
+| Type | Linux | Windows | macOS |
 |---|---|---|---|
 | Firmware | `~/.local/share/voxdmr/firmware/` | `%APPDATA%\voxdmr\firmware\` | `~/Library/Application Support/voxdmr/firmware/` |
 | Config | `~/.config/voxdmr/` | `%APPDATA%\voxdmr\` | `~/Library/Application Support/voxdmr/` |
 | Logs | `~/.local/state/voxdmr/logs/` | `%LOCALAPPDATA%\voxdmr\logs\` | `~/Library/Logs/voxdmr/` |
-
-¹ macOS isn't currently a release target. Paths are listed for future reference.
 
 To override the firmware location (e.g. for packagers or sandboxed installs), set `VOXDMR_FIRMWARE_DIR` before launching:
 
@@ -108,7 +120,7 @@ Recent desktop builds include an **in-app auto-update** — on launch (and from 
 
 ### Uninstall
 
-VoxDMR Desktop is a single binary with no installer. Delete the binary to remove the app. To also remove your config, firmware, and logs, delete the three directories listed above.
+VoxDMR Desktop has no installer. Delete the binary to remove the app (on macOS, drag **VoxDMR** from Applications to the Bin). To also remove your config, firmware, and logs, delete the three directories listed above.
 
 :::
 

@@ -1,12 +1,12 @@
 # VoxDMR Site
 
-Landing page and documentation site for [VoxDMR](https://www.voxdmr.com) — a desktop app for streaming audio to BrandMeister DMR talkgroups via the Rewind protocol. Runs on Linux and Windows.
+Landing page and documentation site for [VoxDMR](https://www.voxdmr.com) — a desktop app for streaming audio to BrandMeister DMR talkgroups via the Rewind protocol. Runs on Linux, Windows and macOS.
 
 The site is published at **[www.voxdmr.com](https://www.voxdmr.com)**.
 
 ## Get VoxDMR
 
-- **Download** the latest release: [github.com/jcalado/voxdmr-site/releases](https://github.com/jcalado/voxdmr-site/releases) — Linux and Windows binaries.
+- **Download** the latest release: [github.com/jcalado/voxdmr-site/releases](https://github.com/jcalado/voxdmr-site/releases) — Linux, Windows and macOS builds.
 - **Install guide:** see [www.voxdmr.com/docs/installation](https://www.voxdmr.com/docs/installation).
 
 ## Bug reports & feature requests

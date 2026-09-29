@@ -1,6 +1,6 @@
 # Resolução de Problemas
 
-Um índice curto das coisas mais prováveis de avariarem e como resolvê-las. A linha de log na barra inferior no desktop (e o event log no separador Connection do Android) é o primeiro sítio para olhar — a maior parte das falhas aparece lá. O log completo no desktop está na [diretoria de logs](./installation) (`~/.local/state/voxdmr/logs/` em Linux, `%LOCALAPPDATA%\voxdmr\logs\` em Windows); no Android é acessível em **Definições → Acerca**.
+Um índice curto das coisas mais prováveis de avariarem e como resolvê-las. A linha de log na barra inferior no desktop (e o event log no separador Connection do Android) é o primeiro sítio para olhar — a maior parte das falhas aparece lá. O log completo no desktop está na [diretoria de logs](./installation) (`~/.local/state/voxdmr/logs/` em Linux, `%LOCALAPPDATA%\voxdmr\logs\` em Windows, `~/Library/Logs/voxdmr/` em macOS); no Android é acessível em **Definições → Acerca**.
 
 ## Ligação
 
@@ -66,6 +66,7 @@ O indicador CLIP à direita do medidor TX fica vermelho fixo quando os picos sat
 
 - **Linux**: a maioria das distros expõe todos os dispositivos de entrada a todas as apps. Se estás num Flatpak ou Snap em sandbox (não é como o VoxDMR é distribuído atualmente), o sandbox precisa de conceder acesso ao áudio.
 - **Windows**: abre **Definições → Privacidade e segurança → Microfone**. Confirma que "Permitir que aplicações acedam ao microfone" está ligado, e que o VoxDMR (ou "Aplicações de ambiente de trabalho") tem permissão. Depois de mudar, reinicia o VoxDMR.
+- **macOS**: o macOS pergunta na primeira vez que o VoxDMR captura áudio. Se recusaste, abre **Definições do Sistema → Privacidade e segurança → Microfone** e ativa o VoxDMR, depois reinicia o VoxDMR.
 - **Android**: a permissão de microfone é pedida na primeira vez que carregas no PTT. Se a negaste, abre as **Definições do Android → Apps → VoxDMR → Permissões → Microfone** e concede-a manualmente. *Microphone permission denied* no snackbar significa que o VoxDMR não conseguiu capturar áudio.
 
 :::mobile
@@ -195,5 +196,5 @@ O VoxDMR é construído sobre iced + wgpu. Em combinações raras de drivers GPU
 
 ## Ainda preso?
 
-- Lê o ficheiro de log completo (`~/.local/state/voxdmr/logs/` em Linux, `%LOCALAPPDATA%\voxdmr\logs\` em Windows).
+- Lê o ficheiro de log completo (`~/.local/state/voxdmr/logs/` em Linux, `%LOCALAPPDATA%\voxdmr\logs\` em Windows, `~/Library/Logs/voxdmr/` em macOS).
 - Abre uma issue no [GitHub](https://github.com/jcalado/voxdmr-site/issues) com o log e uma descrição do que estavas a tentar fazer.
