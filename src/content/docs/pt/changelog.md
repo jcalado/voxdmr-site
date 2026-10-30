@@ -27,7 +27,7 @@ Android.
   no teu talkgroup ou te chama em privado — um toque e uma notificação no desktop, som ou
   vibração no Android, com anúncios falados opcionais pela voz do sistema. Contam todos os
   DMR IDs do indicativo, hotspots incluídos, e um período de silêncio evita um alerta a
-  cada transmissão de um contacto longo.
+  cada transmissão de um contacto longo. Vê [Alertas](./alerts).
 - **Um menu feito para rádios PoC (Android).** No P50 e semelhantes, uma grelha de mosaicos
   em ecrã inteiro substitui a gaveta: destinos e ações rápidas (Ligar, Scan, VOX, Redução
   de ruído, Modo carro…), todos alcançáveis com o D-pad, e um ecrã de definições para

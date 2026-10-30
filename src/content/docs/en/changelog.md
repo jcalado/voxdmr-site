@@ -26,7 +26,7 @@ followed-station alerts, a menu rebuilt for PoC radios, and a big Android batter
   on your talkgroup or call you privately — a chime and a notification on desktop, a sound
   or vibration on Android, with optional spoken announcements through the system voice.
   All of a callsign's DMR IDs count, hotspots included, and a quiet period keeps a long
-  contact from alerting at every over.
+  contact from alerting at every over. See [Alerts](./alerts).
 - **A menu built for PoC radios (Android).** On the P50 and similar, a full-screen grid of
   tiles replaces the drawer: destinations plus quick actions (Connect, Scan, VOX, Noise
   reduction, Car mode…), every tile reachable with the D-pad, and a settings screen to

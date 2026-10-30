@@ -31,6 +31,7 @@ const pageTitleKeys: Record<string, string> = {
   "server-profiles": "docs.page.serverProfiles",
   "auto-reconnect": "docs.page.autoReconnect",
   talkgroups: "docs.page.talkgroups",
+  alerts: "docs.page.alerts",
   "poc-radios": "docs.page.pocRadios",
   "hytera-p50": "docs.page.hyteraP50",
   troubleshooting: "docs.page.troubleshooting",
