@@ -2,6 +2,72 @@
 
 Notas de versão do VoxDMR. Cada página de release no GitHub tem a lista completa de commits e os binários assinados; isto é o resumo humano.
 
+## v0.16.0
+
+::platforms[desktop mobile]
+
+_Lançada em outubro de 2026. Desktop + Android._
+
+Mensagens de texto nas duas plataformas, um registo QSO com histórico e durações, alertas
+de estações seguidas, um menu refeito para rádios PoC, e uma grande correção de bateria no
+Android.
+
+- **Mensagens de texto DMR.** Envia e recebe mensagens no BrandMeister e em redes Homebrew,
+  nas duas plataformas — conversas, caixa de entrada, notificações (com resposta direta no
+  Android) e um botão Mensagem nos detalhes de uma chamada. Uma mensagem privada no
+  BrandMeister é confirmada pelo terminal da outra estação, e o VoxDMR distingue os
+  desfechos: *entregue*, *enviada mas não confirmada* e *não entregue — toca para repetir*.
+  Mensagens para talkgroups funcionam nas redes Homebrew; o BrandMeister não as encaminha.
+- **O registo QSO guarda histórico e cronometra chamadas.** No Android o registo passa a
+  sobreviver a reinícios, com um ecrã de Histórico, uma folha de detalhes e exportação
+  CSV/ADIF, e as tuas próprias transmissões ganham linhas próprias. As duas plataformas
+  ganham uma coluna **Duração** que conta o tempo real da estação no ar — cada transmissão
+  tem a sua linha, por isso quem volta a carregar no PTT não engorda a anterior.
+- **Estações seguidas.** Segue um indicativo ou DMR ID e o VoxDMR avisa-te quando aparece
+  no teu talkgroup ou te chama em privado — um toque e uma notificação no desktop, som ou
+  vibração no Android, com anúncios falados opcionais pela voz do sistema. Contam todos os
+  DMR IDs do indicativo, hotspots incluídos, e um período de silêncio evita um alerta a
+  cada transmissão de um contacto longo.
+- **Um menu feito para rádios PoC (Android).** No P50 e semelhantes, uma grelha de mosaicos
+  em ecrã inteiro substitui a gaveta: destinos e ações rápidas (Ligar, Scan, VOX, Redução
+  de ruído, Modo carro…), todos alcançáveis com o D-pad, e um ecrã de definições para
+  esconder as entradas que não usas. As confirmações também passam a ecrã inteiro, com
+  botões grandes e a escolha segura focada primeiro. Vê [Rádios PoC](./poc-radios).
+- **O ecrã acorda com o tráfego de rádio (Android).** O ecrã liga-se com chamadas a entrar
+  e com o PTT, a app pode mostrar-se sobre o ecrã de bloqueio, e a proteção de PTT no
+  bolso usa o sensor de proximidade para manter um rádio no bolso fora do ar.
+- **Modo carro à tua maneira (Android).** Põe o nome na linha grande, dimensiona cada linha
+  a teu gosto, e esconde as teclas de talkgroup no ecrã em rádios com teclas físicas. Vê
+  [Modo carro](./car-mode).
+- **Silenciar a receção (Android).** Silencia o áudio recebido a partir do menu, sem
+  desligar.
+- **Dados frescos sem pedir (Android).** A base de dados de DMR IDs e a lista de talkgroups
+  do BrandMeister atualizam-se sozinhas em Wi-Fi a carregar, com um aviso quando estão
+  desatualizadas. O failover opcional de master do BrandMeister muda para o seguinte
+  quando o teu desaparece.
+- **Entrar e sair mais depressa (Android).** Mosaicos de Definições Rápidas para a sessão e
+  o scan, atalhos no launcher, e sair sem confirmação (continua a perguntar durante uma
+  transmissão).
+- **Um VoxDMR parado deixa de gastar bateria (Android).** Ligado e parado, a app
+  redesenhava medidores e animações que ninguém via — cerca de um núcleo inteiro de CPU
+  num Pixel 9. Agora é praticamente zero.
+- **As chamadas terminam mesmo quando a rede perde o final.** Uma chamada cujo pacote final
+  se perde termina sozinha após 1,5 s de silêncio, em vez de prender o scan e engordar o
+  registo — e áudio que volte dentro de 5 s retoma a mesma chamada, para uma falha de rede
+  não silenciar o resto.
+- **Fim dos erros de palavra-passe logo a seguir a ligar.** O login num servidor Rewind
+  podia falhar como palavra-passe errada porque um segundo keepalive corria à frente do
+  handshake; agora espera pela sua vez.
+- **O VoxDMR está a caminho do iPhone.** Uma app iOS com áudio de chamadas ao vivo está em
+  testes internos no TestFlight.
+- **Correções e alterações.** Os talker aliases enviados no formato de 16 bits deixam de se
+  transformar em caracteres chineses a meio da chamada (desktop); uma ligação caída deixa
+  de prender uma chamada-fantasma que bloqueava o PTT (desktop); o registo de atividade
+  detalhado passa a nomear os relatórios do servidor BrandMeister e os pacotes
+  desconhecidos; os filtros de voz do TX passam a vir desligados em instalações novas
+  (desktop); e os perfis BrandMeister deixam de pedir indicativo — nunca era enviado, e é
+  a base de dados de DMR IDs que te dá nome no registo.
+
 ## v0.15.3
 
 ::platforms[desktop mobile]

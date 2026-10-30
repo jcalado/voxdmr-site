@@ -2,6 +2,68 @@
 
 Release notes for VoxDMR. Each release page on GitHub has the full commit list and the signed binaries; this is the human summary.
 
+## v0.16.0
+
+::platforms[desktop mobile]
+
+_Released October 2026. Desktop + Android._
+
+Text messaging on both platforms, a QSO log that keeps history and times calls,
+followed-station alerts, a menu rebuilt for PoC radios, and a big Android battery fix.
+
+- **DMR text messaging.** Send and receive texts on BrandMeister and on Homebrew networks,
+  on both platforms — conversations, an inbox, notifications (reply straight from them on
+  Android), and a Message button on a call's details. A private text on BrandMeister is
+  confirmed by the other station's terminal, and VoxDMR tells the outcomes apart:
+  *delivered*, *sent but not confirmed*, and *not delivered — tap to retry*. Talkgroup
+  texts work on Homebrew networks; BrandMeister doesn't route them.
+- **The QSO log keeps history and times calls.** On Android the log now survives restarts,
+  with a History screen, a details sheet and CSV/ADIF export, and your own transmissions
+  get rows of their own. Both platforms gain a **Duration** column that counts the
+  station's actual time on the air — every over gets its own row, so a station that keys
+  up again doesn't inflate its last one.
+- **Followed stations.** Follow a callsign or DMR ID and VoxDMR tells you when they come up
+  on your talkgroup or call you privately — a chime and a notification on desktop, a sound
+  or vibration on Android, with optional spoken announcements through the system voice.
+  All of a callsign's DMR IDs count, hotspots included, and a quiet period keeps a long
+  contact from alerting at every over.
+- **A menu built for PoC radios (Android).** On the P50 and similar, a full-screen grid of
+  tiles replaces the drawer: destinations plus quick actions (Connect, Scan, VOX, Noise
+  reduction, Car mode…), every tile reachable with the D-pad, and a settings screen to
+  hide the entries you don't use. Confirmations go full-screen too, with big buttons and
+  the safe choice focused first. See [PoC radios](./poc-radios).
+- **The screen wakes for radio traffic (Android).** The screen turns on for incoming calls
+  and with PTT, the app can show over the lock screen, and pocket PTT protection uses the
+  proximity sensor to keep a pocketed radio off the air.
+- **Car mode, your way (Android).** Put the name on the big line, size each line yourself,
+  and hide the on-screen talkgroup keys on radios that have hardware ones. See
+  [Car mode](./car-mode).
+- **Receive mute (Android).** Silence received audio from the menu without disconnecting.
+- **Fresh data on its own (Android).** The DMR ID database and the BrandMeister talkgroup
+  list refresh themselves on Wi-Fi while charging, with a banner when they're stale.
+  Optional BrandMeister master failover switches to the next-best master when yours goes
+  away.
+- **Quicker in and out (Android).** Quick Settings tiles for the session and scan, launcher
+  shortcuts, and quit without the confirmation (it still asks mid-transmission).
+- **An idle VoxDMR no longer drains the battery (Android).** Connected and idle, the app
+  was redrawing meters and animations nobody could see — about a full CPU core on a
+  Pixel 9. Now effectively zero.
+- **Calls end even when the network loses the ending.** A call whose terminating frame goes
+  missing now ends on its own after 1.5 s of silence instead of jamming scan and inflating
+  the log — and audio that returns within 5 s resumes the same call, so a network stall
+  doesn't mute the rest of it.
+- **No more wrong-password errors right after connecting.** Logging in to a Rewind server
+  could fail as a bad password because a second keepalive raced the login handshake; it
+  now waits its turn.
+- **VoxDMR is coming to iPhone.** An iOS app with live call audio is in internal TestFlight
+  testing.
+- **Fixes and changes.** Talker aliases sent in the 16-bit format no longer turn into
+  Chinese characters mid-call (desktop); a dropped connection no longer leaves a phantom
+  call blocking PTT (desktop); the detailed activity log names BrandMeister server reports
+  and unknown packets; the TX speech-band filters now default off for new installs
+  (desktop); and BrandMeister profiles no longer ask for a callsign — it was never sent,
+  and the DMR ID database is what names you in the log.
+
 ## v0.15.3
 
 ::platforms[desktop mobile]
