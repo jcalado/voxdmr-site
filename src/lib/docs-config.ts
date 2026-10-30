@@ -22,6 +22,7 @@ export const docsConfig: DocGroup[] = [
       { slug: "server-profiles", title: "Server Profiles" },
       { slug: "auto-reconnect", title: "Auto-reconnect" },
       { slug: "talkgroups", title: "Talkgroups" },
+      { slug: "alerts", title: "Alerts" },
       { slug: "ptt-modes", title: "PTT Modes" },
       { slug: "car-mode", title: "Car Mode" },
       { slug: "audio-settings", title: "Audio Settings" },
